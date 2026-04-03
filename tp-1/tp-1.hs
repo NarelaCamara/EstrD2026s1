@@ -1,7 +1,9 @@
-{- NUMEROS ENTEROS-}
+{-- 2. --}
+{-- NUMEROS ENTEROS--}
 
-{-- 1. --}
+{-- 1. Defina las siguientes funciones --}
 
+{-- a. --}
 {--
     Devuelve numeros positivos, no devuelve numeros negativos, ni con coma. 
     PRECOND: number tiene que ser igual o mayor a cero.
@@ -18,6 +20,8 @@ ocho = sucesor 7
     PRECOND: Number1 y  Number2 deben ser igual o mayor que cero
 -}
 
+{-- b. --}
+
 sumar  :: Int -> Int -> Int
 sumar  number1 number2  = number1 + number2
 
@@ -25,7 +29,7 @@ sumar  number1 number2  = number1 + number2
 nueve :: Int 
 nueve = sumar 5 4
 
-
+{-- c. --}
 {-
     devuelve un par donde la primera comp onente es la división del primero p or el segundo, y la segunda comp onente es el resto de dicha división
     PRECOND: Number1 y  Number2 deben ser igual o mayor que cero. Numero1 es el dividendo y el Numero2 es el divisor. Importa el orden.
@@ -39,6 +43,7 @@ divisionYResto number1 number2  = ( div number1  number2, mod number1 number2)
 tresYUno :: (Int, Int) 
 tresYUno = divisionYResto  16 5
 
+{-- d. --}
 
 {-
     Dado un par de números devuelve el mayor de estos
@@ -69,8 +74,9 @@ diezEjemplo4 :: Int
 diezEjemplo4 = maxDelPar ((maxDelPar (divisionYResto (sumar 4 6) (sucesor 6))), sumar 2 (maxDelPar (divisionYResto (sumar 2 6) (sucesor 48))))
 
 
-{- TIPOS ENUMERATIVOS -}
 {-- 3. --}
+{- TIPOS ENUMERATIVOS -}
+{-- 1. --}
 
 data Dir = Norte | Sur | Este | Oeste 
 
@@ -159,3 +165,160 @@ estaEnMedio Domingo = False
 estaEnMedio _ = True
 
 
+{-- 3.  --}
+
+{-- a. --}
+
+negar :: Bool -> Bool
+negar True = False
+negar False = True
+
+
+{-- b.  --}
+implica :: Bool -> Bool -> Bool
+implica True False = False
+implica _ _ = True
+
+{-- c.  --}
+yTambien :: Bool -> Bool -> Bool
+yTambien True True = True
+yTambien _ _ = False
+
+
+{-- d.  --}
+oBien :: Bool -> Bool -> Bool
+oBien False False = False
+oBien _ _ = True
+
+
+
+{-- 4.  --} 
+{-- REGISTROS --}
+
+{-- 1. --}
+
+data Persona = Persona {
+    nombre :: String,
+    edad :: Int
+}
+
+{-- a. --}
+
+nombre:: Persona -> String
+nombre (Persona name _) = name
+
+{-- b. --}  
+edad :: Persona -> Int
+edad (Persona _ age) = age
+
+{-- c. --}
+crecer :: Persona -> Persona
+crecer (Persona name age) = Persona name (age + 1)
+
+{-- d. --}
+cambioDeNombre :: String -> Persona -> Persona
+cambioDeNombre newName (Persona _ age) = Persona newName age
+
+{-- e. --}
+esMayorQueLaOtra :: Persona -> Persona -> Bool
+esMayorQueLaOtra (Persona _ age1) (Persona _ age2) = age1 > age2
+
+
+{-- f. --}
+laQueEsMayor :: Persona -> Persona -> Persona
+laQueEsMayor ::  (Persona name1 age1) (Persona name2 age2)  = if esMayorQueLaOtra (Persona name1 age1) (Persona name2 age2) then (Persona name1 age1) else (Persona name2 age2)
+
+
+{--  2. --}
+data Pokemon = Pokemon {    entrenador :: String,
+    tipoDePokemon :: TipoDePokemon,
+    energia :: Int
+}
+
+data TipoDePokemon = Agua | Fuego | Planta
+
+data Entrenador = Entrenador {
+    nombreEntrenador :: String,
+    pokemon1 :: Pokemon
+    pokemon2 :: Pokemon
+}
+
+{-- a. --}
+
+tipoSuperior :: TipoDePokemon -> TipoDePokemon -> Bool
+tipoSuperior Agua Fuego = True
+tipoSuperior Fuego Planta = True
+tipoSuperior Planta Agua = True
+tipoSuperior _ _ = False
+
+
+superaA :: Pokemon -> Pokemon -> Bool
+superaA (Pokemon _ tipo1 _) (Pokemon _ tipo2 _) = tipoSuperior tipo1 tipo2
+
+
+{-- b. --}
+
+mismoTipo :: TipoDePokemon -> TipoDePokemon -> Bool
+mismoTipo Agua Agua = True
+mismoTipo Fuego Fuego = True
+mismoTipo Planta Planta = True
+mismoTipo _ _ = False
+
+
+cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
+cantidadDePokemonDe tipo (Entrenador _ (Pokemon _ tipo1 _) (Pokemon _ tipo2 _)) =
+    if mismoTipo tipo tipo1  && mismoTipo tipo tipo2 then 2
+    else if mismoTipo tipo tipo1 || mismoTipo tipo tipo2 then 1
+    else 0
+
+{-- c. --}
+
+juntarPokemon :: Entrenador -> Entrenador -> [Pokemon]
+juntarPokemon (Entrenador _ pokemon1A pokemon2A) (Entrenador _ pokemon1B pokemon2B) = [pokemon1A, pokemon2A, pokemon1B, pokemon2B]
+
+{-- 5. --}
+
+{-- FUNCIONES POLIMORFICAS --}
+
+{-- 1. --}
+
+{-- a. --}
+
+loMismo :: a -> a
+loMismo x = x
+
+{-- b. --}
+siempreSiete :: a -> Int
+siempreSiete _ = 7
+
+{-- c. --}  
+
+swap :: (a, b) -> (b, a)
+swap (x, y) = (y, x)    
+
+
+{-- 2. Estas funciones son polimorficas porque pueden ser utilizadas con cualquier tipo de dato. --}
+
+
+{-- 6. --}
+{-- PATTER MATCHING --} 
+
+
+{-- 2. --}
+estaVacia :: [a] -> Bool
+estaVacia [] = True
+estaVacia _ = False
+
+
+{-- 3. --}
+
+elPrimero :: [a] -> a
+elPrimero (x:xs) = x
+
+{--4 --}
+sinElPrimero :: [a] -> [a]
+sinElPrimero (x:xs) = xs 
+
+{--5 --}
+splitHead ::  [a] -> (a, [a])
+splitHead  (x:xs) = (x , xs )
