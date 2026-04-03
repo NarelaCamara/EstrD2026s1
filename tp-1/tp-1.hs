@@ -12,19 +12,21 @@
 sucesor :: Int -> Int
 sucesor number = number + 1
 
+
+{-- Ejemplo de uso --}
 ocho :: Int 
 ocho = sucesor 7
 
+{-- b. --}
 {-
     Devuelve la suma de dos numeros cualquiera sean
     PRECOND: Number1 y  Number2 deben ser igual o mayor que cero
 -}
 
-{-- b. --}
-
 sumar  :: Int -> Int -> Int
 sumar  number1 number2  = number1 + number2
 
+{-- Ejemplo de uso --}
 
 nueve :: Int 
 nueve = sumar 5 4
@@ -39,6 +41,7 @@ nueve = sumar 5 4
 divisionYResto :: Int -> Int -> (Int, Int)
 divisionYResto number1 number2  = ( div number1  number2, mod number1 number2)
 
+{-- Ejemplo de uso --}
 
 tresYUno :: (Int, Int) 
 tresYUno = divisionYResto  16 5
@@ -53,6 +56,7 @@ tresYUno = divisionYResto  16 5
 maxDelPar :: (Int, Int) -> Int
 maxDelPar (number1, number2) = if number1 > number2 then number1 else number2
 
+{-- Ejemplo de uso --}
 
 diez :: Int 
 diez = maxDelPar (5, 10)
@@ -82,13 +86,15 @@ data Dir = Norte | Sur | Este | Oeste
 
 {-- a. --}
 
-
 opuesto :: Dir -> Dir
 opuesto Norte = Sur
 opuesto Sur = Norte
 opuesto Este = Oeste
 opuesto Oeste = Este
 
+{-- Ejemplo de uso --}
+opuestoEjemplo :: Dir
+opuestoEjemplo = opuesto Norte
 
 {-- b. --}
 
@@ -99,6 +105,9 @@ sonIguales Este Este = True
 sonIguales Oeste Oeste = True
 sonIguales _ _ = False
 
+{-- Ejemplo de uso --}
+sonIgualesEjemplo :: Bool
+sonIgualesEjemplo = sonIguales Norte Norte
 
 {-- c. --}
 
@@ -112,9 +121,14 @@ siguiente Norte = Este
 siguiente Este = Sur
 siguiente Sur = Norte
 
-data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo 
+{-- Ejemplo de uso --}
+siguienteEjemplo :: Dir
+siguienteEjemplo = siguiente Norte
+
 
 {-- 2. --}
+
+data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo 
 
 {-- a. --}
 {--
@@ -126,6 +140,9 @@ data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domi
 primeroYUltimoDia :: (DiaDeSemana ,DiaDeSemana)
 primeroYUltimoDia = ( Lunes , Domingo)
 
+{-- Ejemplo de uso --}
+primeroYUltimoDiaEjemplo :: (DiaDeSemana, DiaDeSemana)
+primeroYUltimoDiaEjemplo = primeroYUltimoDia
 
 {-- b. --}
 empiezaConM :: DiaDeSemana -> Bool
@@ -133,7 +150,11 @@ empiezaConM Martes = True
 empiezaConM Miercoles = True
 empiezaConM _ = False 
 
-{-- c.    --}
+{-- Ejemplo de uso --}
+empiezaConMEjemplo :: Bool
+empiezaConMEjemplo = empiezaConM Martes
+
+{-- c.  --}
 
 sonIgualesDias :: DiaDeSemana -> DiaDeSemana -> Bool
 sonIgualesDias Lunes Lunes = True
@@ -157,6 +178,11 @@ vieneDespues day1 day2 =
     else True
     
 
+
+{-- Ejemplo de uso --}
+vieneDespuesEjemplo :: Bool
+vieneDespuesEjemplo = vieneDespues Martes Lunes
+
 {-- d.  --}
 
 estaEnMedio :: DiaDeSemana -> Bool
@@ -164,6 +190,9 @@ estaEnMedio Lunes = False
 estaEnMedio Domingo = False
 estaEnMedio _ = True
 
+{-- Ejemplo de uso --}
+estaEnMedioEjemplo :: Bool
+estaEnMedioEjemplo = estaEnMedio Miercoles
 
 {-- 3.  --}
 
@@ -197,51 +226,41 @@ oBien _ _ = True
 
 {-- 1. --}
 
-data Persona = Persona {
-    nombre :: String,
-    edad :: Int
-}
+data Persona = PersonaC String Int
 
 {-- a. --}
 
 nombre:: Persona -> String
-nombre (Persona name _) = name
+nombre (PersonaC name _) = name
 
 {-- b. --}  
 edad :: Persona -> Int
-edad (Persona _ age) = age
+edad (PersonaC _ age) = age
 
 {-- c. --}
 crecer :: Persona -> Persona
-crecer (Persona name age) = Persona name (age + 1)
+crecer (PersonaC name age) = PersonaC name (age + 1)
 
 {-- d. --}
 cambioDeNombre :: String -> Persona -> Persona
-cambioDeNombre newName (Persona _ age) = Persona newName age
+cambioDeNombre newName (PersonaC _ age) = PersonaC newName age
 
 {-- e. --}
 esMayorQueLaOtra :: Persona -> Persona -> Bool
-esMayorQueLaOtra (Persona _ age1) (Persona _ age2) = age1 > age2
+esMayorQueLaOtra (PersonaC _ age1) (PersonaC _ age2) = age1 > age2
 
 
 {-- f. --}
 laQueEsMayor :: Persona -> Persona -> Persona
-laQueEsMayor ::  (Persona name1 age1) (Persona name2 age2)  = if esMayorQueLaOtra (Persona name1 age1) (Persona name2 age2) then (Persona name1 age1) else (Persona name2 age2)
+laQueEsMayor (PersonaC name1 age1) (PersonaC name2 age2)  = if esMayorQueLaOtra (PersonaC name1 age1) (PersonaC name2 age2) then (PersonaC name1 age1) else (PersonaC name2 age2)
 
 
 {--  2. --}
-data Pokemon = Pokemon {    entrenador :: String,
-    tipoDePokemon :: TipoDePokemon,
-    energia :: Int
-}
-
 data TipoDePokemon = Agua | Fuego | Planta
 
-data Entrenador = Entrenador {
-    nombreEntrenador :: String,
-    pokemon1 :: Pokemon
-    pokemon2 :: Pokemon
-}
+data Pokemon = PokemonC  Entrenador  TipoDePokemon  Int
+data Entrenador = EntrenadorC String  Pokemon  Pokemon
+
 
 {-- a. --}
 
@@ -253,7 +272,7 @@ tipoSuperior _ _ = False
 
 
 superaA :: Pokemon -> Pokemon -> Bool
-superaA (Pokemon _ tipo1 _) (Pokemon _ tipo2 _) = tipoSuperior tipo1 tipo2
+superaA (PokemonC _ tipo1 _) (PokemonC _ tipo2 _) = tipoSuperior tipo1 tipo2
 
 
 {-- b. --}
@@ -266,7 +285,7 @@ mismoTipo _ _ = False
 
 
 cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
-cantidadDePokemonDe tipo (Entrenador _ (Pokemon _ tipo1 _) (Pokemon _ tipo2 _)) =
+cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC _ tipo1 _) (PokemonC _ tipo2 _)) =
     if mismoTipo tipo tipo1  && mismoTipo tipo tipo2 then 2
     else if mismoTipo tipo tipo1 || mismoTipo tipo tipo2 then 1
     else 0
@@ -274,7 +293,7 @@ cantidadDePokemonDe tipo (Entrenador _ (Pokemon _ tipo1 _) (Pokemon _ tipo2 _)) 
 {-- c. --}
 
 juntarPokemon :: Entrenador -> Entrenador -> [Pokemon]
-juntarPokemon (Entrenador _ pokemon1A pokemon2A) (Entrenador _ pokemon1B pokemon2B) = [pokemon1A, pokemon2A, pokemon1B, pokemon2B]
+juntarPokemon (EntrenadorC _ pokemon1A pokemon2A) (EntrenadorC _ pokemon1B pokemon2B) = [pokemon1A, pokemon2A, pokemon1B, pokemon2B]
 
 {-- 5. --}
 
