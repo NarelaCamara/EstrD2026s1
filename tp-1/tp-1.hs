@@ -256,10 +256,10 @@ laQueEsMayor (PersonaC name1 age1) (PersonaC name2 age2)  = if esMayorQueLaOtra 
 
 
 {--  2. --}
-data TipoDePokemon = Agua | Fuego | Planta
+data TipoDePokemon = Agua | Fuego | Planta deriving (Show, Eq)
 
-data Pokemon = PokemonC  Entrenador  TipoDePokemon  Int
-data Entrenador = EntrenadorC String  Pokemon  Pokemon
+data Pokemon = PokemonC  Entrenador  TipoDePokemon  Int deriving (Show, Eq)
+data Entrenador = EntrenadorC String  Pokemon  Pokemon deriving (Show, Eq)
 
 
 {-- a. --}
