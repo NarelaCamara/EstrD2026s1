@@ -341,3 +341,6 @@ sinElPrimero (x:xs) = xs
 {--5 --}
 splitHead ::  [a] -> (a, [a])
 splitHead  (x:xs) = (x , xs )
+
+
+{-- fin  --}
