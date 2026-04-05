@@ -1,5 +1,8 @@
 # Estructuras de datos
 
-# clase 2
+Lista de videos 
 
-https://www.youtube.com/watch?v=CW09lRWB1cY&list=PL6lbGW3UNWzwDvcKTCyGlNBeEtHvdKzKk&index=1
+[![Estructuras de Datos - Clase 1](https://img.youtube.com/vi/CW09lRWB1cY/0.jpg)](https://www.youtube.com/watch?v=CW09lRWB1cY)
+
+
+ 
