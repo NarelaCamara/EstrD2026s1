@@ -185,14 +185,14 @@ vieneDespuesEjemplo = vieneDespues Martes Lunes
 
 {-- d.  --}
 
-estaEnMedio :: DiaDeSemana -> Bool
-estaEnMedio Lunes = False
-estaEnMedio Domingo = False
-estaEnMedio _ = True
+estaEnElMedio :: DiaDeSemana -> Bool
+estaEnElMedio Lunes = False
+estaEnElMedio Domingo = False
+estaEnElMedio _ = True
 
 {-- Ejemplo de uso --}
-estaEnMedioEjemplo :: Bool
-estaEnMedioEjemplo = estaEnMedio Miercoles
+estaEnElMedioEjemplo :: Bool
+estaEnElMedioEjemplo = estaEnElMedio Miercoles
 
 {-- 3.  --}
 
