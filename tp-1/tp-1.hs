@@ -98,16 +98,16 @@ opuestoEjemplo = opuesto Norte
 
 {-- b. --}
 
-sonIguales :: Dir -> Dir -> Bool
-sonIguales Norte Norte = True
-sonIguales Sur Sur = True
-sonIguales Este Este = True
-sonIguales Oeste Oeste = True
-sonIguales _ _ = False
+iguales :: Dir -> Dir -> Bool
+iguales Norte Norte = True
+iguales Sur Sur = True
+iguales Este Este = True
+iguales Oeste Oeste = True
+iguales _ _ = False
 
 {-- Ejemplo de uso --}
-sonIgualesEjemplo :: Bool
-sonIgualesEjemplo = sonIguales Norte Norte
+igualesEjemplo :: Bool
+igualesEjemplo = iguales Norte Norte
 
 {-- c. --}
 
