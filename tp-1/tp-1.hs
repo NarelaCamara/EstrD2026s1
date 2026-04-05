@@ -86,6 +86,11 @@ data Dir = Norte | Sur | Este | Oeste
 
 {-- a. --}
 
+{-- 
+    Devuelve la dirección opuesta a la dada.
+    PRECOND: La dirección dada debe ser una de las 4 direcciones (norte, sur, este y oeste).
+--}
+
 opuesto :: Dir -> Dir
 opuesto Norte = Sur
 opuesto Sur = Norte
@@ -97,6 +102,11 @@ opuestoEjemplo :: Dir
 opuestoEjemplo = opuesto Norte
 
 {-- b. --}
+
+{-- 
+    Devuelve True si las dos direcciones dadas son iguales, y False en caso contrario.
+    PRECOND: Las direcciones dadas deben ser una de las 4 direcciones (norte, sur, este y oeste).   
+--}
 
 iguales :: Dir -> Dir -> Bool
 iguales Norte Norte = True
@@ -141,10 +151,17 @@ primeroYUltimoDia :: (DiaDeSemana ,DiaDeSemana)
 primeroYUltimoDia = ( Lunes , Domingo)
 
 {-- Ejemplo de uso --}
+
 primeroYUltimoDiaEjemplo :: (DiaDeSemana, DiaDeSemana)
 primeroYUltimoDiaEjemplo = primeroYUltimoDia
 
 {-- b. --}
+
+{-- 
+    Devuelve True si el día dado empieza con la letra M, y False en caso contrario.
+    PRECOND: El día dado debe ser uno de los 7 días (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado y Domingo).
+--}
+
 empiezaConM :: DiaDeSemana -> Bool
 empiezaConM Martes = True
 empiezaConM Miercoles = True
@@ -156,6 +173,11 @@ empiezaConMEjemplo = empiezaConM Martes
 
 {-- c.  --}
 
+{--
+    Devuelve True si los dos días dados son iguales, y False en caso contrario.
+    PRECOND: Los días dados deben ser uno de los 7 días (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado y Domingo).  
+--}
+
 sonIgualesDias :: DiaDeSemana -> DiaDeSemana -> Bool
 sonIgualesDias Lunes Lunes = True
 sonIgualesDias Martes Martes = True 
@@ -165,6 +187,17 @@ sonIgualesDias Viernes Viernes = True
 sonIgualesDias Sabado Sabado = True
 sonIgualesDias Domingo Domingo = True
 sonIgualesDias _ _ = False
+
+
+{-- Ejemplo de uso --}
+sonIgualesDiasEjemplo :: Bool
+sonIgualesDiasEjemplo = sonIgualesDias Lunes Lunes
+
+
+{-- 
+    Devuelve True si el primer día dado viene después del segundo día dado, y False en caso contrario.
+    PRECOND: Los días dados deben ser uno de los 7 días (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado y Domingo).  
+--}
 
 
 vieneDespues :: DiaDeSemana -> DiaDeSemana -> Bool
@@ -185,6 +218,11 @@ vieneDespuesEjemplo = vieneDespues Martes Lunes
 
 {-- d.  --}
 
+{--
+    Devuelve True si el día dado es un día de semana (Lunes, Martes, Miercoles, Jueves o Viernes), y False en caso contrario.
+    PRECOND: El día dado debe ser uno de los 7 días (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado y Domingo).
+--}
+
 estaEnElMedio :: DiaDeSemana -> Bool
 estaEnElMedio Lunes = False
 estaEnElMedio Domingo = False
@@ -198,23 +236,46 @@ estaEnElMedioEjemplo = estaEnElMedio Miercoles
 
 {-- a. --}
 
+{--
+    Devuelve la negación del valor dado.
+    PRECOND: El valor dado debe ser un valor booleano (True o False).
+--}
+
 negar :: Bool -> Bool
 negar True = False
 negar False = True
 
 
 {-- b.  --}
+
+{--
+    Devuelve False si el primer valor dado es True y el segundo valor dado es False, y devuelve True en cualquier otro caso.
+    PRECOND: Los valores dados deben ser valores booleanos (True o False).  
+--}
+
 implica :: Bool -> Bool -> Bool
 implica True False = False
 implica _ _ = True
 
 {-- c.  --}
+
+{--
+    Devuelve True si ambos valores dados son True, y False en cualquier otro caso.
+    PRECOND: Los valores dados deben ser valores booleanos (True o False).
+--}
+
 yTambien :: Bool -> Bool -> Bool
 yTambien True True = True
 yTambien _ _ = False
 
 
 {-- d.  --}
+
+{--
+    Devuelve False si ambos valores dados son False, y True en cualquier otro caso.
+    PRECOND: Los valores dados deben ser valores booleanos (True o False).
+--}
+
 oBien :: Bool -> Bool -> Bool
 oBien False False = False
 oBien _ _ = True
@@ -230,27 +291,63 @@ data Persona = PersonaC String Int
 
 {-- a. --}
 
+{--
+    Devuelve el nombre de la persona dada.
+    PRECOND: La persona dada debe ser un valor del tipo Persona.
+--}
+
 nombre:: Persona -> String
 nombre (PersonaC name _) = name
 
 {-- b. --}  
+
+{--
+    Devuelve la edad de la persona dada.
+    PRECOND: La persona dada debe ser un valor del tipo Persona.
+--}
+
 edad :: Persona -> Int
 edad (PersonaC _ age) = age
 
 {-- c. --}
+
+{--
+    Devuelve una nueva persona con el mismo nombre que la persona dada y con una edad que es un año mayor que la edad de la persona dada.
+    PRECOND: La persona dada debe ser un valor del tipo Persona.
+--}
+
 crecer :: Persona -> Persona
 crecer (PersonaC name age) = PersonaC name (age + 1)
 
 {-- d. --}
+
+{--
+    Devuelve una nueva persona con el mismo nombre que la persona dada y con la edad dada.
+    PRECOND: La persona dada debe ser un valor del tipo Persona. El nuevo nombre dado debe ser un valor del tipo String.
+--}
+
+
 cambioDeNombre :: String -> Persona -> Persona
 cambioDeNombre newName (PersonaC _ age) = PersonaC newName age
 
 {-- e. --}
+
+{--
+    Devuelve True si la edad de la primera persona dada es mayor que la edad de la segunda persona dada, y False en caso contrario.
+    PRECOND: Las personas dadas deben ser valores del tipo Persona.
+--}
+
 esMayorQueLaOtra :: Persona -> Persona -> Bool
 esMayorQueLaOtra (PersonaC _ age1) (PersonaC _ age2) = age1 > age2
 
 
 {-- f. --}
+
+{--
+    Devuelve la persona que es mayor entre las dos personas dadas. En caso de que ambas personas tengan la misma edad, devuelve cualquiera de las dos personas.
+    PRECOND: Las personas dadas deben ser valores del tipo Persona.
+--}
+
 laQueEsMayor :: Persona -> Persona -> Persona
 laQueEsMayor (PersonaC name1 age1) (PersonaC name2 age2)  = if esMayorQueLaOtra (PersonaC name1 age1) (PersonaC name2 age2) then (PersonaC name1 age1) else (PersonaC name2 age2)
 
@@ -264,6 +361,11 @@ data Entrenador = EntrenadorC String  Pokemon  Pokemon deriving (Show, Eq)
 
 {-- a. --}
 
+{--
+    Devuelve True si el primer tipo de Pokémon es superior al segundo tipo de Pokémon, y False en caso contrario.
+    PRECOND: Los tipos de Pokémon dados deben ser valores del tipo TipoDePokemon.
+--}
+
 tipoSuperior :: TipoDePokemon -> TipoDePokemon -> Bool
 tipoSuperior Agua Fuego = True
 tipoSuperior Fuego Planta = True
@@ -271,11 +373,21 @@ tipoSuperior Planta Agua = True
 tipoSuperior _ _ = False
 
 
+{-- 
+    Devuelve True si el primer Pokémon dado es superior al segundo Pokémon dado, y False en caso contrario.
+    PRECOND: Los Pokémon dados deben ser valores del tipo Pokemon.
+--}
+
 superaA :: Pokemon -> Pokemon -> Bool
 superaA (PokemonC _ tipo1 _) (PokemonC _ tipo2 _) = tipoSuperior tipo1 tipo2
 
 
 {-- b. --}
+
+{--
+    Devuelve la cantidad de Pokémon que el entrenador dado tiene del tipo dado.
+    PRECOND: El entrenador dado debe ser un valor del tipo Entrenador. El tipo dado debe ser un valor del tipo TipoDePokemon.
+--}
 
 mismoTipo :: TipoDePokemon -> TipoDePokemon -> Bool
 mismoTipo Agua Agua = True
@@ -284,6 +396,12 @@ mismoTipo Planta Planta = True
 mismoTipo _ _ = False
 
 
+{--
+    Devuelve la cantidad de Pokémon que el entrenador dado tiene del tipo dado.
+    PRECOND: El entrenador dado debe ser un valor del tipo Entrenador. El tipo dado debe ser un valor del tipo TipoDePokemon.
+--}
+   
+
 cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
 cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC _ tipo1 _) (PokemonC _ tipo2 _)) =
     if mismoTipo tipo tipo1  && mismoTipo tipo tipo2 then 2
@@ -291,6 +409,11 @@ cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC _ tipo1 _) (PokemonC _ tipo2 _
     else 0
 
 {-- c. --}
+
+{--
+    Devuelve una lista con todos los Pokémon de los dos entrenadores dados.
+    PRECOND: Los entrenadores dados deben ser valores del tipo Entrenador.
+--}
 
 juntarPokemon :: Entrenador -> Entrenador -> [Pokemon]
 juntarPokemon (EntrenadorC _ pokemon1A pokemon2A) (EntrenadorC _ pokemon1B pokemon2B) = [pokemon1A, pokemon2A, pokemon1B, pokemon2B]
@@ -303,14 +426,30 @@ juntarPokemon (EntrenadorC _ pokemon1A pokemon2A) (EntrenadorC _ pokemon1B pokem
 
 {-- a. --}
 
+{--
+    Devuelve el mismo valor que se le pasa como argumento.
+    PRECOND: El valor dado debe ser un valor del tipo a.
+--}
+
 loMismo :: a -> a
 loMismo x = x
 
 {-- b. --}
+
+{--
+    Devuelve el número 7 sin importar el valor que se le pase como argumento.
+    PRECOND: El valor dado debe ser un valor del tipo a.
+--}
+
 siempreSiete :: a -> Int
 siempreSiete _ = 7
 
 {-- c. --}  
+
+{--
+    Devuelve una tupla con los elementos en orden inverso.
+    PRECOND: Los valores dados deben ser valores del tipo a y b.
+--}
 
 swap :: (a, b) -> (b, a)
 swap (x, y) = (y, x)    
@@ -324,6 +463,12 @@ swap (x, y) = (y, x)
 
 
 {-- 2. --}
+
+{--
+    Devuelve True si la lista dada está vacía, y False en caso contrario.
+    PRECOND: La lista dada debe ser un valor del tipo [a].
+--}
+
 estaVacia :: [a] -> Bool
 estaVacia [] = True
 estaVacia _ = False
@@ -331,14 +476,29 @@ estaVacia _ = False
 
 {-- 3. --}
 
+{--
+    Devuelve el primer elemento de la lista dada.
+    PRECOND: La lista dada debe ser un valor del tipo [a].
+--}
+
 elPrimero :: [a] -> a
 elPrimero (x:xs) = x
 
 {--4 --}
+
+{--
+    Devuelve la lista dada sin su primer elemento.
+    PRECOND: La lista dada debe ser un valor del tipo [a].
+--}
 sinElPrimero :: [a] -> [a]
 sinElPrimero (x:xs) = xs 
 
 {--5 --}
+
+{--
+    Devuelve una tupla con el primer elemento de la lista dada y la lista dada sin su primer elemento.
+    PRECOND: La lista dada debe ser un valor del tipo [a].
+--}    
 splitHead ::  [a] -> (a, [a])
 splitHead  (x:xs) = (x , xs )
 
