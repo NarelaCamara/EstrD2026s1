@@ -82,7 +82,7 @@ diezEjemplo4 = maxDelPar ((maxDelPar (divisionYResto (sumar 4 6) (sucesor 6))), 
 {- TIPOS ENUMERATIVOS -}
 {-- 1. --}
 
-data Dir = Norte | Sur | Este | Oeste 
+data Dir = Norte | Sur | Este | Oeste deriving (Show, Eq)
 
 {-- a. --}
 
@@ -288,7 +288,7 @@ oBien _ _ = True
 
 {-- 1. --}
 
-data Persona = PersonaC String Int
+data Persona = PersonaC String Int deriving (Show, Eq)
 
 {-- a. --}
 
