@@ -356,7 +356,7 @@ laQueEsMayor (PersonaC name1 age1) (PersonaC name2 age2)  = if esMayorQueLaOtra 
 {--  2. --}
 data TipoDePokemon = Agua | Fuego | Planta deriving (Show, Eq)
 
-data Pokemon = PokemonC  Entrenador  TipoDePokemon  Int deriving (Show, Eq)
+data Pokemon = PokemonC  TipoDePokemon  Int deriving (Show, Eq)
 data Entrenador = EntrenadorC String  Pokemon  Pokemon deriving (Show, Eq)
 
 
@@ -380,7 +380,7 @@ tipoSuperior _ _ = False
 --}
 
 superaA :: Pokemon -> Pokemon -> Bool
-superaA (PokemonC _ tipo1 _) (PokemonC _ tipo2 _) = tipoSuperior tipo1 tipo2
+superaA (PokemonC tipo1 _) (PokemonC tipo2 _) = tipoSuperior tipo1 tipo2
 
 
 {-- b. --}
@@ -404,7 +404,7 @@ mismoTipo _ _ = False
    
 
 cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
-cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC _ tipo1 _) (PokemonC _ tipo2 _)) =
+cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC  tipo1 _) (PokemonC  tipo2 _)) =
     if mismoTipo tipo tipo1  && mismoTipo tipo tipo2 then 2
     else if mismoTipo tipo tipo1 || mismoTipo tipo tipo2 then 1
     else 0
