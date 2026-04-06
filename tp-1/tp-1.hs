@@ -129,7 +129,8 @@ igualesEjemplo = iguales Norte Norte
 siguiente :: Dir -> Dir
 siguiente Norte = Este
 siguiente Este = Sur
-siguiente Sur = Norte
+siguiente Sur = Oeste
+siguiente Oeste = Norte
 
 {-- Ejemplo de uso --}
 siguienteEjemplo :: Dir
@@ -138,7 +139,7 @@ siguienteEjemplo = siguiente Norte
 
 {-- 2. --}
 
-data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo 
+data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo deriving (Show, Eq) 
 
 {-- a. --}
 {--
@@ -202,13 +203,13 @@ sonIgualesDiasEjemplo = sonIgualesDias Lunes Lunes
 
 vieneDespues :: DiaDeSemana -> DiaDeSemana -> Bool
 vieneDespues day1 day2 = 
-    if sonIgualesDias day1 Domingo then False
-    else if sonIgualesDias day1 Martes &&  sonIgualesDias day2 Lunes then False
-    else if sonIgualesDias day1 Miercoles && ( sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes )then False
-    else if sonIgualesDias day1 Jueves && ( sonIgualesDias day2 Miercoles || sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes) then False
-    else if sonIgualesDias day1 Viernes && ( sonIgualesDias day2 Jueves ||  sonIgualesDias day2 Miercoles || sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes) then False
-    else if sonIgualesDias day1 Sabado && ( sonIgualesDias day2 Viernes  || sonIgualesDias day2 Jueves ||  sonIgualesDias day2 Miercoles || sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes) then False
-    else True
+   ( sonIgualesDias day1 Domingo)  ||
+    (sonIgualesDias day1 Martes &&  sonIgualesDias day2 Lunes)  ||
+    (sonIgualesDias day1 Miercoles && ( sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes )) ||
+    (sonIgualesDias day1 Jueves && ( sonIgualesDias day2 Miercoles || sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes))  ||
+    (sonIgualesDias day1 Viernes && ( sonIgualesDias day2 Jueves ||  sonIgualesDias day2 Miercoles || sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes)) ||
+    (sonIgualesDias day1 Sabado && ( sonIgualesDias day2 Viernes  || sonIgualesDias day2 Jueves ||  sonIgualesDias day2 Miercoles || sonIgualesDias day2 Martes || sonIgualesDias day2 Lunes)) 
+     
     
 
 
