@@ -130,7 +130,7 @@ siguiente :: Dir -> Dir
 siguiente Norte = Este
 siguiente Este = Sur
 siguiente Sur = Oeste
-siguiente Oeste = Norte
+siguiente Oeste = siguiente Oeste = error "no existe la siguiente dirección a Oeste"
 
 {-- Ejemplo de uso --}
 siguienteEjemplo :: Dir
@@ -255,7 +255,7 @@ negar False = True
 --}
 
 implica :: Bool -> Bool -> Bool
-implica True False = False
+implica True b = b 
 implica _ _ = True
 
 {-- c.  --}
