@@ -175,10 +175,39 @@ factorial n = if n > 0 then n * factorial ( n - 1 ) else error "No se puede calc
 factorialEjemplo = factorial 5
 
 {-- 2. --}
-{-- 3. --}
-{-- 4. --}
-{-- 5. --}
 
+cuentaRegresiva :: Int -> [Int]
+cuentaRegresiva 0 = []
+cuentaRegresiva n = if n < 0 then cuentaRegresiva 0 else n : cuentaRegresiva (n-1)
+
+{-- Ejemplo de uso --}
+cuentaRegresivaEjemplo = cuentaRegresiva 5
+
+{-- 3. --}
+repetir :: Int -> a -> [a]
+repetir 0 _ = []
+repetir n e = if n < 0 then [] else e : repetir (n-1) e
+
+{-- Ejemplo de uso --}
+repetirEjemplo = repetir 3 5
+
+{-- 4. --}
+losPrimeros :: Int -> [a] -> [a]
+losPrimeros n [] = []
+losPrimeros 0 _ = []
+losPrimeros n (x:xs) = x : losPrimeros (n-1) xs
+
+{-- Ejemplo de uso --}
+losPrimerosEjemplo = losPrimeros 3 [1, 2, 3, 4, 5]
+  
+{-- 5. --}
+sinLosPrimeros :: Int -> [a] -> [a]
+sinLosPrimeros 0 ls = ls
+sinLosPrimeros n [] = []
+sinLosPrimeros n (x:xs) = sinLosPrimeros (n-1) xs
+
+{-- Ejemplo de uso --}
+sinLosPrimerosEjemplo = sinLosPrimeros 2 [1, 2, 3, 4, 5]
 
 {-- 3. --}
 
