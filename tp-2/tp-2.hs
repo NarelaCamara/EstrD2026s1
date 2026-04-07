@@ -359,7 +359,21 @@ esDeveloper (Management s p) = False
 {-- c. --}
 
 cantQueTrabajaEn :: [Proyecto] -> Empresa -> Int
+cantQueTrabajaEn ps (ConstEmpresa rs) = longitud ( trabajanEn ps rs ) 
+
+
+trabajanEn :: [Proyecto] -> [Rol] -> [Rol]
+trabajanEn ps [] = []
+trabajanEn ps (x:xs) = if (yaExiste (proyecto x) ps) then x : trabajanEn ps xs else trabajanEn ps xs 
+ 
 
 {-- d. --}
 
 asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
+asignadosPorProyecto e = proyectoAsignados (proyectos e) e
+
+
+proyectoAsignados :: [Proyecto] -> Empresa -> [(Proyecto, Int)]
+proyectoAsignados [] e = []
+proyectoAsignados (x:xs) e = (x , cantQueTrabajaEn (x:[]) e) : proyectoAsignados xs e
+
