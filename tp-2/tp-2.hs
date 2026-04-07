@@ -167,6 +167,13 @@ sinPrimerElemento (x:xs) = xs
 {-- Recursion sobre numeros --}
 
 {-- 1. --}
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = if n > 0 then n * factorial ( n - 1 ) else error "No se puede calcular el factorial de un numero negativo"
+
+{-- Ejemplo de uso --}
+factorialEjemplo = factorial 5
+
 {-- 2. --}
 {-- 3. --}
 {-- 4. --}
