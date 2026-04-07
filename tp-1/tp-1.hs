@@ -356,9 +356,8 @@ laQueEsMayor (PersonaC name1 age1) (PersonaC name2 age2)  = if esMayorQueLaOtra 
 {--  2. --}
 data TipoDePokemon = Agua | Fuego | Planta deriving (Show, Eq)
 
-data Pokemon = PokemonC  TipoDePokemon  Int deriving (Show, Eq)
-data Entrenador = EntrenadorC String  Pokemon  Pokemon deriving (Show, Eq)
-
+data Pokemon = PokemonC  TipoDePokemon  Int deriving Show
+data Entrenador = EntrenadorC String  Pokemon  Pokemon deriving Show
 
 {-- a. --}
 
