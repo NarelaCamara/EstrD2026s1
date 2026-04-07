@@ -214,5 +214,152 @@ sinLosPrimerosEjemplo = sinLosPrimeros 2 [1, 2, 3, 4, 5]
 {-- Registros --}
 
 {-- 1. --}
+
+{-- a. --}
+data Persona = P name age Deriving Show
+
+mayoresA :: Int -> [Persona] -> [Persona]
+mayoresA n [] = []
+mayoresA n (x:xs) = if esMayorA n x  then x : mayoresA n xs else mayoresA n xs
+
+
+esMayorA :: Int -> Persona -> Bool
+esMayorA n p = edad p > n
+
+edad:: Persona -> Int
+edad (P name age) = age
+
+{-- b. --}
+promedioEdad :: [Persona] -> Int
+promedioEdad [] = 0
+promedioEdad ps = sumaEdades ps / longitud ps
+
+sumaEdades :: [Persona] -> Int
+sumaEdades [] = 0
+sumaEdades (x:xs) = edad x + sumaEdades xs
+
+{-- c. --}
+elMasViejo :: [Persona] -> Persona
+elMasViejo [] = error "No debe ser una lista Vacia"
+elMasViejo (x:[]) = x
+elMasViejo (x:xs) = if edad x > edad (primerElemento xs) then elMasViejo (x: (sinPrimerElemento xs)) else elMasViejo xs
+
+
 {-- 2. --}
+
+data TipoDePokemon = Agua | Fuego | Planta deriving (Show, Eq)
+
+data Pokemon = PokemonC  TipoDePokemon  Int deriving Show
+data Entrenador = EntrenadorC String  [Pokemon]  deriving Show
+
+{-- a. --}
+cantPokemon :: Entrenador -> Int
+cantPokemon e = longitud (pokemons e)
+
+pokemons:: Entrenador -> [Pokemon]
+pokemons (EntrenadorC _ xs) = xs
+
+
+{-- b. --}
+
+cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
+cantPokemonDe t e = pokemonsTipoDe t (pokemons e)
+
+
+pokemonsTipoDe :: TipoDePokemon ->  [Pokemon]
+pokemonsTipoDe t [] = []
+pokemonsTipoDe t (x:xs) = if t == pokemonTipo x then x : pokemonsTipoDe t xs else pokemonsTipoDe t xs
+
+pokemonTipo :: Pokemon -> TipoDePokemon
+pokemonTipo (PokemonC t _) = t
+
+
+{-- c. --}
+
+cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenador -> Int
+cuantosDeTipo_De_LeGananATodosLosDe_ e1 e2 = pokemonsQueGananA (pokemons e1) (pokemons e2)
+
+
+pokemonsQueGananA :: [Pokemon] -> [Pokemon] -> [Pokemon]
+pokemonsQueGananA [] n = []
+pokemonsQueGananA (x:xs) n = if leGanaATodos x n then x : pokemonsQueGananA xs n else pokemonsQueGananA xs n
+
+
+leGanaATodos :: Pokemon -> [Pokemon] -> Bool
+leGanaATodos p [] = True
+leGanaATodos p (x:xs) = tipoSuperior (pokemonTipo p) (pokemonTipo x) && leGanaATodos p xs
+
+
+tipoSuperior :: TipoDePokemon -> TipoDePokemon -> Bool
+tipoSuperior Agua Fuego = True
+tipoSuperior Fuego Planta = True
+tipoSuperior Planta Agua = True
+tipoSuperior _ _ = False
+
+{-- d. --}
+
+esMaestroPokemon :: Entrenador -> Bool
+esMaestroPokemon e = tieneTipo Agua (pokemons e) && tieneTipo Fuego (pokemons e) && tieneTipo Planta (pokemons e)
+
+tieneTipo :: TipoDePokemon -> [Pokemon] -> Bool
+tieneTipo t [] = False
+tieneTipo t (x:xs) =  (pokemonTipo x) == t || tieneTipo t xs
+
 {-- 3. --}
+
+
+data Seniority = Junior | SemiSenior | Senior Deriving Show
+data Proyecto = ConsProyecto String Deriving Show
+data Rol = Developer Seniority Proyecto | Management Seniority Proyecto Deriving Show
+data Empresa = ConstEmpresa [Rol]
+
+{-- a. --}
+proyectos :: Empresa -> [Proyecto]
+proyectos [] = []
+proyectos (ConstEmpresa (xs)) = filtrarProyectosRepetidos(allProyectos xs)
+
+filtrarProyectosRepetidos :: [Proyecto] -> [Proyecto]
+filtrarProyectosRepetidos [] = []
+filtrarProyectosRepetidos (x:xs) = if yaExiste x xs then filtrarProyectosRepetidos xs else x : filtrarProyectosRepetidos xs
+
+yaExiste :: Proyecto -> [Proyecto] -> Bool
+yaExiste p [] = False
+yaExiste p (x:xs) =  mismoProyecto p x || yaExiste  p xs
+
+
+mismoProyecto :: Proyecto -> Proyecto -> Bool
+mismoProyecto (ConsProyecto s1) (ConsProyecto s2) = s1 == s2
+
+
+allProyectos :: [Rol] -> [Proyecto]
+allProyectos [] = []
+allProyectos (x:xs) = (proyecto x) : allProyectos xs
+    
+
+proyecto :: Rol -> Proyecto
+proyecto (Developer s p) = p
+proyecto (Management s p ) = p
+
+{-- b. --}
+losDevSenior :: Empresa -> [Proyecto] -> Int
+losDevSenior (ConstEmpresa xs) ps =  longitud (losDevQuePertenecen xs ps)
+
+
+
+losDevQuePertenecen :: [Rol] -> [Proyecto] -> [Rol]
+losDevQuePertenecen [] ps = []
+losDevQuePertenecen (x:xs) ps = if ((esDeveloper x )&& (yaExiste (proyecto x) ps)) then x : losDevQuePertenecen xs ps else losDevQuePertenecen xs ps 
+
+
+esDeveloper :: Rol -> Bool
+esDeveloper (Developer s p) = True
+esDeveloper (Management s p) = False  
+
+ 
+{-- c. --}
+
+cantQueTrabajaEn :: [Proyecto] -> Empresa -> Int
+
+{-- d. --}
+
+asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
