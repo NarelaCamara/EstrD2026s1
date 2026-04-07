@@ -350,7 +350,7 @@ esMayorQueLaOtra (PersonaC _ age1) (PersonaC _ age2) = age1 > age2
 --}
 
 laQueEsMayor :: Persona -> Persona -> Persona
-laQueEsMayor (PersonaC name1 age1) (PersonaC name2 age2)  = if esMayorQueLaOtra (PersonaC name1 age1) (PersonaC name2 age2) then (PersonaC name1 age1) else (PersonaC name2 age2)
+laQueEsMayor p1 p2  = if esMayorQueLaOtra p1 p2 then p1 else p2
 
 
 {--  2. --}
@@ -416,7 +416,12 @@ cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC  tipo1 _) (PokemonC  tipo2 _))
 --}
 
 juntarPokemon :: Entrenador -> Entrenador -> [Pokemon]
-juntarPokemon (EntrenadorC _ pokemon1A pokemon2A) (EntrenadorC _ pokemon1B pokemon2B) = [pokemon1A, pokemon2A, pokemon1B, pokemon2B]
+juntarPokemon  e1 e2 =  pokemons e1 ++ pokemons e2
+
+
+
+pokemons :: Entrenador -> [Pokemon]
+pokemons (EntrenadorC _ pokemon1A pokemon2A) = pokemon1A : pokemon2A []
 
 {-- 5. --}
 
