@@ -82,12 +82,21 @@ apariciones :: Eq a => a -> [a] -> Int
 apariciones _ [] = 0
 apariciones e (x:xs) = if (e == x) then 1 + apariciones e xs  else apariciones e xs
 
+{-- Ejemplo de uso --}
+
+aparicionesEjemplo = apariciones 3 [1, 2, 3, 4, 5, 3, 3]
+
+
 {-- 9. --}
 {--  PRECOND:  La lista solo puede ser de numeros enteros --}
 
 losMenoresA :: Int -> [Int] -> [Int]
 losMenoresA n [] = []
 losMenoresA n (x:xs) =  if x > n then x : losMenoresA n xs else losMenoresA n xs
+
+{-- Ejemplo de uso --}
+
+losMenoresAEjemplo = losMenoresA 3 [1, 2, 3, 4, 5]
 
 
 {-- 10. --}
@@ -96,20 +105,31 @@ lasDeLongitudMayorA :: Int -> [[a]] -> [[a]]
 lasDeLongitudMayorA n [] = []
 lasDeLongitudMayorA n (x:xs) =  if (longitud x) > n  then x : lasDeLongitudMayorA n xs else lasDeLongitudMayorA n xs
 
+{-- Ejemplo de uso --}
+lasDeLongitudMayorAEjemplo = lasDeLongitudMayorA 2 [[1, 2], [3, 4, 5], [6, 7]]
 
 {-- 11. --}
 agregarAlFinal :: [a] -> a -> [a]
 agregarAlFinal [] a = [a]
 agregarAlFinal (x:xs) a = x : agregarAlFinal xs a
 
+{-- Ejemplo de uso --}
+agregarAlFinalEjemplo = agregarAlFinal [1, 2, 3] 4
+
 {-- 12. --}
 agregar :: [a] -> [a] -> [a]
 agregar l1 l2 = l1 ++ l2
+
+{-- Ejemplo de uso --}
+agregarEjemplo = agregar [1, 2, 3] [4, 5, 6]
 
 {-- 13. --}
 reversa :: [a] -> [a]
 reversa [] = []
 reversa (x:xs) = agregarAlFinal (reversa xs) x
+
+{-- Ejemplo de uso --}
+reversaEjemplo = reversa [1, 2, 3, 4, 5]
 
 {-- 14. --}
 zipMaximos:: [Int] -> [Int] -> [Int]
@@ -118,12 +138,18 @@ zipMaximos [] l2 = l2
 zipMaximos [] [] = []
 zipMaximos (x:xs) (l:ls) = (if x > l then x else l) : zipMaximos xs ls
 
+{-- Ejemplo de uso --}
+zipMaximosEjemplo = zipMaximos [1, 2, 3] [4, 5, 6]
+
 
 {-- 15. --}
 elMinimo :: Ord a => [a] -> a 
 elMinimo [] = error "No puede ser una lista vacia"
 elMinimo (x:[]) = x
 elMinimo (x:xs) = if x > primerElemento xs then elMinimo (x: sinPrimerElemento xs) else elMinimo xs
+
+{-- Ejemplo de uso --}
+elMinimoEjemplo = elMinimo [1, 2, 3, 4, 5]
 
 
 primerElemento:: [a] -> a
