@@ -276,7 +276,7 @@ pokemons (EntrenadorC _ xs) = xs
 {-- b. --}
 
 cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
-cantPokemonDe t e = pokemonsTipoDe t (pokemons e)
+cantPokemonDe t e = longitud (pokemonsTipoDe t (pokemons e))
 
 {-- Ejemplo de uso --}
 cantPokemonDeEjemplo = cantPokemonDe Agua (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30])
@@ -293,14 +293,14 @@ pokemonTipo (PokemonC t _) = t
 {-- c. --}
 
 cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenador -> Int
-cuantosDeTipo_De_LeGananATodosLosDe_ e1 e2 = pokemonsQueGananA (pokemons e1) (pokemons e2)
+cuantosDeTipo_De_LeGananATodosLosDe_  t e1 e2 = longitud (pokemonsQueGananA t (pokemons e1) (pokemons e2))
 
 {-- Ejemplo de uso --}
 cuantosDeTipo_De_LeGananATodosLosDe_Ejemplo = cuantosDeTipo_De_LeGananATodosLosDe_ Agua (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30]) (EntrenadorC "Misty" [PokemonC Agua 15, PokemonC Fuego 25, PokemonC Planta 35])   
 
-pokemonsQueGananA :: [Pokemon] -> [Pokemon] -> [Pokemon]
-pokemonsQueGananA [] n = []
-pokemonsQueGananA (x:xs) n = if leGanaATodos x n then x : pokemonsQueGananA xs n else pokemonsQueGananA xs n
+pokemonsQueGananA :: TipoDePokemon ->  [Pokemon] -> [Pokemon] -> [Pokemon]
+pokemonsQueGananA t [] n = []
+pokemonsQueGananA t (x:xs) n = if leGanaATodos x n &&  t == pokemonTipo x then x : pokemonsQueGananA t xs n else pokemonsQueGananA t xs n
 
 
 leGanaATodos :: Pokemon -> [Pokemon] -> Bool
@@ -338,7 +338,6 @@ data Empresa = ConstEmpresa [Rol] deriving Show
 
 {-- a. --}
 proyectos :: Empresa -> [Proyecto]
-proyectos [] = []
 proyectos (ConstEmpresa (xs)) = filtrarProyectosRepetidos(allProyectos xs)
 
 {-- Ejemplo de uso --}
