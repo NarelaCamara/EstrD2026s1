@@ -416,12 +416,11 @@ cantidadDePokemonDe tipo (EntrenadorC _ (PokemonC  tipo1 _) (PokemonC  tipo2 _))
 --}
 
 juntarPokemon :: Entrenador -> Entrenador -> [Pokemon]
-juntarPokemon  e1 e2 =  pokemons e1 ++ pokemons e2
-
+juntarPokemon  e1 e2 =  (pokemons e1 ) ++ (pokemons e2)
 
 
 pokemons :: Entrenador -> [Pokemon]
-pokemons (EntrenadorC _ pokemon1A pokemon2A) = pokemon1A : pokemon2A []
+pokemons (EntrenadorC _ pokemon1A pokemon2A) = pokemon1A : pokemon2A : []
 
 {-- 5. --}
 

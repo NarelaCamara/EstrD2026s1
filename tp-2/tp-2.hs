@@ -216,7 +216,7 @@ sinLosPrimerosEjemplo = sinLosPrimeros 2 [1, 2, 3, 4, 5]
 {-- 1. --}
 
 {-- a. --}
-data Persona = P name age Deriving Show
+data Persona = P String Int deriving Show
 
 mayoresA :: Int -> [Persona] -> [Persona]
 mayoresA n [] = []
@@ -235,7 +235,7 @@ edad (P name age) = age
 {-- b. --}
 promedioEdad :: [Persona] -> Int
 promedioEdad [] = 0
-promedioEdad ps = sumaEdades ps / longitud ps
+promedioEdad ps = (sumaEdades ps) `div` (longitud ps)
 
 
 {-- Ejemplo de uso --}
@@ -282,7 +282,7 @@ cantPokemonDe t e = pokemonsTipoDe t (pokemons e)
 cantPokemonDeEjemplo = cantPokemonDe Agua (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30])
 
 
-pokemonsTipoDe :: TipoDePokemon ->  [Pokemon]
+pokemonsTipoDe :: TipoDePokemon -> [Pokemon] -> [Pokemon]
 pokemonsTipoDe t [] = []
 pokemonsTipoDe t (x:xs) = if t == pokemonTipo x then x : pokemonsTipoDe t xs else pokemonsTipoDe t xs
 
@@ -331,10 +331,10 @@ tieneTipo t (x:xs) =  (pokemonTipo x) == t || tieneTipo t xs
 {-- 3. --}
 
 
-data Seniority = Junior | SemiSenior | Senior Deriving Show
-data Proyecto = ConsProyecto String Deriving Show
-data Rol = Developer Seniority Proyecto | Management Seniority Proyecto Deriving Show
-data Empresa = ConstEmpresa [Rol]
+data Seniority = Junior | SemiSenior | Senior deriving Show
+data Proyecto = ConsProyecto String deriving Show
+data Rol = Developer Seniority Proyecto | Management Seniority Proyecto deriving Show
+data Empresa = ConstEmpresa [Rol] deriving Show
 
 {-- a. --}
 proyectos :: Empresa -> [Proyecto]
