@@ -222,6 +222,9 @@ mayoresA :: Int -> [Persona] -> [Persona]
 mayoresA n [] = []
 mayoresA n (x:xs) = if esMayorA n x  then x : mayoresA n xs else mayoresA n xs
 
+{-- Ejemplo de uso --}
+mayoresAEjemplo = mayoresA 18 [P "Alice" 20, P "Bob" 17, P "Charlie" 25]
+
 
 esMayorA :: Int -> Persona -> Bool
 esMayorA n p = edad p > n
@@ -234,6 +237,10 @@ promedioEdad :: [Persona] -> Int
 promedioEdad [] = 0
 promedioEdad ps = sumaEdades ps / longitud ps
 
+
+{-- Ejemplo de uso --}
+promedioEdadEjemplo = promedioEdad [P "Alice" 20, P "Bob" 17, P "Charlie" 25]
+
 sumaEdades :: [Persona] -> Int
 sumaEdades [] = 0
 sumaEdades (x:xs) = edad x + sumaEdades xs
@@ -244,6 +251,8 @@ elMasViejo [] = error "No debe ser una lista Vacia"
 elMasViejo (x:[]) = x
 elMasViejo (x:xs) = if edad x > edad (primerElemento xs) then elMasViejo (x: (sinPrimerElemento xs)) else elMasViejo xs
 
+{-- Ejemplo de uso --}
+elMasViejoEjemplo = elMasViejo [P "Alice" 20, P "Bob" 17, P "Charlie" 25]
 
 {-- 2. --}
 
@@ -256,6 +265,10 @@ data Entrenador = EntrenadorC String  [Pokemon]  deriving Show
 cantPokemon :: Entrenador -> Int
 cantPokemon e = longitud (pokemons e)
 
+{-- Ejemplo de uso --}
+cantPokemonEjemplo = cantPokemon (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30])  
+
+
 pokemons:: Entrenador -> [Pokemon]
 pokemons (EntrenadorC _ xs) = xs
 
@@ -264,6 +277,9 @@ pokemons (EntrenadorC _ xs) = xs
 
 cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
 cantPokemonDe t e = pokemonsTipoDe t (pokemons e)
+
+{-- Ejemplo de uso --}
+cantPokemonDeEjemplo = cantPokemonDe Agua (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30])
 
 
 pokemonsTipoDe :: TipoDePokemon ->  [Pokemon]
@@ -279,6 +295,8 @@ pokemonTipo (PokemonC t _) = t
 cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenador -> Int
 cuantosDeTipo_De_LeGananATodosLosDe_ e1 e2 = pokemonsQueGananA (pokemons e1) (pokemons e2)
 
+{-- Ejemplo de uso --}
+cuantosDeTipo_De_LeGananATodosLosDe_Ejemplo = cuantosDeTipo_De_LeGananATodosLosDe_ Agua (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30]) (EntrenadorC "Misty" [PokemonC Agua 15, PokemonC Fuego 25, PokemonC Planta 35])   
 
 pokemonsQueGananA :: [Pokemon] -> [Pokemon] -> [Pokemon]
 pokemonsQueGananA [] n = []
@@ -301,6 +319,11 @@ tipoSuperior _ _ = False
 esMaestroPokemon :: Entrenador -> Bool
 esMaestroPokemon e = tieneTipo Agua (pokemons e) && tieneTipo Fuego (pokemons e) && tieneTipo Planta (pokemons e)
 
+
+{-- Ejemplo de uso --}
+esMaestroPokemonEjemplo = esMaestroPokemon (EntrenadorC "Ash" [PokemonC Agua 10, PokemonC Fuego 20, PokemonC Planta 30])
+
+
 tieneTipo :: TipoDePokemon -> [Pokemon] -> Bool
 tieneTipo t [] = False
 tieneTipo t (x:xs) =  (pokemonTipo x) == t || tieneTipo t xs
@@ -317,6 +340,10 @@ data Empresa = ConstEmpresa [Rol]
 proyectos :: Empresa -> [Proyecto]
 proyectos [] = []
 proyectos (ConstEmpresa (xs)) = filtrarProyectosRepetidos(allProyectos xs)
+
+{-- Ejemplo de uso --}
+proyectosEjemplo = proyectos empresaEjemplo
+
 
 filtrarProyectosRepetidos :: [Proyecto] -> [Proyecto]
 filtrarProyectosRepetidos [] = []
@@ -345,6 +372,8 @@ losDevSenior :: Empresa -> [Proyecto] -> Int
 losDevSenior (ConstEmpresa xs) ps =  longitud (losDevQuePertenecen xs ps)
 
 
+{-- Ejemplo de uso --}
+losDevSeniorEjemplo = losDevSenior empresaEjemplo [ConsProyecto "Proyecto A"]
 
 losDevQuePertenecen :: [Rol] -> [Proyecto] -> [Rol]
 losDevQuePertenecen [] ps = []
@@ -366,6 +395,9 @@ trabajanEn :: [Proyecto] -> [Rol] -> [Rol]
 trabajanEn ps [] = []
 trabajanEn ps (x:xs) = if (yaExiste (proyecto x) ps) then x : trabajanEn ps xs else trabajanEn ps xs 
  
+{-- Ejemplo de uso --}
+cantQueTrabajaEnEjemplo = cantQueTrabajaEn [ConsProyecto "Proyecto A"] empresaEjemplo
+
 
 {-- d. --}
 
@@ -377,3 +409,5 @@ proyectoAsignados :: [Proyecto] -> Empresa -> [(Proyecto, Int)]
 proyectoAsignados [] e = []
 proyectoAsignados (x:xs) e = (x , cantQueTrabajaEn (x:[]) e) : proyectoAsignados xs e
 
+{-- Ejemplo de uso --}
+empresaEjemplo = ConstEmpresa [Developer Senior (ConsProyecto "Proyecto A"), Management SemiSenior (ConsProyecto "Proyecto B"), Developer Junior (ConsProyecto "Proyecto A"), Developer Senior (ConsProyecto "Proyecto C")]
