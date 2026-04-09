@@ -386,18 +386,17 @@ esDeveloper (Management s p) = False
 
  
 {-- c. --}
-{-- Ejemplo de uso --}
 
 cantQueTrabajaEn :: [Proyecto] -> Empresa -> Int
-cantQueTrabajaEn ps (ConstEmpresa rs) = longitud ( trabajanEn ps rs ) 
+cantQueTrabajaEn ps (ConstEmpresa rs) =  trabajanEn ps rs 
 
 {-- Ejemplo de uso --}
 cantQueTrabajaEnEjemplo = cantQueTrabajaEn [ConsProyecto "Proyecto A", ConsProyecto "Proyecto B"] empresaEjemplo
 
 
-trabajanEn :: [Proyecto] -> [Rol] -> [Rol]
-trabajanEn ps [] = []
-trabajanEn ps (x:xs) = if (yaExiste (proyecto x) ps) then x : trabajanEn ps xs else trabajanEn ps xs 
+trabajanEn :: [Proyecto] -> [Rol] -> Int
+trabajanEn ps [] = 0
+trabajanEn ps (x:xs) = if (yaExiste (proyecto x) ps) then 1 + (trabajanEn ps xs) else (trabajanEn ps xs) 
  
 
 {-- d. --}
