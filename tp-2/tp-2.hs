@@ -41,7 +41,7 @@ sucesoresEjemplo = sucesores [1, 2, 3, 4, 5]
 {-- 4. --}
 {-- PRECOND: La lista debe ser de tipo Bool --}
 conjuncion :: [Bool] -> Bool
-conjuncion [] = False
+conjuncion [] = True
 conjuncion (x:xs) = x && conjuncion xs
 
 {-- Ejemplo de uso --}
@@ -92,7 +92,7 @@ aparicionesEjemplo = apariciones 3 [1, 2, 3, 4, 5, 3, 3]
 
 losMenoresA :: Int -> [Int] -> [Int]
 losMenoresA n [] = []
-losMenoresA n (x:xs) =  if x > n then x : losMenoresA n xs else losMenoresA n xs
+losMenoresA n (x:xs) =  if x < n then x : losMenoresA n xs else losMenoresA n xs
 
 {-- Ejemplo de uso --}
 
@@ -146,7 +146,7 @@ zipMaximosEjemplo = zipMaximos [1, 2, 3] [4, 5, 6]
 elMinimo :: Ord a => [a] -> a 
 elMinimo [] = error "No puede ser una lista vacia"
 elMinimo (x:[]) = x
-elMinimo (x:xs) = if x > primerElemento xs then elMinimo (x: sinPrimerElemento xs) else elMinimo xs
+elMinimo (x:xs) = if x < primerElemento xs then elMinimo (x: sinPrimerElemento xs) else elMinimo xs
 
 {-- Ejemplo de uso --}
 elMinimoEjemplo = elMinimo [1, 2, 3, 4, 5]
@@ -234,8 +234,7 @@ edad (P name age) = age
 
 {-- b. --}
 promedioEdad :: [Persona] -> Int
-promedioEdad [] = 0
-promedioEdad ps = (sumaEdades ps) `div` (longitud ps)
+promedioEdad ps = div (sumaEdades ps)  (longitud ps)
 
 
 {-- Ejemplo de uso --}
@@ -336,6 +335,8 @@ data Proyecto = ConsProyecto String deriving Show
 data Rol = Developer Seniority Proyecto | Management Seniority Proyecto deriving Show
 data Empresa = ConstEmpresa [Rol] deriving Show
 
+empresaEjemplo = ConstEmpresa [Developer Senior (ConsProyecto "Proyecto A"), Management SemiSenior (ConsProyecto "Proyecto B"), Developer Junior (ConsProyecto "Proyecto A"), Developer Senior (ConsProyecto "Proyecto C")]
+
 {-- a. --}
 proyectos :: Empresa -> [Proyecto]
 proyectos (ConstEmpresa (xs)) = filtrarProyectosRepetidos(allProyectos xs)
@@ -385,18 +386,19 @@ esDeveloper (Management s p) = False
 
  
 {-- c. --}
+{-- Ejemplo de uso --}
 
 cantQueTrabajaEn :: [Proyecto] -> Empresa -> Int
 cantQueTrabajaEn ps (ConstEmpresa rs) = longitud ( trabajanEn ps rs ) 
+
+{-- Ejemplo de uso --}
+cantQueTrabajaEnEjemplo = cantQueTrabajaEn [ConsProyecto "Proyecto A", ConsProyecto "Proyecto B"] empresaEjemplo
 
 
 trabajanEn :: [Proyecto] -> [Rol] -> [Rol]
 trabajanEn ps [] = []
 trabajanEn ps (x:xs) = if (yaExiste (proyecto x) ps) then x : trabajanEn ps xs else trabajanEn ps xs 
  
-{-- Ejemplo de uso --}
-cantQueTrabajaEnEjemplo = cantQueTrabajaEn [ConsProyecto "Proyecto A"] empresaEjemplo
-
 
 {-- d. --}
 
@@ -408,5 +410,6 @@ proyectoAsignados :: [Proyecto] -> Empresa -> [(Proyecto, Int)]
 proyectoAsignados [] e = []
 proyectoAsignados (x:xs) e = (x , cantQueTrabajaEn (x:[]) e) : proyectoAsignados xs e
 
+
 {-- Ejemplo de uso --}
-empresaEjemplo = ConstEmpresa [Developer Senior (ConsProyecto "Proyecto A"), Management SemiSenior (ConsProyecto "Proyecto B"), Developer Junior (ConsProyecto "Proyecto A"), Developer Senior (ConsProyecto "Proyecto C")]
+asignadosPorProyectoEjemplo = asignadosPorProyecto empresaEjemplo
