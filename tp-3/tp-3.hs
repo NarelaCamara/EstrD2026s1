@@ -109,3 +109,19 @@ cantTesoro (x:xs) = if esTesoro x then  1 + cantTesoro xs else cantTesoro xs
 
 {-- --}
 
+cantTesorosEntre:: Int -> Int -> Camino -> Int
+cantTesorosEntre inicio fin Fin = 0
+cantTesorosEntre inicio fin (Nada c) = if (inicio-1) == 0 
+        then cantTesorosEntre 0 (fin-1) c 
+        else cantTesorosEntre (inicio-1) (fin-1) c
+cantTesorosEntre inicio fin (Cofre ts c) =  if (inicio-1) < 0 && (fin-1) > 0 
+        then cantTesoro ts + cantTesorosEntre 0 (fin-1) c 
+        else if (inicio-1) == 0 
+            then  cantTesorosEntre (inicio-1) (fin-1) c 
+            else 0
+
+
+ 
+{--Ejemplo de uso --}
+
+cantTesorosEntreEjemplo = cantTesorosEntre 2 3 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
