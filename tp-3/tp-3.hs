@@ -94,7 +94,7 @@ hayTesoroEntreLosObjetosEn _ = False
 
 
 {-- --}
-alMenosNTesoros:: Int -> Camino -> Int
+alMenosNTesoros:: Int -> Camino -> Bool
 alMenosNTesoros n c = (cantTesorosEn c) >= n 
 
 cantTesorosEn:: Camino -> Int
@@ -108,3 +108,4 @@ cantTesoro (x:xs) = if esTesoro x then  1 + cantTesoro xs else cantTesoro xs
 
 
 {-- --}
+
