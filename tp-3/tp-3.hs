@@ -82,8 +82,8 @@ pasosHastaTesoroEjemplo = pasosHastaTesoro (Nada (Cofre [Cacharro] (Nada (Cofre 
 
 {-- --}
 hayTesoroEn :: Int -> Camino -> Bool
-hayTesoroEn 0 c = hayTesoroEntreLosObjetosEn c
 hayTesoroEn n Fin = False 
+hayTesoroEn 0 c = hayTesoroEntreLosObjetosEn c
 hayTesoroEn n (Nada c) = hayTesoroEn (n-1) c
 hayTesoroEn n (Cofre ts c) = hayTesoroEn (n-1) c 
 
