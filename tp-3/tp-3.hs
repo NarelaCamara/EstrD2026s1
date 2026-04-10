@@ -94,3 +94,17 @@ hayTesoroEntreLosObjetosEn _ = False
 
 
 {-- --}
+alMenosNTesoros:: Int -> Camino -> Int
+alMenosNTesoros n c = (cantTesorosEn c) >= n 
+
+cantTesorosEn:: Camino -> Int
+cantTesorosEn Fin = 0
+cantTesorosEn (Nada c) = 0 + cantTesorosEn c
+cantTesoroEn (Cofre ts c) = cantTesoro ts + cantTesoroEn c
+
+cantTesoro :: [Objeto] -> Int
+cantTesoro [] = 0
+cantTesoro (x:xs) = if esTesoro x then  1 + cantTesoro xs else cantTesoro xs
+
+
+{-- --}
