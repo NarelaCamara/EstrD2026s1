@@ -106,7 +106,7 @@ alMenosNTesorosEjemplo = alMenosNTesoros 3 (Nada (Cofre [Cacharro] (Nada (Cofre 
 cantTesorosEn:: Camino -> Int
 cantTesorosEn Fin = 0
 cantTesorosEn (Nada c) = 0 + cantTesorosEn c
-cantTesorosEn (Cofre ts c) = cantTesoro ts + cantTesorosEn c
+cantTesorosEn (Cofre ts c) = (if (cantTesoro ts) > 0 then 1 else 0) + cantTesorosEn c
 
 cantTesoro :: [Objeto] -> Int
 cantTesoro [] = 0
@@ -116,12 +116,13 @@ cantTesoro (x:xs) = if esTesoro x then  1 + cantTesoro xs else cantTesoro xs
 {-- --}
 
 cantTesorosEntre:: Int -> Int -> Camino -> Int
-cantTesorosEntre inicio fin Fin = 0
-cantTesorosEntre inicio fin (Nada c) = if (inicio-1) == 0 && (fin-1) == 0  then 0 else (cantTesorosEntre (inicio-1) (fin-1) c)
-cantTesorosEntre inicio fin (Cofre ts c) =  if (inicio-1) == 0 then  (if (fin-1) == 0 then 0 else (cantTesoro ts) + (cantTesorosEntre 0 (fin-1) c) ) else cantTesorosEntre (inicio-1) (fin-1) c
+cantTesorosEntre inicio fin c = if fin > inicio then (cantTesorosHasta fin c) - (cantTesorosHasta inicio c) else 0
 
-
-
+cantTesorosHasta:: Int -> Camino -> Int
+cantTesorosHasta r EmptyT = 0
+cantTesorosHasta r (Nada c) = if r == 0 then 0 else cantTesorosHasta (r-1) c
+cantTesorosHasta r (Cofre ts c) = if r == 0 then 0 else cantTesoro ts + cantTesorosHasta (r-1) c
+ 
 {--Ejemplo de uso --}
 
 cantTesorosEntreEjemplo = cantTesorosEntre 2 5 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
