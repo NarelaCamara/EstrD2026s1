@@ -387,11 +387,11 @@ esDeveloper (Management s p) = False
  
 {-- c. --}
 
-cantQueTrabajaEn :: [Proyecto] -> Empresa -> Int
-cantQueTrabajaEn ps (ConstEmpresa rs) =  trabajanEn ps rs 
+cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
+cantQueTrabajanEn ps (ConstEmpresa rs) =  trabajanEn ps rs 
 
 {-- Ejemplo de uso --}
-cantQueTrabajaEnEjemplo = cantQueTrabajaEn [ConsProyecto "Proyecto A", ConsProyecto "Proyecto B"] empresaEjemplo
+cantQueTrabajanEnEjemplo = cantQueTrabajanEn [ConsProyecto "Proyecto A", ConsProyecto "Proyecto B"] empresaEjemplo
 
 
 trabajanEn :: [Proyecto] -> [Rol] -> Int
@@ -407,7 +407,7 @@ asignadosPorProyecto e = proyectoAsignados (proyectos e) e
 
 proyectoAsignados :: [Proyecto] -> Empresa -> [(Proyecto, Int)]
 proyectoAsignados [] e = []
-proyectoAsignados (x:xs) e = (x ,( cantQueTrabajaEn [x] e)) : proyectoAsignados xs e
+proyectoAsignados (x:xs) e = (x ,( cantQueTrabajanEn [x] e)) : proyectoAsignados xs e
 
 
 {-- Ejemplo de uso --}
