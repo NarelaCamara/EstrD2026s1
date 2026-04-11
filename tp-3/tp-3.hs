@@ -119,7 +119,7 @@ cantTesorosEntre:: Int -> Int -> Camino -> Int
 cantTesorosEntre inicio fin c = if fin > inicio then (cantTesorosHasta fin c) - (cantTesorosHasta inicio c) else 0
 
 cantTesorosHasta:: Int -> Camino -> Int
-cantTesorosHasta r EmptyT = 0
+cantTesorosHasta r Fin = 0
 cantTesorosHasta r (Nada c) = if r == 0 then 0 else cantTesorosHasta (r-1) c
 cantTesorosHasta r (Cofre ts c) = if r == 0 then 0 else cantTesoro ts + cantTesorosHasta (r-1) c
  
