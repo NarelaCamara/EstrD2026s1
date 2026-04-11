@@ -87,6 +87,9 @@ hayTesoroEn 0 c = hayTesoroEntreLosObjetosEn c
 hayTesoroEn n (Nada c) = hayTesoroEn (n-1) c
 hayTesoroEn n (Cofre ts c) = hayTesoroEn (n-1) c 
 
+{-- Ejemplo de uso --}
+hayTesoroEnEjemplo = hayTesoroEn 2 (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] Fin))))
+
 
 hayTesoroEntreLosObjetosEn:: Camino -> Bool
 hayTesoroEntreLosObjetosEn (Cofre ts c) = hayTesoroEntreLosObjetos ts
@@ -97,10 +100,13 @@ hayTesoroEntreLosObjetosEn _ = False
 alMenosNTesoros:: Int -> Camino -> Bool
 alMenosNTesoros n c = (cantTesorosEn c) >= n 
 
+{-- Ejemplo de uso --}
+alMenosNTesorosEjemplo = alMenosNTesoros 3 (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Tesoro, Tesoro] Fin))))))
+
 cantTesorosEn:: Camino -> Int
 cantTesorosEn Fin = 0
 cantTesorosEn (Nada c) = 0 + cantTesorosEn c
-cantTesoroEn (Cofre ts c) = cantTesoro ts + cantTesoroEn c
+cantTesorosEn (Cofre ts c) = cantTesoro ts + cantTesorosEn c
 
 cantTesoro :: [Objeto] -> Int
 cantTesoro [] = 0
@@ -118,7 +124,7 @@ cantTesorosEntre inicio fin (Cofre ts c) =  if (inicio-1) == 0 then  (if (fin-1)
 
 {--Ejemplo de uso --}
 
-parteCaminoEntreEjemplo = cantTesorosEntre 2 5 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
+cantTesorosEntreEjemplo = cantTesorosEntre 2 5 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
 
 {-- 2. --}
  
@@ -132,25 +138,36 @@ sumarT :: Tree Int -> Int
 sumarT EmptyT = 0
 sumarT (NodeT a t1 t2) = a + (sumarT t1) + (sumarT t2)
 
+{-- Ejemplo de uso --}
+sumarTEjemplo = sumarT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
+
 {-- 2. --}
 sizeT :: Tree a -> Int
 sizeT EmptyT = 1
 sizeT (NodeT a t1 t2) = 1 + (sizeT t1) + (sizeT t2)
+
+{-- Ejemplo de uso --}
+sizeTEjemplo = sizeT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 3. --}
 mapDobleT:: Tree Int -> Tree Int
 mapDobleT EmptyT = EmptyT
 mapDobleT (NodeT a t1 t2) = (NodeT (doble a) (mapDobleT t1) (mapDobleT t2)) 
 
+{-- Ejemplo de uso --}
+mapDobleTEjemplo = mapDobleT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 doble:: Int -> Int
 doble n = n * 2
+
 
 {-- 4. --}
 perteneceT:: Eq a => a -> Tree a -> Bool
 perteneceT a EmptyT = False
 perteneceT a (NodeT na t1 t2) = (esIgual a na) ||( perteneceT a t1) ||( perteneceT a t2)
 
+{-- Ejemplo de uso --}
+perteneceTEjemplo = perteneceT 5 (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 esIgual:: Eq a => a -> a -> Bool
 esIgual n1 n2 = n1 == n2
@@ -160,10 +177,17 @@ aparicionesT ::Eq a => a -> Tree a -> Int
 aparicionesT a EmptyT = 0
 aparicionesT a (NodeT na t1 t2) = (if (esIgual a na) then 1 else 0) + (aparicionesT a t1) + (aparicionesT a t2)
 
+{-- Ejemplo de uso --}
+aparicionesTEjemplo = aparicionesT 5 (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 5 EmptyT EmptyT))
+
+
 {--6. --}
 leaves:: Tree a -> [a]
 leaves EmptyT = []
 leaves (NodeT a t1 t2) = a : (leaves t1) ++ (leaves t2)
+
+{-- Ejemplo de uso --}
+leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 7. 
 heightT:: Tree a -> Int
