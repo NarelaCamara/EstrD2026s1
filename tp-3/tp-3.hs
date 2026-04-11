@@ -193,7 +193,16 @@ leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 {-- 7. --}
 heightT:: Tree a -> Int
 heightT EmptyT = 0
-heightT _ = 1
+heightT (NodeT a EmptyT t2) = 1 + heightT t2
+heightT (NodeT a t1 EmptyT) = 1 + heightT t1
+heightT (NodeT a t1 t2) = 1 + (mayor (heightT t1) (heightT t2))
+
+mayor:: Int -> Int -> Int
+mayor n1 n2 = if n1 > n2 then n1 else n2
+
+
+{-- Ejemplo de uso --}
+heightTEjemplo = heightT (NodeT 5 (NodeT 3 (NodeT 3 EmptyT EmptyT) EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 8. --}
 --mirrorT:: Tree a -> Tree a 
