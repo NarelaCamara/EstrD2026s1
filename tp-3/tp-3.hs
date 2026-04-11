@@ -205,17 +205,44 @@ mayor n1 n2 = if n1 > n2 then n1 else n2
 heightTEjemplo = heightT (NodeT 5 (NodeT 3 (NodeT 3 EmptyT EmptyT) EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 8. --}
---mirrorT:: Tree a -> Tree a 
+mirrorT:: Tree a -> Tree a 
+mirrorT EmptyT = EmptyT
+mirrorT (NodeT a EmptyT t2) = (NodeT a (mirrorT t2) EmptyT) 
+mirrorT (NodeT a t1 EmptyT) = (NodeT a EmptyT (mirrorT t1)) 
+mirrorT (NodeT a t1 t2) = (NodeT a (mirrorT t2) (mirrorT t1))
 
---toList:: Tree a -> [a]
+{-- 9. --} 
+toList:: Tree a -> [a]
+toList EmptyT = []
+toList (NodeT a t1 t2) = toList t1 ++ (a : []) ++  toList t2
 
---levenN:: Int -> Tree a -> [a]
+{-- 10. --}
+levenN:: Int -> Tree a -> [a]
+levenN n EmptyT = []
+levenN n (NodeT a t1 t2) = if(n == 0) then a : [] else (a : []) ++ levenN (n-1) t1 ++ levenN (n-1) t2
 
---listPerLevel:: Tree a -> [[a]]
+{-- 11. --}
+listPerLevel:: Tree a -> [[a]]
+listPerLevel EmptyT = []
 
---ramaMasLarga:: Tree a -> [a]
+listPerLevel (NodeT a t1 t2) = [a] : listPerLevel t1 : listPerLevel t2
 
---todosLosCaminos:: Tree a -> [[a]]
+{-- 12. --}
+ramaMasLarga:: Tree a -> [a]
+ramaMasLarga EmptyT = []
+ramaMasLarga (NodeT a EmptyT EmptyT) = (a :[])
+ramaMasLarga (NodeT a t1 t2) = (a: []) ++ (mayor (longitud t1) (longitud t2)) 
+
+longitud :: [a] -> Int
+longitud [] = 0
+longitud (x:xs) = 1 + longitud xs
+
+{-- 12. --}
+todosLosCaminos:: Tree a -> [[a]]
+todosLosCaminos EmptyT = []
+todosLosCaminos (NodeT a t1 EmptyT) = [a] : ([a] ++ (todosLosCaminos t1)) 
+todosLosCaminos (NodeT a EmptyT t2) = [a] : ([a] ++ (todosLosCaminos t2)) 
+todosLosCaminos (NodeT a t1 t2) = [a] : ([a] ++ (todosLosCaminos t1)) : ([a] ++ (todosLosCaminos t2))
 
 
 {-- 2. --}
