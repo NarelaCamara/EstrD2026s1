@@ -29,7 +29,7 @@ ejemplo4 = sacar Rojo ejemplo1
 
 {-- --}
 sacar:: Color -> Celda -> Celda
-sacar c CeldaVacia = Bolita c CeldaVacia
+sacar c CeldaVacia = CeldaVacia
 sacar c (Bolita colB celB) = if c == colB then celB else Bolita colB (sacar c celB)
 
 {-- Ejemplo de uso --}
@@ -192,7 +192,7 @@ leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 {-- 7. --}
 heightT:: Tree a -> Int
 heightT EmptyT = 0
-heightT (NodeT a t1 t2) = 1 + heightT t1 + heightT t2 
+heightT _ = 1
 
 {-- 8. --}
 --mirrorT:: Tree a -> Tree a 
