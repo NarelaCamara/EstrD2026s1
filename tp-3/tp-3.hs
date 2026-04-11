@@ -168,4 +168,27 @@ leaves (NodeT a t1 t2) = a : (leaves t1) ++ (leaves t2)
 {-- 7. 
 heightT:: Tree a -> Int
 heightT EmptyT = 0
-heightT (NodeT a t1 t2) = 1 + --}
+heightT (NodeT a t1 t2) = 1 + 
+
+{-- 8. --}
+--mirrorT:: Tree a -> Tree a 
+
+--toList:: Tree a -> [a]
+
+--levenN:: Int -> Tree a -> [a]
+
+--listPerLevel:: Tree a -> [[a]]
+
+--ramaMasLarga:: Tree a -> [a]
+
+--todosLosCaminos:: Tree a -> [[a]]
+
+
+{-- 2. --}
+
+data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA deriving Show
+
+{-- EXPRESIONES ARITMETICAS --}
+{--  1. --}
+
+{-- 2. --}
