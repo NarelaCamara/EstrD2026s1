@@ -192,7 +192,7 @@ leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 {-- 7. 
 heightT:: Tree a -> Int
 heightT EmptyT = 0
-heightT (NodeT a t1 t2) = 1 + 
+heightT (NodeT a t1 t2) = 1 + --}
 
 {-- 8. --}
 --mirrorT:: Tree a -> Tree a 
