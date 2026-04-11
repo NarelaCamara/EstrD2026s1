@@ -111,17 +111,61 @@ cantTesoro (x:xs) = if esTesoro x then  1 + cantTesoro xs else cantTesoro xs
 
 cantTesorosEntre:: Int -> Int -> Camino -> Int
 cantTesorosEntre inicio fin Fin = 0
-cantTesorosEntre inicio fin (Nada c) = if (inicio-1) == 0 
-        then cantTesorosEntre 0 (fin-1) c 
-        else cantTesorosEntre (inicio-1) (fin-1) c
-cantTesorosEntre inicio fin (Cofre ts c) =  if (inicio-1) < 0 && (fin-1) > 0 
-        then cantTesoro ts + cantTesorosEntre 0 (fin-1) c 
-        else if (inicio-1) == 0 
-            then  cantTesorosEntre (inicio-1) (fin-1) c 
-            else 0
+cantTesorosEntre inicio fin (Nada c) = if (inicio-1) == 0 && (fin-1) == 0  then 0 else (cantTesorosEntre (inicio-1) (fin-1) c)
+cantTesorosEntre inicio fin (Cofre ts c) =  if (inicio-1) == 0 then  (if (fin-1) == 0 then 0 else (cantTesoro ts) + (cantTesorosEntre 0 (fin-1) c) ) else cantTesorosEntre (inicio-1) (fin-1) c
 
 
- 
+
 {--Ejemplo de uso --}
 
-cantTesorosEntreEjemplo = cantTesorosEntre 2 3 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
+parteCaminoEntreEjemplo = cantTesorosEntre 2 5 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
+
+{-- 2. --}
+ 
+{-- TIPOS ARBOREOS --}
+{-- arboles binarios --}
+
+data Tree a = EmptyT | NodeT a (Tree a) (Tree a)
+
+{-- 1. --}
+sumarT :: Tree Int -> Int
+sumarT EmptyT = 0
+sumarT (NodeT a t1 t2) = a + (sumarT t1) + (sumarT t2)
+
+{-- 2. --}
+sizeT :: Tree a -> Int
+sizeT EmptyT = 1
+sizeT (NodeT a t1 t2) = 1 + (sizeT t1) + (sizeT t2)
+
+{-- 3. --}
+mapDobleT:: Tree Int -> Tree Int
+mapDobleT EmptyT = EmptyT
+mapDobleT (NodeT a t1 t2) = (NodeT (doble a) (mapDobleT t1) (mapDobleT t2)) 
+
+
+doble:: Int -> Int
+doble n = n * 2
+
+{-- 4. --}
+perteneceT:: Eq a => a -> Tree a -> Bool
+perteneceT a EmptyT = False
+perteneceT a (NodeT na t1 t2) = (esIgual a na) ||( perteneceT a t1) ||( perteneceT a t2)
+
+
+esIgual:: Eq a => a -> a -> Bool
+esIgual n1 n2 = n1 == n2
+
+{-- 5. --}
+aparicionesT ::Eq a => a -> Tree a -> Int
+aparicionesT a EmptyT = 0
+aparicionesT a (NodeT na t1 t2) = (if (esIgual a na) then 1 else 0) + (aparicionesT a t1) + (aparicionesT a t2)
+
+{--6. --}
+leaves:: Tree a -> [a]
+leaves EmptyT = []
+leaves (NodeT a t1 t2) = a : (leaves t1) ++ (leaves t2)
+
+{-- 7. 
+heightT:: Tree a -> Int
+heightT EmptyT = 0
+heightT (NodeT a t1 t2) = 1 + --}
