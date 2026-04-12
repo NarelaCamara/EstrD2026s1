@@ -221,29 +221,27 @@ levenN:: Int -> Tree a -> [a]
 levenN n EmptyT = []
 levenN n (NodeT a t1 t2) = if(n == 0) then a : [] else (a : []) ++ levenN (n-1) t1 ++ levenN (n-1) t2
 
-{-- 11. --}
+{-- 11. 
 listPerLevel:: Tree a -> [[a]]
 listPerLevel EmptyT = []
+listPerLevel (NodeT a t1 t2) = [a] : (listPerLevel t1) : (listPerLevel t2) --}
 
-listPerLevel (NodeT a t1 t2) = [a] : listPerLevel t1 : listPerLevel t2
-
-{-- 12. --}
+{-- 12.
 ramaMasLarga:: Tree a -> [a]
 ramaMasLarga EmptyT = []
 ramaMasLarga (NodeT a EmptyT EmptyT) = (a :[])
-ramaMasLarga (NodeT a t1 t2) = (a: []) ++ (mayor (longitud t1) (longitud t2)) 
+ramaMasLarga (NodeT a t1 t2) = (a: []) ++ (if (mayor (longitud t1) (longitud t2)) then t1 else t2) --}
 
 longitud :: [a] -> Int
 longitud [] = 0
 longitud (x:xs) = 1 + longitud xs
 
-{-- 12. --}
+{-- 13. 
 todosLosCaminos:: Tree a -> [[a]]
 todosLosCaminos EmptyT = []
 todosLosCaminos (NodeT a t1 EmptyT) = [a] : ([a] ++ (todosLosCaminos t1)) 
 todosLosCaminos (NodeT a EmptyT t2) = [a] : ([a] ++ (todosLosCaminos t2)) 
-todosLosCaminos (NodeT a t1 t2) = [a] : ([a] ++ (todosLosCaminos t1)) : ([a] ++ (todosLosCaminos t2))
-
+todosLosCaminos (NodeT a t1 t2) = [a] : ([a] ++ (todosLosCaminos t1)) : ([a] ++ (todosLosCaminos t2))--}
 
 {-- 2. --}
 
@@ -252,4 +250,33 @@ data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA deriving Show
 {-- EXPRESIONES ARITMETICAS --}
 {--  1. --}
 
+eval:: ExpA -> Int
+eval (Valor n) = n
+eval (Sum n1 n2) =(eval n1) + (eval n2)
+eval (Prod n1 n2) = (eval n1) * (eval n2)
+eval (Neg n) = (eval n)  * (-1)
+
 {-- 2. --}
+simplificar:: ExpA -> ExpA
+simplificar (Suma n1 n2) = simplificacionSuma (eval n1) (eval n2)
+simplificar (Prod n1 n2) = simplificacionProd (eval n1) (eval n2)
+simplificar (Neg n) = simplicacionNeg (eval n)
+simplificar n = n
+
+
+simplificacionSuma :: ExpA -> ExpA -> ExpA
+simplificacionSuma (Valor 0) n = n
+simplificacionSuma n (Valor 0) = n
+simplificacionSuma n1 n2 = Suma n1 n2
+
+
+simplificacionProd :: ExpA -> ExpA -> ExpA
+simplificacionProd (Valor 0) n = 0
+simplificacionProd n (Valor 0) = 0
+simplificacionProd (Valor 1) n = n
+simplificacionProd n (Valor 1) = n
+
+
+simplicacionNeg :: ExpA -> ExpA
+simplicacionNeg (Neg (Neg n)) = n 
+simplicacionNeg n = n
