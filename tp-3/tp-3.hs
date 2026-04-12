@@ -265,10 +265,19 @@ levenN n (NodeT a t1 t2) = if(n == 0) then a : [] else levenN (n-1) t1 ++ levenN
 {-- Ejemplo de uso --}
 levenNEjemplo = levenN 1 (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
-{-- 11. 
-listPerLevel:: Tree a -> [[a]]
-listPerLevel EmptyT = []
-listPerLevel (NodeT a t1 t2) = [a] : (listPerLevel t1) : (listPerLevel t2) --}
+{-- 11. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve una lista de listas con los elementos del árbol por nivel --}
+listPerLevel :: Tree a -> [[a]]
+listPerLevel EmptyT          = []
+listPerLevel (NodeT x t1 t2) = [x] : concatenar (listPerLevel t1) (listPerLevel t2)
+
+concatenar :: [[a]] -> [[a]]   -> [[a]]
+concatenar  []     yss        = yss
+concatenar  xss    []         = xss
+concatenar  (xs:xss) (ys:yss) = (xs ++ ys) : concatenar xss yss
+{-- Ejemplo de uso --}
+listPerLevelEjemplo = listPerLevel (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
 {-- 12.
 ramaMasLarga:: Tree a -> [a]
