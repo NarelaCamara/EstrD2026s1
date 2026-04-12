@@ -145,9 +145,11 @@ cantTesorosEntreEjemplo = cantTesorosEntre 0 1 (Cofre [Cacharro, Tesoro, Tesoro]
 {-- TIPOS ARBOREOS --}
 {-- arboles binarios --}
 
-data Tree a = EmptyT | NodeT a (Tree a) (Tree a)
+data Tree a = EmptyT | NodeT a (Tree a) (Tree a) deriving Show
 
 {-- 1. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve la suma de los elementos del árbol --}
 sumarT :: Tree Int -> Int
 sumarT EmptyT = 0
 sumarT (NodeT a t1 t2) = a + (sumarT t1) + (sumarT t2)
@@ -156,6 +158,8 @@ sumarT (NodeT a t1 t2) = a + (sumarT t1) + (sumarT t2)
 sumarTEjemplo = sumarT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 2. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve la cantidad de nodos del árbol --}
 sizeT :: Tree a -> Int
 sizeT EmptyT = 1
 sizeT (NodeT a t1 t2) = 1 + (sizeT t1) + (sizeT t2)
@@ -164,6 +168,8 @@ sizeT (NodeT a t1 t2) = 1 + (sizeT t1) + (sizeT t2)
 sizeTEjemplo = sizeT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 3. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve un nuevo árbol con el resultado de duplicar el valor de cada elemento del árbol --}
 mapDobleT:: Tree Int -> Tree Int
 mapDobleT EmptyT = EmptyT
 mapDobleT (NodeT a t1 t2) = (NodeT (doble a) (mapDobleT t1) (mapDobleT t2)) 
@@ -176,6 +182,8 @@ doble n = n * 2
 
 
 {-- 4. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve True si el elemento dado pertenece al árbol, False en caso contrario --}
 perteneceT:: Eq a => a -> Tree a -> Bool
 perteneceT a EmptyT = False
 perteneceT a (NodeT na t1 t2) = (esIgual a na) ||( perteneceT a t1) ||( perteneceT a t2)
@@ -187,6 +195,8 @@ esIgual:: Eq a => a -> a -> Bool
 esIgual n1 n2 = n1 == n2
 
 {-- 5. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve la cantidad de apariciones del elemento dado en el árbol --}
 aparicionesT ::Eq a => a -> Tree a -> Int
 aparicionesT a EmptyT = 0
 aparicionesT a (NodeT na t1 t2) = (if (esIgual a na) then 1 else 0) + (aparicionesT a t1) + (aparicionesT a t2)
@@ -195,7 +205,10 @@ aparicionesT a (NodeT na t1 t2) = (if (esIgual a na) then 1 else 0) + (aparicion
 aparicionesTEjemplo = aparicionesT 5 (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 5 EmptyT EmptyT))
 
 
+{-- RARO --}
 {--6. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve una lista con los elementos del árbol que son hojas --}
 leaves:: Tree a -> [a]
 leaves EmptyT = []
 leaves (NodeT a t1 t2) = a : (leaves t1) ++ (leaves t2)
@@ -204,6 +217,8 @@ leaves (NodeT a t1 t2) = a : (leaves t1) ++ (leaves t2)
 leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 7. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve la altura del árbol --}
 heightT:: Tree a -> Int
 heightT EmptyT = 0
 heightT (NodeT a EmptyT t2) = 1 + heightT t2
@@ -215,9 +230,11 @@ mayor n1 n2 = if n1 > n2 then n1 else n2
 
 
 {-- Ejemplo de uso --}
-heightTEjemplo = heightT (NodeT 5 (NodeT 3 (NodeT 3 EmptyT EmptyT) EmptyT) (NodeT 7 EmptyT EmptyT))
+heightTEjemplo = heightT (NodeT 5 (NodeT 3 (NodeT 3 (NodeT 3 EmptyT EmptyT) EmptyT) EmptyT) (NodeT 7 EmptyT EmptyT))
 
 {-- 8. --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve un nuevo árbol con el resultado de reflejar el árbol dado --}
 mirrorT:: Tree a -> Tree a 
 mirrorT EmptyT = EmptyT
 mirrorT (NodeT a EmptyT t2) = (NodeT a (mirrorT t2) EmptyT) 
@@ -229,14 +246,24 @@ mirrorTEjemplo = mirrorT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT
 
 
 {-- 9. --} 
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve una lista con los elementos del árbol en orden --}
 toList:: Tree a -> [a]
 toList EmptyT = []
 toList (NodeT a t1 t2) = toList t1 ++ (a : []) ++  toList t2
 
+{-- Ejemplo de uso --}
+toListEjemplo = toList (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
+
 {-- 10. --}
+{-- PRECONDICION: El árbol debe ser válido, el número debe ser mayor o igual a cero
+    Proposito: Devuelve una lista con los elementos del nivel n del árbol --}
 levenN:: Int -> Tree a -> [a]
 levenN n EmptyT = []
-levenN n (NodeT a t1 t2) = if(n == 0) then a : [] else (a : []) ++ levenN (n-1) t1 ++ levenN (n-1) t2
+levenN n (NodeT a t1 t2) = if(n == 0) then a : [] else levenN (n-1) t1 ++ levenN (n-1) t2
+
+{-- Ejemplo de uso --}
+levenNEjemplo = levenN 1 (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
 {-- 11. 
 listPerLevel:: Tree a -> [[a]]
@@ -266,35 +293,37 @@ data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA deriving Show
 
 {-- EXPRESIONES ARITMETICAS --}
 {--  1. --}
-
+{-- PRECONDICION: La expresión debe ser válida
+    Proposito: Devuelve el resultado de evaluar la expresión --}
 eval:: ExpA -> Int
 eval (Neg n) = (eval n)  * (-1)
 eval (Valor n) = n
 eval (Sum n1 n2) =(eval n1) + (eval n2)
 eval (Prod n1 n2) = (eval n1) * (eval n2)
 
+{-- Ejemplo de uso --}
+evalEjemplo = eval (Sum (Prod (Valor 2) (Valor 3)) (Neg (Valor 4)))
+
 {-- 2. --}
+{-- PRECONDICION: La expresión debe ser válida
+    Proposito: Devuelve una nueva expresión con el resultado de simplificar la expresión dada --}
 simplificar:: ExpA -> ExpA
-simplificar (Sum n1 n2) = simplificacionSuma ( n1) ( n2)
-simplificar (Prod n1 n2) = simplificacionProd ( n1) ( n2)
-simplificar (Neg n) = simplificacionNeg ( n)
-simplificar n = n
+simplificar (Sum n1 n2) = simplificacionSuma(simplificar n1) (simplificar n2)
+simplificar (Prod n1 n2) = simplificacionProd (simplificar n1) (simplificar n2)
+simplificar (Neg (Neg n))  = simplificar n
+simplificar (Valor n) = Valor n
+
+
+{-- Ejemplo de uso --}
+simplificarEjemplo = simplificar (Prod (Valor 1) (Neg (Neg(Sum (Neg (Neg (Valor 4))) (Neg (Neg (Valor 0)))))) )
 
 
 simplificacionSuma :: ExpA -> ExpA -> ExpA
-simplificacionSuma (Valor 0) n = n
-simplificacionSuma n (Valor 0) = n
-simplificacionSuma n1 n2 = Sum n1 n2
+simplificacionSuma n1 n2 = if eval n1 == 0 then n2 else if eval n2 == 0 then n1 else Sum n1 n2
 
 
 simplificacionProd :: ExpA -> ExpA -> ExpA
-simplificacionProd (Valor 0) n = Valor 0
-simplificacionProd n (Valor 0) = Valor 0
-simplificacionProd (Valor 1) n = n
-simplificacionProd n (Valor 1) = n
-simplificacionProd n1 n2 = Prod n1 n2
+simplificacionProd n1 n2 = if eval n1 == 0 || eval n2 == 0 then Valor 0 else (if (eval n1 * 1) == 1 then n2 else if (eval n2 * 1) == 1 then n1 else Prod n1 n2)
 
 
-simplificacionNeg :: ExpA -> ExpA
-simplificacionNeg (Neg (Neg n)) = n 
-simplificacionNeg n = n
+ 
