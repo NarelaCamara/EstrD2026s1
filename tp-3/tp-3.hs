@@ -9,7 +9,9 @@ data Color = Rojo | Azul deriving (Show, Eq)
 
 data Celda =  Bolita Color Celda | CeldaVacia deriving Show
 
-{-- --}
+{-- PRECONDICION: El color debe ser válido
+    Proposito: Devuelve la cantidad de bolitas del color dado que hay en la celda --}
+
 nroBolitas:: Color -> Celda -> Int
 nroBolitas  c CeldaVacia = 0
 nroBolitas col (Bolita colB celB ) = if col == colB then 1 + (nroBolitas col celB) else nroBolitas col celB
@@ -18,7 +20,8 @@ nroBolitas col (Bolita colB celB ) = if col == colB then 1 + (nroBolitas col cel
 ejemplo1 = Bolita Rojo (Bolita Azul CeldaVacia)
 ejemplo2 = CeldaVacia
 
-{-- --}
+{-- PRECONDICION: El color debe ser válido
+    Proposito: Pone una bolita del color en la celda --}
 poner:: Color -> Celda -> Celda
 poner col c = (Bolita col c)
 
@@ -27,7 +30,8 @@ poner col c = (Bolita col c)
 ejemplo3 = poner Rojo ejemplo1
 ejemplo4 = sacar Rojo ejemplo1
 
-{-- --}
+{-- PRECONDICION: El color debe ser válido
+    Proposito: Saca una bolita del color en la celda --}
 sacar:: Color -> Celda -> Celda
 sacar c CeldaVacia = CeldaVacia
 sacar c (Bolita colB celB) = if c == colB then celB else Bolita colB (sacar c celB)
@@ -36,7 +40,8 @@ sacar c (Bolita colB celB) = if c == colB then celB else Bolita colB (sacar c ce
 ejemplo5 = sacar Rojo ejemplo3
 ejemplo6 = sacar Azul ejemplo3
 
-{-- --}
+{-- PRECONDICION: El número debe ser válido
+    Proposito: Pone n bolitas del color en la celda --}
 ponerN:: Int -> Color -> Celda -> Celda
 ponerN 0 col c = c
 ponerN n col c = if n > 0 then  (Bolita col (ponerN (n-1) col c)) else c
@@ -52,11 +57,9 @@ ejemplo7 = ponerN 3 Rojo ejemplo2
 data Objeto = Cacharro | Tesoro deriving (Show, Eq)
 data Camino = Fin | Cofre [Objeto] Camino | Nada Camino deriving Show
 
-esTesoro :: Objeto -> Bool
-esTesoro Tesoro = True
-esTesoro _ = False
+{-- PRECONDICION: El camino debe ser válido
+    Proposito: Devuelve True si hay un tesoro en el camino, False en caso contrario --}
 
-{-- --}
 hayTesoro:: Camino -> Bool
 hayTesoro Fin = False
 hayTesoro (Nada c) = False || (hayTesoro c)
@@ -65,22 +68,29 @@ hayTesoro (Cofre lo c) = if hayTesoroEntreLosObjetos lo then True else hayTesoro
 {--Ejemplo de uso --}
 hayTesoroEjemplo = hayTesoro (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro] Fin)))
 
+esTesoro :: Objeto -> Bool
+esTesoro Tesoro = True
+esTesoro _ = False
 
 hayTesoroEntreLosObjetos:: [Objeto] -> Bool
 hayTesoroEntreLosObjetos [] = False
 hayTesoroEntreLosObjetos (x:xs) = if esTesoro x then True else hayTesoroEntreLosObjetos xs
 
 
-{-- --}
+{-- PRECONDICION: El camino debe ser válido
+    Proposito: Devuelve la cantidad de pasos hasta llegar al tesoro
+    Aclaracion: Incluimos el cero al contar los pasos --}
 pasosHastaTesoro :: Camino -> Int
 pasosHastaTesoro Fin = 0
 pasosHastaTesoro (Nada c) = 1 + pasosHastaTesoro c 
 pasosHastaTesoro (Cofre ls c) = if hayTesoroEntreLosObjetos ls then 0 else 1 + pasosHastaTesoro c
 
 {--Ejemplo de uso --}
-pasosHastaTesoroEjemplo = pasosHastaTesoro (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] Fin))))
+pasosHastaTesoroEjemplo = pasosHastaTesoro  (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] Fin)))
 
-{-- --}
+{-- PRECONDICION: El camino debe ser válido
+    Proposito: Devuelve True si hay un tesoro en el camino en la posición dada, False en caso contrario 
+    Aclaracion: Incluimos el cero al contar los pasos --}
 hayTesoroEn :: Int -> Camino -> Bool
 hayTesoroEn n Fin = False 
 hayTesoroEn 0 c = hayTesoroEntreLosObjetosEn c
@@ -88,7 +98,7 @@ hayTesoroEn n (Nada c) = hayTesoroEn (n-1) c
 hayTesoroEn n (Cofre ts c) = hayTesoroEn (n-1) c 
 
 {-- Ejemplo de uso --}
-hayTesoroEnEjemplo = hayTesoroEn 2 (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] Fin))))
+hayTesoroEnEjemplo = hayTesoroEn 3 (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] Fin))))
 
 
 hayTesoroEntreLosObjetosEn:: Camino -> Bool
@@ -96,36 +106,39 @@ hayTesoroEntreLosObjetosEn (Cofre ts c) = hayTesoroEntreLosObjetos ts
 hayTesoroEntreLosObjetosEn _ = False
 
 
-{-- --}
+{-- PRECONDICION: El número debe ser válido, si un camino tiene mas de n tesoros entonces es True
+    Proposito: Devuelve True si hay al menos n tesoros en el camino, False en caso contrario
+    Aclaracion: Incluimos el cero al contar los pasos --}
 alMenosNTesoros:: Int -> Camino -> Bool
 alMenosNTesoros n c = (cantTesorosEn c) >= n 
 
 {-- Ejemplo de uso --}
-alMenosNTesorosEjemplo = alMenosNTesoros 3 (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Tesoro, Tesoro] Fin))))))
+alMenosNTesorosEjemplo = alMenosNTesoros 5 (Nada (Cofre [Cacharro,Tesoro,Tesoro] (Nada (Cofre [Cacharro, Cacharro, Tesoro] (Nada (Cofre [Tesoro, Tesoro] Fin))))))
 
 cantTesorosEn:: Camino -> Int
 cantTesorosEn Fin = 0
 cantTesorosEn (Nada c) = 0 + cantTesorosEn c
-cantTesorosEn (Cofre ts c) = (if (cantTesoro ts) > 0 then 1 else 0) + cantTesorosEn c
+cantTesorosEn (Cofre ts c) = cantTesoro ts + cantTesorosEn c
 
 cantTesoro :: [Objeto] -> Int
 cantTesoro [] = 0
 cantTesoro (x:xs) = if esTesoro x then  1 + cantTesoro xs else cantTesoro xs
 
 
-{-- --}
-
+{-- PRECONDICION: Los números deben ser válidos, 
+    Proposito: Devuelve la cantidad de tesoros en el camino entre las posiciones dadas--}
 cantTesorosEntre:: Int -> Int -> Camino -> Int
-cantTesorosEntre inicio fin c = if fin > inicio then (cantTesorosHasta fin c) - (cantTesorosHasta inicio c) else 0
+cantTesorosEntre _ _ Fin = 0
+cantTesorosEntre _ 0 (Nada c) = 0
+cantTesorosEntre 0 fin (Nada c) = 0 + cantTesorosEntre 0 (fin-1) c
+cantTesorosEntre inicio fin (Nada c) = 0 + cantTesorosEntre (inicio-1) (fin-1) c
+cantTesorosEntre _ 0 (Cofre ts c) = cantTesoro ts
+cantTesorosEntre 0 fin (Cofre ts c) = cantTesoro ts + cantTesorosEntre 0 (fin-1) c
+cantTesorosEntre inicio fin (Cofre ts c) = 0 + cantTesorosEntre (inicio-1) (fin-1) c
 
-cantTesorosHasta:: Int -> Camino -> Int
-cantTesorosHasta r Fin = 0
-cantTesorosHasta r (Nada c) = if r == 0 then 0 else cantTesorosHasta (r-1) c
-cantTesorosHasta r (Cofre ts c) = if r == 0 then 0 else cantTesoro ts + cantTesorosHasta (r-1) c
- 
+
 {--Ejemplo de uso --}
-
-cantTesorosEntreEjemplo = cantTesorosEntre 2 5 (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))))
+cantTesorosEntreEjemplo = cantTesorosEntre 0 1 (Cofre [Cacharro, Tesoro, Tesoro]  (Cofre [Cacharro, Tesoro, Tesoro] (Nada (Cofre [Cacharro, Tesoro] (Nada (Cofre [Cacharro, Tesoro, Tesoro, Tesoro] Fin))))))
 
 {-- 2. --}
  
