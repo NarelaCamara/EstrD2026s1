@@ -211,6 +211,10 @@ mirrorT (NodeT a EmptyT t2) = (NodeT a (mirrorT t2) EmptyT)
 mirrorT (NodeT a t1 EmptyT) = (NodeT a EmptyT (mirrorT t1)) 
 mirrorT (NodeT a t1 t2) = (NodeT a (mirrorT t2) (mirrorT t1))
 
+{-- Ejemplo de uso --}
+mirrorTEjemplo = mirrorT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
+
+
 {-- 9. --} 
 toList:: Tree a -> [a]
 toList EmptyT = []
@@ -251,32 +255,33 @@ data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA deriving Show
 {--  1. --}
 
 eval:: ExpA -> Int
+eval (Neg n) = (eval n)  * (-1)
 eval (Valor n) = n
 eval (Sum n1 n2) =(eval n1) + (eval n2)
 eval (Prod n1 n2) = (eval n1) * (eval n2)
-eval (Neg n) = (eval n)  * (-1)
 
 {-- 2. --}
 simplificar:: ExpA -> ExpA
-simplificar (Suma n1 n2) = simplificacionSuma (eval n1) (eval n2)
-simplificar (Prod n1 n2) = simplificacionProd (eval n1) (eval n2)
-simplificar (Neg n) = simplicacionNeg (eval n)
+simplificar (Sum n1 n2) = simplificacionSuma ( n1) ( n2)
+simplificar (Prod n1 n2) = simplificacionProd ( n1) ( n2)
+simplificar (Neg n) = simplificacionNeg ( n)
 simplificar n = n
 
 
 simplificacionSuma :: ExpA -> ExpA -> ExpA
 simplificacionSuma (Valor 0) n = n
 simplificacionSuma n (Valor 0) = n
-simplificacionSuma n1 n2 = Suma n1 n2
+simplificacionSuma n1 n2 = Sum n1 n2
 
 
 simplificacionProd :: ExpA -> ExpA -> ExpA
-simplificacionProd (Valor 0) n = 0
-simplificacionProd n (Valor 0) = 0
+simplificacionProd (Valor 0) n = Valor 0
+simplificacionProd n (Valor 0) = Valor 0
 simplificacionProd (Valor 1) n = n
 simplificacionProd n (Valor 1) = n
+simplificacionProd n1 n2 = Prod n1 n2
 
 
-simplicacionNeg :: ExpA -> ExpA
-simplicacionNeg (Neg (Neg n)) = n 
-simplicacionNeg n = n
+simplificacionNeg :: ExpA -> ExpA
+simplificacionNeg (Neg (Neg n)) = n 
+simplificacionNeg n = n
