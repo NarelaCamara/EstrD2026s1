@@ -161,7 +161,7 @@ sumarTEjemplo = sumarT (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 {-- PRECONDICION: El árbol debe ser válido
     Proposito: Devuelve la cantidad de nodos del árbol --}
 sizeT :: Tree a -> Int
-sizeT EmptyT = 1
+sizeT EmptyT = 0
 sizeT (NodeT a t1 t2) = 1 + (sizeT t1) + (sizeT t2)
 
 {-- Ejemplo de uso --}
