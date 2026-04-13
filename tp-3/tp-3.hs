@@ -315,24 +315,48 @@ evalEjemplo = eval (Sum (Prod (Valor 2) (Valor 3)) (Neg (Valor 4)))
 
 {-- 2. --}
 {-- PRECONDICION: La expresión debe ser válida
-    Proposito: Devuelve una nueva expresión con el resultado de simplificar la expresión dada --}
+    Proposito: Devuelve una nueva expresión con el resultado de simplificar la expresión dada 
 simplificar:: ExpA -> ExpA
-simplificar (Sum n1 n2) = simplificacionSuma(simplificar n1) (simplificar n2)
+simplificar (Sum n1 n2) = simplificacionSum(simplificar n1) (simplificar n2)
 simplificar (Prod n1 n2) = simplificacionProd (simplificar n1) (simplificar n2)
 simplificar (Neg (Neg n))  = simplificar n
 simplificar (Valor n) = Valor n
 
 
-{-- Ejemplo de uso --}
+  Ejemplo de uso 
 simplificarEjemplo = simplificar (Prod (Valor 1) (Neg (Neg(Sum (Neg (Neg (Valor 4))) (Neg (Neg (Valor 0)))))) )
 
 
-simplificacionSuma :: ExpA -> ExpA -> ExpA
-simplificacionSuma n1 n2 = if eval n1 == 0 then n2 else if eval n2 == 0 then n1 else Sum n1 n2
+simplificacionSum :: ExpA -> ExpA -> ExpA
+simplificacionSum n1 n2 = if eval n1 == 0 then n2 else if eval n2 == 0 then n1 else Sum n1 n2
 
 
 simplificacionProd :: ExpA -> ExpA -> ExpA
 simplificacionProd n1 n2 = if eval n1 == 0 || eval n2 == 0 then Valor 0 else (if (eval n1 * 1) == 1 then n2 else if (eval n2 * 1) == 1 then n1 else Prod n1 n2)
 
+--}
+ 
+simplificar :: ExpA -> ExpA
+simplificar (Valor n)    = Valor n
+simplificar (Sum e1 e2)  = simplificacionSum  (simplificar e1) (simplificar e2)
+simplificar (Prod e1 e2) = simplificacionProd (simplificar e1) (simplificar e2)
+simplificar (Neg e1)     = simplificacionNeg (simplificar e1)        
 
  
+simplificacionSum :: ExpA -> ExpA -> ExpA
+simplificacionSum (Valor 0 ) e         = e
+simplificacionSum e          (Valor 0) = e
+simplificacionSum e1         e2        = Sum e1 e2
+ 
+
+simplificacionProd :: ExpA -> ExpA -> ExpA
+simplificacionProd (Valor 0)  e         = Valor 0
+simplificacionProd  e         (Valor 0) = Valor 0
+simplificacionProd  e         (Valor 1) = e
+simplificacionProd (Valor 1)  e         = e
+simplificacionProd e1        e2        = Prod e1 e2
+
+
+simplificacionNeg :: ExpA -> ExpA
+simplificacionNeg (Neg e) = e
+simplificacionNeg e       = Neg e
