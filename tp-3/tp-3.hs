@@ -258,12 +258,12 @@ toListEjemplo = toList (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 
 {-- 10. --}
 {-- PRECONDICION: El árbol debe ser válido, el número debe ser mayor o igual a cero
     Proposito: Devuelve una lista con los elementos del nivel n del árbol --}
-levenN:: Int -> Tree a -> [a]
-levenN n EmptyT = []
-levenN n (NodeT a t1 t2) = if(n == 0) then a : [] else levenN (n-1) t1 ++ levenN (n-1) t2
+levelN:: Int -> Tree a -> [a]
+levelN n EmptyT = []
+levelN n (NodeT a t1 t2) = if(n == 0) then a : [] else levelN (n-1) t1 ++ levelN (n-1) t2
 
 {-- Ejemplo de uso --}
-levenNEjemplo = levenN 1 (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
+levelNEjemplo = levelN 1 (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
 {-- 11. --}
 {-- PRECONDICION: El árbol debe ser válido
