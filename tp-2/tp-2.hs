@@ -347,11 +347,11 @@ proyectosEjemplo = proyectos empresaEjemplo
 
 filtrarProyectosRepetidos :: [Proyecto] -> [Proyecto]
 filtrarProyectosRepetidos [] = []
-filtrarProyectosRepetidos (x:xs) = if yaExiste x xs then filtrarProyectosRepetidos xs else x : filtrarProyectosRepetidos xs
+filtrarProyectosRepetidos (x:xs) = if existeProyectoEn x xs then filtrarProyectosRepetidos xs else x : filtrarProyectosRepetidos xs
 
-yaExiste :: Proyecto -> [Proyecto] -> Bool
-yaExiste p [] = False
-yaExiste p (x:xs) =  mismoProyecto p x || yaExiste  p xs
+existeProyectoEn :: Proyecto -> [Proyecto] -> Bool
+existeProyectoEn p [] = False
+existeProyectoEn p (x:xs) =  mismoProyecto p x || existeProyectoEn  p xs
 
 
 mismoProyecto :: Proyecto -> Proyecto -> Bool
@@ -369,15 +369,15 @@ proyecto (Management s p ) = p
 
 {-- b. --}
 losDevSenior :: Empresa -> [Proyecto] -> Int
-losDevSenior (ConstEmpresa xs) ps =  longitud (losDevQuePertenecen xs ps)
+losDevSenior (ConstEmpresa xs) ps =  losDevQuePertenecen xs ps
 
 
 {-- Ejemplo de uso --}
 losDevSeniorEjemplo = losDevSenior empresaEjemplo [ConsProyecto "Proyecto A"]
 
-losDevQuePertenecen :: [Rol] -> [Proyecto] -> [Rol]
-losDevQuePertenecen [] ps = []
-losDevQuePertenecen (x:xs) ps = if ((esDeveloper x )&& (yaExiste (proyecto x) ps)) then x : losDevQuePertenecen xs ps else losDevQuePertenecen xs ps 
+losDevQuePertenecen :: [Rol] -> [Proyecto] -> Int
+losDevQuePertenecen [] ps = 0
+losDevQuePertenecen (x:xs) ps = if ((esDeveloper x)&& (existeProyectoEn (proyecto x) ps)) then 1 + losDevQuePertenecen xs ps else 0 + losDevQuePertenecen xs ps 
 
 
 esDeveloper :: Rol -> Bool
@@ -396,7 +396,7 @@ cantQueTrabajanEnEjemplo = cantQueTrabajanEn [ConsProyecto "Proyecto A", ConsPro
 
 trabajanEn :: [Proyecto] -> [Rol] -> Int
 trabajanEn ps [] = 0
-trabajanEn ps (x:xs) = if (yaExiste (proyecto x) ps) then 1 + (trabajanEn ps xs) else (trabajanEn ps xs) 
+trabajanEn ps (x:xs) = if (existeProyectoEn (proyecto x) ps) then 1 + (trabajanEn ps xs) else (trabajanEn ps xs) 
  
 
 {-- d. --}
