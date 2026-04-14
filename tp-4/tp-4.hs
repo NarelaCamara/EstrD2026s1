@@ -114,9 +114,31 @@ esTesoro _ = False
 {-- Ejemplo de uso --}
 hayTesoroEjemplo = hayTesoro (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Tesoro])) (Fin (CofreC [])))
 
-{-- --}
+{-- PRECONDICION: El mapa debe ser válido
+    Proposito: Devuelve True si hay un tesoro en el mapa, False en caso contrario --}
 hayTesoroEn:: [Dir] -> Mapa -> Bool
 hayTesoroEn [] (Fin c) = hayTesoroEnCofre c
 hayTesoroEn [] (Bifurcacion c m1 m2) = hayTesoroEnCofre c
 hayTesoroEn _ (Fin c) = False
-hayTesoroEn (x:xs) (Bifurcacion c m1 m2) = False --FALTA HACER
+hayTesoroEn (x:xs) (Bifurcacion c m1 m2) = if esIzquierda x then hayTesoroEn xs m1 else hayTesoroEn xs m2 
+
+{-- Ejemplo de uso --}
+hayTesoroEnEjemplo = hayTesoroEn [Izq] (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Tesoro])) (Fin (CofreC [])))
+
+
+esIzquierda:: Dir -> Bool
+esIzquierda Izq = True
+esIzquierda _ = False
+
+{-- PRECONDICION: El mapa debe ser válido
+    Proposito: Devuelve el camino al tesoro en el mapa, si existe --}
+caminoAlTesoro:: Mapa -> [Dir]
+caminoAlTesoro (Fin c) = []
+caminoAlTesoro (Bifurcacion c m1 m2) = if hayTesoroEnCofre c then [] else (if hayTesoro m1 then Izq : caminoAlTesoro m1 else Der : caminoAlTesoro m1)
+
+{-- Ejemplo de uso --}
+
+ejemploCaminoAlTesoro = caminoAlTesoro (Bifurcacion (CofreC [Chatarra]) 
+    (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Chatarra]) ))
+    (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Chatarra]) )))
+
