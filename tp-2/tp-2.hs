@@ -369,6 +369,7 @@ proyecto (Management s p ) = p
 
 {-- b. --}
 losDevSenior :: Empresa -> [Proyecto] -> Int
+losDevSenior (ConstEmpresa []) ps = 0
 losDevSenior (ConstEmpresa xs) ps =  losDevQuePertenecen xs ps
 
 
@@ -377,12 +378,13 @@ losDevSeniorEjemplo = losDevSenior empresaEjemplo [ConsProyecto "Proyecto A"]
 
 losDevQuePertenecen :: [Rol] -> [Proyecto] -> Int
 losDevQuePertenecen [] ps = 0
-losDevQuePertenecen (x:xs) ps = if ((esDeveloper x)&& (existeProyectoEn (proyecto x) ps)) then 1 + losDevQuePertenecen xs ps else 0 + losDevQuePertenecen xs ps 
+losDevQuePertenecen (x:xs) ps = if ((esDeveloperSenior x) && (existeProyectoEn (proyecto x) ps)) then 1 + losDevQuePertenecen xs ps else 0 + losDevQuePertenecen xs ps 
 
 
-esDeveloper :: Rol -> Bool
-esDeveloper (Developer s p) = True
-esDeveloper (Management s p) = False  
+esDeveloperSenior :: Rol -> Bool
+esDeveloperSenior (Developer Senior p) = True
+esDeveloperSenior (Management s p) = False  
+esDeveloperSenior _ = False
 
  
 {-- c. --}
