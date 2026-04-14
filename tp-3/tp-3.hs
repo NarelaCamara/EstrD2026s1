@@ -266,6 +266,7 @@ levelN n (NodeT a t1 t2) = if(n == 0) then a : [] else levelN (n-1) t1 ++ levelN
 levelNEjemplo = levelN 1 (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
 {-- 11. --}
+{-- RARO --}
 {-- PRECONDICION: El árbol debe ser válido
     Proposito: Devuelve una lista de listas con los elementos del árbol por nivel --}
 listPerLevel :: Tree a -> [[a]]
@@ -279,22 +280,33 @@ concatenar  (xs:xss) (ys:yss) = (xs ++ ys) : concatenar xss yss
 {-- Ejemplo de uso --}
 listPerLevelEjemplo = listPerLevel (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
-{-- 12.
-ramaMasLarga:: Tree a -> [a]
+{-- 12. --}
+{-- RARO --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve una lista con los elementos de la rama más larga del árbol --}
+
+ramaMasLarga :: Tree a -> [a]
 ramaMasLarga EmptyT = []
-ramaMasLarga (NodeT a EmptyT EmptyT) = (a :[])
-ramaMasLarga (NodeT a t1 t2) = (a: []) ++ (if (mayor (longitud t1) (longitud t2)) then t1 else t2) --}
+ramaMasLarga (NodeT x n1 n2) = if heightT n1 > heightT n2 then x : ramaMasLarga n1 else x : ramaMasLarga n2  
 
-longitud :: [a] -> Int
-longitud [] = 0
-longitud (x:xs) = 1 + longitud xs
+{-- Ejemplo de uso --}
+ramaMasLargaEjemplo = ramaMasLarga (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
-{-- 13. 
-todosLosCaminos:: Tree a -> [[a]]
-todosLosCaminos EmptyT = []
-todosLosCaminos (NodeT a t1 EmptyT) = [a] : ([a] ++ (todosLosCaminos t1)) 
-todosLosCaminos (NodeT a EmptyT t2) = [a] : ([a] ++ (todosLosCaminos t2)) 
-todosLosCaminos (NodeT a t1 t2) = [a] : ([a] ++ (todosLosCaminos t1)) : ([a] ++ (todosLosCaminos t2))--}
+
+{-- 13. --}
+{-- RARO --}
+{-- PRECONDICION: El árbol debe ser válido
+    Proposito: Devuelve una lista de listas con los elementos de cada camino del árbol --}
+todosLosCaminos :: Tree a         -> [[a]]
+todosLosCaminos    EmptyT          = [   ]
+todosLosCaminos    (NodeT x t1 t2) = [x] : concatenarACada x (todosLosCaminos t1) ++ concatenarACada x (todosLosCaminos t2)
+  
+concatenarACada :: a -> [[a]]   -> [[a]]
+concatenarACada    x    [   ]    = [   ]
+concatenarACada    x    (xs:xss) = (x:xs) : concatenarACada x xss 
+
+{-- Ejemplo de uso --}
+todosLosCaminosEjemplo = todosLosCaminos (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
 
 {-- 2. --}
 
@@ -314,6 +326,7 @@ eval (Prod n1 n2) = (eval n1) * (eval n2)
 evalEjemplo = eval (Sum (Prod (Valor 2) (Valor 3)) (Neg (Valor 4)))
 
 {-- 2. --}
+{-- RARO --}
 {-- PRECONDICION: La expresión debe ser válida
     Proposito: Devuelve una nueva expresión con el resultado de simplificar la expresión dada 
 simplificar:: ExpA -> ExpA
@@ -360,3 +373,7 @@ simplificacionProd e1        e2        = Prod e1 e2
 simplificacionNeg :: ExpA -> ExpA
 simplificacionNeg (Neg e) = e
 simplificacionNeg e       = Neg e
+
+
+{-- Ejemplo de uso --}
+simplificarEjemplo = simplificar (Prod (Valor 1) (Neg (Neg(Sum (Neg (Neg (Valor 4))) (Neg (Neg (Valor 0)))))) ) 
