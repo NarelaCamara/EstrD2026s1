@@ -224,10 +224,7 @@ heightT:: Tree a -> Int
 heightT EmptyT = 0
 heightT (NodeT a EmptyT t2) = 1 + heightT t2
 heightT (NodeT a t1 EmptyT) = 1 + heightT t1
-heightT (NodeT a t1 t2) = 1 + (mayor (heightT t1) (heightT t2))
-
-mayor:: Int -> Int -> Int
-mayor n1 n2 = if n1 > n2 then n1 else n2
+heightT (NodeT a t1 t2) = 1 + (max (heightT t1) (heightT t2))
 
 
 {-- Ejemplo de uso --}
