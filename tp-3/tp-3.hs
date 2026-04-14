@@ -210,8 +210,9 @@ aparicionesTEjemplo = aparicionesT 5 (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 5 E
 {-- PRECONDICION: El árbol debe ser válido
     Proposito: Devuelve una lista con los elementos del árbol que son hojas --}
 leaves:: Tree a -> [a]
+leaves (NodeT a EmptyT EmptyT) = a : []
 leaves EmptyT = []
-leaves (NodeT a t1 t2) = a : (leaves t1) ++ (leaves t2)
+leaves (NodeT a t1 t2) = (leaves t1) ++ (leaves t2)
 
 {-- Ejemplo de uso --}
 leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
