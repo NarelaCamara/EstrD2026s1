@@ -222,6 +222,7 @@ leavesEjemplo = leaves (NodeT 5 (NodeT 3 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
     Proposito: Devuelve la altura del árbol --}
 heightT:: Tree a -> Int
 heightT EmptyT = 0
+heightT (NodeT a EmptyT EmptyT) = 1
 heightT (NodeT a EmptyT t2) = 1 + heightT t2
 heightT (NodeT a t1 EmptyT) = 1 + heightT t1
 heightT (NodeT a t1 t2) = 1 + (max (heightT t1) (heightT t2))
