@@ -297,13 +297,13 @@ ramaMasLargaEjemplo = ramaMasLarga (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT Empt
 {-- RARO --}
 {-- PRECONDICION: El árbol debe ser válido
     Proposito: Devuelve una lista de listas con los elementos de cada camino del árbol --}
-todosLosCaminos :: Tree a         -> [[a]]
-todosLosCaminos    EmptyT          = [   ]
-todosLosCaminos    (NodeT x t1 t2) = [x] : concatenarACada x (todosLosCaminos t1) ++ concatenarACada x (todosLosCaminos t2)
+todosLosCaminos :: Tree a -> [[a]]
+todosLosCaminos EmptyT = []
+todosLosCaminos (NodeT x t1 t2) = [x] : concatenarACada x (todosLosCaminos t1) ++ concatenarACada x (todosLosCaminos t2)
   
 concatenarACada :: a -> [[a]]   -> [[a]]
-concatenarACada    x    [   ]    = [   ]
-concatenarACada    x    (xs:xss) = (x:xs) : concatenarACada x xss 
+concatenarACada x [] = []
+concatenarACada x (xs:xss) = (x:xs) : concatenarACada x xss 
 
 {-- Ejemplo de uso --}
 todosLosCaminosEjemplo = todosLosCaminos (NodeT 5 (NodeT 3 EmptyT (NodeT 2 EmptyT EmptyT)) (NodeT 7 EmptyT EmptyT))
@@ -326,29 +326,8 @@ eval (Prod n1 n2) = (eval n1) * (eval n2)
 evalEjemplo = eval (Sum (Prod (Valor 2) (Valor 3)) (Neg (Valor 4)))
 
 {-- 2. --}
-{-- RARO --}
 {-- PRECONDICION: La expresión debe ser válida
-    Proposito: Devuelve una nueva expresión con el resultado de simplificar la expresión dada 
-simplificar:: ExpA -> ExpA
-simplificar (Sum n1 n2) = simplificacionSum(simplificar n1) (simplificar n2)
-simplificar (Prod n1 n2) = simplificacionProd (simplificar n1) (simplificar n2)
-simplificar (Neg (Neg n))  = simplificar n
-simplificar (Valor n) = Valor n
-
-
-  Ejemplo de uso 
-simplificarEjemplo = simplificar (Prod (Valor 1) (Neg (Neg(Sum (Neg (Neg (Valor 4))) (Neg (Neg (Valor 0)))))) )
-
-
-simplificacionSum :: ExpA -> ExpA -> ExpA
-simplificacionSum n1 n2 = if eval n1 == 0 then n2 else if eval n2 == 0 then n1 else Sum n1 n2
-
-
-simplificacionProd :: ExpA -> ExpA -> ExpA
-simplificacionProd n1 n2 = if eval n1 == 0 || eval n2 == 0 then Valor 0 else (if (eval n1 * 1) == 1 then n2 else if (eval n2 * 1) == 1 then n1 else Prod n1 n2)
-
---}
- 
+    Proposito: Devuelve una nueva expresión con el resultado de simplificar la expresión dada --}
 simplificar :: ExpA -> ExpA
 simplificar (Valor n)    = Valor n
 simplificar (Sum e1 e2)  = simplificacionSum  (simplificar e1) (simplificar e2)

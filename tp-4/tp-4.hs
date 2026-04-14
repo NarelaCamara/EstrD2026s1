@@ -81,3 +81,42 @@ cantCapasPorPizza (x:xs) = (cantidadDeCapas x , x) : cantCapasPorPizza xs
 
 {-- Ejemplo de uso --}
 cantCapasPorPizzaEjemplo = cantCapasPorPizza [Capa Salsa (Capa Queso Prepizza), Capa Jamon (Capa Salsa (Capa Queso Prepizza))]
+
+{-- 2. --}
+data Dir = Izq | Der deriving Show
+data Objeto = Tesoro | Chatarra deriving Show
+
+data Cofre = CofreC [Objeto] deriving Show
+
+data Mapa = Fin Cofre | Bifurcacion Cofre Mapa Mapa deriving Show
+
+{-- 1. --}
+
+{-- PRECONDICION: El mapa debe ser válido
+    Proposito: Devuelve True si hay un tesoro en el mapa, False en caso contrario --}
+hayTesoro:: Mapa -> Bool
+hayTesoro (Fin c) = hayTesoroEnCofre c
+hayTesoro (Bifurcacion c m1 m2) =  (hayTesoroEnCofre c) || hayTesoro m1 || hayTesoro m2
+
+
+hayTesoroEnCofre:: Cofre -> Bool
+hayTesoroEnCofre (CofreC ts) = hayAlgunTesoro ts
+
+hayAlgunTesoro:: [Objeto] -> Bool
+hayAlgunTesoro [] = False
+hayAlgunTesoro (x:xs) = (esTesoro x) || (hayAlgunTesoro xs)
+
+
+esTesoro:: Objeto -> Bool
+esTesoro Tesoro = True
+esTesoro _ = False
+
+{-- Ejemplo de uso --}
+hayTesoroEjemplo = hayTesoro (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Tesoro])) (Fin (CofreC [])))
+
+{-- --}
+hayTesoroEn:: [Dir] -> Mapa -> Bool
+hayTesoroEn [] (Fin c) = hayTesoroEnCofre c
+hayTesoroEn [] (Bifurcacion c m1 m2) = hayTesoroEnCofre c
+hayTesoroEn _ (Fin c) = False
+hayTesoroEn (x:xs) (Bifurcacion c m1 m2) = False --FALTA HACER
