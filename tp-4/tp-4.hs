@@ -139,6 +139,6 @@ caminoAlTesoro (Bifurcacion c m1 m2) = if hayTesoroEnCofre c then [] else (if ha
 {-- Ejemplo de uso --}
 
 ejemploCaminoAlTesoro = caminoAlTesoro (Bifurcacion (CofreC [Chatarra]) 
-    (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Chatarra]) ))
+    (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Tesoro]) ))
     (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Chatarra]) )))
 
