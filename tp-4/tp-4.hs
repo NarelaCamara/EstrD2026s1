@@ -142,3 +142,65 @@ ejemploCaminoAlTesoro = caminoAlTesoro (Bifurcacion (CofreC [Chatarra])
     (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Tesoro]) ))
     (Bifurcacion (CofreC [Chatarra]) (Fin (CofreC [Chatarra])) (Fin (CofreC [Chatarra]) )))
 
+{-- PRECONDICION: El mapa debe ser válido
+    Proposito: Devuelve el camino de la rama más larga en el mapa --}
+caminoDeLaRamaMasLarga:: Mapa -> [Dir]
+caminoDeLaRamaMasLarga (Fin _) = []
+caminoDeLaRamaMasLarga (Bifurcacion c m1 m2) = 
+    if longitud (caminoDeLaRamaMasLarga m1) > longitud (caminoDeLaRamaMasLarga m2) 
+        then Izq : caminoDeLaRamaMasLarga m1 
+        else Der : caminoDeLaRamaMasLarga m2
+ 
+longitud :: [Dir] -> Int
+longitud [] = 0
+longitud (x:xs) = 1 + longitud xs
+
+
+{-- Ejemplo de uso --}
+ejemploCaminoDeLaRamaMasLarga = caminoDeLaRamaMasLarga (Bifurcacion (CofreC [Chatarra]) 
+    (Bifurcacion (CofreC [Chatarra]) 
+        (Fin (CofreC [Chatarra])) 
+        (Fin (CofreC [Chatarra]) ))
+    (Fin (CofreC [Chatarra, Tesoro])))
+
+
+{-- --}
+tesorosPorNivel:: Mapa -> [[Objeto]]
+tesorosPorNivel (Fin c) = (saquearCofre c) : []
+tesorosPorNivel (Bifurcacion c m1 m2) =  (saquearCofre c) : concatenar (tesorosPorNivel m1) (tesorosPorNivel m2)
+
+concatenar:: [[Objeto]] -> [[Objeto]] -> [[Objeto]] 
+concatenar [] xs = xs
+concatenar xs [] = xs 
+concatenar (x:xs) (y:ys) = (x ++ y) : concatenar xs ys
+
+saquearCofre:: Cofre -> [Objeto]
+saquearCofre (CofreC ts) = if (hayAlgunTesoro ts) then robar ts else []
+
+
+robar::[Objeto] -> [Objeto]
+robar [] = []
+robar (x:xs) = if esTesoro x then x : robar xs else robar xs
+
+{-- --}
+ejemploTesorosPorNivel = tesorosPorNivel (Bifurcacion (CofreC [Chatarra, Tesoro, Tesoro]) 
+    (Bifurcacion (CofreC [Chatarra]) 
+        (Fin (CofreC [Chatarra])) 
+        (Fin (CofreC [Tesoro, Tesoro, Tesoro]) ))
+    (Fin (CofreC [Chatarra, Tesoro])))
+
+-- devuelve [[Tesoro, Tesoro], [Tesoro], [Tesoro, Tesoro] ]
+
+
+{-- 
+todosLosCaminos:: Mapa -> [[Dir]]
+todosLosCaminos (Fin c) = []
+todosLosCaminos (Bifurcacion c m1 m2) =
+
+ejemploTodosLosCaminos = todosLosCaminos (Bifurcacion (CofreC [Chatarra, Tesoro, Tesoro]) 
+    (Bifurcacion (CofreC [Chatarra]) 
+        (Fin (CofreC [Chatarra])) 
+        (Fin (CofreC [Tesoro, Tesoro]) ))
+    (Fin (CofreC [Chatarra, Tesoro])))
+--}
+--devuelve [[Izq], [Izq, Izq], [Izq, Der], [Der]]
