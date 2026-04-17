@@ -169,7 +169,7 @@ tesorosPorNivel:: Mapa -> [[Objeto]]
 tesorosPorNivel (Fin c) = (saquearCofre c) : []
 tesorosPorNivel (Bifurcacion c m1 m2) =  (saquearCofre c) : concatenar (tesorosPorNivel m1) (tesorosPorNivel m2)
 
-concatenar:: [[Objeto]] -> [[Objeto]] -> [[Objeto]] 
+concatenar:: [[a]] -> [[a]] -> [[a]] 
 concatenar [] xs = xs
 concatenar xs [] = xs 
 concatenar (x:xs) (y:ys) = (x ++ y) : concatenar xs ys
@@ -192,15 +192,15 @@ ejemploTesorosPorNivel = tesorosPorNivel (Bifurcacion (CofreC [Chatarra, Tesoro,
 -- devuelve [[Tesoro, Tesoro], [Tesoro], [Tesoro, Tesoro] ]
 
 
-{-- 
 todosLosCaminos:: Mapa -> [[Dir]]
 todosLosCaminos (Fin c) = []
-todosLosCaminos (Bifurcacion c m1 m2) =
+todosLosCaminos (Bifurcacion c m1 m2) =  Izq : concatenar (todosLosCaminos m1) ++ Der : (todosLosCaminos m2) 
 
 ejemploTodosLosCaminos = todosLosCaminos (Bifurcacion (CofreC [Chatarra, Tesoro, Tesoro]) 
     (Bifurcacion (CofreC [Chatarra]) 
         (Fin (CofreC [Chatarra])) 
         (Fin (CofreC [Tesoro, Tesoro]) ))
     (Fin (CofreC [Chatarra, Tesoro])))
---}
+
+
 --devuelve [[Izq], [Izq, Izq], [Izq, Der], [Der]]
