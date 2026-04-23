@@ -10,7 +10,7 @@ module Set(
 )
 where 
 
-data Set a = Set [a]     
+data Set a = Set [a]  deriving Show  
 
 {--
     Proposito: 
@@ -27,7 +27,7 @@ emptyS = (Set [])
 --}
 addS:: Eq a => a -> Set a -> Set a
 addS a (Set []) = Set [a]
-addS a (Set xs) = Set (a:xs)
+addS a (Set xs) = if pertenece a xs then Set xs else Set (a:xs)
 
 {--
     Proposito: 
@@ -39,8 +39,8 @@ belongs a (Set []) = False
 belongs a (Set xs) = pertenece a xs
 
 pertenece::Eq a => a -> [a]-> Bool
-pertenece a [] = False
-pertenece a (x:xs) = a == x || pertenece a xs
+pertenece y [] = False
+pertenece y (x:xs) = y == x || pertenece y xs
 
 {--
     Proposito: 
@@ -51,7 +51,7 @@ pertenece a (x:xs) = a == x || pertenece a xs
 sizeS :: Eq a => Set a -> Int
 sizeS (Set xs) = longitud xs  
 
-longitud:: Eq a => [a]
+longitud:: Eq a => [a] -> Int
 longitud [] = 0
 longitud (x:xs) = 1 + longitud xs
 
@@ -62,7 +62,7 @@ longitud (x:xs) = 1 + longitud xs
 --}
 
 removeS :: Eq a => a -> Set a -> Set a
-removeS a (Set xs) = remove a xs
+removeS a (Set xs) = Set (remove a xs)
 
 remove:: Eq a => a -> [a] -> [a]
 remove a [] = []
@@ -74,7 +74,7 @@ remove a (x:xs) = if a == x then remove a xs else x : remove a xs
     COSTO: 
 --}
 unionS :: Eq a => Set a -> Set a -> Set a
-unionS (Set xs) (Set ys) = (Set (unirSinRepetidos xs)) 
+unionS (Set xs) (Set ys) = (Set (unirSinRepetidos xs ys)) 
 
 unirSinRepetidos::  Eq a => [a] -> [a]-> [a]
 unirSinRepetidos [] ys = ys

@@ -1,6 +1,6 @@
 
 {-- PRACTICA 5 --}
-
+import Set
 
 {-- 1. --}
 
@@ -70,10 +70,10 @@ pertenece n (x:xs) = n == x || pertenece n xs
     COSTO: Cuadratico
     Es de costo Cuadratico ya que la funcion es recursiva y ademas se hace otra recursion lineal para validar si ya se agrego o no ese elemento
  --}
-sinRepetidos :: Eq a => [a] -> [a]
-sinRepetidos [] = []
-sinRepetidos (x:xs) = 
-    if pertenece x xs then sinRepetidos xs else x : sinRepetidos xs
+sinRepetidos' :: Eq a => [a] -> [a]
+sinRepetidos' [] = []
+sinRepetidos' (x:xs) = 
+    if pertenece x xs then sinRepetidos' xs else x : sinRepetidos' xs
 
 {--
 Proposito: Devuelve una lista de la fusion de la primera lista y la segunda lista
@@ -149,3 +149,61 @@ sacar n (x:xs) = if n == x then xs else x : sacar n xs
 ordenar :: Ord a => [a] -> [a]
 ordenar [] = []
 orderar xs = let m = minimo xs in m : ordenar (sacar m xs)
+
+{--2. SET(conjunto) --}
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO: 
+--}
+losQuePertenecen :: Eq a => [a] -> Set a -> [a]
+losQuePertenecen [] s = []
+losQuePertenecen (x:xs) s = if belongs x s then x : losQuePertenecen xs s else losQuePertenecen xs s
+
+{-- Ejemplo de uso --}
+ejemploDeSet =  addS 4 (addS 1 (addS 2 (addS 3 emptyS)))
+losQuePertenecenEjemplo = losQuePertenecen [1,2,3,5] ejemploDeSet
+
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO: 
+--}
+sinRepetidos :: Eq a => [a] -> [a]
+sinRepetidos xs = setToList (addList xs) 
+
+
+addList:: Eq a => [a] -> Set a
+addList [] = emptyS
+addList (x:xs) = addS x (addList xs)
+
+{-- Ejemplo de uso --}
+sinRepetidosEjemplo = sinRepetidos [1,2,3,4,4,4,4,4,5,5,5,5,5,6,6,6,6,8]
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO: 
+--}
+data Tree a = EmptyT | NodeT a (Tree a) (Tree a) deriving Show
+
+unirTodos :: Eq a => Tree (Set a) -> Set a
+unirTodos EmptyT = emptyS
+unirTodos (NodeT x t1 t2) = unionS x ( unionS (unirTodos t1) (unirTodos t2))
+
+
+{-- Ejemplo de uso --}
+ejemploDeSet1 =  addS 4 (addS 1 (addS 2 (addS 3 emptyS)))
+ejemploDeSet2 =  addS 4 (addS 6 (addS 2 (addS 3 emptyS)))
+ejemploDeSet3 =  addS 4 (addS 5 (addS 2 (addS 3 emptyS)))
+ejemploDeSet4 =  addS 4 (addS 7 (addS 2 (addS 3 emptyS)))
+
+unirTodosEjemplo = unirTodos (NodeT ejemploDeSet1 (NodeT ejemploDeSet2 EmptyT EmptyT ) (NodeT ejemploDeSet3 EmptyT  (NodeT ejemploDeSet4 EmptyT EmptyT ) ) )
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO:
+--}
