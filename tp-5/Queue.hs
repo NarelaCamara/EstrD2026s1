@@ -8,8 +8,7 @@ module Queue (
 )
 where
 data Queue a = Q [a] deriving Show
-
-
+-- Ingresa-> 1 Ingresa-> 2  sale->> 1 >> 2
 {--
     Proposito: 
     PRECONDICION: 

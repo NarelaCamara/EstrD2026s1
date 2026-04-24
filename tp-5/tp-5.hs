@@ -2,6 +2,7 @@
 {-- PRACTICA 5 --}
 import Set
 import Queue
+import Stack
 {-- 1. --}
 
 {-- 
@@ -241,3 +242,5 @@ unionQ q1 q2 = if isEmptyQ q2 then q1 else enqueue (firstQ q2) (unionQ q1 (deque
 ejemploDeQueueA = enqueue 3 (enqueue 2 (enqueue 1 emptyQ))
 ejemploDeQueueB = enqueue 4 (enqueue 5 (enqueue 6 emptyQ))
 unionQEjemplo = unionQ ejemploDeQueueA ejemploDeQueueB
+
+{-- 4. STACK (pila) --}
