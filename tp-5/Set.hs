@@ -26,8 +26,8 @@ emptyS = (Set [])
     COSTO: 
 --}
 addS:: Eq a => a -> Set a -> Set a
-addS a (Set []) = Set [a]
-addS a (Set xs) = if pertenece a xs then Set xs else Set (a:xs)
+addS x (Set []) = Set [x]
+addS x (Set xs) = if pertenece a xs then Set xs else Set (a:xs)
 
 {--
     Proposito: 
@@ -35,8 +35,8 @@ addS a (Set xs) = if pertenece a xs then Set xs else Set (a:xs)
     COSTO: 
 --}
 belongs :: Eq a => a -> Set a -> Bool
-belongs a (Set []) = False
-belongs a (Set xs) = pertenece a xs
+belongs x (Set []) = False
+belongs x (Set xs) = pertenece x xs
 
 pertenece::Eq a => a -> [a]-> Bool
 pertenece y [] = False
@@ -62,11 +62,11 @@ longitud (x:xs) = 1 + longitud xs
 --}
 
 removeS :: Eq a => a -> Set a -> Set a
-removeS a (Set xs) = Set (remove a xs)
+removeS x (Set xs) = Set (remove x xs)
 
 remove:: Eq a => a -> [a] -> [a]
-remove a [] = []
-remove a (x:xs) = if a == x then remove a xs else x : remove a xs
+remove x [] = []
+remove y (x:xs) = if y == x then remove y xs else x : remove y xs
 
 {--
     Proposito: 

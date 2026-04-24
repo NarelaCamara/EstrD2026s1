@@ -202,6 +202,10 @@ ejemploDeSet4 =  addS 4 (addS 7 (addS 2 (addS 3 emptyS)))
 
 unirTodosEjemplo = unirTodos (NodeT ejemploDeSet1 (NodeT ejemploDeSet2 EmptyT EmptyT ) (NodeT ejemploDeSet3 EmptyT  (NodeT ejemploDeSet4 EmptyT EmptyT ) ) )
 
+
+{-- 3. Queue (Cola) --}
+
+
 {--
     Proposito: 
     PRECONDICION: 
