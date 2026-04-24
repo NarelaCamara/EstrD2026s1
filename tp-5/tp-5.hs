@@ -148,7 +148,7 @@ sacar n (x:xs) = if n == x then xs else x : sacar n xs
 --}
 ordenar :: Ord a => [a] -> [a]
 ordenar [] = []
-orderar xs = let m = minimo xs in m : ordenar (sacar m xs)
+ordenar xs = let m = minimo xs in m : ordenar (sacar m xs)
 
 {--2. SET(conjunto) --}
 
@@ -205,9 +205,14 @@ unirTodosEjemplo = unirTodos (NodeT ejemploDeSet1 (NodeT ejemploDeSet2 EmptyT Em
 
 {-- 3. Queue (Cola) --}
 
-
 {--
     Proposito: 
     PRECONDICION: 
     COSTO:
 --}
+lengthQ :: Queue a -> Int
+lengthQ q = if isEmptyQ q then 0 else  1 + (lengthQ (dequeue q))
+
+{-- Ejemplo de uso --}
+ejemploDeQueue = enqueue 1 (enqueue 2 (enqueue 3 emptyQ))
+lengthQEjemplo = lengthQ ejemploDeQueue

@@ -1,4 +1,5 @@
 module Queue (
+    Queue,
     emptyQ,
     isEmptyQ,
     enqueue,
@@ -68,11 +69,11 @@ dequeue :: Queue a -> Queue a
 dequeue (Q []) = error "dequeue: empty queue"
 dequeue (Q (_:xs)) = Q xs
 
-'dequeue' :: Queue a -> Queue a
-'dequeue' (Q []) = error "'dequeue': empty queue"
-'dequeue' (Q (xs)) = sinLast xs
+dequeue' :: Queue a -> Queue a
+dequeue' (Q []) = error "dequeue': empty queue"
+dequeue' (Q (xs)) = Q (sinLast xs)
 
 
 sinLast::[a] -> [a]
-sinLast [x] = x
-sinLast (x:xs) = sinLast xs
+sinLast [x] = []
+sinLast (x:xs) = x : sinLast xs
