@@ -216,3 +216,28 @@ lengthQ q = if isEmptyQ q then 0 else  1 + (lengthQ (dequeue q))
 {-- Ejemplo de uso --}
 ejemploDeQueue = enqueue 1 (enqueue 2 (enqueue 3 emptyQ))
 lengthQEjemplo = lengthQ ejemploDeQueue
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO:
+--}
+queueToList :: Queue a -> [a]
+queueToList q = if isEmptyQ q then [] else (firstQ q) : queueToList (dequeue q) 
+
+{-- Ejemplo de uso --}
+ejemploDeQueue1 = enqueue 1 (enqueue 2 (enqueue 3 emptyQ))
+queueToListEjemplo = queueToList ejemploDeQueue1
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO:
+--}
+unionQ :: Queue a -> Queue a -> Queue a
+unionQ q1 q2 = if isEmptyQ q2 then q1 else enqueue (firstQ q2) (unionQ q1 (dequeue q2))
+
+{-- Ejemplo de uso --}
+ejemploDeQueueA = enqueue 3 (enqueue 2 (enqueue 1 emptyQ))
+ejemploDeQueueB = enqueue 4 (enqueue 5 (enqueue 6 emptyQ))
+unionQEjemplo = unionQ ejemploDeQueueA ejemploDeQueueB
