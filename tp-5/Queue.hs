@@ -36,6 +36,11 @@ enqueue :: a -> Queue a -> Queue a
 enqueue x (Q []) = Q [x]
 enqueue x (Q xs) = Q (xs ++ [x])
 
+
+enqueue' :: a -> Queue a -> Queue a 
+enqueue' x (Q []) = Q [x]
+enqueue' x (Q xs) = Q (x:xs)
+
 {--
     Proposito: 
     PRECONDICION:  Queue debe tener elementos
@@ -45,7 +50,15 @@ firstQ :: Queue a -> a
 firstQ (Q []) = error "firstQ: empty queue"
 firstQ (Q (x:_)) = x
 
- 
+firstQ' :: Queue a -> a
+firstQ' (Q []) = error "firstQ': empty queue"
+firstQ' (Q (xs)) = lastElement xs
+
+
+lastElement::[a] -> a
+lastElement [x] = x
+lastElement (x:xs) = lastElement xs
+
 {--
     Proposito: 
     PRECONDICION: Queue debe tener elementos
@@ -54,3 +67,12 @@ firstQ (Q (x:_)) = x
 dequeue :: Queue a -> Queue a
 dequeue (Q []) = error "dequeue: empty queue"
 dequeue (Q (_:xs)) = Q xs
+
+'dequeue' :: Queue a -> Queue a
+'dequeue' (Q []) = error "'dequeue': empty queue"
+'dequeue' (Q (xs)) = sinLast xs
+
+
+sinLast::[a] -> [a]
+sinLast [x] = x
+sinLast (x:xs) = sinLast xs

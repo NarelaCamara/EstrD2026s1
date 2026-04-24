@@ -1,7 +1,7 @@
 
 {-- PRACTICA 5 --}
 import Set
-
+import Queue
 {-- 1. --}
 
 {-- 
