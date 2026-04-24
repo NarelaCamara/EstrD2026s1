@@ -244,3 +244,34 @@ ejemploDeQueueB = enqueue 4 (enqueue 5 (enqueue 6 emptyQ))
 unionQEjemplo = unionQ ejemploDeQueueA ejemploDeQueueB
 
 {-- 4. STACK (pila) --}
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO:
+--}
+apilar :: [a] -> Stack a
+apilar [] = emptyST
+apilar (x:xs) = push x (apilar xs)
+
+{-- Ejemplo de uso --}
+apilarEjemplo = apilar [1,2,3,4,5,6]
+
+{--
+    Proposito: 
+    PRECONDICION: 
+    COSTO:
+--}
+desapilar :: Stack a -> [a]
+desapilar st = if isEmptyST st then [] else (top st) : desapilar (pop st) 
+
+{-- Ejemplo de uso --}
+desapilarEjemplo = desapilar (push 3 (push 2 (push 1 emptyST)))
+
+
+insertarEnPos :: Int -> a -> Stack a -> Stack a
+insertarEnPos n e st = if n == 0 then push e st else push (top st) (insertarEnPos (n-1) e (pop st)) 
+
+
+{-- Ejemplo de uso --}
+insertarEnPosEjemplo = insertarEnPos  2 666 ( push 4 (push 3 (push 2 (push 1 emptyST))))
