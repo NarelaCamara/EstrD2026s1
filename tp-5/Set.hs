@@ -27,7 +27,7 @@ emptyS = (Set [])
 --}
 addS:: Eq a => a -> Set a -> Set a
 addS x (Set []) = Set [x]
-addS x (Set xs) = if pertenece a xs then Set xs else Set (a:xs)
+addS x (Set xs) = if pertenece x xs then Set xs else Set (x:xs)
 
 {--
     Proposito: 
