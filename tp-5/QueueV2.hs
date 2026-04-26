@@ -10,17 +10,17 @@ where
 data Queue a = Q [a] [a] deriving Show
 -- Ingresa-> 1 Ingresa-> 2 [2, 1]  sale->> 1 >> 2
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Devuelve un Queue vacío
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --}
 emptyQ :: Queue a
 emptyQ = (Q [] [])
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Verifica si el Queue está vacío
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --}
 isEmptyQ :: Queue a -> Bool
 isEmptyQ (Q _ []) = True
@@ -29,18 +29,18 @@ isEmptyQ _ = False
 
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Añade un elementoal Queue
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --}
 enqueue :: a -> Queue a -> Queue a 
 enqueue x (Q fs bs) = Q (fs++[x]) (x:bs)
 
 
 {--
-    Proposito: 
+    Proposito: Devuelve el primer elemento del Queue
     PRECONDICION:  Queue debe tener elementos
-    COSTO: 
+    COSTO: O(1) Constante
 --}
 firstQ :: Queue a -> a
 firstQ (Q []) = error "firstQ: empty queue"
@@ -49,9 +49,9 @@ firstQ (Q (f:fs) bs) = f
 
 
 {--
-    Proposito: 
+    Proposito: Elimina el primer elemento del Queue
     PRECONDICION: Queue debe tener elementos
-    COSTO: 
+    COSTO: O(1) Constante
 --}
 dequeue :: Queue a -> Queue a
 dequeue (Q []) = error "dequeue: empty queue"
