@@ -12,51 +12,52 @@ data Stack a = Stack [a] Int  deriving Show
 -- Ingresa-> 1 Ingresa-> 2  sale->> 2 >> 1
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Devuelve una Stack vacia
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --}
 
 emptyST :: Stack a
 emptyST = (Stack [] 0)
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Determina si una Stack esta vacia
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --}
 isEmptyST :: Stack a -> Bool
 isEmptyST (Stack [] _) = True
 isEmptyST _ = False
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Agrega un elemento a la Stack
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --} 
 push :: a -> Stack a -> Stack a
 push x (Stack xs n) = (Stack (x:xs) (n+1) )
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Devuelve el primer elemento de la Stack
+    PRECONDICION:  Stack debe tener elementos
+    COSTO: O(1) Constante
 --} 
 top :: Stack a -> a
 top (Stack (x:xs) _) = x 
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Elimina el primer elemento de la Stack
+    PRECONDICION:  Stack debe tener elementos
+    COSTO: O(1) Constante
 --} 
 pop :: Stack a -> Stack a
+pop (Stack []) = error "pop: empty stack"
 pop (Stack (x:xs) n) = (Stack xs (n-1))
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Devuelve la longitud de la Stack
+    PRECONDICION: ninguna
+    COSTO: O(1) Constante
 --} 
 lenS :: Stack a -> Int
 lenS  (Stack xs n) = n
