@@ -8,7 +8,7 @@ import Stack
 {-- 
     Proposito: Devuelve el primer elemento de una lista 
     PRECONDICION: La lista no debe ser vacía
-    COSTO: constante
+    COSTO: O(1) constante
     Es de costo constante ya que se trabaja solo con un elemento de la lista.
 --}
 head' :: [a] -> a
@@ -17,7 +17,7 @@ head' (x:xs) = x
 {-- 
     Proposito: Devuelve un numero incrementado en 90
     PRECONDICION: Debe ser un numero
-    COSTO: constante
+    COSTO: O(1) constante
     Es de costo constante ya que se trabaja solo con un elemento.   
 --}
 
@@ -28,7 +28,7 @@ sumar n = n + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1
 {--
     Proposito: Devuelve un numero multiplicado n veces
     PRECONDICION: Debe ser un numero
-    COSTO: Lineal
+    COSTO: O(n) lineal
     Es de costo lineal ya que se hace una recursion con el valor de n
  --}
 factorial :: Int -> Int
@@ -38,7 +38,7 @@ factorial n = n * factorial (n-1)
 {--
     Proposito: Devuelve la longitud de la lista de elementos
     PRECONDICION: Debe ser de tipo lista
-    COSTO: Lineal
+    COSTO: O(n) lineal
     Es de costo lineal ya que se hace una recursion sobre los elementos de la lista
 --}
 longitud :: [a] -> Int
@@ -48,7 +48,7 @@ longitud (x:xs) = 1 + longitud xs
 {--
     Proposito: Devuelve la los factoriales de una lista de numeros
     PRECONDICION: Debe ser de tipo lista
-    COSTO: Cuadratico
+    COSTO: O(n^2) cuadratico
     Es de costo Cuadratico ya que la funcion factoriales es recursiva y sobre cada elemento se hace otra recursion (factorial)
 --}
 factoriales :: [Int] -> [Int]
@@ -58,7 +58,7 @@ factoriales (x:xs) = factorial x : factoriales xs
 {-- 
     Proposito: Devuelve True si n pertenece a la lista
     PRECONDICION: Debe ser de tipo lista de elementos comparables y n debe ser posible comparar
-    COSTO: Lineal
+    COSTO: O(n) lineal
     Es de costo Lineal ya que la funcion es recursiva 
 --}
 pertenece :: Eq a => a -> [a] -> Bool
@@ -68,7 +68,7 @@ pertenece n (x:xs) = n == x || pertenece n xs
 {--
     Proposito: Devuelve una lsita sin elementos repetidos
     PRECONDICION: Debe ser de tipo lista de elementos comparables
-    COSTO: Cuadratico
+    COSTO: O(n^2) cuadratico
     Es de costo Cuadratico ya que la funcion es recursiva y ademas se hace otra recursion lineal para validar si ya se agrego o no ese elemento
  --}
 sinRepetidos' :: Eq a => [a] -> [a]
@@ -79,7 +79,7 @@ sinRepetidos' (x:xs) =
 {--
 Proposito: Devuelve una lista de la fusion de la primera lista y la segunda lista
     PRECONDICION: Ambas deben ser de tipo lista
-    COSTO: Lineal
+    COSTO: O(n) lineal
     Es de costo Lineal ya que la funcion solo recorre una lista y hace solo una unica accion en cada recorrido
  --}
 append :: [a] -> [a] -> [a]
@@ -89,7 +89,7 @@ append (x:xs) ys = x : append xs ys
 {--
     Proposito:  Devuelve un string apartir de una lista de strings
     PRECONDICION: Debe ser una lista de string
-    COSTO: Lineal, ya que solo recorre una vez y hace una unica accion
+    COSTO: O(n) lineal, ya que solo recorre una vez y hace una unica accion
 --}
 
 concatenar :: [String] -> String
@@ -99,7 +99,7 @@ concatenar (x:xs) = x ++ concatenar xs
 {--
     Proposito:  Devuelve una n elementos de una lista dada
     PRECONDICION: Debe ser de tipo lista y el numero debe ser mayor ó igual a cero
-    COSTO: Lineal, ya que no hace mas que recorrer la lista
+    COSTO: O(n) lineal, ya que no hace mas que recorrer la lista
 --}
 
 takeN :: Int -> [a] -> [a]
@@ -109,7 +109,7 @@ takeN n (x:xs) = x : takeN (n-1) xs
 {--
     Proposito: devuelve una lista con n elementos menos
     PRECONDICION: n debe ser mayor ó igual a cero
-    COSTO: Lineal, ya que solo recorre una lista y no hace mas que eso
+    COSTO: O(n) lineal, ya que solo recorre una lista y no hace mas que eso
 --}
 dropN :: Int -> [a] -> [a]
 dropN 0 xs = xs
@@ -119,7 +119,7 @@ dropN n (x:xs) = dropN (n-1) xs
 {--
     Proposito:  Devuelve una tupla con la lista dada dividida apartir del numero dado
     PRECONDICION: Debe ser de tipo lista y los numeros mayor o igual a cero
-    COSTO: Lineal, por nmás que sean dos funciones lineales, por cada recorrido no hace otro recorrido recursivo
+    COSTO: O(n) lineal, por nmás que sean dos funciones lineales, por cada recorrido no hace otro recorrido recursivo
 --}
 partir :: Int -> [a] -> ([a], [a])
 partir n xs = (takeN n xs, dropN n xs)
@@ -127,7 +127,7 @@ partir n xs = (takeN n xs, dropN n xs)
 {--
     Proposito:  Devuelve el minimo de una lista de elementos
     PRECONDICION: La lista no puede no tener elementos
-    COSTO: Lienal, ya que no hace mas de una recursion y el costo de min es constante por consiguiente en el peor de los casos el costo es lineal 
+    COSTO: O(n) lineal, ya que no hace mas de una recursion y el costo de min es constante por consiguiente en el peor de los casos el costo es lineal 
 --}
 minimo :: Ord a => [a] -> a
 minimo [x] = x
@@ -136,7 +136,7 @@ minimo (x:xs) = min x (minimo xs)
 {--
     Proposito:  Saca el n elemento de la lista
     PRECONDICION: Debe ser de tipo lista y comparable 
-    COSTO: Lineal, ya que no hace mas de una recursion, el caso base es de costo constante
+    COSTO: O(n) lineal, ya que no hace mas de una recursion, el caso base es de costo constante
 --}
 sacar :: Eq a => a -> [a] -> [a]
 sacar n [] = []
@@ -145,7 +145,7 @@ sacar n (x:xs) = if n == x then xs else x : sacar n xs
 {--
     Proposito:  Devuelve una lsita ordenada de menor a mayor
     PRECONDICION: Debe ser una lista de elemetnos ordenables
-    COSTO: Cuadratico, cada elemento ejecuta minimo que es lineal, incluido sacar que tambien es lineal dentro de la recursividad de ordenar entonces nos da un costo cuadratico
+    COSTO: O(n^2) cuadratico, cada elemento ejecuta minimo que es lineal, incluido sacar que tambien es lineal dentro de la recursividad de ordenar entonces nos da un costo cuadratico
 --}
 ordenar :: Ord a => [a] -> [a]
 ordenar [] = []
@@ -154,9 +154,10 @@ ordenar xs = let m = minimo xs in m : ordenar (sacar m xs)
 {--2. SET(conjunto) --}
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Dados una lista y un conjunto, describ e una lista con to dos los elementos que p ertenecen
+al conjunto.
+    PRECONDICION: La lista debe der de tipos comparables.
+    COSTO: O(n) lineal
 --}
 losQuePertenecen :: Eq a => [a] -> Set a -> [a]
 losQuePertenecen [] s = []
@@ -168,9 +169,9 @@ losQuePertenecenEjemplo = losQuePertenecen [1,2,3,5] ejemploDeSet
 
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Devuelve una lista sin elementos repetidos
+    PRECONDICION: La lista debe ser de tipos comparables.
+    COSTO: O(n) lineal, ya que se hace un recorrido en la lista.
 --}
 sinRepetidos :: Eq a => [a] -> [a]
 sinRepetidos xs = setToList (addList xs) 
@@ -184,9 +185,10 @@ addList (x:xs) = addS x (addList xs)
 sinRepetidosEjemplo = sinRepetidos [1,2,3,4,4,4,4,4,5,5,5,5,5,6,6,6,6,8]
 
 {--
-    Proposito: 
-    PRECONDICION: 
-    COSTO: 
+    Proposito: Dado un arb ol de conjuntos describ e un conjunto con la union de to dos los conjuntos
+del arbol.
+    PRECONDICION: Tree debe ser del mismo tipo que el Set
+    COSTO: O(n) lineal
 --}
 data Tree a = EmptyT | NodeT a (Tree a) (Tree a) deriving Show
 
@@ -209,7 +211,7 @@ unirTodosEjemplo = unirTodos (NodeT ejemploDeSet1 (NodeT ejemploDeSet2 EmptyT Em
 {--
     Proposito: 
     PRECONDICION: 
-    COSTO:
+    COSTO: O(n) lineal, ya que se hace un recorrido.
 --}
 lengthQ :: Queue a -> Int
 lengthQ q = if isEmptyQ q then 0 else  1 + (lengthQ (dequeue q))
