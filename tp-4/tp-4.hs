@@ -263,5 +263,30 @@ siEsMotorPoder (Motor p) = p
 siEsMotorPoder _ = 0
 
 {-- Ejemplo de uso --}
-
 poderDePropulsionEjemplo = poderDePropulsion (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10)] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10)] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10)] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
+
+
+{-- --}
+barriles:: Nave -> [Barril]
+barriles (N t) = obtenerBarriles t
+
+obtenerBarriles :: Tree Sector -> [Barril]
+obtenerBarriles EmptyT = []
+obtenerBarriles (NodeT s t1 t2) = obtenerBarrilesSector s ++  obtenerBarriles t1 ++ obtenerBarriles t2
+
+
+obtenerBarrilesSector :: Sector -> [Barril]
+obtenerBarrilesSector (S _ cs _) = obtenerBarrilesComponentes cs
+
+obtenerBarrilesComponentes::[Componente] -> [Barril]
+obtenerBarrilesComponentes [] = []
+obtenerBarrilesComponentes (x:xs) = obtenerBarrilesComponente x ++ obtenerBarrilesComponentes xs
+
+obtenerBarrilesComponente:: Componente -> [Barril]
+obtenerBarrilesComponente (Almacen bs) = bs
+obtenerBarrilesComponente _ = []
+
+
+{-- Ejemplo de uso --}
+barrilesEjemplo = barriles (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
+
