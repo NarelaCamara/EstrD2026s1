@@ -192,9 +192,9 @@ ejemploTesorosPorNivel = tesorosPorNivel (Bifurcacion (CofreC [Chatarra, Tesoro,
 -- devuelve [[Tesoro, Tesoro], [Tesoro], [Tesoro, Tesoro] ]
 
 
-todosLosCaminos:: Mapa -> [[Dir]]
+{--todosLosCaminos:: Mapa -> [[Dir]]
 todosLosCaminos (Fin c) = []
-todosLosCaminos (Bifurcacion c m1 m2) =  Izq : concatenar (todosLosCaminos m1) ++ Der : (todosLosCaminos m2) 
+todosLosCaminos (Bifurcacion c m1 m2) =  [Izq] : concatenar (todosLosCaminos m1) (todosLosCaminos m2) 
 
 ejemploTodosLosCaminos = todosLosCaminos (Bifurcacion (CofreC [Chatarra, Tesoro, Tesoro]) 
     (Bifurcacion (CofreC [Chatarra]) 
@@ -202,5 +202,39 @@ ejemploTodosLosCaminos = todosLosCaminos (Bifurcacion (CofreC [Chatarra, Tesoro,
         (Fin (CofreC [Tesoro, Tesoro]) ))
     (Fin (CofreC [Chatarra, Tesoro])))
 
-
+--}
 --devuelve [[Izq], [Izq, Izq], [Izq, Der], [Der]]
+
+
+ {-- 3. NAVE ESPACIAL --}
+
+
+data Componente = LanzaTorpedos | Motor Int | Almacen [Barril] deriving Show
+data Barril = Comida | Oxigeno | Torpedo | Combustible deriving Show
+
+data Sector = S SectorId [Componente] [Tripulante] deriving Show
+
+type SectorId = String 
+type Tripulante = String 
+
+data Tree a = EmptyT | NodeT a (Tree a) (Tree a) deriving Show
+
+data Nave = N (Tree Sector) deriving Show
+
+
+{-- --}
+
+sectores:: Nave -> [SectorId]
+sectores (N t) = obtenerSectoresId t
+
+obtenerSectoresId:: Tree Sector -> [SectorId]
+obtenerSectoresId (EmptyT) = []
+obtenerSectoresId (NodeT a t1 t2) = obtenerSectorId a : obtenerSectoresId t1 ++ obtenerSectoresId t2
+
+
+obtenerSectorId:: Sector -> SectorId
+obtenerSectorId (S id _ _) = id
+
+{-- Ejemplo de uso --}
+
+sectoresEjemplo = sectores (N (NodeT (S "Sector 1" [LanzaTorpedos] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
