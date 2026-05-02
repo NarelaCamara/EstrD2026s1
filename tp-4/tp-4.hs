@@ -333,3 +333,22 @@ asignarASector t (S id cs ts) = (S id cs (t:ts))
 
 {-- Ejemplo de uso --}
 asignarTripulanteAEjemplo = asignarTripulanteA "Tripulante 666" ["Sector 2", "Sector 3"] (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
+
+
+{-- --}
+sectoresAsignados:: Tripulante -> Nave -> [SectorId]
+sectoresAsignados n (N t) = sectoresAsignadosTree n t
+
+sectoresAsignadosTree:: Tripulante -> Tree Sector -> [SectorId]
+sectoresAsignadosTree n (EmptyT) = []
+sectoresAsignadosTree n (NodeT s t1 t2) = if(sectorAsignado n s) then (obtenerId s) : sectoresAsignadosTree n t1 ++ sectoresAsignadosTree n t2 else  sectoresAsignadosTree n t1 ++ sectoresAsignadosTree n t2
+
+sectorAsignado::Tripulante -> Sector -> Bool
+sectorAsignado t (S _ _ ts) = pertenece t ts
+
+
+{-- Ejemplo de uso --}
+sectoresAsignadosEjemplo = sectoresAsignados "Tripulante 666"  (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1","Tripulante 666"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1", "Tripulante 666"]) EmptyT EmptyT ) ) EmptyT ))
+
+
+{-- --}
