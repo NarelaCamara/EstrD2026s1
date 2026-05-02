@@ -290,3 +290,24 @@ obtenerBarrilesComponente _ = []
 {-- Ejemplo de uso --}
 barrilesEjemplo = barriles (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
 
+
+{-- --}
+agregarASector:: [Componente] -> SectorId -> Nave -> Nave
+agregarASector cs sId (N t) = (N (agregarATree cs sId t))
+
+
+agregarATree:: [Componente] -> SectorId -> Tree Sector -> Tree Sector
+agregarATree _ _ EmptyT = EmptyT
+agregarATree cs sId (NodeT s t1 t2 ) = (NodeT (siEsAgregar cs sId s) (agregarATree  cs sId t1) (agregarATree  cs sId t2))
+
+siEsAgregar::[Componente] -> SectorId -> Sector -> Sector
+siEsAgregar cs sId s = if (obtenerId s) == sId then agregarComponentes cs s else s
+
+obtenerId:: Sector -> SectorId
+obtenerId (S id _ _) = id
+
+agregarComponentes:: [Componente] -> Sector -> Sector 
+agregarComponentes cs1 (S id cs ts ) = (S id  (cs++cs1) ts) 
+
+{-- Ejemplo de uso --}
+agregarASectorEjemplo = agregarASector [LanzaTorpedos, (Motor 666), (Motor 777),(Almacen [Comida])] "Sector 3" (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
