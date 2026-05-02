@@ -352,3 +352,22 @@ sectoresAsignadosEjemplo = sectoresAsignados "Tripulante 666"  (N (NodeT (S "Sec
 
 
 {-- --}
+tripulantes:: Nave -> [Tripulante]
+tripulantes (N t) = eliminarRepetidos (tripulantesTree t)
+
+
+tripulantesTree ::Tree Sector -> [Tripulante]
+tripulantesTree EmptyT = []
+tripulantesTree (NodeT s t1 t2) = obtenerTripulantes s ++  tripulantesTree t1 ++ tripulantesTree t2
+
+obtenerTripulantes::Sector -> [Tripulante]
+obtenerTripulantes (S _ _ ts) = ts
+
+
+eliminarRepetidos :: Eq a => [a] -> [a]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs) = if pertenece x xs then eliminarRepetidos xs else x : eliminarRepetidos xs
+
+
+{-- Ejemplo de uso --}
+tripulantesEjemplo = tripulantes  (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1","Tripulante 666"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1", "Tripulante 666"]) EmptyT EmptyT ) ) EmptyT ))
