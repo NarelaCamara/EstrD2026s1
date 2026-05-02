@@ -311,3 +311,25 @@ agregarComponentes cs1 (S id cs ts ) = (S id  (cs++cs1) ts)
 
 {-- Ejemplo de uso --}
 agregarASectorEjemplo = agregarASector [LanzaTorpedos, (Motor 666), (Motor 777),(Almacen [Comida])] "Sector 3" (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
+
+{-- --}
+asignarTripulanteA:: Tripulante -> [SectorId] -> Nave -> Nave
+asignarTripulanteA n sIds (N t) = (N (asignarATree n sIds t))
+
+asignarATree :: Tripulante -> [SectorId] -> Tree Sector -> Tree Sector
+asignarATree n sIds (EmptyT) = EmptyT
+asignarATree n sIds (NodeT s t1 t2) = NodeT (asignarSiEs n sIds s) (asignarATree n sIds t1) (asignarATree n sIds t2)
+
+asignarSiEs ::Tripulante -> [SectorId] -> Sector -> Sector
+asignarSiEs n sIds s = if pertenece (obtenerId s) sIds then asignarASector n s else s 
+
+pertenece:: Eq a => a -> [a] -> Bool
+pertenece n [] = False
+pertenece n (x:xs) = n == x || pertenece n xs
+
+asignarASector ::Tripulante -> Sector -> Sector
+asignarASector t (S id cs ts) = (S id cs (t:ts))
+
+
+{-- Ejemplo de uso --}
+asignarTripulanteAEjemplo = asignarTripulanteA "Tripulante 666" ["Sector 2", "Sector 3"] (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
