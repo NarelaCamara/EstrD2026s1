@@ -238,3 +238,30 @@ obtenerSectorId (S id _ _) = id
 {-- Ejemplo de uso --}
 
 sectoresEjemplo = sectores (N (NodeT (S "Sector 1" [LanzaTorpedos] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
+
+{-- --}
+poderDePropulsion:: Nave -> Int 
+poderDePropulsion (N t) = obternerPoderSectores t
+
+
+obternerPoderSectores:: Tree Sector -> Int 
+obternerPoderSectores (EmptyT) = 0
+obternerPoderSectores (NodeT s t1 t2) = obtenerPoderMotor s + obternerPoderSectores t1 + obternerPoderSectores t2
+
+
+obtenerPoderMotor:: Sector -> Int
+obtenerPoderMotor (S _ cs ts) = obtenerPoderMotores cs
+
+
+obtenerPoderMotores:: [Componente]-> Int
+obtenerPoderMotores [] = 0
+obtenerPoderMotores (x:xs) = siEsMotorPoder x + obtenerPoderMotores xs
+
+
+siEsMotorPoder :: Componente -> Int
+siEsMotorPoder (Motor p) = p
+siEsMotorPoder _ = 0
+
+{-- Ejemplo de uso --}
+
+poderDePropulsionEjemplo = poderDePropulsion (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10)] ["Tripulante 1"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10)] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10)] ["Tripulante 1"]) EmptyT EmptyT ) ) EmptyT ))
