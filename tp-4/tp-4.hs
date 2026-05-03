@@ -460,13 +460,20 @@ exploradoresPorTerritorioEjemplo = exploradoresPorTerritorio  (M (Cazador "Cazad
 
 {-- --}
 
+collectCazadores:: Lobo -> [Nombre]
+collectCazadores (Cria _) = []
+collectCazadores (Explorador _ _ l1 l2) = collectCazadores l1 ++ collectCazadores l2
+collectCazadores (Cazador n _ l1 l2 l3) = n : collectCazadores l1 ++ collectCazadores l2 ++ collectCazadores l3
+
+{-- --}
+
 cazadoresSuperioresDe:: Nombre -> Manada -> [Nombre]
 cazadoresSuperioresDe n (M l) = cazadoresSuperioresLobos n l
 
 cazadoresSuperioresLobos:: Nombre -> Lobo -> [Nombre]
 cazadoresSuperioresLobos nf (Cria n) = []
-cazadoresSuperioresLobos nf (Explorador n _ l1 l2) =  if existe  nf l1 || existe  nf l2  then cazadoresSuperioresLobos n l1 ++ cazadoresSuperioresLobos n l2 else []
-cazadoresSuperioresLobos nf (Cazador n _ l1 l2 l3) = n : (if  existe  nf l1 || existe nf l2 || existe nf l3 then cazadoresSuperioresLobos n l1 ++ cazadoresSuperioresLobos n l2 ++ cazadoresSuperioresLobos n l3 else [] )
+cazadoresSuperioresLobos nf (Explorador n _ l1 l2) = if existe nf l1 then cazadoresSuperioresLobos nf l1 ++ collectCazadores l2 else if existe nf l2 then cazadoresSuperioresLobos nf l2 ++ collectCazadores l1 else []
+cazadoresSuperioresLobos nf (Cazador n _ l1 l2 l3) = if existe nf l1 then n : (cazadoresSuperioresLobos nf l1 ++ cazadoresSuperioresLobos nf l2 ++ cazadoresSuperioresLobos nf l3) else if existe nf l2 then n : (cazadoresSuperioresLobos nf l1 ++ cazadoresSuperioresLobos nf l2 ++ cazadoresSuperioresLobos nf l3) else if existe nf l3 then n : (cazadoresSuperioresLobos nf l1 ++ cazadoresSuperioresLobos nf l2 ++ cazadoresSuperioresLobos nf l3) else []
 
 existe:: Nombre -> Lobo -> Bool
 existe nf (Cria n) = nf == n
@@ -474,7 +481,7 @@ existe nf (Explorador n _ l1 l2) = nf == n || existe nf l1 || existe nf l2
 existe nf (Cazador n _ l1 l2 l3) = nf == n || existe nf l1 || existe nf l2 || existe nf l3
 
 {-- Ejemplo de uso --}
-cazadoresSuperioresDeEjemplo = cazadoresSuperioresDe "Cazador 5" (M (Cazador "Cazador 4" ["Presa 41"] 
+cazadoresSuperioresDeEjemplo = cazadoresSuperioresDe "Cazador 2" (M (Cazador "Cazador 4" ["Presa 41"] 
     (Cria "Cria 4 1") 
     (Cria "Cria 4 2") 
     (Cazador "Cazador 3" ["Presa 31"] 
@@ -486,7 +493,7 @@ cazadoresSuperioresDeEjemplo = cazadoresSuperioresDe "Cazador 5" (M (Cazador "Ca
             (Cazador "Cazador 2" ["Presa 21"] 
                 (Cria "Cria 2 1") 
                 (Cria "Cria 2 2") 
-                (Cazador "Cazador 5" ["Presa 21"] 
+                (Cazador "Cazador 5" ["Presa 51"] 
                     (Cria "Cria 5 1") 
                     (Cria "Cria 5 2") 
                     (Cria "Cria 5 3"))
