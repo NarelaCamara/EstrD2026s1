@@ -457,3 +457,41 @@ pertenecenLobos (Cazador _ _ l1 l2 l3) t = pertenecenLobos l1 t ++ pertenecenLob
 
 {-- Ejemplo de uso --}
 exploradoresPorTerritorioEjemplo = exploradoresPorTerritorio  (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1"] (Explorador "Explorador 2" ["Territorio 1"] (Cria "Cria 1") (Cria "Cria 2")) (Explorador "Explorador 666" ["Territorio 666"] (Cria "Cria 3") (Cria "Cria 4")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 5") (Cria "Cria 6"))))
+
+{-- --}
+
+cazadoresSuperioresDe:: Nombre -> Manada -> [Nombre]
+cazadoresSuperioresDe n (M l) = cazadoresSuperioresLobos n l
+
+cazadoresSuperioresLobos:: Nombre -> Lobo -> [Nombre]
+cazadoresSuperioresLobos nf (Cria n) = []
+cazadoresSuperioresLobos nf (Explorador n _ l1 l2) =  if existe  nf l1 || existe  nf l2  then cazadoresSuperioresLobos n l1 ++ cazadoresSuperioresLobos n l2 else []
+cazadoresSuperioresLobos nf (Cazador n _ l1 l2 l3) = n : (if  existe  nf l1 || existe nf l2 || existe nf l3 then cazadoresSuperioresLobos n l1 ++ cazadoresSuperioresLobos n l2 ++ cazadoresSuperioresLobos n l3 else [] )
+
+existe:: Nombre -> Lobo -> Bool
+existe nf (Cria n) = nf == n
+existe nf (Explorador n _ l1 l2) = nf == n || existe nf l1 || existe nf l2
+existe nf (Cazador n _ l1 l2 l3) = nf == n || existe nf l1 || existe nf l2 || existe nf l3
+
+{-- Ejemplo de uso --}
+cazadoresSuperioresDeEjemplo = cazadoresSuperioresDe "Cazador 5" (M (Cazador "Cazador 4" ["Presa 41"] 
+    (Cria "Cria 4 1") 
+    (Cria "Cria 4 2") 
+    (Cazador "Cazador 3" ["Presa 31"] 
+        (Explorador "Explorador 666" ["Territorio 1"] 
+            (Cazador "Cazador 1" ["Presa 11"] 
+                (Cria "Cria 1 1") 
+                (Cria "Cria 1 2") 
+                (Cria "Cria 1 3"))
+            (Cazador "Cazador 2" ["Presa 21"] 
+                (Cria "Cria 2 1") 
+                (Cria "Cria 2 2") 
+                (Cazador "Cazador 5" ["Presa 21"] 
+                    (Cria "Cria 5 1") 
+                    (Cria "Cria 5 2") 
+                    (Cria "Cria 5 3"))
+            )) 
+        (Cria "Cria 3 2") 
+        (Cria "Cria 3 3"))))
+
+
