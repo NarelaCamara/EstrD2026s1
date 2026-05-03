@@ -151,7 +151,7 @@ caminoDeLaRamaMasLarga (Bifurcacion c m1 m2) =
         then Izq : caminoDeLaRamaMasLarga m1 
         else Der : caminoDeLaRamaMasLarga m2
  
-longitud :: [Dir] -> Int
+longitud :: [a] -> Int
 longitud [] = 0
 longitud (x:xs) = 1 + longitud xs
 
@@ -371,3 +371,31 @@ eliminarRepetidos (x:xs) = if pertenece x xs then eliminarRepetidos xs else x : 
 
 {-- Ejemplo de uso --}
 tripulantesEjemplo = tripulantes  (N (NodeT (S "Sector 1" [LanzaTorpedos, (Motor 10), (Motor 10),(Almacen [Comida]),(Almacen [Comida])] ["Tripulante 1","Tripulante 666"]) (NodeT (S "Sector 2" [LanzaTorpedos, (Motor 10), (Almacen [Oxigeno])] ["Tripulante 1"]) EmptyT (NodeT (S "Sector 3" [LanzaTorpedos, (Motor 10), (Almacen [Torpedo]), (Almacen [Combustible, Oxigeno])] ["Tripulante 1", "Tripulante 666"]) EmptyT EmptyT ) ) EmptyT ))
+
+{-- 4. --}
+
+type Presa = String
+type Territorio = String
+type Nombre = String
+
+data Lobo = Cazador Nombre [Presa] Lobo Lobo Lobo | Explorador Nombre [Territorio] Lobo Lobo | Cria Nombre deriving Show
+data Manada = M Lobo deriving Show
+
+{-- --}
+buenaCaza :: Manada -> Bool
+buenaCaza (M l) = cantidadCaza l > cantidadCrias l
+
+cantidadCaza :: Lobo -> Int
+cantidadCaza (Cria _) = 0
+cantidadCaza (Explorador _ _ l1 l2) = cantidadCaza l1 + cantidadCaza l2
+cantidadCaza (Cazador _ p l1 l2 l3) = longitud p + cantidadCaza l1 + cantidadCaza l2 + cantidadCaza l3
+
+
+cantidadCrias :: Lobo -> Int
+cantidadCrias (Cria _) = 1
+cantidadCrias (Explorador _ _ l1 l2 ) = cantidadCrias l1 + cantidadCrias l1
+cantidadCrias (Cazador _ _ l1 l2 l3 ) = cantidadCrias l1 + cantidadCrias l1 + cantidadCrias l3
+
+{-- Ejemplo de uso --}
+
+buenaCazaEjemplo = buenaCaza  (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1"] (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 1") (Cria "Cria 2")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 3") (Cria "Cria 4")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 5") (Cria "Cria 6"))))
