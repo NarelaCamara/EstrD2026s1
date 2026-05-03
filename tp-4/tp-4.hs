@@ -399,3 +399,24 @@ cantidadCrias (Cazador _ _ l1 l2 l3 ) = cantidadCrias l1 + cantidadCrias l1 + ca
 {-- Ejemplo de uso --}
 
 buenaCazaEjemplo = buenaCaza  (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1"] (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 1") (Cria "Cria 2")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 3") (Cria "Cria 4")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 5") (Cria "Cria 6"))))
+
+{-- --}
+
+elAlfa :: Manada -> (Nombre, Int)
+elAlfa (M l) = elAlfaLobo l 
+
+elAlfaLobo:: Lobo -> (Nombre, Int)
+elAlfaLobo (Cria n) = (n, 0)
+elAlfaLobo (Explorador n _ l1 l2) = devuelveMayor (elAlfaLobo l1) (elAlfaLobo l2)
+elAlfaLobo (Cazador n p l1 l2 l3) = devuelveMayor (devuelveMayor (n, (longitud p)) (elAlfaLobo l1))  (devuelveMayor  (elAlfaLobo l2) (elAlfaLobo l3))
+
+
+devuelveMayor:: (Nombre, Int) -> (Nombre, Int) -> (Nombre, Int)
+devuelveMayor (n1,c1) (n2,c2) = if c1  >= c2 then (n1,c1) else (n2,c2)
+
+{-- Ejemplo de uso --}
+
+elAlfaEjemplo = elAlfa  (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1"] (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 1") (Cria "Cria 2")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 3") (Cria "Cria 4")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 5") (Cria "Cria 6"))))
+
+
+{-- --}
