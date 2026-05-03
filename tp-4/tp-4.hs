@@ -420,3 +420,40 @@ elAlfaEjemplo = elAlfa  (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1",
 
 
 {-- --}
+loQueExploraron:: Territorio -> Manada -> [Nombre]
+loQueExploraron t (M l) = loQueExploraronLobos t l
+
+loQueExploraronLobos ::  Territorio -> Lobo -> [Nombre]
+loQueExploraronLobos t (Cria _) = [] 
+loQueExploraronLobos t (Explorador n ts l1 l2) = if pertenece t ts then n : (loQueExploraronLobos t l1)  ++ (loQueExploraronLobos t l2) else (loQueExploraronLobos t l1) ++ (loQueExploraronLobos t l2)
+loQueExploraronLobos t (Cazador _ _ l1 l2 l3) = (loQueExploraronLobos t l1) ++ (loQueExploraronLobos t l2) ++ (loQueExploraronLobos t l3)
+
+{-- Ejemplo de uso --}
+loQueExploraronEjemplo = loQueExploraron "Territorio 666" (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1"] (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 1") (Cria "Cria 2")) (Explorador "Explorador 666" ["Territorio 666"] (Cria "Cria 3") (Cria "Cria 4")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 5") (Cria "Cria 6"))))
+
+
+{-- --}
+exploradoresPorTerritorio:: Manada -> [(Territorio, [Nombre])]
+exploradoresPorTerritorio (M l) = exploradoresLobos l (sinRepetir (territorios l))  
+
+territorios ::Lobo -> [Territorio]
+territorios (Cria _) = []
+territorios (Explorador _ ts l1 l2) = ts ++ territorios l1 ++ territorios l2
+territorios (Cazador _ _ l1 l2 l3) = territorios l1 ++ territorios l2 ++ territorios l3
+
+sinRepetir::[Territorio] -> [Territorio]
+sinRepetir [] = []
+sinRepetir (x:xs) = if pertenece x xs then sinRepetir xs else x : sinRepetir xs
+
+exploradoresLobos:: Lobo -> [Territorio] -> [(Territorio, [Nombre])]
+exploradoresLobos l [] = []
+exploradoresLobos l (x:xs) = (x, pertenecenLobos l x) : exploradoresLobos l xs
+
+pertenecenLobos:: Lobo -> Territorio -> [Nombre]
+pertenecenLobos (Cria _) t = []
+pertenecenLobos (Explorador n ts l1 l2) t = if pertenece t ts then n : pertenecenLobos l1 t ++ pertenecenLobos l2 t else pertenecenLobos l1 t ++ pertenecenLobos l2 t
+pertenecenLobos (Cazador _ _ l1 l2 l3) t = pertenecenLobos l1 t ++ pertenecenLobos l2 t ++ pertenecenLobos l3 t
+
+
+{-- Ejemplo de uso --}
+exploradoresPorTerritorioEjemplo = exploradoresPorTerritorio  (M (Cazador "Cazador 1" ["Presa 1", "Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1","Presa 1"] (Explorador "Explorador 2" ["Territorio 1"] (Cria "Cria 1") (Cria "Cria 2")) (Explorador "Explorador 666" ["Territorio 666"] (Cria "Cria 3") (Cria "Cria 4")) (Explorador "Explorador 1" ["Territorio 1"] (Cria "Cria 5") (Cria "Cria 6"))))
