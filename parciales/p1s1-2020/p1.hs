@@ -46,5 +46,8 @@ ponerN c n a = ponerA n (ponerN (c-1) n a)
 
 
 {-- Ejemplo de uso --}
-alcanciaEjemplo = (contarA 5 (ponerA 5 (ponerA 1 (ponerA 5 nuevaA))))  -- 2
-vaquitaEjemplo = vaquita [ alcanciaEjemplo, alcanciaEjemplo, alcanciaEjemplo]
+alcanciaEjemplo :: Alcancia
+alcanciaEjemplo = (ponerA 5 (ponerA 5 (ponerA 5 (ponerA 2 (ponerA 2 (ponerA 1 nuevaA))))))
+
+vaquitaEjemplo:: Alcancia
+vaquitaEjemplo = vaquita [alcanciaEjemplo, alcanciaEjemplo, alcanciaEjemplo]
