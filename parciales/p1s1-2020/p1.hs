@@ -51,3 +51,13 @@ alcanciaEjemplo = (ponerA 5 (ponerA 5 (ponerA 5 (ponerA 2 (ponerA 2 (ponerA 1 nu
 
 vaquitaEjemplo:: Alcancia
 vaquitaEjemplo = vaquita [alcanciaEjemplo, alcanciaEjemplo, alcanciaEjemplo]
+
+
+{-- --}
+type Fecha = Int 
+type Ciudad = String 
+data DiarioDeViaje =  EmpezarEn Ciudad | AgregarViaje DiarioDeViaje Fecha Ciudad deriving Show 
+
+
+contarSospechosos:: Map DNI DiarioDeViaje -> Fecha -> Ciudad -> Int 
+contarSospechosos
