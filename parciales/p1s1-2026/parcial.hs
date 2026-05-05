@@ -79,29 +79,8 @@ type Nombre = String
 data EstadoCivil = SinPareja | EnMatrimonioCon Nombre | EnMatrimonioConPeroHijosCon Nombre Nombre deriving Show
 data Persona = P Nombre EstadoCivil deriving Show
 data GenTree =   Hijos0 Persona | Hijos1 Persona GenTree | Hijos2 Persona GenTree GenTree | Hijos3 Persona GenTree GenTree GenTree deriving Show
-data Maybe a = Nothing | Just a deriving Show
+--data Maybe a = Nothing | Just a deriving Show
 
------------
-elegirEntre :: Maybe a -> Maybe a -> Maybe a
-elegirEntre (Just x) m = Just x
-elegirEntre Nothing m = m
-
------------
-elegirSi :: Bool -> Maybe a -> Maybe a -> Maybe a
-elegirSi True  m1 m2 = m1
-elegirSi False m1 m2 = m2
-
------------
-agregar_A_ :: a -> Maybe [a] -> Maybe [a]
-agregar_A_ y Nothing = Nothing
-agregar_A_ y (Just xs) = Just (y : xs)
-
----
-hijosDe :: Nombre -> GenTree -> Maybe [Persona] 
-hijosDe n (Hijos0 p) = Just []
-hijosDe n (Hijos1 p g1) = hijosDe n g1   
-hijosDe n (Hijos2 p g1 g2) =  if esPersona n p then  (cabezaDeFamiliaDe g1) :(cabezaDeFamiliaDe g2) : []   else (hijosDe n (elegirSi (existeEnGen g1 g2) g1 g2))
-hijosDe n (Hijos3 p g1 g2 g3) =  if esPersona n p then  (cabezaDeFamiliaDe g1) :(cabezaDeFamiliaDe g2) : (cabezaDeFamiliaDe g3) : []   else agregar_A_ (cabezaDeFamiliaDe g1)  (hijosDe n (elegirSi (existeEnGen g1 g2) (elegirSi (existeEnGen g2 g3) g2 g3)))
 
 
 nombre:: Persona -> Nombre
@@ -113,8 +92,26 @@ esPersona n p = (nombre p) == n
 existeEnGen::Nombre -> GenTree -> Bool
 existeEnGen n (Hijos0 p) = esPersona n p
 existeEnGen n (Hijos1 p g1) = esPersona n p || existeEnGen n g1
-existeEnGen n (Hijos2 p g1 g2 g3) = esPersona n p || existeEnGen n g1 || existeEnGen n g2
+existeEnGen n (Hijos2 p g1 g2) = esPersona n p || existeEnGen n g1 || existeEnGen n g2
 existeEnGen n (Hijos3 p g1 g2 g3) = esPersona n p || existeEnGen n g1 || existeEnGen n g2 || existeEnGen n g3
+
+
+cabezaDeFamiliaDe ::  GenTree -> Persona
+cabezaDeFamiliaDe (Hijos0 p) = p
+cabezaDeFamiliaDe (Hijos1 p g1) = p
+cabezaDeFamiliaDe (Hijos2 p g1 g2) = p
+cabezaDeFamiliaDe (Hijos3 p g1 g2 g3) = p
+
+
+hijosDe_En_ :: Nombre -> GenTree -> Maybe [Persona] 
+hijosDe_En_ n g = if existeEnGen n g then Just (hijosDe_En_' n g) else Nothing
+
+
+hijosDe_En_' :: Nombre -> GenTree -> [Persona] 
+hijosDe_En_' n (Hijos0 p) =  []
+hijosDe_En_' n (Hijos1 p g1) = if esPersona n p then (cabezaDeFamiliaDe g1) : [] else hijosDe_En_' n g1   
+hijosDe_En_' n (Hijos2 p g1 g2) =  if esPersona n p then  (cabezaDeFamiliaDe g1) :(cabezaDeFamiliaDe g2) : [] else hijosDe_En_' n (if existeEnGen n g1 then g1 else g2 )
+hijosDe_En_' n (Hijos3 p g1 g2 g3) =  if esPersona n p then (cabezaDeFamiliaDe g1) : (cabezaDeFamiliaDe g2) : (cabezaDeFamiliaDe g3) : [] else hijosDe_En_' n (if existeEnGen n g1 then g1 else (if existeEnGen n g2 then g2 else g3))
 
 
 
@@ -151,4 +148,31 @@ ancestrosDe_En_ "Lucius Malfoy" fliaMalfoy
     ]
 --}
 
---ancestrosDe_En_ :: Nombre -> GenTree -> [Persona] 
+
+nombre:: Persona -> Nombre
+nombre (P n _) = n
+
+esPersona::Nombre -> Persona-> Bool
+esPersona n p = (nombre p) == n
+
+existeEnGen::Nombre -> GenTree -> Bool
+existeEnGen n (Hijos0 p) = esPersona n p
+existeEnGen n (Hijos1 p g1) = esPersona n p || existeEnGen n g1
+existeEnGen n (Hijos2 p g1 g2) = esPersona n p || existeEnGen n g1 || existeEnGen n g2
+existeEnGen n (Hijos3 p g1 g2 g3) = esPersona n p || existeEnGen n g1 || existeEnGen n g2 || existeEnGen n g3
+
+
+
+
+ancestrosDe_En_ :: Nombre -> GenTree -> [Persona] 
+ancestrosDe_En_ n g = if existeEnGen n g then ancestrosDe_En_' n g  else error "No pertenece a la familia"
+
+
+ancestrosDe_En_' :: Nombre -> GenTree -> [Persona] 
+ancestrosDe_En_' n (Hijos0 p) = []
+ancestrosDe_En_' n (Hijos1 p g1) = if existeEnGen n g1 then p : ancestrosDe_En_' n g1 else []
+ancestrosDe_En_' n (Hijos2 p g1 g2) = if (existeEnGen n g1) || (existeEnGen n g2) then p :  ancestrosDe_En_' n g1 ++ ancestrosDe_En_' n g2 else []
+ancestrosDe_En_' n (Hijos3 p g1 g2 g3) = if (existeEnGen n g1) || (existeEnGen n g2) || (existeEnGen n g3) then p : ancestrosDe_En_' n g1 ++ ancestrosDe_En_' n g2 ++ ancestrosDe_En_' n g3 else []
+
+
+ancestrosDe_En_Ejemplo = ancestrosDe_En_ "Lucius Malfoy" fliaMalfoy
