@@ -6,36 +6,26 @@ module Alcancia(
 )
 where 
 
-data Alcancia a = A [(Moneda, Int)]  deriving Show  
-data Moneda = M Int deriving Show
+data Alcancia = A (Moneda, Int) (Moneda, Int) (Moneda, Int)  deriving Show  
 
-valor:: Moneda -> Int
-valor (M n) = n
-
-monedaValida :: Moneda -> Bool
-monedaValida = (M 1) = True
-monedaValida = (M 2) = True
-monedaValida = (M 5) = True
-monedaValida = (M _) = False
-
+type Moneda = Int
 -- constante
 nuevaA :: Alcancia 
-nuevaA = A []
+nuevaA = (A (5,0) (2,0) (1,0))
 
--- constante + lineal 
-ponerA:: Int -> Alcancia -> Alcancia 
-ponerA x (A xs) = if monedaValida x then agregarMoneda x xs then (A xs)
+-- constante + constante 
+ponerA:: Moneda -> Alcancia -> Alcancia 
+ponerA 5 (A m5 m2 m1) = (A (aumentarUno m5) m2 m1)
+ponerA 2 (A m5 m2 m1) = (A m5 (aumentarUno m2) m1)
+ponerA 1 (A m5 m2 m1) = (A m5 m2 (aumentarUno m1))
+ponerA n (A m5 m2 m1) = (A m5 m2 m1)
 
--- constante + lineal
-agregarMoneda:: Int -> [(Moneda, Int)] -> [(Moneda, Int)]
-agregarMoneda n [] = []
-agregarMoneda n ((m, c):xs) = if n == m then (m, c+1) : xs else (m, c) : agregarMoneda n xs
+aumentarUno::(Moneda, Int) -> (Moneda, Int) 
+aumentarUno (m, c) = (m, c+1) 
 
---constante + lineal
-contarA:: Int -> Alcancia -> Int 
-contarA n (A xs) = if monedaValida n then buscarMoneda n xs then 0
-
--- constante + lineal 
-buscarMoneda::Int ->[(Moneda, Int)] -> Int
-buscarMoneda n [] = 0
-buscarMoneda n ((m,c):xs) = if (valor m) == n then c else buscarMoneda n xs
+--constante
+contarA:: Moneda -> Alcancia -> Int 
+contarA 5 (A  (m5,c5) m2 m1) = c5
+contarA 2 (A  m5 (m2,c2) m1) = c2
+contarA 1 (A  m5 m2 (m1,c1)) = c1    
+contarA n (A  m5 m2 m1) = 0
