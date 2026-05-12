@@ -1,16 +1,16 @@
-module MapV2 (
-    MapV2,
+module Map (
+    Map,
     emptyM,
     assocM,
     lookupM,
     deleteM,
     keys,
-    mapV2Ejemplo1,
-    mapV2Ejemplo2,
-    mapV2Ejemplo3
+    mapEjemplo1,
+    mapEjemplo2,
+    mapEjemplo3
 )
 where
-data MapV2 k v = M [(k,v)] deriving Show
+data Map k v = M [(k,v)] deriving Show
 
 {-
     INVARIANTE DE REPRENSENTACION:  lista de pares-clave valor con claves repetidas 
@@ -22,7 +22,7 @@ data MapV2 k v = M [(k,v)] deriving Show
     PRECONDICION:   
     COSTO:   O(1) constante
 -}
-emptyM :: MapV2 k v
+emptyM :: Map k v
 emptyM = (M [])
 
 
@@ -31,7 +31,7 @@ emptyM = (M [])
     PRECONDICION:   
     COSTO:    O(1) Constante
 -}
-assocM :: Eq k => k -> v -> MapV2 k v -> MapV2 k v
+assocM :: Eq k => k -> v -> Map k v -> Map k v
 assocM c1 v1 (M xs) =  (M ((c1,v1):xs))
 
 {-
@@ -46,7 +46,7 @@ assocM c1 v1 (M xs) =  (M ((c1,v1):xs))
     PRECONDICION:   El primer elemento que cumpla la condicion, el mas reciente trae
     COSTO:   O(n) Lineal
 -}
-lookupM :: Eq k => k -> MapV2 k v -> Maybe v
+lookupM :: Eq k => k -> Map k v -> Maybe v
 lookupM c (M xs) = buscar c xs 
 
 {-
@@ -65,7 +65,7 @@ buscar c ((c1,v2):xs) = if c1 == c then (Just v2) else buscar c xs
     COSTO:   O(n) Lineal
 -}
 
-deleteM :: Eq k => k -> MapV2 k v -> MapV2 k v
+deleteM :: Eq k => k -> Map k v -> Map k v
 deleteM c1 (M xs) = (M (borrar c1 xs))
 
 {-
@@ -82,7 +82,7 @@ borrar c1 ((c2,v2):xs) = if c1 == c2 then borrar c1 xs else (c2,v2) : borrar c1 
     PRECONDICION:   
     COSTO:   O(n) Lineal
 -}
-keys :: MapV2 k v -> [k]
+keys :: Map k v -> [k]
 keys (M []) = []
 keys (M xs) = obtenerClaves xs
 
@@ -107,9 +107,9 @@ existIn c [] = False
 existIn c ((c1,v1):xs) = c1 == c || existIn c xs
 
 
-mapV2Ejemplo1 = (M [(1, "Valor 1"),(1, "Valor 667"), (2, "Valor 2"),(3, "Valor 3")])
-mapV2Ejemplo3 = (M [(1, "Valor 666"),(1, "Valor 1"), (2, "Valor 8"),(4, "Valor 4")])
+mapEjemplo1 = (M [(1, "Valor 1"),(1, "Valor 667"), (2, "Valor 2"),(3, "Valor 3")])
+mapEjemplo3 = (M [(1, "Valor 666"),(1, "Valor 1"), (2, "Valor 8"),(4, "Valor 4")])
 
 
-mapV2Ejemplo2 :: MapV2 String Int
-mapV2Ejemplo2 = (M [("Clave 1", 1),("Clave 1", 666), ( "Clave 2", 2),("Clave 3", 3)])
+mapEjemplo2 :: Map String Int
+mapEjemplo2 = (M [("Clave 1", 1),("Clave 1", 666), ( "Clave 2", 2),("Clave 3", 3)])
