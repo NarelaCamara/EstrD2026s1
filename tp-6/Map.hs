@@ -5,7 +5,8 @@ module Map (
     lookupM,
     deleteM,
     keys,
-    mapEjemplo
+    mapEjemplo1,
+    mapEjemplo2
 )
 where
 data Map k v = M [(k,v)] deriving Show
@@ -95,4 +96,7 @@ obtenerClaves ((c1,v1):xs) = c1 : obtenerClaves xs
 
 
 
-mapEjemplo = (M [(1, "Valor 1"), (2, "Valor 2"),(3, "Valor 3")])
+mapEjemplo1 = (M [(1, "Valor 1"), (2, "Valor 2"),(3, "Valor 3")])
+
+mapEjemplo2 :: Map String Int
+mapEjemplo2 = (M [("Clave 1", 1), ( "Clave 2", 2),("Clave 3", 3)])
