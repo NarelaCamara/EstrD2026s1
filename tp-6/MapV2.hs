@@ -13,8 +13,9 @@ where
 data Map k v = M [(k,v)] deriving Show
 
 {-
-    INVARIANTE DE REPRENSENTACION:  lista de pares-clave valor sin claves rep etidas 
+    INVARIANTE DE REPRENSENTACION:  lista de pares-clave valor con claves rep etidas 
 -}
+
 
 {-
     Proposito: 

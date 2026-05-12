@@ -13,7 +13,8 @@ where
 data Map k v = M [(k,v)] deriving Show
 
 {-
-    INVARIANTE DE REPRENSENTACION:  lista de pares-clave valor sin claves rep etidas 
+    INVARIANTE DE REPRENSENTACION:  dos listas, una de claves y otra de valores, donde la clave ubicada en la p osición i está
+aso ciada al valor en la misma p osición, p ero de la otra lista
 -}
 
 {-
