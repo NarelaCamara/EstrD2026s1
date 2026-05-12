@@ -10,11 +10,11 @@ module Map (
     mapEjemplo3
 )
 where
-data Map k v = M [(k,v)] deriving Show
+data Map k v = M [k] [v] deriving Show
 
 {-
     INVARIANTE DE REPRENSENTACION:  dos listas, una de claves y otra de valores, donde la clave ubicada en la p osición i está
-aso ciada al valor en la misma p osición, p ero de la otra lista
+aso ciada al valor en la misma p osición, p ero de la otra lista y repetidos
 -}
 
 {-
@@ -23,25 +23,17 @@ aso ciada al valor en la misma p osición, p ero de la otra lista
     COSTO:   O(1) constante
 -}
 emptyM :: Map k v
-emptyM = (M [])
+emptyM = (M [] [])
 
 
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:   O(n) Lineal
+    COSTO:    O(1) Constante
 -}
 assocM :: Eq k => k -> v -> Map k v -> Map k v
-assocM c1 v1 (M xs) =  (M (associar c1 v1 xs))
+assocM c1 v1 (M ks vs) =  (M (c1:ks) (v1:vs) )
 
-{-
-    Proposito: 
-    PRECONDICION:   
-    COSTO:   O(1) constante +  O(1) constante +  O(n) Lineal
--}
-associar :: Eq k => k -> v -> [(k, v)] ->[(k, v)] 
-associar c1 v1 [] = [(c1, v1)]
-associar c1 v1 ((c2,v2):xs) = if c1 == c2 then (c1, v1) : xs else (c2,v2) : associar c1 v1 xs
 
 
 {-
@@ -50,16 +42,17 @@ associar c1 v1 ((c2,v2):xs) = if c1 == c2 then (c1, v1) : xs else (c2,v2) : asso
     COSTO:   O(n) Lineal
 -}
 lookupM :: Eq k => k -> Map k v -> Maybe v
-lookupM c (M xs) = buscar c xs 
+lookupM c (M ks vs) =  
+     ks vs 
 
 {-
     Proposito: 
     PRECONDICION:   
     COSTO:   O(1) constante +  O(n) Lineal
 -}
-buscar :: Eq k => k -> [(k, v)] -> Maybe v 
-buscar c [] = Nothing
-buscar c ((c1,v2):xs) = if c1 == c then (Just v2) else buscar c xs
+buscar :: Eq k => k -> [k]-> [v] -> Maybe v 
+buscar c [] vs = Nothing
+buscar c (c1:cs) (v1:vs) = if c1 == c then (Just v1) else buscar c cs vs
 
 
 {-
