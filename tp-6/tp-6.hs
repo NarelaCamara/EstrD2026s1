@@ -171,3 +171,25 @@ fromJust'' Nothing = 0
 
 {--Ejemplo de uso --}
 incrementarEjemplo = incrementar ["Clave 1", "Clave 2", "Clave 2"] mapEjemplo2 
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n^2) Cuadratico +  O(n) Lineal =  O(n^2) Cuadratico
+-}
+mergeMaps:: Eq k => Map k v -> Map k v -> Map k v
+mergeMaps m1 m2 = mergeToMap (mapToList m1) m2
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal +  O(1) Constante
+-}
+
+mergeToMap:: Eq k => [(k,v)] -> Map k v -> Map k v 
+mergeToMap [] map = map
+mergeToMap ((c1,v1):xs) map = assocM c1 v1 (mergeToMap xs map)
+
+{--Ejemplo de uso --}
+mergeMapsEjemplo = mergeMaps mapEjemplo3 mapEjemplo1
