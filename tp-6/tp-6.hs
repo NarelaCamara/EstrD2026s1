@@ -109,24 +109,27 @@ mapToList map = convertirMap (keys map) map
 -}
 convertirMap :: Eq k => [k] -> Map k v -> [(k,v)]
 convertirMap [] map = []
-convertirMap (x:xs) map = ( x, (lookupM x map)) : convertirMap xs map
+convertirMap (x:xs) map = ( x, (fromJust (lookupM x map))) : convertirMap xs map
 
-
+fromJust:: Maybe v -> v
+fromJust (Just e) = e
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(1) Constante 
 -}
 agruparEq :: Eq k => [(k, v)] -> Map k [v]
 agruparEq [] = emptyM
 agruparEq ((c1,v1):xs) = 
-    if notIsNothing (lookupM c1 (agruparEq xs)) then else 
+    assocM c1 (v1 : fromJust' (lookupM c1 (agruparEq xs) ))  (agruparEq xs)
 
- 
+fromJust' ::  Maybe [v] -> [v]
+fromJust' (Just xs) = xs
+fromJust' Nothing = [] 
 
 
 {--Ejemplo de uso --}
-agruparEqEjemplo = agruparEq [(1, "Valor 1"), (2, "Valor 2"),(2, "Valor 4"), (3, "Valor 3")]
+agruparEqEjemplo = agruparEq [(1, "Valor 1"),  (2, "Valor 6"), (2, "Valor 2"),(2, "Valor 4"), (3, "Valor 3")]
 
 
 
