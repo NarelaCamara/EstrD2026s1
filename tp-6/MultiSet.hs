@@ -1,5 +1,3 @@
-import Map
-
 module MultiSet (
     MultiSet,
     emptyMS,
@@ -7,12 +5,12 @@ module MultiSet (
     ocurrencesMS,
     unionMS,
     intersectionMS,
-    multiSetToList,
-    multiSetEjemplo1,
-    multiSetEjemplo2,
-    multiSetEjemplo3
+    multiSetToList
 )
 where
+
+import Map
+
 data MultiSet a = MS (Map a Int) deriving Show
 
 
@@ -35,7 +33,7 @@ emptyMS = (MS emptyM)
     COSTO:  Map V1 >>  O(n) Lineal
 -}
 addMS :: Ord a => a -> MultiSet a -> MultiSet a
-addMS n (MS map) = assocM  n (fromJust''(lookupM n map))
+addMS n (MS map) = (MS (assocM n (fromJust''(lookupM n map)) map) )
 
 {-
     Proposito: 
@@ -107,10 +105,19 @@ convertirMap (x:xs) map = ( x, (fromJust (lookupM x map))) : convertirMap xs map
 {-
     Proposito: 
     PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+
+fromJust:: Maybe v -> v
+fromJust (Just e) = e
+
+{-
+    Proposito: 
+    PRECONDICION:   
     COSTO:   O(1) Constante +  O(n) Lineal
 -}
 intersectionMS :: Ord a => MultiSet a -> MultiSet a -> MultiSet a
-intersectionMS (MS map1) (MS map2) = (MS intersectionM map1 map2)
+intersectionMS (MS map1) (MS map2) = (MS (intersectionM map1 map2))
 
 {-
     Proposito: 
@@ -126,9 +133,9 @@ intersectionM map1 map2 = deleteKeysM (keys map1) map2
     COSTO:  O(n) Lineal +  O(n) Lineal +  O(n) Lineal =  O(n) Lineal 
 -}
 
-deleteKeysM::  :: Ord k => [k] -> Map k Int -> Map k Int
+deleteKeysM :: Ord k => [k] -> Map k Int -> Map k Int
 deleteKeysM [] map = emptyM 
-deleteKeysM (x:xs) map =  notIsNothing x (lookupM x map) (deleteKeysM xs map)
+deleteKeysM (x:xs) map =  notIsNothing x (lookupM x map) (deleteKeysM xs map) 
 
 
 {-
@@ -137,7 +144,7 @@ deleteKeysM (x:xs) map =  notIsNothing x (lookupM x map) (deleteKeysM xs map)
     COSTO:   O(1) Constante +  O(n) Lineal
 -}
 
-notIsNothing:: Ord k => k -> Maybe a -> Map k Int  -> Map k Int
+notIsNothing:: Ord k => k -> Maybe Int -> Map k Int  -> Map k Int
 notIsNothing n Nothing map = map 
 notIsNothing n (Just v) map = assocM n v map 
 
@@ -148,5 +155,5 @@ notIsNothing n (Just v) map = assocM n v map
     COSTO:   O(n^2) Cuadratico
 -}
 
-multiSetToList :: MultiSet a -> [(a, Int)]
+multiSetToList :: Eq a => MultiSet a -> [(a, Int)]
 multiSetToList (MS xs) = mapToList xs
