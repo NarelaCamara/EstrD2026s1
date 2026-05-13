@@ -238,3 +238,17 @@ ocurrenciasEjemplo = ocurrencias "aaabbc"
 cantidad:: Char -> [Char] -> Int
 cantidad c [] = 0
 cantidad c (x:xs) = if c == x then 1 + (cantidad c xs) else cantidad c xs
+
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  Map Version 1 >>>>>>  O(n) Lineal
+-}
+ocurrenciasMS ::Ord a => [a] -> MultiSet a
+ocurrenciasMS [] = emptyMS
+ocurrenciasMS (t:ts) = addMS t (ocurrenciasMS ts)
+
+{--Ejemplo de uso --}
+ocurrenciasMSEjemplo = ocurrenciasMS "aaabbc"
