@@ -62,35 +62,46 @@ buscar c (c1:cs) (v1:vs) = if c1 == c then (Just v1) else buscar c cs vs
 -}
 
 deleteM :: Eq k => k -> Map k v -> Map k v
-deleteM c1 (M xs) = (M (borrar c1 xs))
+deleteM c1 (M cs vs) = (borrar c1 cs vs)
 
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:   O(1) constante +  O(n) Lineal
+    COSTO:   O(1) constante +  O(n) Lineal +  O(1) Constante
 -}
-borrar :: Eq k => k -> [(k,v)] -> [(k,v)]
-borrar c1 [] = []
-borrar c1 ((c2,v2):xs) = if c1 == c2 then xs else (c2,v2) : borrar c1 xs
+borrar :: Eq k => k -> [k] -> [v] -> Map k v
+borrar c1 [] [] = (M [] [])
+borrar c1 (c2:cs) (v2:vs) = if c1 == c2 then borrar c1 cs vs else assocM c2 v2 (borrar c1 cs vs)
 
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:   O(n) Lineal
+    COSTO:   O(n^2) Cuadratico
 -}
 keys :: Map k v -> [k]
-keys (M []) = []
-keys (M xs) = obtenerClaves xs
+keys (M cs _) = eliminarRepetidos cs
 
 
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:   O(n) Lineal
+    COSTO:   O(n) Lineal *  O(n) Lineal =  O(n^2) Cuadratico
 -}
-obtenerClaves:: [(k,v)] -> [k]
-obtenerClaves [] = []
-obtenerClaves ((c1,v1):xs) = c1 : obtenerClaves xs
+eliminarRepetidos:: [k] -> [k]
+eliminarRepetidos [] = []
+eliminarRepetidos (c1:xs) =  if exist c1 xs then eliminarRepetidos xs else c1 :  eliminarRepetidos xs
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  O(n) Lineal 
+-}
+exist:: Eq k => k -> [k] -> Bool
+exist c1 [] = False
+exist c1 (c:cs) = c == c1 || exist c1 cs
+
+
 
 
 
