@@ -1,6 +1,7 @@
 
 import PriorityQueue
 import Map
+import MultiSet
 {-- PRACTICA 6 --}
 
 {-- 1. --}
