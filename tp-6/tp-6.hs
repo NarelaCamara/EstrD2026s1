@@ -193,3 +193,47 @@ mergeToMap ((c1,v1):xs) map = assocM c1 v1 (mergeToMap xs map)
 
 {--Ejemplo de uso --}
 mergeMapsEjemplo = mergeMaps mapEjemplo3 mapEjemplo1
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+indexar :: [a] -> Map Int a
+indexar xs = indexMap xs 1
+
+{--Ejemplo de uso --}
+indexarEjemplo = indexar [1,2,3,4,5]
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO: Map Version 1 >>>>>>  O(1) Constante +  O(n) Lineal 
+-}
+indexMap:: [a] -> Int -> Map Int a
+indexMap [] n = emptyM
+indexMap (x:xs) n = assocM n x (indexMap xs (n+1))
+
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  Map Version 1 >>>>>>  O(n) Lineal
+-}
+ocurrencias :: String -> Map Char Int
+ocurrencias [] = emptyM
+ocurrencias (t:ts) = assocM t ((cantidad t ts)+1) (ocurrencias ts)
+
+{--Ejemplo de uso --}
+ocurrenciasEjemplo = ocurrencias "aaabbc"
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO: Map Version 1 >>>>>>  O(1) Constante +  O(n) Lineal
+-}
+cantidad:: Char -> [Char] -> Int
+cantidad c [] = 0
+cantidad c (x:xs) = if c == x then 1 + (cantidad c xs) else cantidad c xs
