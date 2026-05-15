@@ -9,7 +9,7 @@ import MultiSet
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:   O(n) Lineal
+    COSTO:   O(n^2) Cuadratico
 -}
 heapSort::Ord a => [a] -> [a]
 heapSort xs = toListPQ (createPQ xs)  

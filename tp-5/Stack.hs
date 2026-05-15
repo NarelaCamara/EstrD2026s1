@@ -51,7 +51,7 @@ top (Stack (x:xs) _) = x
     COSTO: O(1) Constante
 --} 
 pop :: Stack a -> Stack a
-pop (Stack []) = error "pop: empty stack"
+pop (Stack [] _) = error "pop: empty stack"
 pop (Stack (x:xs) n) = (Stack xs (n-1))
 
 {--
