@@ -86,12 +86,18 @@ insertBSTEjemplo = insertBST 2 (insertBST 14 ejemploTreeBST)
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(log n) logatirmo
 -}
 deleteBST :: Ord a => a -> Tree a -> Tree a
 deleteBST e EmptyT = EmptyT
 deleteBST e (NodeT n t1 t2) = if (e == n) then (refactor t1 t2) else (if (e < n) then (NodeT n (deleteBST e t1) t2) else (NodeT n t1 (deleteBST e t2)))
 
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo
+-}
 refactor :: Tree a -> Tree a -> Tree a
 refactor EmptyT t2 = t2
 refactor t1 EmptyT = t1 
@@ -99,3 +105,24 @@ refactor (NodeT e t11 t12) t2 = (NodeT e (refactor t11 t12) t2)
 
 {--Ejemplo de uso --}
 deleteBSTEjemplo = deleteBST 18 ejemploTreeBST
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+splitMinBST :: Ord a => Tree a -> (a, Tree a)
+splitMinBST t = let min = (findMin t) in (min, (deleteBST min t))
+
+{--Ejemplo de uso --}
+splitMinBSTEjemplo = splitMinBST ejemploTreeBST
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+findMin::Ord a => Tree a -> a 
+findMin (NodeT e EmptyT _) = e
+findMin (NodeT e t1 _) = findMin t1 
