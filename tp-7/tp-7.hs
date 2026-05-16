@@ -141,5 +141,9 @@ splitMaxBST t = let max = (findMax t) in (max,deleteBST max t)
     COSTO:   O(log n) logatirmo
 -}
 findMax::Ord a => Tree a -> a 
-findMax (NodeT e EmptyT _) = e
-findMax (NodeT e t1 _) = findMax t1 
+findMax (NodeT e _ EmptyT) = e
+findMax (NodeT e _ t2) = findMax t2 
+
+
+{--Ejemplo de uso --}
+splitMaxBSTEjemplo = splitMaxBST ejemploTreeBST
