@@ -154,16 +154,22 @@ splitMaxBSTEjemplo = splitMaxBST ejemploTreeBST
     COSTO:  
 -}
 esBST :: Ord a => Tree a -> Bool
-esBST (NodeT e t1 t2) = (allMinTo e t1) && (allMaxTo e t2)
+esBST (NodeT e t1 t2) = (allMin e t1) && (allMax e t2)
 esBST _ = True 
 
-allMinTo:: Ord a => a -> Tree a -> Bool
-allMinTo e EmptyT = True 
-allMinTo e (NodeT n t1 t2) = (e > n) && (allMinTo n t1) && (allMinTo n t2)
+allMin:: Ord a => a -> Tree a -> Bool
+allMin _ EmptyT = True 
+allMin maxVal (NodeT n t1 t2) =
+    (n < maxVal) &&
+    allMin n t1 &&
+    allMax n t2 
 
-allMaxTo:: Ord a => a -> Tree a -> Bool
-allMaxTo e EmptyT = True 
-allMaxTo e (NodeT n t1 t2) = (e < n) && (allMaxTo n t1) && (allMaxTo n t2)
+allMax:: Ord a => a -> Tree a -> Bool
+allMax _ EmptyT = True 
+allMax minVal (NodeT n t1 t2) =
+    (n > minVal) &&
+    allMin n t1 &&
+    allMax n t2
 
 {--Ejemplo de uso --}
 esBSTEjemplo = esBST ejemploTreeBST
