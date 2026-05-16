@@ -110,7 +110,7 @@ deleteBSTEjemplo = deleteBST 18 ejemploTreeBST
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(log n) logatirmo
 -}
 splitMinBST :: Ord a => Tree a -> (a, Tree a)
 splitMinBST t = let min = (findMin t) in (min, (deleteBST min t))
@@ -121,8 +121,25 @@ splitMinBSTEjemplo = splitMinBST ejemploTreeBST
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(log n) logatirmo
 -}
 findMin::Ord a => Tree a -> a 
 findMin (NodeT e EmptyT _) = e
 findMin (NodeT e t1 _) = findMin t1 
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo
+-}
+splitMaxBST :: Ord a => Tree a -> (a, Tree a)
+splitMaxBST t = let max = (findMax t) in (max,deleteBST max t)
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo
+-}
+findMax::Ord a => Tree a -> a 
+findMax (NodeT e EmptyT _) = e
+findMax (NodeT e t1 _) = findMax t1 
