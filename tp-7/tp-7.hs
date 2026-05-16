@@ -147,3 +147,23 @@ findMax (NodeT e _ t2) = findMax t2
 
 {--Ejemplo de uso --}
 splitMaxBSTEjemplo = splitMaxBST ejemploTreeBST
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+esBST :: Ord a => Tree a -> Bool
+esBST (NodeT e t1 t2) = (allMinTo e t1) && (allMaxTo e t2)
+esBST _ = True 
+
+allMinTo:: Ord a => a -> Tree a -> Bool
+allMinTo e EmptyT = True 
+allMinTo e (NodeT n t1 t2) = (e > n) && (allMinTo n t1) && (allMinTo n t2)
+
+allMaxTo:: Ord a => a -> Tree a -> Bool
+allMaxTo e EmptyT = True 
+allMaxTo e (NodeT n t1 t2) = (e < n) && (allMaxTo n t1) && (allMaxTo n t2)
+
+{--Ejemplo de uso --}
+esBSTEjemplo = esBST ejemploTreeBST
