@@ -151,12 +151,17 @@ splitMaxBSTEjemplo = splitMaxBST ejemploTreeBST
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(n) Lineal
 -}
 esBST :: Ord a => Tree a -> Bool
 esBST (NodeT e t1 t2) = (allMin e t1) && (allMax e t2)
 esBST _ = True 
 
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal
+-}
 allMin:: Ord a => a -> Tree a -> Bool
 allMin _ EmptyT = True 
 allMin maxVal (NodeT n t1 t2) =
@@ -164,6 +169,11 @@ allMin maxVal (NodeT n t1 t2) =
     allMin n t1 &&
     allMax n t2 
 
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal
+-}
 allMax:: Ord a => a -> Tree a -> Bool
 allMax _ EmptyT = True 
 allMax minVal (NodeT n t1 t2) =
@@ -173,3 +183,50 @@ allMax minVal (NodeT n t1 t2) =
 
 {--Ejemplo de uso --}
 esBSTEjemplo = esBST ejemploTreeBST
+
+{-
+    Proposito:  Propósito : dado un BST y un elemento, devuelve el máximo elemento que sea menor al
+elemento dado
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo
+-}
+elMaximoMenorA:: Ord a => a -> Tree a -> Maybe a
+elMaximoMenorA e EmptyT = Nothing
+elMaximoMenorA e (NodeT n t1 t2) = if (esLaRama e n t1 t2) then (Just n) else (elMaximoMenorA e (elegirRama (e <= n) t1 t2))
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+esLaRama ::Ord a => a -> a -> Tree a -> Tree a -> Bool
+esLaRama e n t1 t2 = e >= n && esMenor e (root t2)
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+esMenor::Ord a => a -> Maybe a -> Bool
+esMenor e Nothing = True
+esMenor e (Just n) = e <= n
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+root:: Tree a -> Maybe a
+root EmptyT = Nothing
+root (NodeT n t1 t2) = (Just n)
+
+
+{--Ejemplo de uso --}
+{--
+          12
+         /  \
+        8    18
+       / \   / \
+      4  10 16 25
+--}
+elMaximoMenorAEjemplo = elMaximoMenorA 11 ejemploTreeBST
