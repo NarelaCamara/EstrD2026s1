@@ -27,8 +27,8 @@ consEmpleado c = (E c (emptyS))
     PRECONDICION:   
     COSTO:   O(1) Constante
 -}
-CUIL:: Empleado -> CUIL
-CUIL (E c _ ) = c 
+cuil :: Empleado -> CUIL
+cuil (E c _ ) = c 
 
 {-
     Proposito: 

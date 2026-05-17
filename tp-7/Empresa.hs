@@ -137,8 +137,8 @@ agregarASector s c (ConsE mS mE) = let e = (incorporarSector s (fromJust (lookup
     COSTO:   O(log n) logatirmo
 -}
 actualizarEmpleadoEnEmpleados:: Empleado -> (Map CUIL Empleado) -> (Map CUIL Empleado)
-actualizarEmpleadoEnEmpleados e mE  = let  mE' = (deleteM (CUIL e) mE)
-            in assocM (CUIL e) e mE'
+actualizarEmpleadoEnEmpleados e mE  = let  mE' = (deleteM (cuil e) mE)
+            in assocM (cuil e) e mE'
 
 {-
     Proposito: 
@@ -146,7 +146,7 @@ actualizarEmpleadoEnEmpleados e mE  = let  mE' = (deleteM (CUIL e) mE)
     COSTO:   O(log n) logatirmo
 -}
 actualizarEmpleadoEnSectores:: SectorId -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
-actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS (CUIL e) (fromJust (lookupM s mS)))
+actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS (cuil e) (fromJust (lookupM s mS)))
             in assocM s (addS e eS') (deleteM s mS)
 
 {-
