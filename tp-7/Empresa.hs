@@ -94,7 +94,7 @@ agregarSector s (ConsE mS mE) = (ConsE (assocM s emptyS mS) mE)
 -}
 agregarEmpleado :: [SectorId] -> CUIL -> Empresa -> Empresa 
 agregarEmpleado ss c (ConsE mS mE) = let e = (agregarSectoresAEmpleado ss (consEmpleado c))
-            in  (ConsE (nuevoEmpleadoParaSectores ss e mS) (addS e mE))
+            in  (ConsE (nuevoEmpleadoParaSectores ss e mS) (assocM c e mE))
 
 {-
     Proposito: 
@@ -103,7 +103,7 @@ agregarEmpleado ss c (ConsE mS mE) = let e = (agregarSectoresAEmpleado ss (consE
 -}
 nuevoEmpleadoParaSectores:: [SectorId] -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
 nuevoEmpleadoParaSectores [] e mS = mS
-nuevoEmpleadoParaSectores (s:ss) e mS = (nuevoEmpleadoParaSectores ss e (agregarEmpleadoEnSector s e mS) )
+nuevoEmpleadoParaSectores (s:ss) e mS =(agregarEmpleadoEnSector s e (nuevoEmpleadoParaSectores ss e mS))
 
 {-
     Proposito: 
@@ -111,7 +111,7 @@ nuevoEmpleadoParaSectores (s:ss) e mS = (nuevoEmpleadoParaSectores ss e (agregar
     COSTO:   O(log n) logatirmo
 -}
 agregarEmpleadoEnSector:: SectorId -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
-agregarEmpleadoEnSector s e mS  = assocM s (addS e (fromJust (lookupM s mS))) (deleteM s mS)
+agregarEmpleadoEnSector s e mS = assocM s (addS e (fromJust (lookupM s mS))) (deleteM s mS)
 
 {-
     Proposito: 
