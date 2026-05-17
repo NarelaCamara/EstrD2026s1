@@ -430,7 +430,7 @@ rearmarEmpresa (c:css) em = borrarEmpleado c (rearmarEmpresa css em)
     COSTO:   O(1) Constante -> por elc calculo + el  O(n) Lineal 
 -}
 eliminarLaMitad:: [CUIL] -> [CUIL]
-eliminarLaMitad css = elimnarCantidad (round ((longitud css) `div` 2)) css
+eliminarLaMitad css = elimnarCantidad (round ((length  css) `div` 2)) css
 
 {-
     Proposito: 
@@ -441,6 +441,37 @@ elimnarCantidad:: Int ->  [CUIL] -> [CUIL]
 elimnarCantidad 0 css = css 
 elimnarCantidad n (c:css) = elimnarCantidad (n-1) css
 
---convertirEnComodin :: CUIL -> Empresa -> Empresa
 
---esComodin :: CUIL -> Empresa -> Bool
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+convertirEnComodin :: CUIL -> Empresa -> Empresa
+convertirEnComodin c em = agregarleSectoresAEmpleado c (todosLosSectores em) em
+
+
+agregarleSectoresAEmpleado::CUIL -> [SectorId] -> Empresa -> Empresa
+agregarleSectoresAEmpleado c [] em = em 
+agregarleSectoresAEmpleado c (s:ss) em = agregarASector s c (agregarleSectoresAEmpleado c ss em )
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal 
+-}
+
+esComodin :: CUIL -> Empresa -> Bool
+esComodin c em = estaEnTodosLosSectores (buscarPorCUIL c) (todosLosSectores em) em 
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(s) Lineal -> s siendo el largo de la lista de sectores
+-}
+estaEnTodosLosSectores :: Empleado -> [SectorId] -> Bool
+estaEnTodosLosSectores e [] = True
+estaEnTodosLosSectores e (x:xs) =  x  `elem` (sectores e) && (estaEnTodosLosSectores e xs) 
+
+
