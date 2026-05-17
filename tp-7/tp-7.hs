@@ -450,6 +450,9 @@ elimnarCantidad n (c:css) = elimnarCantidad (n-1) css
 convertirEnComodin :: CUIL -> Empresa -> Empresa
 convertirEnComodin c em = agregarleSectoresAEmpleado c (todosLosSectores em) em
 
+{--Ejemplo de uso --}
+convertirEnComodinEjemplo = convertirEnComodin 1111 empresaEjemplo
+
 
 agregarleSectoresAEmpleado::CUIL -> [SectorId] -> Empresa -> Empresa
 agregarleSectoresAEmpleado c [] em = em 
@@ -463,7 +466,11 @@ agregarleSectoresAEmpleado c (s:ss) em = agregarASector s c (agregarleSectoresAE
 -}
 
 esComodin :: CUIL -> Empresa -> Bool
-esComodin c em = estaEnTodosLosSectores (buscarPorCUIL c em) (todosLosSectores em) 
+esComodin c em = estaEnTodosLosSectores (buscarPorCUIL c em) (todosLosSectores em)
+
+{--Ejemplo de uso --}
+empresaEjemplo1 = agregarEmpleado [2222, 1111] 8888 (agregarEmpleado [2222] 7777 (agregarEmpleado [1111] 6666 (agregarEmpleado [1111] 5555 (agregarSectores [1111, 2222] consEmpresa))))
+esComodinEjemplo = esComodin 1111 convertirEnComodinEjemplo
 
 {-
     Proposito: 
