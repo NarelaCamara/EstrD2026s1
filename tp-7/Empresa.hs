@@ -60,7 +60,7 @@ fromJust (Just e) = e
 -}
 
 empleadosDelSector :: SectorId -> Empresa -> [Empleado]
-empleadosDelSector s (ConsE mS mE) = fromJust (lookupM s mS)
+empleadosDelSector s (ConsE mS mE) =  setToList (fromJust (lookupM s mS))
 
 
 {-

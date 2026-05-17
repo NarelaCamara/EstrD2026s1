@@ -9,7 +9,7 @@ where
 
 import Set
 
-data Empleado = E CUIL (Set SectorId) deriving Show
+data Empleado = E CUIL (Set SectorId) deriving (Show, Eq)
 
 type CUIL = Int
 type SectorId = Int
