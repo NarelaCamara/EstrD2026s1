@@ -10,7 +10,7 @@ module Set(
 )
 where 
 
-data Set a = Set [a]  deriving Show  
+data Set a = Set [a]  deriving (Show, Eq)  
 
 {--
     Proposito: Devulve un set vacio
