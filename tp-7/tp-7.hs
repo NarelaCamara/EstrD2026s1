@@ -192,7 +192,7 @@ elemento dado
 -}
 elMaximoMenorA:: Ord a => a -> Tree a -> Maybe a
 elMaximoMenorA e EmptyT = Nothing
-elMaximoMenorA e (NodeT n t1 t2) = if (esLaRamaMenorMasCercana e n t1 t2) then (Just n) else (elMaximoMenorA e (elegirRama (esMenor e (root t1)) t1 t2))
+elMaximoMenorA e (NodeT n t1 t2) = if (esLaRamaMenorMasCercana e n t1 t2) then (Just n) else (elMaximoMenorA e (elegirRama (e < n) t1 t2))
 
 {-
     Proposito: 
@@ -200,7 +200,7 @@ elMaximoMenorA e (NodeT n t1 t2) = if (esLaRamaMenorMasCercana e n t1 t2) then (
     COSTO:   O(1) Constante
 -}
 esLaRamaMenorMasCercana ::Ord a => a -> a -> Tree a -> Tree a -> Bool
-esLaRamaMenorMasCercana e n t1 t2 = e <= n && esMenor e (root t2)
+esLaRamaMenorMasCercana e n t1 t2 = e > n && esMenor e (root t2)
 
 {-
     Proposito: 
@@ -209,7 +209,7 @@ esLaRamaMenorMasCercana e n t1 t2 = e <= n && esMenor e (root t2)
 -}
 esMenor::Ord a => a -> Maybe a -> Bool
 esMenor e Nothing = True
-esMenor e (Just n) = e < n
+esMenor e (Just n) = n < e
 
 {-
     Proposito: 
@@ -257,7 +257,7 @@ esLaRamaMayorMasCercano e n t1 t2 = e <= n && esMayor e (root t1)
 -}
 esMayor::Ord a => a -> Maybe a -> Bool
 esMayor e Nothing = True
-esMayor e (Just n) = e >= n
+esMayor e (Just n) = e > n
 
 {--Ejemplo de uso --}
 {--
