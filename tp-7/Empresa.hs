@@ -114,7 +114,7 @@ agregarEmpleadoEnSector s e mS  = assocM s (addS e (fromJust (lookupM s mS))) (d
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:   O(n) Lineal -> donde n es el valor de la lista Sector ID
+    COSTO:    n (log n) Ene log ene -> donde n es el valor de la lista Sector ID
 -}
 agregarSectoresAEmpleado :: [SectorId] -> Empleado -> Empleado
 agregarSectoresAEmpleado [] e = e
@@ -124,18 +124,40 @@ agregarSectoresAEmpleado (x:xs) e = incorporarSector x (agregarSectoresAEmpleado
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(log n) logatirmo
 -}
 agregarASector :: SectorId -> CUIL -> Empresa -> Empresa 
 agregarASector s c (ConsE mS mE) = let e = (incorporarSector s (fromJust (lookupM c mE)))  
     in  (ConsE (actualizarEmpleadoEnSectores s e mS) (actualizarEmpleadoEnEmpleados e mE) )
 
 
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo
+-}
 actualizarEmpleadoEnEmpleados:: Empleado -> (Map CUIL Empleado) -> (Map CUIL Empleado)
 actualizarEmpleadoEnEmpleados e mE  = let  mE' = (deleteM (CUIL e) mE)
             in assocM (CUIL e) e mE'
 
-
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo
+-}
 actualizarEmpleadoEnSectores:: SectorId -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
 actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS (CUIL e) (fromJust (lookupM s mS)))
             in assocM s (addS e eS') (deleteM s mS)
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+borrarEmpleado :: CUIL -> Empresa -> Empresa 
+borrarEmpleado c (ConsE mS mE) = (ConsE (eliminarEmpleadoDeSectrores (keys mS) c mS) (removeS c mE))
+
+eliminarEmpleadoDeSectrores:: [SectorId] -> CUIL -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
+eliminarEmpleadoDeSectrores [] c mS = emptyM
+eliminarEmpleadoDeSectrores (s:ss) c mS = assocM s (removeS c (fromJust (lookupM s mS))) (eliminarEmpleadoDeSectrores ss c mS)
+
