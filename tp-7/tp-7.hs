@@ -1,3 +1,5 @@
+import Map
+
 {-- PRACTICA 7 --}
 
 {-- 1. --}
@@ -365,3 +367,5 @@ altura (NodeT n t1 t2) = 1  + (max (altura t1) (altura t2))
 
 {--Ejemplo de uso --}
 balanceadoEjemplo = balanceado ejemploNoBalanceado1
+
+{-- 3. --}
