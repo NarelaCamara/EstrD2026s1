@@ -148,7 +148,7 @@ actualizarEmpleadoEnEmpleados e mE  = let  mE' = (deleteM (cuil e) mE)
     COSTO:   O(log n) logatirmo
 -}
 actualizarEmpleadoEnSectores:: SectorId -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
-actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS (cuil e) (fromJust (lookupM s mS)))
+actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS e (fromJust (lookupM s mS)))
             in assocM s (addS e eS') (deleteM s mS)
 
 {-
@@ -157,9 +157,10 @@ actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS (cuil e) (fromJust (l
     COSTO:  
 -}
 borrarEmpleado :: CUIL -> Empresa -> Empresa 
-borrarEmpleado c (ConsE mS mE) = (ConsE (eliminarEmpleadoDeSectrores (keys mS) c mS) (removeS c mE))
+borrarEmpleado c (ConsE mS mE) = let e = fromJust (lookupM c mE)
+                in ConsE (eliminarEmpleadoDeSectrores (keys mS) e mS) (deleteM c mE)
 
-eliminarEmpleadoDeSectrores:: [SectorId] -> CUIL -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
-eliminarEmpleadoDeSectrores [] c mS = emptyM
-eliminarEmpleadoDeSectrores (s:ss) c mS = assocM s (removeS c (fromJust (lookupM s mS))) (eliminarEmpleadoDeSectrores ss c mS)
+eliminarEmpleadoDeSectrores:: [SectorId] -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
+eliminarEmpleadoDeSectrores [] _ mS = mS
+eliminarEmpleadoDeSectrores (s:ss) e mS = assocM s (removeS e (fromJust (lookupM s mS))) (eliminarEmpleadoDeSectrores ss e mS)
 
