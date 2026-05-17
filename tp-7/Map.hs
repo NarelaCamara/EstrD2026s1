@@ -8,10 +8,9 @@ module Map (
     mapEjemplo1,
 )
 where
-data Map k v = M ( Tree (k,v)) deriving Show
+data Map k v = M (Tree k v) deriving Show
 
-
-data Tree (k,v) = EmptyT | NodeT (k,v) (Tree (k,v)) (Tree (k,v))
+data Tree k v = EmptyT | NodeT (k,v) (Tree k v) (Tree k v)
     deriving Show
 
 
@@ -41,7 +40,7 @@ assocM c1 v1 (M t) =  (M (agregarArbol c1 v1 t))
     PRECONDICION:   
     COSTO:   O(1) Constante +  O(1) Constante +  O(log n) logatirmo +  O(1) Constante
 -}
-agregarArbol ::  Ord k => k -> v -> Tree (k,v) -> Tree (k,v)
+agregarArbol ::  Ord k => k -> v -> Tree k v -> Tree k v
 agregarArbol c1 v1 EmptyT = (NodeT (c1,v1) EmptyT EmptyT)
 agregarArbol c1 v1 (NodeT (c,v) t1 t2) = if c == c1 then (NodeT (c1,v1) t1 t2) else agregarArbol c1 v1 (elegirRama (c1 < c) t1 t2)
 
@@ -51,7 +50,7 @@ agregarArbol c1 v1 (NodeT (c,v) t1 t2) = if c == c1 then (NodeT (c1,v1) t1 t2) e
     PRECONDICION:   
     COSTO:   O(1) Constante
 -}
-elegirRama:: Bool -> Tree a -> Tree a -> Tree a
+elegirRama:: Bool -> Tree k v -> Tree k v -> Tree k v
 elegirRama True t1 t2 = t1
 elegirRama False t1 t2 = t2
 
@@ -75,7 +74,7 @@ lookupM c (M ts) = buscar c ts
     PRECONDICION:   
     COSTO:   O(1) constante +  O(1) Constante +  O(log n) logatirmo
 -}
-buscar :: Eq k => k -> Tree (k, v) -> Maybe v 
+buscar :: Ord k => k -> Tree k v -> Maybe v 
 buscar c EmptyT = Nothing
 buscar c (NodeT (c1, v1) t1 t2) = if c1 == c then (Just v1) else buscar c (elegirRama (c < c1) t1 t2)
 
@@ -86,7 +85,7 @@ buscar c (NodeT (c1, v1) t1 t2) = if c1 == c then (Just v1) else buscar c (elegi
     COSTO:   O(n) Lineal
 -}
 
-deleteM :: Eq k => k -> Map k v -> Map k v
+deleteM :: Ord k => k -> Map k v -> Map k v
 deleteM c1 (M xs) = (M (borrar c1 xs))
 
 {-
@@ -94,7 +93,7 @@ deleteM c1 (M xs) = (M (borrar c1 xs))
     PRECONDICION:   
     COSTO:   O(1) constante +   O(log k) logatirmo (Amortizado?)
 -}
-borrar :: Ord k => k -> Tree (k,v) -> Tree (k,v)
+borrar :: Ord k => k -> Tree k v -> Tree k v
 borrar c1 EmptyT = EmptyT
 borrar c1 (NodeT (c2,v2) t1 t2) = if c1 == c2 then (refactor t1 t2) else if (c1 < c2) then (NodeT (c2,v2) (borrar c1 t1 ) t2 ) else (NodeT (c2,v2) t1 (borrar c1 t2 ) )
 
@@ -103,7 +102,7 @@ borrar c1 (NodeT (c2,v2) t1 t2) = if c1 == c2 then (refactor t1 t2) else if (c1 
     PRECONDICION:   
     COSTO:   O(log n) logatirmo
 -}
-refactor :: Tree a -> Tree a -> Tree a
+refactor :: Tree k v -> Tree k v -> Tree k v
 refactor EmptyT t2 = t2
 refactor t1 EmptyT = t1 
 refactor (NodeT e t11 t12) t2 = (NodeT e (refactor t11 t12) t2)
@@ -114,7 +113,7 @@ refactor (NodeT e t11 t12) t2 = (NodeT e (refactor t11 t12) t2)
     COSTO:   O(n) Lineal
 -}
 keys :: Map k v -> [k]
-keys (M []) = []
+keys (M EmptyT) = []
 keys (M xs) = obtenerClaves xs
 
 
@@ -123,7 +122,7 @@ keys (M xs) = obtenerClaves xs
     PRECONDICION:   
     COSTO:   O(n) Lineal
 -}
-obtenerClaves:: Tree(k,v) -> [k]
+obtenerClaves:: Tree k v -> [k]
 obtenerClaves EmptyT = []
 obtenerClaves ( NodeT (c1,v1) t1 t2) = c1 : (obtenerClaves t1) ++ (obtenerClaves t2)
 
