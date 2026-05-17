@@ -371,3 +371,15 @@ altura (NodeT n t1 t2) = 1  + (max (altura t1) (altura t2))
 balanceadoEjemplo = balanceado ejemploNoBalanceado1
 
 {-- 5. --}
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+--comenzarCon :: [SectorId] -> [CUIL] -> Empresa 
+
+--recorteDePersonal :: Empresa -> Empresa
+
+--convertirEnComodin :: CUIL -> Empresa -> Empresa
+
+--esComodin :: CUIL -> Empresa -> Bool
