@@ -268,3 +268,100 @@ esMayor e (Just n) = e > n
       4  10 16 25
 --}
 elMinimoMayorAEjemplo = elMinimoMayorA 17 ejemploTreeBST  -- 18
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+
+ejemploTreeNoBalanceado :: Tree Int
+ejemploTreeNoBalanceado =
+    NodeT 12
+        (NodeT 8
+            (NodeT 4
+                (NodeT 2 EmptyT EmptyT)
+                EmptyT
+            )
+            (NodeT 10 EmptyT EmptyT)
+        )
+        (NodeT 18 EmptyT EmptyT)
+
+ejemploBalanceado1 :: Tree Int
+ejemploBalanceado1 =
+    NodeT 12
+        (NodeT 8 (NodeT 4 EmptyT EmptyT) (NodeT 10 EmptyT EmptyT))
+        (NodeT 18 (NodeT 16 EmptyT EmptyT) (NodeT 25 EmptyT EmptyT))
+
+ejemploNoBalanceado1 :: Tree Int
+ejemploNoBalanceado1 =
+    NodeT 12
+        (NodeT 8
+            (NodeT 4
+                (NodeT 2 EmptyT EmptyT)
+                EmptyT
+            )
+            EmptyT
+        )
+        (NodeT 18 EmptyT EmptyT)
+{--
+          12
+         /  \
+        8    18
+       /
+      4
+     /
+    2
+--}
+
+{--
+          12
+         /  \
+        8    18
+       / \
+      4  10
+     /
+    2
+--}
+
+{--
+          10
+         /  \
+        5    15
+       /
+      2
+     /
+    1
+--}
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal
+
+-}
+balanceado:: Tree a -> Bool
+balanceado EmptyT = True
+balanceado (NodeT n t1 t2) = (esMenorOIgualAUno (altura t1) (altura t2)) && balanceado t1 && balanceado t2
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+esMenorOIgualAUno:: Int -> Int -> Bool
+esMenorOIgualAUno nt1 nt2 = abs (nt1 - nt2) <= 1
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal
+-}
+altura:: Tree a -> Int 
+altura EmptyT = 0
+altura (NodeT n t1 t2) = 1  + (max (altura t1) (altura t2)) 
+
+{--Ejemplo de uso --}
+balanceadoEjemplo = balanceado ejemploNoBalanceado1
