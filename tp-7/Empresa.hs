@@ -1,5 +1,20 @@
 import Empleado
 
+module Empresa (
+    Empresa,
+    consEmpresa,
+    buscarPorCUIL,
+    empleadosDelSector,
+    todosLosCUIL,
+    todosLosSectores,
+    agregarSector,
+    agregarEmpleado,
+    agregarASector,
+    borrarEmpleado
+    )
+where
+
+
 type SectorId = Int
 type CUIL = Int
 data Empresa = ConsE (Map SectorId (Set Empleado))
