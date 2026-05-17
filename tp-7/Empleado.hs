@@ -11,16 +11,37 @@ where
 
 type CUIL = Int
 type SectorId = String
-data Map k v = E CUIL (Set SectorId) deriving Show
+data Empleado = E CUIL (Set SectorId) deriving Show
 
-consEmpleado:: String 
-consEmpleado = "no implementado aun"
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+consEmpleado:: CUIL -> Empleado
+consEmpleado c = (E c (emptyS))
 
-CUIL:: String 
-CUIL = "no implementado aun"
 
-incorporarSector:: String 
-incorporarSector = "no implementado aun"
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+CUIL:: Empleado -> CUIL
+CUIL (E c _ ) = c 
 
-sectores:: String 
-sectores = "no implementado aun"
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante +  O(log ss) logatirmo 
+-}
+incorporarSector:: :: SectorId -> Empleado -> Empleado 
+incorporarSector s (E c ss ) = (E c (addS s ss))
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+sectores::  Empleado -> [SectorId]
+sectores (E c ss ) = (setToList ss) 
