@@ -430,7 +430,7 @@ rearmarEmpresa (c:css) em = borrarEmpleado c (rearmarEmpresa css em)
     COSTO:   O(1) Constante -> por elc calculo + el  O(n) Lineal 
 -}
 eliminarLaMitad:: [CUIL] -> [CUIL]
-eliminarLaMitad css = elimnarCantidad (round ((length  css) `div` 2)) css
+eliminarLaMitad css = elimnarCantidad (length css `div` 2) css
 
 {-
     Proposito: 
@@ -463,7 +463,7 @@ agregarleSectoresAEmpleado c (s:ss) em = agregarASector s c (agregarleSectoresAE
 -}
 
 esComodin :: CUIL -> Empresa -> Bool
-esComodin c em = estaEnTodosLosSectores (buscarPorCUIL c) (todosLosSectores em) em 
+esComodin c em = estaEnTodosLosSectores (buscarPorCUIL c em) (todosLosSectores em) 
 
 {-
     Proposito: 
