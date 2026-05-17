@@ -1,4 +1,3 @@
-import Empleado
 
 module Empresa (
     Empresa,
@@ -14,6 +13,7 @@ module Empresa (
     )
 where
 
+import Empleado
 
 type SectorId = Int
 type CUIL = Int
