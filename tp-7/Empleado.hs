@@ -1,7 +1,7 @@
 module Empleado (
     Empleado,
     consEmpleado,
-    CUIL,
+    cuil,
     incorporarSector,
     sectores
     )
