@@ -14,9 +14,11 @@ module Empresa (
 where
 
 import Empleado
+import Map
+import Set
 
-type SectorId = Int
 type CUIL = Int
+type SectorId = Int
 data Empresa = ConsE (Map SectorId (Set Empleado)) (Map CUIL Empleado) deriving Show
 
 {--

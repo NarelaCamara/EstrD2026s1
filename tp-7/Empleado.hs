@@ -12,7 +12,7 @@ import Set
 data Empleado = E CUIL (Set SectorId) deriving Show
 
 type CUIL = Int
-type SectorId = String
+type SectorId = Int
 {-
     Proposito: 
     PRECONDICION:   
