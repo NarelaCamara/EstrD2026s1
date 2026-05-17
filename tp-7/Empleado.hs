@@ -1,5 +1,3 @@
-import Set
-
 module Empleado (
     Empleado,
     consEmpleado,
@@ -9,10 +7,12 @@ module Empleado (
     )
 where
 
-type CUIL = Int
-type SectorId = String
+import Set
+
 data Empleado = E CUIL (Set SectorId) deriving Show
 
+type CUIL = Int
+type SectorId = String
 {-
     Proposito: 
     PRECONDICION:   
@@ -35,7 +35,7 @@ CUIL (E c _ ) = c
     PRECONDICION:   
     COSTO:   O(1) Constante +  O(log ss) logatirmo 
 -}
-incorporarSector:: :: SectorId -> Empleado -> Empleado 
+incorporarSector :: SectorId -> Empleado -> Empleado 
 incorporarSector s (E c ss ) = (E c (addS s ss))
 
 {-
