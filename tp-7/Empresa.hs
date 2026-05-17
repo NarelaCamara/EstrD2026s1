@@ -9,7 +9,9 @@ module Empresa (
     agregarSector,
     agregarEmpleado,
     agregarASector,
-    borrarEmpleado
+    borrarEmpleado,
+    CUIL, 
+    SectorId
     )
 where
 
@@ -154,12 +156,17 @@ actualizarEmpleadoEnSectores s e mS  = let  eS' = (removeS e (fromJust (lookupM 
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   n (log n) Ene log ene +  O(log n) logatirmo
 -}
 borrarEmpleado :: CUIL -> Empresa -> Empresa 
 borrarEmpleado c (ConsE mS mE) = let e = fromJust (lookupM c mE)
                 in ConsE (eliminarEmpleadoDeSectrores (keys mS) e mS) (deleteM c mE)
 
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:    n (log n) Ene log ene -> n siendo el valor de la lista de sector
+-}
 eliminarEmpleadoDeSectrores:: [SectorId] -> Empleado -> (Map SectorId (Set Empleado)) -> (Map SectorId (Set Empleado))
 eliminarEmpleadoDeSectrores [] _ mS = mS
 eliminarEmpleadoDeSectrores (s:ss) e mS = assocM s (removeS e (fromJust (lookupM s mS))) (eliminarEmpleadoDeSectrores ss e mS)

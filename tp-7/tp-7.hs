@@ -374,11 +374,72 @@ balanceadoEjemplo = balanceado ejemploNoBalanceado1
 {-
     Proposito: 
     PRECONDICION:   
+    COSTO:  O(sc) Lineal  -> donde sc es la suma de las longitudes de las listas sectores y cuils 
+-}
+comenzarCon :: [SectorId] -> [CUIL] -> Empresa 
+comenzarCon sss css = agregarEmpleados css (agregarSectores sss consEmpresa)
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(log n) logatirmo +  O(s) Lineal -> depende de la longitud de sectores
+-}
+agregarSectores:: [SectorId] -> Empresa -> Empresa
+agregarSectores [] em = em 
+agregarSectores (s:ss) em = agregarSector s (agregarSectores ss em)
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  O(1) Constante +  O(c) Lineal -> Depende de la longitud de la lista de Cuils -> 
+-}
+
+agregarEmpleados:: [CUIL] -> Empresa -> Empresa
+agregarEmpleados [] em = em
+agregarEmpleados (c:css) em = agregarEmpleado [] c (agregarEmpleados css em) 
+
+{--Ejemplo de uso --} -- RAROO
+comenzarConEjemplo = comenzarCon [1111, 2222, 3333] [4444, 5555, 6666] 
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
     COSTO:  
 -}
---comenzarCon :: [SectorId] -> [CUIL] -> Empresa 
+recorteDePersonal :: Empresa -> Empresa
+recorteDePersonal em = rearmarEmpresa (eliminarLaMitad (todosLosCUIL em)) em
 
---recorteDePersonal :: Empresa -> Empresa
+{--Ejemplo de uso --}
+empresaEjemplo = agregarEmpleado [2222, 1111] 8888 (agregarEmpleado [2222] 7777 (agregarEmpleado [1111] 6666 (agregarEmpleado [1111] 5555 (agregarSectores [1111, 2222, 3333, 4444] consEmpresa))))
+recorteDePersonalEjemplo = recorteDePersonal empresaEjemplo
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+rearmarEmpresa:: [CUIL] -> Empresa -> Empresa 
+rearmarEmpresa [] em = em
+rearmarEmpresa (c:css) em = borrarEmpleado c (rearmarEmpresa css em)
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante -> por elc calculo + el  O(n) Lineal 
+-}
+eliminarLaMitad:: [CUIL] -> [CUIL]
+eliminarLaMitad css = elimnarCantidad (round ((longitud css) `div` 2)) css
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(n) Lineal -> n es el valor de el numero n
+-}
+elimnarCantidad:: Int ->  [CUIL] -> [CUIL]
+elimnarCantidad 0 css = css 
+elimnarCantidad n (c:css) = elimnarCantidad (n-1) css
 
 --convertirEnComodin :: CUIL -> Empresa -> Empresa
 
