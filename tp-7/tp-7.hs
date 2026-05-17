@@ -192,15 +192,15 @@ elemento dado
 -}
 elMaximoMenorA:: Ord a => a -> Tree a -> Maybe a
 elMaximoMenorA e EmptyT = Nothing
-elMaximoMenorA e (NodeT n t1 t2) = if (esLaRama e n t1 t2) then (Just n) else (elMaximoMenorA e (elegirRama (e <= n) t1 t2))
+elMaximoMenorA e (NodeT n t1 t2) = if (esLaRamaMenorMasCercana e n t1 t2) then (Just n) else (elMaximoMenorA e (elegirRama (esMenor e (root t1)) t1 t2))
 
 {-
     Proposito: 
     PRECONDICION:   
     COSTO:   O(1) Constante
 -}
-esLaRama ::Ord a => a -> a -> Tree a -> Tree a -> Bool
-esLaRama e n t1 t2 = e >= n && esMenor e (root t2)
+esLaRamaMenorMasCercana ::Ord a => a -> a -> Tree a -> Tree a -> Bool
+esLaRamaMenorMasCercana e n t1 t2 = e <= n && esMenor e (root t2)
 
 {-
     Proposito: 
@@ -209,7 +209,7 @@ esLaRama e n t1 t2 = e >= n && esMenor e (root t2)
 -}
 esMenor::Ord a => a -> Maybe a -> Bool
 esMenor e Nothing = True
-esMenor e (Just n) = e <= n
+esMenor e (Just n) = e < n
 
 {-
     Proposito: 
@@ -229,4 +229,42 @@ root (NodeT n t1 t2) = (Just n)
        / \   / \
       4  10 16 25
 --}
-elMaximoMenorAEjemplo = elMaximoMenorA 11 ejemploTreeBST
+elMaximoMenorAEjemplo = elMaximoMenorA 17 ejemploTreeBST -- 16
+
+{-
+    Proposito: dado un BST y un elemento, devuelve el mínimo elemento que sea mayor al
+elemento dado
+    PRECONDICION:   
+    COSTO:   O(1) Constante +  O(1) Constante +  O(log n) logatirmo
+-}
+
+elMinimoMayorA:: Ord a => a -> Tree a -> Maybe a
+elMinimoMayorA e EmptyT = Nothing
+elMinimoMayorA e (NodeT n t1 t2) = if (esLaRamaMayorMasCercano e n t1 t2) then (Just n) else (elMinimoMayorA e (elegirRama (e < n) t1 t2))
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+esLaRamaMayorMasCercano ::Ord a => a -> a -> Tree a -> Tree a -> Bool
+esLaRamaMayorMasCercano e n t1 t2 = e <= n && esMayor e (root t1)
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:   O(1) Constante
+-}
+esMayor::Ord a => a -> Maybe a -> Bool
+esMayor e Nothing = True
+esMayor e (Just n) = e >= n
+
+{--Ejemplo de uso --}
+{--
+          12
+         /  \
+        8    18
+       / \   / \
+      4  10 16 25
+--}
+elMinimoMayorAEjemplo = elMinimoMayorA 17 ejemploTreeBST  -- 18
