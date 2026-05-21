@@ -13,19 +13,17 @@ data Nave = N (Map SectorId Sector) (Map Nombre Tripulante) (MaxHeap Tripulante)
 
 {-
     INVARIANTE DE REPRENSENTACION:  
-
-* El tipo Sector es un tipo abstracto, y representa al sector de una nave, el cual contiene componentes y tripulantes asignados.
-* El tipo Tripulante es un tipo abstracto, y representa a un tripulante dentro de la nave, el cual tiene un nombre, un rango y sectores asignados.
-* El tipo SectorId es sinónimo de String, e identifica al sector de forma unívoca.
-* Los tipos Nombre y Rango son sinónimos de String. Todos los nombres de tripulantes son únicos.
-* Un sector está vacío cuando no tiene tripulantes, y la nave está vacía si no tiene ningún tripulante.
-* Puede haber tripulantes sin sectores asignados.
+    Sea N mss mnt mh
+    En mh no existen tripulantes repetidos
+    Para todo tripulante que es value en mnt se encuentra en mh
+    Para todo tripulante que esta en mh debe estar en mnt en el value
+    Para todo tripulante t que es valor en mnt, su clave asociada es el nombre de t
 -}
 
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:  O(n) Lineal ->  n siendo el valor de la longitud de la lista
 -}
 construir :: [SectorId] -> Nave
 construir (x:xs) = (N crearSectores xs) (emptyM) (emptyH)
@@ -34,8 +32,30 @@ construir (x:xs) = (N crearSectores xs) (emptyM) (emptyH)
 {-
     Proposito: 
     PRECONDICION:   
-    COSTO:  
+    COSTO:   O(n) Lineal -> n siendo el valor de la longitud de la lista
 -}
 crearSectores :: [SectorId] -> Map SectorId Sector
 crearSectores [] = emptyM
 crearSectores (x:xs) = assocM x (crearS x) (crearSectores xs)
+
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+ingresarT :: Nombre -> Rango -> Nave -> Nave
+ingresarT n r (N mss mts mxts) = let tN = (crearT n r)
+    in (N mss (assocM n tN mts) (insertH t mxts))
+
+
+
+
+agregarASector :: [Componente] -> SectorId -> Nave -> Nave
+agregarASector css sId (N mss mts mxts) = (N (AgregarComponentesASector sId mss)  mts mxts)
+
+
+AgregarComponentesASector::[Componente] -> (Map SectorId Sector)
+AgregarComponentesASector [] = 
+AgregarComponentesASector (x:xs)
