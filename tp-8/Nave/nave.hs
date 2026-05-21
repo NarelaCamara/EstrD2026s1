@@ -11,10 +11,6 @@ type Rango = String
 
 data Nave = N (Map SectorId Sector) (Map Nombre Tripulante) (MaxHeap Tripulante) deriving Show
 
-data Componente = LanzaTorpedos | Motor Int | Almacen [Barril]
-data Barril = Comida | Oxigeno | Torpedo | Combustible
-
-
 {-
     INVARIANTE DE REPRENSENTACION:  
 
@@ -32,5 +28,14 @@ data Barril = Comida | Oxigeno | Torpedo | Combustible
     COSTO:  
 -}
 construir :: [SectorId] -> Nave
-construir [] = (N )
-construir (x:xs) =
+construir (x:xs) = (N crearSectores xs) (emptyM) (emptyH)
+
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+crearSectores :: [SectorId] -> Map SectorId Sector
+crearSectores [] = emptyM
+crearSectores (x:xs) = assocM x (crearS x) (crearSectores xs)
