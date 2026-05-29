@@ -7,3 +7,8 @@ Lista de videos
 Tarea
 * Añadir invariantes
 * costos
+
+
+C++ / C
+Comando  ejecutar
+* g++ ... NombreArchivoMain.cpp NombreInterface.h
