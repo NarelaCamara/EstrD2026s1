@@ -12,4 +12,4 @@ Tarea
 C++ / C
 Comando para compilar y ejecutar el programa a la vez:
 
- - g++ -o tp-9 tp-9.cpp; pushd .\tp-9; .\tp-9; popd
+ - g++ -std=c++11 -O2 -o tp-9\tp-9.exe tp-9\tp-9.cpp; tp-9\tp-9.exe
