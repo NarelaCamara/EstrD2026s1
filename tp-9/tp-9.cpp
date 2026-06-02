@@ -35,6 +35,7 @@ int main()
 }
 
 // 1. // Precondición: c1 < c2
+//
 void printFromTo(char c1, char c2)
 {
     for (int i = 0; c1 + i <= c2; i++)
@@ -60,7 +61,8 @@ int fc(int n)
 }
 
 // 3. // Precondición: n <= m
-
+// proposito: Es la sumatioria de n.
+// costo: Lineal n
 int ft(int n, int m)
 {
     if (n == m)
@@ -68,4 +70,16 @@ int ft(int n, int m)
         return n;
     }
     return n + ft(n + 1, m);
+}
+
+
+//una forma mas eficiente
+// costo: constante 
+int ftV2(int n, int m){
+    int x = n;
+    while (n != m){
+        n++;
+        x = x + n;
+    }
+    return x;
 }
