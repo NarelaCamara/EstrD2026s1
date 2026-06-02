@@ -131,7 +131,7 @@ void desdeCeroHastaNI(int n)
     int i = 0;
     while (n > i)
     {
-        cout << i;
+        cout << i << " ";
         i++;
     }
 }
@@ -140,7 +140,7 @@ void desdeCeroHastaNR(int n, int i)
 {
     if (n > i)
     {
-        cout << i;
+        cout << i << " ";
         desdeCeroHastaNR(n, i + 1);
     }
 }
