@@ -146,6 +146,32 @@ void desdeCeroHastaN(int n)
     desdeCeroHastaNR(n, 0);
 }
 
+int multI(int n, int m)
+{
+    int x = 0;
+    while (m > 0)
+    {
+        x = x + n;
+        m--;
+    }
+    return x;
+};
+
+int multR(int n, int m)
+{
+    if (m > 0)
+    {
+        return n + multR(n, m - 1);
+    }
+    return 0;
+};
+
+int mult(int n, int m)
+{
+    cout << " Iterativa " << multI(n, m);
+    cout << " Recursiva " << multR(n, m);
+};
+
 int main()
 {
     // Ejercicio 1
@@ -217,8 +243,9 @@ int main()
     desdeCeroHastaN(6);
     cout << endl;
 
-    // int mult(int n, int m) {};
     // Propósito : realiza la multiplicación entre dos números(sin utilizar la op eración * de C++) .5.
+    mult(2, 5);
+    cout << endl;
 
     // void primerosN(int n, string s) {};
     // Propósito : imprime los primeros n char del string s, separados p or un salto de línea.Precondición : el string tiene al menos n char .6.
