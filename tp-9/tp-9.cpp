@@ -45,6 +45,9 @@ void printFromTo(char c1, char c2)
 }
 
 // 2. // Precondición: n >= 0
+// proposito: Es factorial de n.
+// costo: constante
+//No se puede hacer mas eficiente
 int fc(int n)
 {
     int x = 1;
@@ -57,6 +60,7 @@ int fc(int n)
 }
 
 // 3. // Precondición: n <= m
+
 int ft(int n, int m)
 {
     if (n == m)
