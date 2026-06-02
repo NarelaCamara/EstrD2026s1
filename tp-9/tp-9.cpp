@@ -88,6 +88,35 @@ void printN(int n, string s)
     printNR(n, s);
 }
 
+void cuentaRegresivaI(int n);
+void cuentaRegresivaR(int n);
+
+void cuentaRegresiva(int n)
+{
+    cout << " Iterativa ";
+    cuentaRegresivaI(n);
+    cout << " Recursiva ";
+    cuentaRegresivaR(n);
+}
+
+void cuentaRegresivaI(int n)
+{
+    while (n > 0)
+    {
+        cout << n << " ";
+        n--;
+    }
+}
+
+void cuentaRegresivaR(int n)
+{
+    if (n > 0)
+    {
+        cout << n << " ";
+        cuentaRegresivaR(n - 1);
+    }
+}
+
 int main()
 {
     // Ejercicio 1
@@ -147,13 +176,11 @@ int main()
     // Ejercicio 4
     cout << "Ejercicio 4" << endl;
 
-    printN(4, "A");
-    // ejemplo de uso
-
     // Propósito: imprime n veces un string s.
+    printN(4, "A");
 
-    // void cuentaRegresiva(int n) {};
     //  Propósito : imprime los números desde n hasta 0, separados p or saltos de línea.3.
+    cuentaRegresiva(10);
 
     // void desdeCeroHastaN(int n) {};
     //  Propósito : imprime los números de 0 hasta n, separados p or saltos de línea.4.
