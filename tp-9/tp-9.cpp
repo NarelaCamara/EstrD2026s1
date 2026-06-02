@@ -1,8 +1,66 @@
 #include <iostream>
 using namespace std;
+#include "Par.cpp"
+
+// Ejercicio 2
+
+// 1. // Precondición: c1 < c2
+// proposito: Muestra en pantalla el valor de ese string
+// costo: constante
+// No se puede hacer mas eficiente
+void printFromTo(char c1, char c2)
+{
+    for (int i = 0; c1 + i <= c2; i++)
+    {
+        cout << c1 + i << ", ";
+    }
+    cout << endl;
+};
+
+// 2. // Precondición: n >= 0
+// proposito: Es factorial de n.
+// costo: constante
+// No se puede hacer mas eficiente
+int fc(int n)
+{
+    int x = 1;
+    while (n > 0)
+    {
+        x = x * n;
+        n--;
+    }
+    return x;
+};
+
+// 3. // Precondición: n <= m
+// proposito: Es la sumatioria de n.
+// costo: Lineal n
+int ft(int n, int m)
+{
+    if (n == m)
+    {
+        return n;
+    }
+    return n + ft(n + 1, m);
+};
+
+// una forma mas eficiente
+//  costo: constante
+int ftV2(int n, int m)
+{
+    int x = n;
+    while (n != m)
+    {
+        n++;
+        x = x + n;
+    }
+    return x;
+};
 
 int main()
 {
+    // Ejercicio 1
+    cout << "Ejercicio 1" << endl;
 
     // 1. Ejercicio
     int x_e1 = 0;       /* Memoria -> almacena 16 bites del numero CERO  */
@@ -32,54 +90,29 @@ int main()
     }
     cout << b << endl;
     cout << y << endl;
-}
 
-// 1. // Precondición: c1 < c2
-//
-void printFromTo(char c1, char c2)
-{
-    for (int i = 0; c1 + i <= c2; i++)
-    {
-        cout << c1 + i << ", ";
-    }
-    cout << endl;
-}
+    // Ejercicio 2
+    cout << "Ejercicio 2" << endl;
 
-// 2. // Precondición: n >= 0
-// proposito: Es factorial de n.
-// costo: constante
-//No se puede hacer mas eficiente
-int fc(int n)
-{
-    int x = 1;
-    while (n > 0)
-    {
-        x = x * n;
-        n--;
-    }
-    return x;
-}
+    // Ejemplo de uso
+    printFromTo('a', 'c');
 
-// 3. // Precondición: n <= m
-// proposito: Es la sumatioria de n.
-// costo: Lineal n
-int ft(int n, int m)
-{
-    if (n == m)
-    {
-        return n;
-    }
-    return n + ft(n + 1, m);
-}
+    cout << fc(5)
+         << endl;
+    cout << ft(5, 7)
+         << endl;
 
+    // Ejercicio 3
 
-//una forma mas eficiente
-// costo: constante 
-int ftV2(int n, int m){
-    int x = n;
-    while (n != m){
-        n++;
-        x = x + n;
-    }
-    return x;
+    cout << "Ejercicio 3" << endl;
+    Par par = consPar(3, 4);
+    cout << "consPar(3, 4): " << par.x << "," << par.y << endl;
+    cout << "fst(consPar(3, 4)): " << fst(par) << endl;
+    cout << "snd(consPar(3, 4)): " << snd(par) << endl;
+    cout << "maxDelPar(consPar(3, 4)): " << maxDelPar(par) << endl;
+    cout << "swap(consPar(3, 4)): " << swap(par).x << "," << swap(par).y << endl;
+    cout << "divisionYResto(10, 3): " << divisionYResto(10, 3).x << "," << divisionYResto(10, 3).y << endl;
+
+    // Ejercicio 4
+    cout << "Ejercicio 4" << endl;
 }
