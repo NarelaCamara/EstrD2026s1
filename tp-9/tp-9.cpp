@@ -117,6 +117,34 @@ void cuentaRegresivaR(int n)
     }
 }
 
+//
+void desdeCeroHastaN(int n)
+{
+    cout << " Iterativa ";
+    desdeCeroHastaNI(n);
+    cout << " Recursiva ";
+    desdeCeroHastaNR(n, 0);
+}
+
+void desdeCeroHastaNI(int n)
+{
+    int i = 0;
+    while (n > i)
+    {
+        cout << i;
+        i++;
+    }
+}
+
+void desdeCeroHastaNR(int n, int i)
+{
+    if (n > i)
+    {
+        cout << i;
+        desdeCeroHastaNR(n, i + 1);
+    }
+}
+
 int main()
 {
     // Ejercicio 1
@@ -178,12 +206,15 @@ int main()
 
     // Propósito: imprime n veces un string s.
     printN(4, "A");
+    cout << endl;
 
     //  Propósito : imprime los números desde n hasta 0, separados p or saltos de línea.3.
     cuentaRegresiva(10);
+    cout << endl;
 
-    // void desdeCeroHastaN(int n) {};
     //  Propósito : imprime los números de 0 hasta n, separados p or saltos de línea.4.
+    desdeCeroHastaN(6);
+    cout << endl;
 
     // int mult(int n, int m) {};
     // Propósito : realiza la multiplicación entre dos números(sin utilizar la op eración * de C++) .5.
