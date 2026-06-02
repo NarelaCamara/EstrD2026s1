@@ -118,13 +118,6 @@ void cuentaRegresivaR(int n)
 }
 
 //
-void desdeCeroHastaN(int n)
-{
-    cout << " Iterativa ";
-    desdeCeroHastaNI(n);
-    cout << " Recursiva ";
-    desdeCeroHastaNR(n, 0);
-}
 
 void desdeCeroHastaNI(int n)
 {
@@ -143,6 +136,14 @@ void desdeCeroHastaNR(int n, int i)
         cout << i << " ";
         desdeCeroHastaNR(n, i + 1);
     }
+}
+
+void desdeCeroHastaN(int n)
+{
+    cout << " Iterativa ";
+    desdeCeroHastaNI(n);
+    cout << " Recursiva ";
+    desdeCeroHastaNR(n, 0);
 }
 
 int main()
