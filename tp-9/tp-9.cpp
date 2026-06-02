@@ -57,6 +57,37 @@ int ftV2(int n, int m)
     return x;
 };
 
+// Ejercicio 4
+
+// iterativa
+void printNI(int n, string s)
+{
+    cout << "printN(" << n << "," << s << "); ";
+    while (n != 0)
+    {
+        cout << s;
+        n--;
+    }
+};
+// recursiva
+void printNR(int n, string s)
+{
+    cout << "printN(" << n << "," << s << "); ";
+    if (n != 0)
+    {
+        cout << s;
+        return printN(n--, s);
+    };
+};
+
+void printN(int n, string s)
+{
+    cout << "Iterativa ";
+    printNI(n, s);
+    cout << "Recursiva ";
+    printNR(n, s);
+}
+
 int main()
 {
     // Ejercicio 1
@@ -115,4 +146,27 @@ int main()
 
     // Ejercicio 4
     cout << "Ejercicio 4" << endl;
+
+    printN(4, "A");
+    // ejemplo de uso
+
+    // Propósito: imprime n veces un string s.
+
+    // void cuentaRegresiva(int n) {};
+    //  Propósito : imprime los números desde n hasta 0, separados p or saltos de línea.3.
+
+    // void desdeCeroHastaN(int n) {};
+    //  Propósito : imprime los números de 0 hasta n, separados p or saltos de línea.4.
+
+    // int mult(int n, int m) {};
+    // Propósito : realiza la multiplicación entre dos números(sin utilizar la op eración * de C++) .5.
+
+    // void primerosN(int n, string s) {};
+    // Propósito : imprime los primeros n char del string s, separados p or un salto de línea.Precondición : el string tiene al menos n char .6.
+
+    // bool pertenece(char c, string s) {};
+    //  Prop ósito : indica si un char c aparece en el string s.7.
+
+    // int apariciones(char c, string s) {};
+    //  Prop ósito : devuelve la cantidad de apariciones de un char c en el string s.
 }
