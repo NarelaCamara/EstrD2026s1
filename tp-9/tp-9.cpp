@@ -62,7 +62,7 @@ int ftV2(int n, int m)
 // iterativa
 void printNI(int n, string s)
 {
-    cout << "printN(" << n << "," << s << "); ";
+
     while (n != 0)
     {
         cout << s;
@@ -72,19 +72,19 @@ void printNI(int n, string s)
 // recursiva
 void printNR(int n, string s)
 {
-    cout << "printN(" << n << "," << s << "); ";
+
     if (n != 0)
     {
         cout << s;
-        return printN(n--, s);
-    };
-};
+        printNR(n - 1, s);
+    }
+}
 
 void printN(int n, string s)
 {
-    cout << "Iterativa ";
+    cout << " Iterativa ";
     printNI(n, s);
-    cout << "Recursiva ";
+    cout << " Recursiva ";
     printNR(n, s);
 }
 
