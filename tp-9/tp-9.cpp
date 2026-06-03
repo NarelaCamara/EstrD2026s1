@@ -237,11 +237,11 @@ int aparicionesI(char c, string s)
 
 int aparicionesR(char c, string s, int i)
 {
-    if (s.length() > i)
+    if (i >= s.length())
     {
-        cout << s[i];
-        return (c == s[i] ? 1 : 0) + aparicionesR(c, s, i + 1);
+        return 0;
     }
+    return (s[i] == c ? 1 : 0) + aparicionesR(c, s, i + 1);
 };
 
 int apariciones(char c, string s)
