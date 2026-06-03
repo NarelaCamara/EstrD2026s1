@@ -30,11 +30,13 @@ int division(Fraccion f)
     return f.numerador / f.denominador;
 };
 
+/** Devuelve el valor absoluto de un entero */
 static int absInt(int x)
 {
     return x < 0 ? -x : x;
 }
 
+/** Devuelve el máximo común divisor de dos enteros */
 static int mcd(int a, int b)
 {
     a = absInt(a);
