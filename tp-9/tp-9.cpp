@@ -172,6 +172,33 @@ int mult(int n, int m)
     cout << " Recursiva " << multR(n, m);
 };
 
+void primerosNI(int n, string s)
+{
+    int x = 0;
+    while (n > x)
+    {
+        cout << s[x];
+        x++;
+    }
+};
+
+void primerosNR(int n, string s, int i)
+{
+    if (n > i)
+    {
+        cout << s[i];
+        primerosNR(n, s, i + 1);
+    }
+};
+
+void primerosN(int n, string s)
+{
+    cout << " Iterativa ";
+    primerosNI(n, s);
+    cout << " Recursiva ";
+    primerosNR(n, s, 0);
+};
+
 int main()
 {
     // Ejercicio 1
@@ -247,8 +274,8 @@ int main()
     mult(2, 5);
     cout << endl;
 
-    // void primerosN(int n, string s) {};
     // Propósito : imprime los primeros n char del string s, separados p or un salto de línea.Precondición : el string tiene al menos n char .6.
+    primerosN(4, "Nareko");
 
     // bool pertenece(char c, string s) {};
     //  Prop ósito : indica si un char c aparece en el string s.7.
