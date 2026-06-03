@@ -199,6 +199,58 @@ void primerosN(int n, string s)
     primerosNR(n, s, 0);
 };
 
+//
+bool perteneceI(char c, string s)
+{
+    bool x = false;
+    for (int i = 0; i < s.length(); i++)
+    {
+        x = x || s[i] == c;
+    }
+    return x;
+};
+
+bool perteneceR(char c, string s, int i)
+{
+    return c == s[i] || perteneceR(c, s, i + 1);
+};
+
+bool pertenece(char c, string s)
+{
+    cout << c << ", " << s << endl;
+    cout << " Iterativa " << perteneceI(c, s);
+    cout << " Recursiva " << perteneceR(c, s, 0);
+};
+
+int aparicionesI(char c, string s)
+{
+    int x = 0;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == c)
+        {
+            x++;
+        }
+    }
+    return x;
+};
+
+int aparicionesR(char c, string s, int i)
+{
+    if (s.length() > i)
+    {
+        cout << s[i];
+        return (c == s[i] ? 1 : 0) + aparicionesR(c, s, i + 1);
+    }
+};
+
+int apariciones(char c, string s)
+{
+    cout << c << ", " << s << endl;
+    cout << " Iterativa " << aparicionesI(c, s);
+    cout << " Recursiva " << aparicionesR(c, s, 0);
+};
+
 int main()
 {
     // Ejercicio 1
@@ -276,10 +328,13 @@ int main()
 
     // Propósito : imprime los primeros n char del string s, separados p or un salto de línea.Precondición : el string tiene al menos n char .6.
     primerosN(4, "Nareko");
+    cout << endl;
 
-    // bool pertenece(char c, string s) {};
     //  Prop ósito : indica si un char c aparece en el string s.7.
+    pertenece('z', "Nareko");
+    cout << endl;
 
-    // int apariciones(char c, string s) {};
-    //  Prop ósito : devuelve la cantidad de apariciones de un char c en el string s.
+    cout << apariciones('a', "Naaaareko");
+    cout << endl;
+    // Propósito : devuelve la cantidad de apariciones de un char c en el string s.
 }
