@@ -25,7 +25,7 @@ int denominador(Fraccion f)
 };
 
 // Propósito: devuelve el resultado de hacer la división
-float division(Fraccion f)
+int division(Fraccion f)
 {
     return f.numerador / f.denominador;
 };

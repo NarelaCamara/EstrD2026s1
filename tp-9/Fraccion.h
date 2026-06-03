@@ -14,7 +14,7 @@ int numerador(Fraccion f);
 // Propósito: devuelve el denominador
 int denominador(Fraccion f);
 // Propósito: devuelve el resultado de hacer la división
-float division(Fraccion f);
+int division(Fraccion f);
 // Propósito: devuelve una fracción que resulta de multiplicar las fracciones
 // (sin simplificar)
 Fraccion multF(Fraccion f1, Fraccion f2);

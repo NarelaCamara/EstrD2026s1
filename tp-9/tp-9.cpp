@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "Par.cpp"
+#include "Fraccion.cpp"
 
 // Ejercicio 2
 
@@ -343,4 +344,16 @@ int main()
     apariciones('a', "Naaaareko");
     cout << endl;
     // Propósito : devuelve la cantidad de apariciones de un char c en el string s.
+
+    // Ejercicio 5
+    cout << "Ejercicio 5" << endl;
+
+    cout << "consFraccion(1, 2): " << consFraccion(1, 2).numerador << "/" << consFraccion(1, 2).denominador << endl;
+    cout << "numerador(consFraccion(1, 2)): " << numerador(consFraccion(1, 2)) << endl;
+    cout << "denominador(consFraccion(1, 2)): " << denominador(consFraccion(1, 2)) << endl;
+    cout << "division(consFraccion(4, 8))" << division(consFraccion(4, 8)) << endl;
+    cout << "multF(consFraccion(1, 2), consFraccion(3, 4)): " << multF(consFraccion(1, 2), consFraccion(3, 4)).numerador << "/" << multF(consFraccion(1, 2), consFraccion(3, 4)).denominador << endl;
+    cout << "simplificada(consFraccion(4, 8)): " << simplificada(consFraccion(4, 8)).numerador << "/" << simplificada(consFraccion(4, 8)).denominador << endl;
+    cout << "sumF(consFraccion(1, 2), consFraccion(3, 4)): " << sumF(consFraccion(1, 2), consFraccion(3, 4)).numerador << "/" << sumF(consFraccion(1, 2), consFraccion(3, 4)).denominador << endl;  
+
 }
