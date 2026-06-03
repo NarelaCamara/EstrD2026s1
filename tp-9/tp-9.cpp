@@ -241,14 +241,20 @@ int aparicionesR(char c, string s, int i)
     {
         return 0;
     }
-    return (s[i] == c ? 1 : 0) + aparicionesR(c, s, i + 1);
+    if (s[i] == c)
+    {
+        return 1 + aparicionesR(c, s, i + 1);
+    }
+    return aparicionesR(c, s, i + 1);
 };
 
 int apariciones(char c, string s)
 {
+    int rec = aparicionesR(c, s, 0);
     cout << c << ", " << s << endl;
     cout << " Iterativa " << aparicionesI(c, s);
-    cout << " Recursiva " << aparicionesR(c, s, 0);
+    cout << " Recursiva " << rec;
+    return rec;
 };
 
 int main()
@@ -334,7 +340,7 @@ int main()
     pertenece('z', "Nareko");
     cout << endl;
 
-    cout << apariciones('a', "Naaaareko");
+    apariciones('a', "Naaaareko");
     cout << endl;
     // Propósito : devuelve la cantidad de apariciones de un char c en el string s.
 }
