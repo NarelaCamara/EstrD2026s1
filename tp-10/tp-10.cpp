@@ -19,4 +19,5 @@ int main()
     cout << "laQueEsMayor: " << nombre(laQueEsMayor(p, p2)) << endl;
 
     cout << "Ejercicio 2";
+    
 }
