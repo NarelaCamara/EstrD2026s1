@@ -3,7 +3,7 @@ using namespace std;
 #include "Persona.cpp"
 #include "Pokemon.cpp"
 #include "Entrenador.cpp"
-#include "ArrayList.cpp"
+// #include "ArrayList.cpp"
 
 int main()
 {
@@ -37,32 +37,34 @@ int main()
     cout << "Entrenador";
     Entrenador entrenador = consEntrenador("Entrenador 1", 2, new Pokemon[2]{pokemon1, pokemon1});
     cout << "nombreDeEntrenador: " << nombreDeEntrenador(entrenador) << endl;
-    cout << "cantidadDePokemon: " << cantidadDePokemon(entrenador) << endl;
+    /*cout << "cantidadDePokemon: " << cantidadDePokemon(entrenador) << endl;
     cout << "cantidadDePokemonDe: cantidad de Pokemon de tipo Agua " << cantidadDePokemonDe("Agua", entrenador) << endl;
     cout << "pokemonNro: Pokemon numero 1 " << tipoDePokemon(pokemonNro(1, entrenador)) << endl;
 
     Entrenador entrenador2 = consEntrenador("Entrenador 2", 2, new Pokemon[2]{consPokemon("Planta"), consPokemon("Planta")});
-    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;
+    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;*/
 
-    cout << "Ejercicio 3" << endl;
-    cout << "Array Lists" << endl;
+    /*
 
-    ArrayList lista1 = newArrayList();
-    add(1, lista1);
-    add(2, lista1);
+        cout << "Ejercicio 3" << endl;
+        cout << "Array Lists" << endl;
 
-    cout << lista1->cantidad << endl;
-    cout << "length: " << lengthAL(lista1) << endl;
-    cout << "get: " << get(0, lista1) << endl;
+        ArrayList lista1 = newArrayList();
+        add(1, lista1);
+        add(2, lista1);
 
-    resize(10, lista1);
-    cout << "length: " << lengthAL(lista1) << endl;
+        cout << lista1->cantidad << endl;
+        cout << "length: " << lengthAL(lista1) << endl;
+        cout << "get: " << get(0, lista1) << endl;
 
-    add(3, lista1);
-    cout << "get: " << get(2, lista1) << endl;
+        resize(10, lista1);
+        cout << "length: " << lengthAL(lista1) << endl;
 
-    remove(lista1);
-    cout << "length: " << lengthAL(lista1) << endl;
+        add(3, lista1);
+        cout << "get: " << get(2, lista1) << endl;
+
+        remove(lista1);
+        cout << "length: " << lengthAL(lista1) << endl;*/
 
     /*
     int sumatoria(ArrayList xs)
