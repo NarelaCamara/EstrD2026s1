@@ -48,21 +48,21 @@ int main()
     cout << "Array Lists" << endl;
 
     ArrayList lista1 = newArrayList();
-    add(lista1, 1);
-    add(lista1, 2);
+    add(1, lista1);
+    add(2, lista1);
 
     cout << lista1->cantidad << endl;
-    cout << "length: " << length(lista1) << endl;
-    cout << "get: " << get(lista1, 0) << endl;
+    cout << "length: " << lengthAL(lista1) << endl;
+    cout << "get: " << get(0, lista1) << endl;
 
-    resize(lista1, 10);
-    cout << "length: " << length(lista1) << endl;
+    resize(10, lista1);
+    cout << "length: " << lengthAL(lista1) << endl;
 
-    add(lista1, 3);
-    cout << "get: " << get(lista1, 2) << endl;
+    add(3, lista1);
+    cout << "get: " << get(2, lista1) << endl;
 
     remove(lista1);
-    cout << "length: " << length(lista1) << endl;
+    cout << "length: " << lengthAL(lista1) << endl;
 
     /*
     int sumatoria(ArrayList xs)
