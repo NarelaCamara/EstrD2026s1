@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "Persona.cpp"
+#include "Pokemon.cpp"
 
 int main()
 {
@@ -19,5 +20,17 @@ int main()
     cout << "laQueEsMayor: " << nombre(laQueEsMayor(p, p2)) << endl;
 
     cout << "Ejercicio 2";
-    
+    cout << "Pokemon";
+    Pokemon pokemon1 = consPokemon("Agua");
+    Pokemon pokemon2 = consPokemon("Fuego");
+    cout << "tipoDePokemon: Pokemon1 " << tipoDePokemon(pokemon1) << endl;
+    cout << "tipoDePokemon: Pokemon2 " << tipoDePokemon(pokemon2) << endl;
+    cout << "energia: Pokemon1 " << energia(pokemon1) << endl;
+    cout << "energia: Pokemon2 " << energia(pokemon2) << endl;
+    perderEnergia(50, pokemon1);
+    cout << "perderEnergia: Pokemon1 " << energia(pokemon1) << endl
+         << "perderEnergia: Pokemon2 " << energia(pokemon2) << endl;
+    cout << "superaA: Pokemon1 supera a Pokemon2 " << superaA(pokemon1, pokemon2) << endl;
+
+    cout << "Entrenador";
 }
