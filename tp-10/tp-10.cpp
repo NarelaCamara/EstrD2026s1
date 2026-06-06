@@ -45,4 +45,21 @@ int main()
 
     cout << "Ejercicio 3" << endl;
     cout << "Array Lists" << endl;
+
+    /*
+    int sumatoria(ArrayList xs)
+    Devuelve la suma de to dos los elementos.
+    2. void sucesores(ArrayList xs)
+    Incrementa en uno to dos los elementos.
+    3. bool pertenece(int x, ArrayList xs)
+    Indica si el elemento p ertenece a la lista.
+    4. int apariciones(int x, ArrayList xs)
+    Indica la cantidad de elementos iguales a x.
+    5. ArrayList append(ArrayList xs, ArrayList ys)
+    Crea una nueva lista a partir de la primera y la segunda (en ese orden).
+    Página 3 de 4
+    Estructuras de datos - UNQ
+    6. int minimo(ArrayList xs)
+    Devuelve el elemento más chico de la lista
+    */
 }
