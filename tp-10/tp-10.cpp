@@ -3,6 +3,7 @@ using namespace std;
 #include "Persona.cpp"
 #include "Pokemon.cpp"
 #include "Entrenador.cpp"
+#include "ArrayList.cpp"
 
 int main()
 {
@@ -45,6 +46,23 @@ int main()
 
     cout << "Ejercicio 3" << endl;
     cout << "Array Lists" << endl;
+
+    ArrayList lista1 = newArrayList();
+    add(lista1, 1);
+    add(lista1, 2);
+
+    cout << lista1->cantidad << endl;
+    cout << "length: " << length(lista1) << endl;
+    cout << "get: " << get(lista1, 0) << endl;
+
+    resize(lista1, 10);
+    cout << "length: " << length(lista1) << endl;
+
+    add(lista1, 3);
+    cout << "get: " << get(lista1, 2) << endl;
+
+    remove(lista1);
+    cout << "length: " << length(lista1) << endl;
 
     /*
     int sumatoria(ArrayList xs)
