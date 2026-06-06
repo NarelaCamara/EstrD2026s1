@@ -2,6 +2,7 @@
 using namespace std;
 #include "Persona.cpp"
 #include "Pokemon.cpp"
+#include "Entrenador.cpp"
 
 int main()
 {
@@ -33,4 +34,15 @@ int main()
     cout << "superaA: Pokemon1 supera a Pokemon2 " << superaA(pokemon1, pokemon2) << endl;
 
     cout << "Entrenador";
+    Entrenador entrenador = consEntrenador("Entrenador 1", 2, new Pokemon[2]{pokemon1, pokemon1});
+    cout << "nombreDeEntrenador: " << nombreDeEntrenador(entrenador) << endl;
+    cout << "cantidadDePokemon: " << cantidadDePokemon(entrenador) << endl;
+    cout << "cantidadDePokemonDe: cantidad de Pokemon de tipo Agua " << cantidadDePokemonDe("Agua", entrenador) << endl;
+    cout << "pokemonNro: Pokemon numero 1 " << tipoDePokemon(pokemonNro(1, entrenador)) << endl;
+
+    Entrenador entrenador2 = consEntrenador("Entrenador 2", 2, new Pokemon[2]{consPokemon("Planta"), consPokemon("Planta")});
+    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;
+
+    cout << "Ejercicio 3" << endl;
+    cout << "Array Lists" << endl;
 }

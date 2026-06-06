@@ -1,7 +1,10 @@
-#include <iostream>
-using namespace std;
+#ifndef POKEMON_H
+#define POKEMON_H
 
-typedef string TipoDePokemon;
+#include <iostream>
+#include <string>
+
+typedef std::string TipoDePokemon;
 
 struct PokeSt
 {
@@ -11,16 +14,18 @@ struct PokeSt
 
 typedef PokeSt *Pokemon;
 
-// Dicho esto, implementar la siguiente interfaz de P okemon:
+// Dicho esto, implementar la siguiente interfaz de Pokemon:
 Pokemon consPokemon(TipoDePokemon tipo);
-// Dado un tip o devuelve un p okémon con 100 % de energía.
+// Dado un tipo devuelve un pokemon con 100 % de energía.
 TipoDePokemon tipoDePokemon(Pokemon p);
-// Devuelve el tip o de un p okémon.consEntrenador
+// Devuelve el tipo de un pokemon.
 int energia(Pokemon p);
-// Devuelve el p orcenta je de energía.
+// Devuelve el porcentaje de energía.
 void perderEnergia(int energia, Pokemon p);
-// Le resta energía al p okémon.
+// Le resta energía al pokemon.
 bool superaA(Pokemon p1, Pokemon p2);
-/*Dados dos p okémon indica si el primero, en base al tip o, es sup erior al segundo. Agua sup era
-a fuego, fuego a planta y planta a agua. Y cualquier otro caso es falso.
-Una vez hecho eso, implementar la siguiente interfaz de Entrenador:*/
+/* Dados dos pokemon indica si el primero, en base al tipo, es superior al segundo. Agua supera
+   a fuego, fuego a planta y planta a agua. Y cualquier otro caso es falso.
+   Una vez hecho eso, implementar la siguiente interfaz de Entrenador: */
+
+#endif // POKEMON_H
