@@ -3,6 +3,9 @@
 #include "Entrenador.h"
 using namespace std;
 
+// Forward declaration
+bool superaATodos(Pokemon p, Entrenador e2);
+
 /*Dado un nombre, una cantidad de pokémon, y un array de pokémon de ese tamaño, devuelve
 un entrenador.*/
 Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
@@ -63,10 +66,10 @@ bool leGanaATodos(Entrenador e1, Entrenador e2)
 
 bool superaATodos(Pokemon p, Entrenador e2)
 {
-    bool leGanaATodos = false;
+    bool leGanaATodosBool = false;
     for (int i = 0; i < e2.cantPokemon; ++i)
     {
-        leGanaATodos = leGanaATodos && (superaA(p, e2.pokemon[i]));
+        leGanaATodosBool = leGanaATodosBool && (superaA(p, e2.pokemon[i]));
     }
-    return leGanaATodos;
+    return leGanaATodosBool;
 }
