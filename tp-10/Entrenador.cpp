@@ -13,6 +13,8 @@ Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
     EntrenadorSt *e = new EntrenadorSt;
     e->nombre = nombre;
     e->cantPokemon = cantidad;
+    // reservar espacio para el array de pokémon y copiar los punteros
+    e->pokemon = new Pokemon[cantidad];
     for (int i = 0; i < cantidad; ++i)
     {
         e->pokemon[i] = pokemon[i];
