@@ -32,7 +32,7 @@ void f1()
     // Array dinamico de punteros a PersonaStr, se borra con delete[]
     PersonaStr **ps3 = new PersonaStr *[5];
     for (int i = 0; i < 5; ++i)
-        ps3[i] = new PersonaStr; // ya no queda ningún puntero nulo
+        ps3[i] = new PersonaStr;
 
     // quiero modificar el segundo elemento
     ps3[2]->nombre = "Pepe";
@@ -53,6 +53,12 @@ void f1()
     for (int i = 0; i < 5; ++i)
         delete ps3[i];
     delete[] ps3;
+
+    // algo para que modifique la memoria y se vea el efecto de acceder a memoria que ya no es de nuestro programa, lo que se llama "memoria basura"
+    for (int i = 0; i < 1000000; ++i)
+        int *x = new int;
+
+    //
 
     cout << "Memoria liberada" << endl;
     cout << "p: " << p.edad << endl;
