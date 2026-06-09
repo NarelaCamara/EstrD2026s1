@@ -3,11 +3,11 @@ using namespace std;
 #include "Persona.cpp"
 #include "Pokemon.cpp"
 #include "Entrenador.cpp"
-// #include "ArrayList.cpp"
+#include "ArrayList.cpp"
 
 int main()
 {
-    cout << "Ejercicio 1" << endl;
+    cout << "Ejercicio 1 ------------------------------------------------" << endl;
     Persona p = consPersona("Persona 1", 666);
     Persona p2 = consPersona("Persona 3", 777);
     cout << " nombreDeLaPersona: p " << nombre(p);
@@ -21,8 +21,8 @@ int main()
     cout << "esMayorQueLaOtra: " << esMayorQueLaOtra(p, p2) << endl;
     cout << "laQueEsMayor: " << nombre(laQueEsMayor(p, p2)) << endl;
 
-    cout << "Ejercicio 2";
-    cout << "Pokemon";
+    cout << "Ejercicio 2 ------------------------------------------------" << endl;
+    cout << "Pokemon ------------------------------------------------" << endl;
     Pokemon pokemon1 = consPokemon("Agua");
     Pokemon pokemon2 = consPokemon("Fuego");
     cout << "tipoDePokemon: Pokemon1 " << tipoDePokemon(pokemon1) << endl;
@@ -34,37 +34,30 @@ int main()
          << "perderEnergia: Pokemon2 " << energia(pokemon2) << endl;
     cout << "superaA: Pokemon1 supera a Pokemon2 " << superaA(pokemon1, pokemon2) << endl;
 
-    cout << "Entrenador";
+    cout << "Entrenador ------------------------------------------------" << endl;
     Entrenador entrenador = consEntrenador("Entrenador 1", 2, new Pokemon[2]{pokemon1, pokemon1});
     cout << "nombreDeEntrenador: " << nombreDeEntrenador(entrenador) << endl;
-    /*cout << "cantidadDePokemon: " << cantidadDePokemon(entrenador) << endl;
+    cout << "cantidadDePokemon: " << cantidadDePokemon(entrenador) << endl;
     cout << "cantidadDePokemonDe: cantidad de Pokemon de tipo Agua " << cantidadDePokemonDe("Agua", entrenador) << endl;
     cout << "pokemonNro: Pokemon numero 1 " << tipoDePokemon(pokemonNro(1, entrenador)) << endl;
 
     Entrenador entrenador2 = consEntrenador("Entrenador 2", 2, new Pokemon[2]{consPokemon("Planta"), consPokemon("Planta")});
-    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;*/
+    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;
 
-    /*
-
-        cout << "Ejercicio 3" << endl;
-        cout << "Array Lists" << endl;
-
-        ArrayList lista1 = newArrayList();
-        add(1, lista1);
-        add(2, lista1);
-
-        cout << lista1->cantidad << endl;
-        cout << "length: " << lengthAL(lista1) << endl;
-        cout << "get: " << get(0, lista1) << endl;
-
-        resize(10, lista1);
-        cout << "length: " << lengthAL(lista1) << endl;
-
-        add(3, lista1);
-        cout << "get: " << get(2, lista1) << endl;
-
-        remove(lista1);
-        cout << "length: " << lengthAL(lista1) << endl;*/
+    cout << "Ejercicio 3 ------------------------------------------------" << endl;
+    cout << "Array Lists ------------------------------------------------" << endl;
+    ArrayList lista1 = newArrayList();
+    add(1, lista1);
+    add(2, lista1);
+    cout << lista1->cantidad << endl;
+    cout << "length: " << lengthAL(lista1) << endl;
+    cout << "get: " << get(0, lista1) << endl;
+    resize(10, lista1);
+    cout << "length: " << lengthAL(lista1) << endl;
+    add(3, lista1);
+    cout << "get: " << get(2, lista1) << endl;
+    remove(lista1);
+    cout << "length: " << lengthAL(lista1) << endl;
 
     /*
     int sumatoria(ArrayList xs)

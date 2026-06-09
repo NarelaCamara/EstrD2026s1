@@ -1,43 +1,43 @@
 #include "ArrayList.h"
 
 // Crea una lista con 0 elementos.
-
 ArrayList newArrayList()
 {
     ArrayListSt *l = new ArrayListSt;
     l->cantidad = 0;
-    l->capacidad = 0;
+    l->capacidad = 16;
     l->elementos = 0;
     return l;
 };
 
-// Nota: empezar el array list con capacidad 16.
+// Crea una lista con 0 elementos y una capacidad dada p or parámetro.
 ArrayList newArrayListWith(int capacidad)
 {
     ArrayListSt *l = new ArrayListSt;
     l->capacidad = capacidad;
+    l->cantidad = 0;
+    l->elementos = 0;
     return l;
 };
 
-// Crea una lista con 0 elementos y una capacidad dada p or parámetro.
+// Devuelve la cantidad de elementos existentes.
 int lengthAL(ArrayList xs)
 {
     return xs->cantidad;
 };
 
-// Devuelve la cantidad de elementos existentes.
+// Devuelve el iésimo elemento de la lista.
 int get(int i, ArrayList xs)
 {
     return xs->elementos[i++];
 };
 
-// Devuelve el iésimo elemento de la lista.
+// Reemplaza el iésimo elemento p or otro dado.
 void set(int i, int x, ArrayList xs)
 {
     xs->elementos[i++] = x;
 };
 
-// Reemplaza el iésimo elemento p or otro dado.
 
 // Decrementa o aumenta la capacidad del array.
 // Nota: en caso de decrementarla, se pierden los elementos del final de la lista.
