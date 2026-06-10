@@ -29,7 +29,7 @@ int lengthAL(ArrayList xs)
 // Devuelve el iésimo elemento de la lista.
 int get(int i, ArrayList xs)
 {
-    return xs->elementos[i];
+    return xs->elementos[i - 1];
 };
 
 // Reemplaza el iésimo elemento por otro dado.
@@ -42,24 +42,21 @@ void set(int i, int x, ArrayList xs)
 // Nota: en caso de decrementarla, se pierden los elementos del final de la lista.
 void resize(int capacidad, ArrayList xs)
 {
-    int nuevaCantidad = xs->cantidad > capacidad ? capacidad : xs->cantidad;
     int *nuevosElementos = new int[capacidad];
-
-    for (int j = 0; j < nuevaCantidad; j++)
+    for (int j = 0; j < capacidad; j++)
     {
         nuevosElementos[j] = xs->elementos[j];
     }
-
     delete[] xs->elementos;
     xs->elementos = nuevosElementos;
     xs->capacidad = capacidad;
-    xs->cantidad = nuevaCantidad;
+    xs->cantidad = capacidad;
 };
 
 // Agrega un elemento al final de la lista.
 void add(int x, ArrayList xs)
 {
-    if (xs->cantidad >= xs->capacidad)
+    if (xs->cantidad + 1 >= xs->capacidad)
     {
         int nuevaCapacidad = xs->capacidad + 2;
         int *nuevosElementos = new int[nuevaCapacidad];
@@ -83,6 +80,15 @@ void remove(ArrayList xs)
 {
     if (xs->cantidad > 0)
     {
-        xs->cantidad = xs->cantidad - 1;
+        int newCantidad = xs->cantidad - 1;
+        int *nuevosElementos = new int[newCantidad];
+
+        for (int j = 0; j < newCantidad; j++)
+        {
+            nuevosElementos[j] = xs->elementos[j];
+        }
+        delete[] xs->elementos;
+        xs->elementos = nuevosElementos;
+        xs->cantidad = newCantidad;
     }
 };

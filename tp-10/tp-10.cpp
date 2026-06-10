@@ -49,15 +49,20 @@ int main()
     ArrayList lista1 = newArrayList();
     add(1, lista1);
     add(2, lista1);
-    cout << lista1->cantidad << endl;
-    /*cout << "length: " << lengthAL(lista1) << endl;
-    cout << "get: " << get(0, lista1) << endl;
-    resize(10, lista1);
-    cout << "length: " << lengthAL(lista1) << endl;
     add(3, lista1);
+    add(4, lista1);
+    add(5, lista1);
+    add(6, lista1);
+    cout << lista1->cantidad << endl;
+    cout << "length: " << lengthAL(lista1) << endl;
     cout << "get: " << get(2, lista1) << endl;
+    resize(4, lista1);
+    cout << "length: " << lengthAL(lista1) << endl;
+    add(5, lista1);
+    cout << "get: " << get(2, lista1) << endl;
+    cout << "length: " << lengthAL(lista1) << endl;
     remove(lista1);
-    cout << "length: " << lengthAL(lista1) << endl;*/
+    cout << "length: " << lengthAL(lista1) << endl;
 
     /*
     int sumatoria(ArrayList xs)
