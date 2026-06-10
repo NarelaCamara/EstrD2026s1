@@ -6,17 +6,17 @@ ArrayList newArrayList()
     ArrayListSt *l = new ArrayListSt;
     l->cantidad = 0;
     l->capacidad = 16;
-    l->elementos = 0;
+    l->elementos = new int[16];
     return l;
 };
 
-// Crea una lista con 0 elementos y una capacidad dada p or parámetro.
+// Crea una lista con 0 elementos y una capacidad dada por parámetro.
 ArrayList newArrayListWith(int capacidad)
 {
     ArrayListSt *l = new ArrayListSt;
     l->capacidad = capacidad;
     l->cantidad = 0;
-    l->elementos = 0;
+    l->elementos = new int[capacidad];
     return l;
 };
 
@@ -29,37 +29,60 @@ int lengthAL(ArrayList xs)
 // Devuelve el iésimo elemento de la lista.
 int get(int i, ArrayList xs)
 {
-    return xs->elementos[i++];
+    return xs->elementos[i];
 };
 
-// Reemplaza el iésimo elemento p or otro dado.
+// Reemplaza el iésimo elemento por otro dado.
 void set(int i, int x, ArrayList xs)
 {
-    xs->elementos[i++] = x;
+    xs->elementos[i - 1] = x;
 };
-
 
 // Decrementa o aumenta la capacidad del array.
 // Nota: en caso de decrementarla, se pierden los elementos del final de la lista.
 void resize(int capacidad, ArrayList xs)
 {
-    xs->cantidad = xs->cantidad > capacidad ? capacidad : xs->cantidad;
-    xs->capacidad = (xs->capacidad > capacidad ? capacidad : xs->capacidad);
-    xs->elementos[capacidad];
+    int nuevaCantidad = xs->cantidad > capacidad ? capacidad : xs->cantidad;
+    int *nuevosElementos = new int[capacidad];
+
+    for (int j = 0; j < nuevaCantidad; j++)
+    {
+        nuevosElementos[j] = xs->elementos[j];
+    }
+
+    delete[] xs->elementos;
+    xs->elementos = nuevosElementos;
+    xs->capacidad = capacidad;
+    xs->cantidad = nuevaCantidad;
 };
 
 // Agrega un elemento al final de la lista.
 void add(int x, ArrayList xs)
 {
+    if (xs->cantidad >= xs->capacidad)
+    {
+        int nuevaCapacidad = xs->capacidad + 2;
+        int *nuevosElementos = new int[nuevaCapacidad];
+
+        for (int j = 0; j < xs->cantidad; j++)
+        {
+            nuevosElementos[j] = xs->elementos[j];
+        }
+
+        delete[] xs->elementos;
+        xs->elementos = nuevosElementos;
+        xs->capacidad = nuevaCapacidad;
+    }
+
+    xs->elementos[xs->cantidad] = x;
     xs->cantidad = xs->cantidad + 1;
-    xs->capacidad = xs->cantidad + 1 > xs->capacidad ? xs->capacidad + 2 : xs->capacidad;
-    xs->elementos[xs->cantidad + 1] = x;
 };
 
 // Borra el último elemento de la lista.
 void remove(ArrayList xs)
 {
-    xs->cantidad = xs->cantidad - 1;
-    xs->capacidad = xs->cantidad - 1 > xs->capacidad ? xs->capacidad - 2 : xs->capacidad;
-    xs->elementos[xs->cantidad - 1];
+    if (xs->cantidad > 0)
+    {
+        xs->cantidad = xs->cantidad - 1;
+    }
 };
