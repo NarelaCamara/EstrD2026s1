@@ -5,6 +5,35 @@ using namespace std;
 #include "Entrenador.cpp"
 #include "ArrayList.cpp"
 
+// Devuelve la suma deto dos los elementos.
+int sumatoria(ArrayList xs)
+{
+    int cant = lengthAL(xs);
+    int suma = 0;
+
+    for (int i = 0; i < cant; i++)
+    {
+
+        suma = suma + get(i, xs);
+    }
+    return suma;
+};
+
+// Incrementa en uno to dos los elementos.
+void sucesores(ArrayList xs) {};
+
+// Indica si el elemento p ertenece a la lista.
+bool pertenece(int x, ArrayList xs) {};
+
+// Indica la cantidad de elementos iguales a x.
+int apariciones(int x, ArrayList xs) {};
+
+// Crea una nueva lista a partir de la primera y la segunda (en ese orden).
+ArrayList append(ArrayList xs, ArrayList ys) {};
+
+// Devuelve el elemento más chico de la lista
+int minimo(ArrayList xs) {};
+
 int main()
 {
     cout << "Ejercicio 1 ------------------------------------------------" << endl;
@@ -64,20 +93,6 @@ int main()
     remove(lista1);
     cout << "length: " << lengthAL(lista1) << endl;
 
-    /*
-    int sumatoria(ArrayList xs)
-    Devuelve la suma de to dos los elementos.
-    2. void sucesores(ArrayList xs)
-    Incrementa en uno to dos los elementos.
-    3. bool pertenece(int x, ArrayList xs)
-    Indica si el elemento p ertenece a la lista.
-    4. int apariciones(int x, ArrayList xs)
-    Indica la cantidad de elementos iguales a x.
-    5. ArrayList append(ArrayList xs, ArrayList ys)
-    Crea una nueva lista a partir de la primera y la segunda (en ese orden).
-    Página 3 de 4
-    Estructuras de datos - UNQ
-    6. int minimo(ArrayList xs)
-    Devuelve el elemento más chico de la lista
-    */
+    cout << "Ejercicio 4 ------------------------------------------------" << endl;
+    cout << "sumatoria: " << sumatoria(lista1);
 }
