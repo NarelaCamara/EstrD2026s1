@@ -58,7 +58,7 @@ void add(int x, ArrayList xs)
 {
     if (xs->cantidad + 1 >= xs->capacidad)
     {
-        int nuevaCapacidad = xs->capacidad + 2;
+        int nuevaCapacidad = xs->capacidad + 16;
         int *nuevosElementos = new int[nuevaCapacidad];
 
         for (int j = 0; j < xs->cantidad; j++)
@@ -68,11 +68,10 @@ void add(int x, ArrayList xs)
 
         delete[] xs->elementos;
         xs->elementos = nuevosElementos;
-        xs->capacidad = nuevaCapacidad;
     }
 
     xs->elementos[xs->cantidad] = x;
-    xs->cantidad = xs->cantidad + 1;
+    xs->cantidad++;
 };
 
 // Borra el último elemento de la lista.
@@ -83,7 +82,7 @@ void remove(ArrayList xs)
         int newCantidad = xs->cantidad - 1;
         int *nuevosElementos = new int[newCantidad];
 
-        for (int j = 0; j < newCantidad; j++)
+        for (int j = 0; j <= newCantidad; j++)
         {
             nuevosElementos[j] = xs->elementos[j];
         }
