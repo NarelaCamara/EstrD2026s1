@@ -42,7 +42,7 @@ void set(int i, int x, ArrayList xs)
 // Nota: en caso de decrementarla, se pierden los elementos del final de la lista.
 void resize(int capacidad, ArrayList xs)
 {
-    int *nuevosElementos = new int[capacidad];
+    int *nuevosElementos = new int[capacidad-1];
     for (int j = 0; j < capacidad; j++)
     {
         nuevosElementos[j] = xs->elementos[j];
@@ -59,7 +59,7 @@ void add(int x, ArrayList xs)
     if (xs->cantidad + 1 >= xs->capacidad)
     {
         int nuevaCapacidad = xs->capacidad + 16;
-        int *nuevosElementos = new int[nuevaCapacidad];
+        int *nuevosElementos = new int[nuevaCapacidad-1];
 
         for (int j = 0; j < xs->cantidad; j++)
         {
@@ -80,7 +80,7 @@ void remove(ArrayList xs)
     if (xs->cantidad > 0)
     {
         int newCantidad = xs->cantidad - 1;
-        int *nuevosElementos = new int[newCantidad];
+        int *nuevosElementos = new int[newCantidad-1];
 
         for (int j = 0; j <= newCantidad; j++)
         {
