@@ -23,7 +23,7 @@ ArrayList newArrayListWith(int capacidad)
 // Devuelve la cantidad de elementos existentes.
 int lengthAL(ArrayList xs)
 {
-    return xs->cantidad;
+    return xs->cantidad+1;//wtffffffffff
 };
 
 // Devuelve el iésimo elemento de la lista.
