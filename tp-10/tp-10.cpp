@@ -9,7 +9,6 @@ void showList(ArrayList xs)
 {
     cout << "Inicio ";
     int cant = lengthAL(xs);
-    int suma = 0;
     for (int i = 1; i < cant; i++)
     {
         cout << get(i, xs) << " - ";
@@ -153,13 +152,16 @@ int main()
     cout << "length: " << lengthAL(lista1) << endl;
     cout << "get: " << get(2, lista1) << endl;
     resize(4, lista1);
-    cout << "length: " << lengthAL(lista1) << endl;
+
+    cout << "resize 4: ";
+    showList((lista1));
+
     add(5, lista1);
-    add(5, lista1);
-    cout << "get: " << get(2, lista1) << endl;
-    cout << "length: " << lengthAL(lista1) << endl;
+    cout << "add(5, lista1): ";
+    showList((lista1));
+
     remove(lista1);
-    cout << "length: " << lengthAL(lista1) << endl;
+    cout << "remove: ";
     showList(lista1);
 
     cout << "Ejercicio 4 ------------------------------------------------" << endl;

@@ -3,7 +3,11 @@
 using namespace std;
 
 
-LinkedList nil();
+
+LinkedList nil(){
+    Nodol *n = new Nodol;
+
+};
 //Crea una lista vacía.
 
 bool isEmpty(LinkedList xs);
