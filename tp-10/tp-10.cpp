@@ -68,17 +68,29 @@ int apariciones(int x, ArrayList xs)
 // Crea una nueva lista a partir de la primera y la segunda (en ese orden).
 ArrayList append(ArrayList xs, ArrayList ys)
 {
-
-    int cant = lengthAL(xs) + lengthAL(ys);
+    int cantX = lengthAL(xs);
+    int cantY = lengthAL(ys);
     int i = 0;
-    int *listNew = int[cant];
+    
+    ArrayList arrayNew = newArrayListWith(cantX + cantX);
 
-    while (cant == i)
+    while (cantX >= 0)
     {
-        set(i, xs[i], listNew);
+        set(i, get(cantX, xs), arrayNew);
         i++;
+        cantX--;
+        cout << "xs : " << get(cantX, xs)<< cantX << endl;
 
     };
+
+    while (cantY >= 0)
+    {
+        set(i, get(cantY, ys), arrayNew);
+        i++;
+        cantY--;
+        cout << "ys : " << get(cantY, ys)<< cantY << endl;
+    };
+    return arrayNew;
 };
 
 // Devuelve el elemento más chico de la lista
@@ -154,5 +166,14 @@ int main()
     add(2, lista1);
     add(2, lista1);
     showList(lista1);
-    cout << "apariciones: " << apariciones(4, lista1);
+    cout << "apariciones: " << apariciones(4, lista1) << endl;
+
+    ArrayList lista2 = newArrayList();
+    add(12, lista2);
+    add(22, lista2);
+    add(32, lista2);
+    add(42, lista2);
+
+    cout << "append: ";
+    showList(append(lista1, lista2));
 }
