@@ -70,31 +70,42 @@ ArrayList append(ArrayList xs, ArrayList ys)
 {
     int cantX = lengthAL(xs);
     int cantY = lengthAL(ys);
-    int i = 0;
-    
-    ArrayList arrayNew = newArrayListWith(cantX + cantX);
+    cout << "append: cantX=" << cantX << " cantY=" << cantY << "\n";
 
-    while (cantX >= 0)
+    ArrayList arrayNew = newArrayListWith(cantX + cantY);
+
+    for (int i = 0; i <= cantX-1; i++)
     {
-        set(i, get(cantX, xs), arrayNew);
-        i++;
-        cantX--;
-        cout << "xs : " << get(cantX, xs)<< cantX << endl;
+        int value = get(i, xs);
+        cout << "append: xs[" << i << "]=" << value << " new len=" << lengthAL(arrayNew) << "\n";
+        add(value, arrayNew);
+        cout << "append: after add xs i=" << i << " len=" << lengthAL(arrayNew) << "\n";
+    }
+    cout << "append: after xs, new length=" << lengthAL(arrayNew) << "\n";
 
-    };
-
-    while (cantY >= 0)
+    for (int i = 0; i <= cantY+1; i++)
     {
-        set(i, get(cantY, ys), arrayNew);
-        i++;
-        cantY--;
-        cout << "ys : " << get(cantY, ys)<< cantY << endl;
-    };
+        int value = get(i, ys);
+        cout << "append: ys[" << i << "]=" << value << " new len=" << lengthAL(arrayNew) << "\n";
+        add(value, arrayNew);
+        cout << "append: after add ys i=" << i << " len=" << lengthAL(arrayNew) << "\n";
+    }
+    cout << "append: after ys, new length=" << lengthAL(arrayNew) << "\n";
+
     return arrayNew;
 };
 
 // Devuelve el elemento más chico de la lista
-int minimo(ArrayList xs) {};
+int minimo(ArrayList xs) {
+    int c = lengthAL(xs);
+    int min = get(0, xs);
+    for (int i = 0; i <= c; i++)
+    {
+        int value = get(i, xs);
+        min = min <= value ? min : value;
+    }
+    return min;
+};
 
 int main()
 {
@@ -176,4 +187,7 @@ int main()
 
     cout << "append: ";
     showList(append(lista1, lista2));
+
+    cout << "min: " << minimo(lista1);
+
 }
