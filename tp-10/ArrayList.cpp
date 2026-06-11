@@ -1,5 +1,11 @@
 #include "ArrayList.h"
 
+/**
+ * INVARIANTE DE REPRESENTACION
+ * cantidad y capacidad son valores que cuentan desde 1 a n, no inlcuye al cero
+ * siempre se va a contar desde el 1 y no desde el cero
+ */
+
 // Crea una lista con 0 elementos.
 ArrayList newArrayList()
 {

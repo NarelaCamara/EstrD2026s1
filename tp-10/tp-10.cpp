@@ -22,7 +22,7 @@ int sumatoria(ArrayList xs)
 {
     int cant = lengthAL(xs);
     int suma = 0;
-    for (int i = 1; i <= cant-1; i++)
+    for (int i = 1; i < cant; i++)
     {
         suma = suma + get(i, xs);
     }
@@ -33,7 +33,7 @@ int sumatoria(ArrayList xs)
 void sucesores(ArrayList xs)
 {
     int cant = lengthAL(xs);
-    for (int i = 1; i <= cant-1; i++)
+    for (int i = 1; i < cant; i++)
     {
         int sum = get(i, xs) + 1;
         set(i, sum, xs);
@@ -45,7 +45,7 @@ bool pertenece(int x, ArrayList xs)
 {
     int cant = lengthAL(xs);
     bool p = false;
-    for (int i = 1; i <= cant-1; i++)
+    for (int i = 1; i < cant; i++)
     {
         p = p || get(i, xs) == x;
     };
@@ -57,7 +57,7 @@ int apariciones(int x, ArrayList xs)
 {
     int cant = lengthAL(xs);
     int ap = 0;
-    for (int i = 1; i <= cant-1; i++)
+    for (int i = 1; i < cant; i++)
     {
         int n = get(i, xs) == x ? 1 : 0;
         ap = ap + n;
@@ -91,9 +91,9 @@ ArrayList append(ArrayList xs, ArrayList ys)
 
 // Devuelve el elemento más chico de la lista
 int minimo(ArrayList xs) {
-    int c = lengthAL(xs);
+    int cant = lengthAL(xs);
     int min = get(0, xs);
-    for (int i = 1; i <= c-1; i++)
+    for (int i = 1; i < cant; i++)
     {
         int value = get(i-1, xs);
         min = min <= value ? min : value;
@@ -187,3 +187,4 @@ int main()
     cout << "append: " << endl;
     showList(append(lista1, lista2));
 }
+/**porque a las primeras ejecuciones falla???? */
