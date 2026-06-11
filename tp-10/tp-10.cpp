@@ -5,31 +5,81 @@ using namespace std;
 #include "Entrenador.cpp"
 #include "ArrayList.cpp"
 
+void showList(ArrayList xs)
+{
+    cout << "Inicio ";
+    int cant = lengthAL(xs);
+    int suma = 0;
+    for (int i = 1; i < cant - 1; i++)
+    {
+        cout << get(i, xs) << " - ";
+    }
+    cout << "fin" << endl;
+}
+
 // Devuelve la suma deto dos los elementos.
 int sumatoria(ArrayList xs)
 {
     int cant = lengthAL(xs);
     int suma = 0;
-
-    for (int i = 0; i < cant; i++)
+    for (int i = 1; i < cant; i++)
     {
-
         suma = suma + get(i, xs);
     }
     return suma;
 };
 
 // Incrementa en uno to dos los elementos.
-void sucesores(ArrayList xs) {};
+void sucesores(ArrayList xs)
+{
+    int cant = lengthAL(xs);
+    for (int i = 1; i < cant; i++)
+    {
+        int sum = get(i, xs) + 1;
+        set(i, sum, xs);
+    };
+};
 
 // Indica si el elemento p ertenece a la lista.
-bool pertenece(int x, ArrayList xs) {};
+bool pertenece(int x, ArrayList xs)
+{
+    int cant = lengthAL(xs);
+    bool p = false;
+    for (int i = 1; i < cant; i++)
+    {
+        p = p || get(i, xs) == x;
+    };
+    return p;
+};
 
 // Indica la cantidad de elementos iguales a x.
-int apariciones(int x, ArrayList xs) {};
+int apariciones(int x, ArrayList xs)
+{
+    int cant = lengthAL(xs);
+    int ap = 0;
+    for (int i = 1; i < cant; i++)
+    {
+        int n = get(i, xs) == x ? 1 : 0;
+        ap = ap + n;
+    };
+    return ap;
+};
 
 // Crea una nueva lista a partir de la primera y la segunda (en ese orden).
-ArrayList append(ArrayList xs, ArrayList ys) {};
+ArrayList append(ArrayList xs, ArrayList ys)
+{
+
+    int cant = lengthAL(xs) + lengthAL(ys);
+    int i = 0;
+    int *listNew = int[cant];
+
+    while (cant == i)
+    {
+        set(i, xs[i], listNew);
+        i++;
+
+    };
+};
 
 // Devuelve el elemento más chico de la lista
 int minimo(ArrayList xs) {};
@@ -92,7 +142,17 @@ int main()
     cout << "length: " << lengthAL(lista1) << endl;
     remove(lista1);
     cout << "length: " << lengthAL(lista1) << endl;
+    showList(lista1);
 
     cout << "Ejercicio 4 ------------------------------------------------" << endl;
-    cout << "sumatoria: " << sumatoria(lista1);
+    cout << "sumatoria: " << sumatoria(lista1) << endl;
+    sucesores(lista1);
+    cout << "sucesores: ";
+    showList(lista1);
+
+    cout << "pertenece: " << pertenece(2, lista1) << endl;
+    add(2, lista1);
+    add(2, lista1);
+    showList(lista1);
+    cout << "apariciones: " << apariciones(4, lista1);
 }
