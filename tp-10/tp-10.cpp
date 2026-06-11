@@ -10,7 +10,7 @@ void showList(ArrayList xs)
     cout << "Inicio ";
     int cant = lengthAL(xs);
     int suma = 0;
-    for (int i = 1; i < cant - 1; i++)
+    for (int i = 1; i <= cant-1; i++)
     {
         cout << get(i, xs) << " - ";
     }
@@ -22,7 +22,7 @@ int sumatoria(ArrayList xs)
 {
     int cant = lengthAL(xs);
     int suma = 0;
-    for (int i = 1; i < cant; i++)
+    for (int i = 1; i <= cant-1; i++)
     {
         suma = suma + get(i, xs);
     }
@@ -33,7 +33,7 @@ int sumatoria(ArrayList xs)
 void sucesores(ArrayList xs)
 {
     int cant = lengthAL(xs);
-    for (int i = 1; i < cant; i++)
+    for (int i = 1; i <= cant-1; i++)
     {
         int sum = get(i, xs) + 1;
         set(i, sum, xs);
@@ -45,7 +45,7 @@ bool pertenece(int x, ArrayList xs)
 {
     int cant = lengthAL(xs);
     bool p = false;
-    for (int i = 1; i < cant; i++)
+    for (int i = 1; i <= cant-1; i++)
     {
         p = p || get(i, xs) == x;
     };
@@ -57,7 +57,7 @@ int apariciones(int x, ArrayList xs)
 {
     int cant = lengthAL(xs);
     int ap = 0;
-    for (int i = 1; i < cant; i++)
+    for (int i = 1; i <= cant-1; i++)
     {
         int n = get(i, xs) == x ? 1 : 0;
         ap = ap + n;
@@ -66,7 +66,8 @@ int apariciones(int x, ArrayList xs)
 };
 
 void addList  (ArrayList xs, ArrayList nxs){
-    for (int i = 0; i <= lengthAL(xs); i++)
+     int cant = lengthAL(xs);
+    for (int i = 1; i <= cant-1; i++)
     {
         int value = get(i,xs);
         cout << value ;
@@ -90,9 +91,9 @@ ArrayList append(ArrayList xs, ArrayList ys)
 int minimo(ArrayList xs) {
     int c = lengthAL(xs);
     int min = get(0, xs);
-    for (int i = 0; i <= c; i++)
+    for (int i = 1; i <= c-1; i++)
     {
-        int value = get(i, xs);
+        int value = get(i-1, xs);
         min = min <= value ? min : value;
     }
     return min;
@@ -176,9 +177,8 @@ int main()
     add(32, lista2);
     add(42, lista2);
 
+    cout << "minimo: " << minimo(lista2) << endl;
+
     cout << "append: ";
     showList(append(lista1, lista2));
-
-    cout << "min: " << minimo(lista1);
-
 }
