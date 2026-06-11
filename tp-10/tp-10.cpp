@@ -70,30 +70,20 @@ ArrayList append(ArrayList xs, ArrayList ys)
 {
     int cantX = lengthAL(xs);
     int cantY = lengthAL(ys);
-    cout << "append: cantX=" << cantX << " cantY=" << cantY << "\n";
-
     ArrayList arrayNew = newArrayListWith(cantX + cantY);
-
-    for (int i = 0; i <= cantX-1; i++)
-    {
-        int value = get(i, xs);
-        cout << "append: xs[" << i << "]=" << value << " new len=" << lengthAL(arrayNew) << "\n";
-        add(value, arrayNew);
-        cout << "append: after add xs i=" << i << " len=" << lengthAL(arrayNew) << "\n";
-    }
-    cout << "append: after xs, new length=" << lengthAL(arrayNew) << "\n";
-
-    for (int i = 0; i <= cantY+1; i++)
-    {
-        int value = get(i, ys);
-        cout << "append: ys[" << i << "]=" << value << " new len=" << lengthAL(arrayNew) << "\n";
-        add(value, arrayNew);
-        cout << "append: after add ys i=" << i << " len=" << lengthAL(arrayNew) << "\n";
-    }
-    cout << "append: after ys, new length=" << lengthAL(arrayNew) << "\n";
-
+    addList(xs, arrayNew);
+    addList(ys, arrayNew);
     return arrayNew;
 };
+
+void addList  (ArrayList xs, ArrayList nxs){
+    for (int i = 0; i <= lengthAL(xs); i++)
+    {
+        int value = get(i,xs);
+        cout << value ;
+        add(value, nxs);
+    }
+}
 
 // Devuelve el elemento más chico de la lista
 int minimo(ArrayList xs) {
