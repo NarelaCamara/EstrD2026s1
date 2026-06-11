@@ -65,6 +65,14 @@ int apariciones(int x, ArrayList xs)
     return ap;
 };
 
+void addList  (ArrayList xs, ArrayList nxs){
+    for (int i = 0; i <= lengthAL(xs); i++)
+    {
+        int value = get(i,xs);
+        cout << value ;
+        add(value, nxs);
+    }
+}
 // Crea una nueva lista a partir de la primera y la segunda (en ese orden).
 ArrayList append(ArrayList xs, ArrayList ys)
 {
@@ -76,14 +84,7 @@ ArrayList append(ArrayList xs, ArrayList ys)
     return arrayNew;
 };
 
-void addList  (ArrayList xs, ArrayList nxs){
-    for (int i = 0; i <= lengthAL(xs); i++)
-    {
-        int value = get(i,xs);
-        cout << value ;
-        add(value, nxs);
-    }
-}
+
 
 // Devuelve el elemento más chico de la lista
 int minimo(ArrayList xs) {
