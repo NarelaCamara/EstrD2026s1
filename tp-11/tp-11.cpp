@@ -22,7 +22,18 @@ int main() {
     ListIterator li = getIterator(l);
     cout << "getIterator: ";
     showIterator(li);
-    cout << "current: " << current(li);
-    
+    cout << "current: " << current(li) << endl;
+    SetCurrent(666, li);
+    cout << "setCurrent: " << current(li) << endl;
+    Next(li);
+    cout << "setCurrent: " << current(li) << endl;
+    cout << "atEnd: " << atEnd(li) << endl;
+
+    DisposeIterator(li);
+    DestroyL(l);
+
+    cout << "Se borraron DisposeIterator y DestroyL: ";
+    showList(l);
+    showIterator(li);
     return 0;
 };
