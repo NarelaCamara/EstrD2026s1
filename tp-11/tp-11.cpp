@@ -15,5 +15,8 @@ int main() {
     showList(l);
     cout << "Second: " << head(l) << endl;
     cout << "isEmpty: " << (isEmpty(l) ? "true" : "false") << endl;
+    Snoc(5,l);
+    Snoc(6,l);
+    showList(l);
     return 0;
 };
