@@ -3,11 +3,10 @@
 #include "Entrenador.h"
 using namespace std;
 
-// Forward declaration
-bool superaATodos(Pokemon p, Entrenador e2);
 
 /*Dado un nombre, una cantidad de pokémon, y un array de pokémon de ese tamaño, devuelve
 un entrenador.*/
+/* costo constante, un frame con 5 campos y heap un arran tamaño cantidad y 2 espacios por el entrenador  */
 Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
 {
     EntrenadorSt *e = new EntrenadorSt;
@@ -21,18 +20,84 @@ Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
     }
     return *e;
 };
+/*
+STACK
++-----------------------------------------------------+
+| perderEnergia frame                                 |
+|    - e :  --> HEAP EntrenadorSt               |
+|   - nombre -- string  
+    - cantidad -- int
+    - ps -- HEAP Pokemon    
+    - i int (for)                            |
++-----------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+|   e: EntrenadorSt { 
+        - nombre, 
+        - cantPokemon, 
+        - pokemon --> HEAP pokemon 
+    }
+|   - pokemon: [cantidad]
+        - [0] {tipo, vida}                                 |
+|       - [...] {tipo, vida}                                 |
+|       - [cantidad] {tipo, vida}                                                                  |
++-----------------------------------------------------+ 
+*/
+
 
 // Devuelve el nombre del entrenador.
 string nombreDeEntrenador(Entrenador e)
 {
     return e.nombre;
 };
+/*
+STACK
++-----------------------------------------------------+
+| nombreDeEntrenador frame                            |
+|   - e :  --> HEAP EntrenadorSt                       |
++-----------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+|   - e: Entrenador { 
+        - nombre, 
+        - cantPokemon, 
+        - pokemon --> HEAP pokemon }
+|   - pokemon: [cantidad]
+        - [0] {tipo, vida}                                 |
+|       - [...] {tipo, vida}                                 |
+|       - [cantidad] {tipo, vida}                                                                  |
++-----------------------------------------------------+ 
+*/
+
 
 // Devuelve la cantidad de p okémon que p osee el entrenador.
 int cantidadDePokemon(Entrenador e)
 {
     return e.cantPokemon;
 };
+/*
+STACK
++-----------------------------------------------------+
+| nombreDeEntrenador frame                            |
+|   - e :  --> HEAP EntrenadorSt                       |
++-----------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+|   - e: Entrenador { 
+        - nombre, 
+        - cantPokemon, 
+        - pokemon --> HEAP pokemon }
+|   - pokemon: [cantidad]
+        - [0] {tipo, vida}                                 |
+|       - [...] {tipo, vida}                                 |
+|       - [cantidad] {tipo, vida}                                                                  |
++-----------------------------------------------------+ 
+*/
+
+
 
 // Devuelve la cantidad de p okémon de determinado tip o que p osee el entrenador.
 int cantidadDePokemonDe(TipoDePokemon tipo, Entrenador e)
