@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+
+//cantidad cuenta apartir del uno
 struct NodoL{
     int elem;         // valor del nodo
     NodoL* siguiente; // puntero al siguiente nodo

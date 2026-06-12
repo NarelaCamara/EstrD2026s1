@@ -9,11 +9,11 @@ int main() {
     Cons(2,l);
     Cons(3,l);
     Cons(4,l);
+    showList(l);
     cout << "Head: " << head(l) << endl;
     Tail(l);
+    showList(l);
     cout << "Second: " << head(l) << endl;
     cout << "isEmpty: " << (isEmpty(l) ? "true" : "false") << endl;
-    Tail(l);
-    cout << "Tail: " << head(l) << endl;
     return 0;
 };

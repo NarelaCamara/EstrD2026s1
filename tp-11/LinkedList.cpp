@@ -2,6 +2,19 @@
 #include "LinkedList.h" 
 using namespace std;
 
+
+void showList (LinkedList xs){
+    NodoL* acc = xs->primero;
+    while (acc != NULL) {
+        cout << acc->elem;
+        if (acc->siguiente != NULL) {
+            cout << " - ";
+        }
+        acc = acc->siguiente;
+    }
+    cout << endl;
+}
+
 //Crea una lista vacía.
 LinkedList nil(){
     LinkedList ln = new LinkedListSt;//porque ya es un puntero
@@ -22,20 +35,11 @@ int head(LinkedList xs){
 
 //Agrega un elemento al principio de la lista.
 void Cons(int x, LinkedList xs){
-    if(xs->cantidad == 0){
-        NodoL* n = new NodoL;
-        n->elem =x;
-        n->siguiente = NULL;
-        xs->primero= n;
-    }else{
-        NodoL* n = new NodoL;
-        n->elem = x;
-        n->siguiente = xs->primero;
-        xs->primero = n;
-        xs->cantidad++;
-    }
+    NodoL* n = new NodoL;
+    n->elem = x;
+    n->siguiente = xs->primero;
+    xs->primero = n;
     xs->cantidad++;
-
 };
 
 void Tail(LinkedList xs){
@@ -48,10 +52,21 @@ void Tail(LinkedList xs){
 };
 //Quita el primer elemento.
 
-int length(LinkedList xs);
+int length(LinkedList xs){
+    return xs->cantidad;
+};
 //Devuelve la cantidad de elementos.
 
-void Snoc(int x, LinkedList xs);
+void Snoc(int x, LinkedList xs){
+    NodoL* last = xs->primero;
+    for(int i = 1; i < xs->cantidad; i++){
+        last = last->siguiente;
+    }
+    NodoL* n = new NodoL;
+    n->elem=x;
+    n->siguiente=NULL;
+    last->siguiente=n;
+};
 //Agrega un elemento al final de la lista.
 
 ListIterator getIterator(LinkedList xs);
