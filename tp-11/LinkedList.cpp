@@ -2,24 +2,50 @@
 #include "LinkedList.h" 
 using namespace std;
 
-
-
+//Crea una lista vacía.
 LinkedList nil(){
-    Nodol *n = new Nodol;
+    LinkedList ln = new LinkedListSt;//porque ya es un puntero
+    ln->cantidad = 0;
+    ln->primero = NULL;
+    return ln;
+};
+
+//Indica si la lista está vacía.
+bool isEmpty(LinkedList xs){
+    return xs->cantidad == 0;
+};
+
+//Devuelve el primer elemento.
+int head(LinkedList xs){
+    return xs->primero->elem;
+};
+
+//Agrega un elemento al principio de la lista.
+void Cons(int x, LinkedList xs){
+    if(xs->cantidad == 0){
+        NodoL* n = new NodoL;
+        n->elem =x;
+        n->siguiente = NULL;
+        xs->primero= n;
+    }else{
+        NodoL* n = new NodoL;
+        n->elem = x;
+        n->siguiente = xs->primero;
+        xs->primero = n;
+        xs->cantidad++;
+    }
+    xs->cantidad++;
 
 };
-//Crea una lista vacía.
 
-bool isEmpty(LinkedList xs);
-//Indica si la lista está vacía.
-
-int head(LinkedList xs);
-//Devuelve el primer elemento.
-
-void Cons(int x, LinkedList xs);
-//Agrega un elemento al principio de la lista.
-
-void Tail(LinkedList xs);
+void Tail(LinkedList xs){
+    if(xs->cantidad > 0){
+        NodoL* n = xs->primero->siguiente;
+        delete xs->primero;
+        xs->primero=n;
+        xs->cantidad--;
+    }
+};
 //Quita el primer elemento.
 
 int length(LinkedList xs);
