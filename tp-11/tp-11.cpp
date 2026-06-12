@@ -17,6 +17,12 @@ int main() {
     cout << "isEmpty: " << (isEmpty(l) ? "true" : "false") << endl;
     Snoc(5,l);
     Snoc(6,l);
+    cout << "length: " << length(l)<< endl;
     showList(l);
+    ListIterator li = getIterator(l);
+    cout << "getIterator: ";
+    showIterator(li);
+    cout << "current: " << current(li);
+    
     return 0;
 };

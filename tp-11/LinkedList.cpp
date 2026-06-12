@@ -2,6 +2,17 @@
 #include "LinkedList.h" 
 using namespace std;
 
+void showIterator (ListIterator xs){
+    NodoL* acc = xs->current;
+    while (acc != NULL) {
+        cout << acc->elem;
+        if (acc->siguiente != NULL) {
+            cout << " - ";
+        }
+        acc = acc->siguiente;
+    }
+    cout << endl;
+}
 
 void showList (LinkedList xs){
     NodoL* acc = xs->primero;
@@ -42,6 +53,7 @@ void Cons(int x, LinkedList xs){
     xs->cantidad++;
 };
 
+//Quita el primer elemento.
 void Tail(LinkedList xs){
     if(xs->cantidad > 0){
         NodoL* n = xs->primero->siguiente;
@@ -50,13 +62,13 @@ void Tail(LinkedList xs){
         xs->cantidad--;
     }
 };
-//Quita el primer elemento.
 
+//Devuelve la cantidad de elementos.
 int length(LinkedList xs){
     return xs->cantidad;
 };
-//Devuelve la cantidad de elementos.
 
+//Agrega un elemento al final de la lista.
 void Snoc(int x, LinkedList xs){
     NodoL* last = xs->primero;
     for(int i = 1; i < xs->cantidad; i++){
@@ -67,15 +79,23 @@ void Snoc(int x, LinkedList xs){
     n->siguiente=NULL;
     last->siguiente=n;
 };
-//Agrega un elemento al final de la lista.
 
-ListIterator getIterator(LinkedList xs);
 //Apunta el recorrido al primer elemento.
+ListIterator getIterator(LinkedList xs){
+    ListIterator li = new IteratorSt;
+    NodoL* n = xs->primero;
+    li->current =n;
+    return li;
+};
 
-int current(ListIterator ixs);
 //Devuelve el elemento actual en el recorrido.
+int current(ListIterator ixs){
+    return ixs->current->elem;
+};
 
-void SetCurrent(int x, ListIterator ixs);
+void SetCurrent(int x, ListIterator ixs){
+    
+};
 //Reemplaza el elemento actual por otro elemento.
 
 void Next(ListIterator ixs);
