@@ -6,13 +6,16 @@ using namespace std;
 
 /*Dado un nombre, una cantidad de pokémon, y un array de pokémon de ese tamaño, devuelve
 un entrenador.*/
-/* costo constante, un frame con 5 campos y heap un arran tamaño cantidad y 2 espacios por el entrenador  */
+/* costo lineal en cantidad, porque copia el array de punteros a Pokémon.
+   Stack: un frame constante con los parámetros y la variable de bucle.
+   Heap: una estructura EntrenadorSt y un array de `Pokemon` (punteros).
+*/
 Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
 {
     EntrenadorSt *e = new EntrenadorSt;
     e->nombre = nombre;
     e->cantPokemon = cantidad;
-    // reservar espacio para el array de pokémon y copiar los punteros
+    // reservar espacio para el array de punteros a Pokemon y copiar los punteros
     e->pokemon = new Pokemon[cantidad];
     for (int i = 0; i < cantidad; ++i)
     {
@@ -23,26 +26,28 @@ Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
 /*
 STACK
 +-----------------------------------------------------+
-| perderEnergia frame                                 |
-|    - e :  --> HEAP EntrenadorSt               |
-|   - nombre -- string  
-    - cantidad -- int
-    - ps -- HEAP Pokemon    
-    - i int (for)                            |
+| consEntrenador frame                                 |
+|   - nombre : string                                  |
+|   - cantidad : int                                   |
+|   - pokemon : Pokemon*                                |
+|   - e : EntrenadorSt*                                |
+|   - i : int                                          |
 +-----------------------------------------------------+
 
 HEAP
 +-----------------------------------------------------+
-|   e: EntrenadorSt { 
-        - nombre, 
-        - cantPokemon, 
-        - pokemon --> HEAP pokemon 
-    }
-|   - pokemon: [cantidad]
-        - [0] {tipo, vida}                                 |
-|       - [...] {tipo, vida}                                 |
-|       - [cantidad] {tipo, vida}                                                                  |
-+-----------------------------------------------------+ 
+| EntrenadorSt {                                      |
+|   nombre,                                           |
+|   cantPokemon,                                      |
+|   pokemon --> HEAP [cantidad]                       |
+| }                                                   |
+|                                                     |
+| pokemon: [cantidad]                                 |
+|   [0] -> Pokemon                                     |
+|   [1] -> Pokemon                                     |
+|   ...                                               |
+|   [cantidad-1] -> Pokemon                            |
++-----------------------------------------------------+
 */
 
 
