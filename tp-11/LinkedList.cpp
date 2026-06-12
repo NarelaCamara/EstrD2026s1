@@ -93,19 +93,27 @@ int current(ListIterator ixs){
     return ixs->current->elem;
 };
 
-void SetCurrent(int x, ListIterator ixs){
-    
-};
 //Reemplaza el elemento actual por otro elemento.
+void SetCurrent(int x, ListIterator ixs){
+    ixs->current->elem = x;
+};
 
-void Next(ListIterator ixs);
 //Pasa al siguiente elemento.
+void Next(ListIterator ixs){
+    ixs->current= ixs->current->siguiente;
+};
 
-bool atEnd(ListIterator ixs);
 //Indica si el recorrido ha terminado.
+bool atEnd(ListIterator ixs){
+    return ixs->current->siguiente == NULL;
+};
 
-void DisposeIterator(ListIterator ixs);
 //Libera la memoria ocupada por el iterador.
+void DisposeIterator(ListIterator ixs){
+    delete ixs;
+};
 
-void DestroyL(LinkedList xs);
 //Libera la memoria ocupada por la lista.
+void DestroyL(LinkedList xs){
+        delete xs;
+};
