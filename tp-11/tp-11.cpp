@@ -33,7 +33,8 @@ int main() {
     DestroyL(l);
 
     cout << "Se borraron DisposeIterator y DestroyL: ";
-    showList(l);
-    showIterator(li);
+     cout << "DisposeIterator y DestroyL llamados correctamente." << endl;
+    cout << "l es " << l << endl;
+    cout << "li es " << li << endl;
     return 0;
 };
