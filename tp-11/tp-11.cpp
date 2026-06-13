@@ -33,9 +33,10 @@ int main() {
     cout << "setCurrent: " << current(li) << endl;
     showIterator(li);
     cout << "atEnd: " << (atEnd(li) ? "true" : "false")<< endl;
+    /***
     DisposeIterator(li);
     DestroyL(l);
-
-    cout << "DisposeIterator y DestroyL llamados correctamente." << endl;
+    cout << "DisposeIterator y DestroyL llamados correctamente." << endl; 
+    */
     return 0;
 };
