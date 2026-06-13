@@ -323,4 +323,3 @@ int main()
     cout << "append: " << endl;
     showList(append(lista1, lista2));
 }
-/**porque a las primeras dos ejecuciones falla???? wtfff */
