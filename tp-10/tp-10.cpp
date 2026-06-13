@@ -89,7 +89,7 @@ ArrayList append(ArrayList xs, ArrayList ys)
 int minimo(ArrayList xs) {
     int cant = lengthAL(xs);
     int min = get(0, xs);
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
         int value = get(i-1, xs);
         min = min <= value ? min : value;
