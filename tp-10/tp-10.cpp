@@ -102,7 +102,7 @@ int minimo(ArrayList xs) {
 
 int main()
 {
-    cout << "Ejercicio 1 ------------------------------------------------" << endl;
+/*    cout << "Ejercicio 1 ------------------------------------------------" << endl;
     Persona p = consPersona("Persona 1", 666);
     Persona p2 = consPersona("Persona 3", 777);
     cout << " nombreDeLaPersona: p " << nombre(p);
@@ -137,7 +137,7 @@ int main()
     cout << "pokemonNro: Pokemon numero 1 " << tipoDePokemon(pokemonNro(1, entrenador)) << endl;
 
     Entrenador entrenador2 = consEntrenador("Entrenador 2", 2, new Pokemon[2]{consPokemon("Planta"), consPokemon("Planta")});
-    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;
+    cout << "leGanaATodos: Entrenador 1 le gana a Entrenador 2 " << leGanaATodos(entrenador, entrenador2) << endl;*/
 
     cout << "Ejercicio 3 ------------------------------------------------" << endl;
     cout << "Array Lists ------------------------------------------------" << endl;

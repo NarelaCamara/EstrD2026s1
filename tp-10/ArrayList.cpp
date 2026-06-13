@@ -138,11 +138,11 @@ HEAP
 void resize(int capacidad, ArrayList xs)
 {
     int lenght = capacidad >= xs->cantidad ? capacidad : xs->cantidad;
-    int *nuevosElementos = new int[capacidad];
+    int* nuevosElementos = new int[capacidad];
 
     for (int j = 1; j < lenght; j++)
     {
-        nuevosElementos[j--] = xs->elementos[j--];
+        nuevosElementos[j] = xs->elementos[j];
     }
     delete[] xs->elementos;
     xs->elementos = nuevosElementos;
@@ -176,11 +176,11 @@ void add(int x, ArrayList xs)
     if (xs->cantidad >= xs->capacidad)
     {
         int nuevaCapacidad = xs->capacidad + 16;
-        int *nuevosElementos = new int[nuevaCapacidad-1];
+        int* nuevosElementos = new int[nuevaCapacidad-1];
 
         for (int j = 1; j < xs->cantidad; j++)
         {
-            nuevosElementos[j--] = xs->elementos[j--];
+            nuevosElementos[j] = xs->elementos[j];
         }
 
         delete[] xs->elementos;
@@ -217,11 +217,11 @@ void remove(ArrayList xs)
     {
         int newCantidad = xs->cantidad-1;
         int length = newCantidad-1;
-        int *nuevosElementos = new int[length];
+        int* nuevosElementos = new int[length];
 
         for (int j = 1; j < length; j++)
         {
-            nuevosElementos[j--] = xs->elementos[j--];
+            nuevosElementos[j] = xs->elementos[j];
         }
         delete[] xs->elementos;
         xs->elementos = nuevosElementos;
