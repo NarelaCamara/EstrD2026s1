@@ -9,17 +9,32 @@
 // Crea una lista con 0 elementos.
 ArrayList newArrayList()
 {
-    ArrayListSt *l = new ArrayListSt;
+    ArrayList l = new ArrayListSt;
     l->cantidad = 0;
     l->capacidad = 16;
     l->elementos = new int[16-1];
     return l;
 };
+/*
+STACK
++-----------------------------------------------------+
+| consPokemon frame                                  |         
+|                                                     |
+|   - p : PokeSt --> HEAP {tipo, vida}   
+    - tipo: string
+|                                                     |
++-----------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+|  p: PokeSt { tipo, vida }                     |
++-----------------------------------------------------+ 
+*/
 
 // Crea una lista con 0 elementos y una capacidad dada por parámetro.
 ArrayList newArrayListWith(int capacidad)
 {
-    ArrayListSt *l = new ArrayListSt;
+    ArrayList l = new ArrayListSt;
     l->capacidad = capacidad;
     l->cantidad = 0;
     l->elementos = new int[capacidad-1];
