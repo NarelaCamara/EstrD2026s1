@@ -2,8 +2,7 @@
 
 /**
  * INVARIANTE DE REPRESENTACION
- * cantidad y capacidad son valores que cuentan desde 1 a n, no inlcuye al cero
- * siempre se va a contar desde el 1 y no desde el cero
+ * cantidad y capacidad son valores que cuentan desde cero a n, incluye al cero
  */
 
 
@@ -137,17 +136,17 @@ HEAP
 // Nota: en caso de decrementarla, se pierden los elementos del final de la lista.
 void resize(int capacidad, ArrayList xs)
 {
-    int lenght = capacidad >= xs->cantidad ? capacidad : xs->cantidad;
     int* nuevosElementos = new int[capacidad];
 
-    for (int j = 1; j < lenght; j++)
+    int copyCount = xs->cantidad < capacidad ? xs->cantidad : capacidad;
+    for (int j = 0; j < copyCount; j++)
     {
         nuevosElementos[j] = xs->elementos[j];
     }
     delete[] xs->elementos;
     xs->elementos = nuevosElementos;
     xs->capacidad = capacidad;
-    xs->cantidad = lenght;
+    xs->cantidad = copyCount;
 };
 /*
 STACK
@@ -176,15 +175,16 @@ void add(int x, ArrayList xs)
     if (xs->cantidad >= xs->capacidad)
     {
         int nuevaCapacidad = xs->capacidad + 16;
-        int* nuevosElementos = new int[nuevaCapacidad-1];
+        int* nuevosElementos = new int[nuevaCapacidad];
 
-        for (int j = 1; j < xs->cantidad; j++)
+        for (int j = 0; j < xs->cantidad; j++)
         {
             nuevosElementos[j] = xs->elementos[j];
         }
 
         delete[] xs->elementos;
         xs->elementos = nuevosElementos;
+        xs->capacidad = nuevaCapacidad;
     }
 
     xs->elementos[xs->cantidad] = x;
@@ -215,17 +215,7 @@ void remove(ArrayList xs)
 {
     if (xs->cantidad > 0)
     {
-        int newCantidad = xs->cantidad-1;
-        int length = newCantidad-1;
-        int* nuevosElementos = new int[length];
-
-        for (int j = 1; j < length; j++)
-        {
-            nuevosElementos[j] = xs->elementos[j];
-        }
-        delete[] xs->elementos;
-        xs->elementos = nuevosElementos;
-        xs->cantidad = newCantidad;
+        xs->cantidad--;
     }
 };
 /*

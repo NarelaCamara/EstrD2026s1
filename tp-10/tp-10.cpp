@@ -7,13 +7,13 @@ using namespace std;
 
 void showList(ArrayList xs)
 {
-    cout << "Inicio ";
+    cout << "Inicio";
     int cant = lengthAL(xs);
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
-        cout << get(i, xs) << " - ";
+        cout << (i == 0 ? " " : " - ") << get(i, xs);
     }
-    cout << "fin" << endl;
+    cout << " fin" << endl;
 }
 
 // Devuelve la suma deto dos los elementos.
@@ -21,7 +21,7 @@ int sumatoria(ArrayList xs)
 {
     int cant = lengthAL(xs);
     int suma = 0;
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
         suma = suma + get(i, xs);
     }
@@ -32,7 +32,7 @@ int sumatoria(ArrayList xs)
 void sucesores(ArrayList xs)
 {
     int cant = lengthAL(xs);
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
         int sum = get(i, xs) + 1;
         set(i, sum, xs);
@@ -44,7 +44,7 @@ bool pertenece(int x, ArrayList xs)
 {
     int cant = lengthAL(xs);
     bool p = false;
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
         p = p || get(i, xs) == x;
     };
@@ -56,7 +56,7 @@ int apariciones(int x, ArrayList xs)
 {
     int cant = lengthAL(xs);
     int ap = 0;
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
         int n = get(i, xs) == x ? 1 : 0;
         ap = ap + n;
@@ -66,13 +66,12 @@ int apariciones(int x, ArrayList xs)
 
 void addList  (ArrayList fxs, ArrayList nxs){
     int cant = lengthAL(fxs);
-    for (int i = 1; i < cant; i++)
+    for (int i = 0; i < cant; i++)
     {
         int value = get(i, fxs);
-        
         add(value, nxs);
     }
-    cout << "addList:"; 
+    cout << "addList:";
     showList(nxs);
 }
 // Crea una nueva lista a partir de la primera y la segunda (en ese orden).
@@ -150,7 +149,7 @@ int main()
     add(6, lista1);
     cout << lista1->cantidad << endl;
     cout << "length: " << lengthAL(lista1) << endl;
-    cout << "get: " << get(2, lista1) << endl;
+    cout << "get: " << get(0, lista1) << endl;
     resize(4, lista1);
 
     cout << "resize 4: ";
