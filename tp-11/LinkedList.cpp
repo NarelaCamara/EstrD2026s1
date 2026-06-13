@@ -110,10 +110,22 @@ bool atEnd(ListIterator ixs){
 
 //Libera la memoria ocupada por el iterador.
 void DisposeIterator(ListIterator ixs){
+    NodoL* next = ixs->current;
+    while (next != NULL) {
+        NodoL* tmp = next->siguiente;
+        delete next;
+        next = tmp;
+    }
     delete ixs;
-};
+}
 
 //Libera la memoria ocupada por la lista.
 void DestroyL(LinkedList xs){
-        delete xs;
+    NodoL* acc = xs->primero;
+    while (acc != NULL) {   
+            NodoL* tmp = acc->siguiente;
+            delete acc;
+            acc=tmp;
+        }
+    delete xs;
 };
