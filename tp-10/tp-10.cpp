@@ -5,6 +5,8 @@ using namespace std;
 #include "Entrenador.cpp"
 #include "ArrayList.cpp"
 
+
+/**costo  */
 void showList(ArrayList xs)
 {
     cout << "Inicio";
@@ -15,7 +17,25 @@ void showList(ArrayList xs)
     }
     cout << " fin" << endl;
 }
+/*
+STACK
++---------------------------------------------------------------------------+
+| showList frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }|
+|   - cant int                                                              |   
+|    - i int                                                                |  
++---------------------------------------------------------------------------+
 
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
+
+
+/*costo: constante ?*/
 // Devuelve la suma deto dos los elementos.
 int sumatoria(ArrayList xs)
 {
@@ -28,41 +48,103 @@ int sumatoria(ArrayList xs)
     return suma;
 };
 
+/*
+STACK
++---------------------------------------------------------------------------+
+| sumatoria frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }|
+|   - cant int                                                              |   
+|   - suma int                                                              |   
+|    - i int                                                                |  
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
+
 // Incrementa en uno to dos los elementos.
 void sucesores(ArrayList xs)
 {
-    int cant = lengthAL(xs);
-    for (int i = 0; i < cant; i++)
+    for (int i = 0; i < lengthAL(xs); i++)
     {
-        int sum = get(i, xs) + 1;
-        set(i, sum, xs);
+        set(i, get(i, xs) + 1, xs);
     };
 };
+/*
+STACK
++---------------------------------------------------------------------------+
+| sucesores frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }| 
+|    - i int                                                                |  
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
+
 
 // Indica si el elemento p ertenece a la lista.
 bool pertenece(int x, ArrayList xs)
 {
-    int cant = lengthAL(xs);
     bool p = false;
-    for (int i = 0; i < cant; i++)
+    for (int i = 0; i < lengthAL(xs); i++)
     {
         p = p || get(i, xs) == x;
     };
     return p;
 };
+/*
+STACK
++---------------------------------------------------------------------------+
+| pertenece frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }| 
+|    - i int                                                                |
+|    - p bool                                                               |  
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
 
 // Indica la cantidad de elementos iguales a x.
 int apariciones(int x, ArrayList xs)
 {
-    int cant = lengthAL(xs);
     int ap = 0;
-    for (int i = 0; i < cant; i++)
+    for (int i = 0; i < lengthAL(xs); i++)
     {
-        int n = get(i, xs) == x ? 1 : 0;
-        ap = ap + n;
+        ap = ap + get(i, xs) == x ? 1 : 0;;
     };
     return ap;
 };
+/*
+STACK
++---------------------------------------------------------------------------+
+| apariciones frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }| 
+|    - i int                                                                |
+|    - ap int                                                               |  
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
+
 
 void addList  (ArrayList fxs, ArrayList nxs){
     int cant = lengthAL(fxs);
@@ -72,30 +154,85 @@ void addList  (ArrayList fxs, ArrayList nxs){
         add(value, nxs);
     }
 }
+/*
+STACK
++---------------------------------------------------------------------------+
+| addList frame                                                             |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }| 
+|    - i int                                                                |
+|    - ap int                                                               |  
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
+
+
 // Crea una nueva lista a partir de la primera y la segunda (en ese orden).
 ArrayList append(ArrayList xs, ArrayList ys)
 {
-    int cantX = lengthAL(xs);
-    int cantY = lengthAL(ys);
-    ArrayList arrayNew = newArrayListWith(cantX + cantY);
+    ArrayList arrayNew = newArrayListWith(lengthAL(xs) + lengthAL(ys));
     addList(xs, arrayNew);
     addList(ys, arrayNew);
     return arrayNew;
 };
+/*
+STACK
++---------------------------------------------------------------------------+
+| append frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }| 
+|    addList frame                                                          |         
+|     - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int}| 
+|     - i int                                                               |
+|     - ap int                                                              |  
+|    addList frame                                                          |         
+|     - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int}| 
+|     - i int                                                               |
+|     - ap int                                                              |  
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
 
 
 
 // Devuelve el elemento más chico de la lista
 int minimo(ArrayList xs) {
-    int cant = lengthAL(xs);
     int min = get(0, xs);
-    for (int i = 0; i < cant; i++)
+    for (int i = 0; i < lengthAL(xs); i++)
     {
-        int value = get(i-1, xs);
+        int value = get(i, xs);
         min = min <= value ? min : value;
     }
     return min;
 };
+/*
+STACK
++---------------------------------------------------------------------------+
+| append frame                                                              |         
+|   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }| 
+|   - i int                                                                 |
+|   - min int                                                               |  
+|    - value int                                                            |
++---------------------------------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+| - elementos: [0] int                                |
+| - elementos: [...] int                              |
+| - elementos: [cantidad-1] int                       |
++-----------------------------------------------------+ 
+*/
+
 
 int main()
 {

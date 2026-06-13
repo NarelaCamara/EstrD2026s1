@@ -195,17 +195,17 @@ STACK
 |   - e1 :  --> HEAP EntrenadorSt                     |
 |   - e2 :  --> HEAP EntrenadorSt                     |
 |    - i: int                                         |
-|    - [e1-> pokemon[0]] superaATodos frame           |
+|    [e1-> pokemon[0]] superaATodos frame             |
 |           - p :  --> HEAP Pokemon                   |
 |           - e2 :  --> HEAP EntrenadorSt             |  
 |            - leGanaATodosBool: bool                 |
 |            - i: int                                 |
-|    - [e1-> pokemon[...]] superaATodos frame         |  
+|    [e1-> pokemon[...]] superaATodos frame           |  
 |            - p :  --> HEAP Pokemon                  |
 |           - e2 :  --> HEAP EntrenadorSt             | 
 |            - leGanaATodosBool: bool                 |
 |            - i: int|                                |
-|    - [e1-> pokemon[cantidad]] superaATodos frame    |
+|    [e1-> pokemon[cantidad]] superaATodos frame      |
 |    - p :  --> HEAP Pokemon                          |
 |           - e2 :  --> HEAP EntrenadorSt             |
 |            - leGanaATodosBool: bool                 |
