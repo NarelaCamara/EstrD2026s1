@@ -71,8 +71,6 @@ void addList  (ArrayList fxs, ArrayList nxs){
         int value = get(i, fxs);
         add(value, nxs);
     }
-    cout << "addList:";
-    showList(nxs);
 }
 // Crea una nueva lista a partir de la primera y la segunda (en ese orden).
 ArrayList append(ArrayList xs, ArrayList ys)
@@ -169,11 +167,11 @@ int main()
     cout << "sucesores: ";
     showList(lista1);
 
+    add(2, lista1);
+    add(2, lista1);
     cout << "pertenece: " << pertenece(2, lista1) << endl;
-    add(2, lista1);
-    add(2, lista1);
     showList(lista1);
-    cout << "apariciones: " << apariciones(3, lista1) << endl;
+    cout << "apariciones: " << apariciones(2, lista1) << endl;
 
     ArrayList lista2 = newArrayListWith(12);
     add(12, lista2);
@@ -183,8 +181,8 @@ int main()
 
     cout << "minimo: " << minimo(lista2) << endl;
 
-    showList((lista1));
-    showList(( lista2));
+    showList(lista1);
+    showList(lista2);
     cout << "append: " << endl;
     showList(append(lista1, lista2));
 }
