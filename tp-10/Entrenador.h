@@ -9,7 +9,7 @@ struct EntrenadorSt
     int cantPokemon;
 };
 
-typedef EntrenadorSt Entrenador;
+typedef EntrenadorSt* Entrenador;
 
 Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon);
 /*Dado un nombre, una cantidad de p okémon, y un array de p okémon de ese tamaño, devuelve

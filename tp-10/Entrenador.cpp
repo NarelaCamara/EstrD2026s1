@@ -12,7 +12,7 @@ un entrenador.*/
 */
 Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
 {
-    EntrenadorSt *e = new EntrenadorSt;
+    Entrenador e = new EntrenadorSt;
     e->nombre = nombre;
     e->cantPokemon = cantidad;
     // reservar espacio para el array de punteros a Pokemon y copiar los punteros
@@ -21,7 +21,7 @@ Entrenador consEntrenador(string nombre, int cantidad, Pokemon *pokemon)
     {
         e->pokemon[i] = pokemon[i];
     }
-    return *e;
+    return e;
 };
 /*
 STACK
@@ -29,17 +29,17 @@ STACK
 | consEntrenador frame                                 |
 |   - nombre : string                                  |
 |   - cantidad : int                                   |
-|   - pokemon : Pokemon*                                |
-|   - e : EntrenadorSt*                                |
+|   - pokemon : --> HEAP Pokemon                       |
+|   - e : --> HEAP Entrenador                          |
 |   - i : int                                          |
 +-----------------------------------------------------+
 
 HEAP
 +-----------------------------------------------------+
-| EntrenadorSt {                                      |
-|   nombre,                                           |
-|   cantPokemon,                                      |
-|   pokemon --> HEAP [cantidad]                       |
+|  - e: Entrenador  {                                      |
+|   - nombre,                                           |
+|   - cantPokemon,                                      |
+|   - pokemon --> HEAP [cantidad]                       |
 | }                                                   |
 |                                                     |
 | pokemon: [cantidad]                                 |
@@ -50,11 +50,11 @@ HEAP
 +-----------------------------------------------------+
 */
 
-
+// costo constante, crea un frame
 // Devuelve el nombre del entrenador.
 string nombreDeEntrenador(Entrenador e)
 {
-    return e.nombre;
+    return e->nombre;
 };
 /*
 STACK
@@ -80,7 +80,7 @@ HEAP
 // Devuelve la cantidad de p okémon que p osee el entrenador.
 int cantidadDePokemon(Entrenador e)
 {
-    return e.cantPokemon;
+    return e->cantPokemon;
 };
 /*
 STACK
@@ -108,40 +108,127 @@ HEAP
 int cantidadDePokemonDe(TipoDePokemon tipo, Entrenador e)
 {
     int cantidad = 0;
-    for (int i = 0; i < e.cantPokemon; ++i)
+    for (int i = 0; i < e->cantPokemon; ++i)
     {
-        cantidad = e.pokemon[i]->tipo == tipo ? 1 : 0;
+        cantidad = e->pokemon[i]->tipo == tipo ? 1 : 0;
     }
     return cantidad;
 };
+/*
+STACK
++-----------------------------------------------------+
+| nombreDeEntrenador frame                            |
+|   - e :  --> HEAP EntrenadorSt                       |
+|   - tipo: string
+    - cantidad: int
+    - i: int
++-----------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+|   - e: Entrenador { 
+        - nombre, 
+        - cantPokemon, 
+        - pokemon --> HEAP pokemon }
+|   - pokemon: [cantidad]
+        - [0] {tipo, vida}                                 |
+|       - [...] {tipo, vida}                                 |
+|       - [cantidad] {tipo, vida}                                                                  |
++-----------------------------------------------------+ 
+*/
 
 // Devuelve el p okémon número i de los p okémon del entrenador.
 // Precondición: existen al menos i −1 p okémon.
 Pokemon pokemonNro(int i, Entrenador e)
 {
-    return e.pokemon[i++];
+    return e->pokemon[i++];
 };
+/*
+STACK
++-----------------------------------------------------+
+| nombreDeEntrenador frame                            |
+|   - e :  --> HEAP EntrenadorSt                      |
++-----------------------------------------------------+
+
+HEAP
++-----------------------------------------------------+
+|   - e: Entrenador {                                 |
+|        - nombre,                                    |
+|        - cantPokemon,                               |
+|        - pokemon --> HEAP pokemon }                 |
+|   - pokemon: [cantidad]                             |
+|        - [0] {tipo, vida}                           |
+|       - [...] {tipo, vida}                          |
+|       - [cantidad] {tipo, vida}                     |
++-----------------------------------------------------+ 
+*/
+
+
+/** costo: se van a abrir  */
+bool superaATodos(Pokemon p, Entrenador e2)
+{
+    bool leGanaATodosBool = false;
+    for (int i = 0; i < e2->cantPokemon; ++i)
+    {
+        leGanaATodosBool = leGanaATodosBool && (superaA(p, e2->pokemon[i]));
+    }
+    return leGanaATodosBool;
+}
 
 // Dados dos entrenadores, indica si, para cada pokémon del segundo entrenador, el primero
 // posee al menos un pokémon que le gane a todos
 bool leGanaATodos(Entrenador e1, Entrenador e2)
 {
-    for (int i = 0; i < e1.cantPokemon; ++i)
+    for (int i = 0; i < e1->cantPokemon; ++i)
     {
-        if (superaATodos(e1.pokemon[i], e2))
+        if (superaATodos(e1->pokemon[i], e2))
         {
             return true;
         };
     }
     return false;
 };
+/*
+STACK
++-----------------------------------------------------+
+| leGanaATodos frame                                  |
+|   - e1 :  --> HEAP EntrenadorSt                     |
+|   - e2 :  --> HEAP EntrenadorSt                     |
+|    - i: int                                         |
+|    - [e1-> pokemon[0]] superaATodos frame           |
+|           - p :  --> HEAP Pokemon                   |
+|           - e2 :  --> HEAP EntrenadorSt             |  
+|            - leGanaATodosBool: bool                 |
+|            - i: int                                 |
+|    - [e1-> pokemon[...]] superaATodos frame         |  
+|            - p :  --> HEAP Pokemon                  |
+|           - e2 :  --> HEAP EntrenadorSt             | 
+|            - leGanaATodosBool: bool                 |
+|            - i: int|                                |
+|    - [e1-> pokemon[cantidad]] superaATodos frame    |
+|    - p :  --> HEAP Pokemon                          |
+|           - e2 :  --> HEAP EntrenadorSt             |
+|            - leGanaATodosBool: bool                 |
+|            - i: int                                 |
++-----------------------------------------------------+
 
-bool superaATodos(Pokemon p, Entrenador e2)
-{
-    bool leGanaATodosBool = false;
-    for (int i = 0; i < e2.cantPokemon; ++i)
-    {
-        leGanaATodosBool = leGanaATodosBool && (superaA(p, e2.pokemon[i]));
-    }
-    return leGanaATodosBool;
-}
+HEAP
++-----------------------------------------------------+
+|   - e1: Entrenador {                                |
+|        - nombre,                                    |
+|        - cantPokemon,                               |
+|        - pokemon1 --> HEAP pokemon }                |
+    - e2: Entrenador {                                |
+|        - nombre,                                    |
+|        - cantPokemon,                               |
+|        - pokemon2 --> HEAP pokemon }                |
+|   - pokemon1: [cantidad]                            |
+|        - [0] {tipo, vida}                           |
+|       - [...] {tipo, vida}                          |
+|       - [cantidad] {tipo, vida}                     |
+|   - pokemon2: [cantidad]                            |
+|        - [0] {tipo, vida}                           |
+|       - [...] {tipo, vida}                          |
+|       - [cantidad] {tipo, vida}                     |
++-----------------------------------------------------+ 
+*/
