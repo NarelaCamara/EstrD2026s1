@@ -138,15 +138,15 @@ void resize(int capacidad, ArrayList xs)
 {
     int* nuevosElementos = new int[capacidad];
 
-    int copyCount = xs->cantidad < capacidad ? xs->cantidad : capacidad;
-    for (int j = 0; j < copyCount; j++)
+    int lenght = xs->cantidad < capacidad ? xs->cantidad : capacidad;
+    for (int j = 0; j < lenght; j++)
     {
         nuevosElementos[j] = xs->elementos[j];
     }
     delete[] xs->elementos;
     xs->elementos = nuevosElementos;
     xs->capacidad = capacidad;
-    xs->cantidad = copyCount;
+    xs->cantidad = lenght;
 };
 /*
 STACK
@@ -223,7 +223,7 @@ STACK
 +---------------------------------------------------------------------------+
 | remove frame                                                              |         
 |   - xs : ArrayList --> HEAP {cantidad, capacidad, elementos--> HEAP int  }|
-|   - newCantidad int                                                         |   
+|   - newCantidad int                                                       |   
 |   - lenght int                                                            |  
 |   - nuevosElementos  --> HEAP int                                         |
 |    - i int                                                                |  
@@ -233,6 +233,6 @@ HEAP
 +-----------------------------------------------------+
 | - elementos: [0] int                                |
 | - elementos: [...] int                              |
-| - elementos: [cantidad-1] int                         |
+| - elementos: [cantidad-1] int                       |
 +-----------------------------------------------------+ 
 */
