@@ -78,6 +78,7 @@ void Snoc(int x, LinkedList xs){
     n->elem=x;
     n->siguiente=NULL;
     last->siguiente=n;
+    xs->cantidad++;
 };
 
 //Apunta el recorrido al primer elemento.
