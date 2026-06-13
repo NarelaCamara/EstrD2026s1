@@ -89,5 +89,10 @@ int main() {
     Sucesores(l);
     cout << "Sucesores: "; showList(l);
 
+
+    /**Heaps
+    Ejercicio 9
+    Implementar heaps binarias según el có digo de la teórica, y probarlas con ejemplos */
+
     return 0;
 };
