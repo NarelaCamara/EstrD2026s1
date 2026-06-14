@@ -6,30 +6,43 @@ using namespace std;
 //Devuelve la suma de to dos los elementos
 int sumatoria (LinkedList xs){
     int sum = 0;
-    while(xs->cantidad > 0){
-        sum = sum + head(xs);
-        Tail(xs);
+    if (!isEmpty(xs)) {
+        ListIterator li = getIterator(xs);
+        while (!atEnd(li)) {
+            sum = sum + current(li);
+            Next(li);
+        }
+        DisposeIterator(li);
     }
-    cout << endl;
     return sum;
 }
 
 
 //Incrementa en uno to dos los elementos.
 void Sucesores (LinkedList xs){
-    LinkedList nll =nil();
-    while(xs->cantidad > 0){
-        int h = head(xs) +1;
-        Tail(xs);
-        Snoc(h, nll);
-        DestroyL(xs);
-        xs= nll;
+    if (isEmpty(xs)) return;
+    ListIterator li = getIterator(xs);
+    while (true) {
+        SetCurrent(current(li) + 1, li);
+        if (atEnd(li)) break;
+        Next(li);
+    }
+    DisposeIterator(li);
+}
 
-    };
+//Indica si el elemento pertenece a la lista.
+bool pertence (int x, LinkedList xs){
+     bool p = false;
+    if (!isEmpty(xs)) {
+        ListIterator li = getIterator(xs);
+        while (!atEnd(li)) {
+            p = p || current(li) == x;
+            Next(li);
+        }
+        DisposeIterator(li);
+    }
+    return p;
 };
-
-//Indica si el elemento p ertenece a la lista.
-bool pertence (int x, LinkedList xs){};
 
 //Indica la cantidad de elementos iguales a x.
 int apariciones(int x, LinkedList xs){};
@@ -82,9 +95,9 @@ int main() {
     cout << "DisposeIterator y DestroyL llamados correctamente." << endl; 
 
     l = nil();
+    Cons(1,l);
     Cons(3,l);
-    Cons(3,l);
-    Cons(3,l);  
+    Cons(4,l);  
     li = getIterator(l);
     
     cout << "LinkedList ---- usuario ----------------------------------------- " << endl;
@@ -92,7 +105,7 @@ int main() {
     cout << "sumatoria: " << sumatoria(l) << endl;
     Sucesores(l);
     cout << "Sucesores: "; showList(l);
-
+    cout << "pertenece: " << (pertence(2,l) ? "true" : "false" ) << endl;
 
     /**Heaps
     Ejercicio 9
