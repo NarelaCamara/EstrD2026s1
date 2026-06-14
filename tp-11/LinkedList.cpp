@@ -34,6 +34,7 @@ LinkedList nil(){
     return ln;
 };
 
+
 //Indica si la lista está vacía.
 bool isEmpty(LinkedList xs){
     return xs->cantidad == 0;
@@ -53,7 +54,7 @@ void Cons(int x, LinkedList xs){
     xs->cantidad++;
 };
 
-//Quita el primer elemento.
+
 void Tail(LinkedList xs){
     if(xs->cantidad > 0){
         NodoL* n = xs->primero->siguiente;
@@ -62,6 +63,50 @@ void Tail(LinkedList xs){
         xs->cantidad--;
     }
 };
+/*
+STACK
++---------------------------------------------------------------------------+
+| Tail frame                                                                |
+|   - xs : LinkedList --> HEAP { cantidad, primero --> HEAP NodoL }         |
+|   - n  : NodoL* --> HEAP NodoL                                            |
++---------------------------------------------------------------------------+
+
+HEAP (antes)
++-------------------------------------------------------+
+| LinkedListSt                                          |
+|  - cantidad: int = 3                                  |
+|  - primero --> HEAP Nodo1                             |
++-------------------------------------------------------+
+| Nodo1:                                                |
+|  - elem                                               |
+|  - siguiente --> HEAP Nodo2                           |
++-------------------------------------------------------+
+| Nodo2:                                                |
+|  - elem                                               |
+|  - siguiente --> HEAP Nodo3                           |
++-------------------------------------------------------+
+| Nodo3:                                                |
+|  - elem                                               |
+|  - siguiente = NULL                                   |
++-------------------------------------------------------+
+
+HEAP (después)
++-------------------------------------------------------+
+| LinkedListSt                                          |
+|  - cantidad: int = 2                                  |
+|  - primero --> HEAP Nodo2                             |
++-------------------------------------------------------+
+| Nodo2:                                                |
+|  - elem                                               |
+|  - siguiente --> HEAP Nodo3                           |
++-------------------------------------------------------+
+| Nodo3:                                                |
+|  - elem                                               |
+|  - siguiente = NULL                                   |
++-------------------------------------------------------+
+
+Nota: el nodo original apuntado por xs->primero (Nodo1) es liberado con delete.
+*/
 
 //Devuelve la cantidad de elementos.
 int length(LinkedList xs){
