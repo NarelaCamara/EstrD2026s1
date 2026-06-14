@@ -60,9 +60,9 @@ int main() {
     showList(l);
     cout << "Second: " << head(l) << endl;
     cout << "isEmpty: " << (isEmpty(l) ? "true" : "false") << endl;
-    Snoc(5,l); //falto 5 donde esta???
+    Snoc(5,l); 
     Snoc(6,l);
-    cout << "length: " << length(l)<< endl; //deberia ser 5
+    cout << "length: " << length(l)<< endl;
     showList(l);
 
     cout << "ListIterator ----------------------------------------- " << endl;
@@ -77,12 +77,16 @@ int main() {
     cout << "setCurrent: " << current(li) << endl;
     showIterator(li);
     cout << "atEnd: " << (atEnd(li) ? "true" : "false")<< endl;
-    /***
     DisposeIterator(li);
     DestroyL(l);
     cout << "DisposeIterator y DestroyL llamados correctamente." << endl; 
-    */
 
+    l = nil();
+    Cons(3,l);
+    Cons(3,l);
+    Cons(3,l);  
+    li = getIterator(l);
+    
     cout << "LinkedList ---- usuario ----------------------------------------- " << endl;
     showList(l);
     cout << "sumatoria: " << sumatoria(l) << endl;
