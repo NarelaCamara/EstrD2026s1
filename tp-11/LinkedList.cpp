@@ -110,13 +110,8 @@ bool atEnd(ListIterator ixs){
 };
 
 //Libera la memoria ocupada por el iterador.
+/** como elimina en destroyL ya el nodo current esta eliminado, no necesario borrarlo otra vez.  */
 void DisposeIterator(ListIterator ixs){
-    NodoL* next = ixs->current;
-    while (next != NULL) {
-        NodoL* tmp = next->siguiente;
-        delete next;
-        next = tmp;
-    }
     delete ixs;
 }
 
