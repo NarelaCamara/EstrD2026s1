@@ -22,9 +22,8 @@ int sumatoria (LinkedList xs){
 void Sucesores (LinkedList xs){
     if (isEmpty(xs)) return;
     ListIterator li = getIterator(xs);
-    while (true) {
+    while (!atEnd(li)) {
         SetCurrent(current(li) + 1, li);
-        if (atEnd(li)) break;
         Next(li);
     }
     DisposeIterator(li);
@@ -32,7 +31,7 @@ void Sucesores (LinkedList xs){
 
 //Indica si el elemento pertenece a la lista.
 bool pertence (int x, LinkedList xs){
-     bool p = false;
+    bool p = false;
     if (!isEmpty(xs)) {
         ListIterator li = getIterator(xs);
         while (!atEnd(li)) {
@@ -45,14 +44,49 @@ bool pertence (int x, LinkedList xs){
 };
 
 //Indica la cantidad de elementos iguales a x.
-int apariciones(int x, LinkedList xs){};
+int apariciones(int x, LinkedList xs){
+    int p = 0;
+    if (!isEmpty(xs)) {
+        ListIterator li = getIterator(xs);
+        while (!atEnd(li)) {
+            p =+ current(li) == x ? 1 : 0;
+            Next(li);
+        }
+        DisposeIterator(li);
+    }
+    return p;
+};
 
 //Devuelve el elemento más chico de la lista.
-int minimo(LinkedList xs){};
+int minimo(LinkedList xs){
+    int min = 0;
+    if (!isEmpty(xs)) {
+        ListIterator li = getIterator(xs);
+        min = current(li);
+        while (!atEnd(li)) {
+            int c = current(li);
+            min =+ c >= min ? min : c;
+            Next(li);
+        }
+        DisposeIterator(li);
+    }
+    return min;
+};
 
 /*Dada una lista genera otra con los mismos elementos, en el mismo orden.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
-LinkedList copy(LinkedList xs){};
+LinkedList copy(LinkedList xs){
+    LinkedList c = new LinkedListSt;
+    ListIterator li = getIterator(xs);
+    if(!isEmpty(xs)){
+        while(!atEnd(li)){
+            Snoc(current(li), c);
+            Next(li);
+        }
+        DisposeIterator(li);
+    }
+    return c;
+};
 
 /*Agrega to dos los elementos de la segunda lista al final de los de la primera.
 La segunda lista se destruye.
@@ -78,7 +112,7 @@ int main() {
     cout << "length: " << length(l)<< endl;
     showList(l);
 
-    cout << "ListIterator ----------------------------------------- " << endl;
+    cout << "ListIterator ----implementador ------------------------------------- " << endl;
     ListIterator li = getIterator(l);
     cout << "getIterator: ";
     showIterator(li);
@@ -106,6 +140,21 @@ int main() {
     Sucesores(l);
     cout << "Sucesores: "; showList(l);
     cout << "pertenece: " << (pertence(2,l) ? "true" : "false" ) << endl;
+    cout << "apariciones: " << apariciones(2, l) << endl;
+    cout << "minimo: " << minimo(l) << endl;
+
+    LinkedList c = copy(l);
+    cout << "copy: ";
+    showList(c); cout << endl;
+
+    Sucesores(c);
+    Append(l, c);
+    cout << "append: "; showList(l);
+
+    cout << "Ejercicio LinkedList ---- implementador ----------------------------------------- " << endl;
+    AppendI(l, c);
+    cout << "appendI: "; showList(l);
+    
 
     /**Heaps
     Ejercicio 9

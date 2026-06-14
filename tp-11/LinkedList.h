@@ -64,3 +64,8 @@ void DisposeIterator(ListIterator ixs);
 
 void DestroyL(LinkedList xs);
 //Libera la memoria ocupada por la lista.
+
+/*Agrega to dos los elementos de la segunda lista al final de los de la primera.
+La segunda lista se destruye.
+Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
+void AppendI(LinkedList xs, LinkedList ys);

@@ -106,7 +106,7 @@ void Next(ListIterator ixs){
 
 //Indica si el recorrido ha terminado.
 bool atEnd(ListIterator ixs){
-    return ixs->current->siguiente == NULL;
+    return ixs->current == NULL;
 };
 
 //Libera la memoria ocupada por el iterador.
@@ -125,3 +125,18 @@ void DestroyL(LinkedList xs){
         }
     delete xs;
 };
+
+
+/**
+ * Agregar la op eración de Append a la interfaz de LinkedList, e implementarla como implementador
+en O(1). */
+void AppendI(LinkedList xs, LinkedList ys){
+    NodoL* last = xs->primero;
+    for(int i = 1; i < xs->cantidad; i++){
+        last = last->siguiente;
+    }
+        last->siguiente = ys->primero;
+        xs->cantidad =+ ys->cantidad;
+    delete ys;
+};
+
