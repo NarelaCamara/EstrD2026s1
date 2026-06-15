@@ -375,7 +375,7 @@ int main() {
     Sucesores(c);
     Append(l, c);
     cout << "append: "; showList(l);
-
+    /** 
     cout << "Ejercicio LinkedList ---- implementador ----------------------------------------- " << endl;
     AppendI(l, c);
     cout << "appendI: "; showList(l);
@@ -403,7 +403,7 @@ int main() {
 
 
     cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
-    
+    */
     
     
     /**Heaps
