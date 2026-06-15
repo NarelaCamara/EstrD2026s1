@@ -480,16 +480,20 @@ HEAP (despues) --memory leak?
 /**
  * Agregar la op eración de Append a la interfaz de LinkedList, e implementarla como implementador
 en O(1). */
-void AppendI(LinkedList xs, LinkedList ys)
-{
-    NodoL* acc = xs->primero;
-    for (int i=1; i < xs->cantidad; i++)
-    {
-        acc = acc->siguiente;
+void AppendI(LinkedList xs, LinkedList ys) {
+    if (isEmpty(xs)) {
+        xs->primero = ys->primero;
+        xs->cantidad = ys->cantidad;
+    } else if (!isEmpty(ys)) {
+        NodoL* acc = xs->primero;
+        for (int i = 0; i < xs->cantidad; i++){
+            acc = acc->siguiente;
+        } 
+        acc->siguiente = ys->primero;
+        xs->cantidad += ys->cantidad;
     }
-    acc->siguiente = ys->primero;
-    xs->cantidad = xs->cantidad + ys->cantidad;
-};
+    delete ys;
+}
 
 /*
 STACK (antes)
