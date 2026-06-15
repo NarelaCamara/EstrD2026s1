@@ -282,7 +282,17 @@ HEAP
 /*Agrega to dos los elementos de la segunda lista al final de los de la primera.
 La segunda lista se destruye.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
-void Append(LinkedList xs, LinkedList ys){};
+void Append(LinkedList xs, LinkedList ys){
+    if(!isEmpty(xs)){
+        ListIterator li = getIterator(ys);
+        while(!atEnd(li)){
+            Snoc(current(li), xs);
+            Next(li);
+        }
+        DisposeIterator(li);
+    }
+    delete ys;
+};
 
 /*
 STACK
@@ -373,7 +383,7 @@ int main() {
     showList(c); cout << endl;
 
     Sucesores(c);
-    Append(l, c);
+    Append(c, l);
     cout << "append: "; showList(l);
     /** 
     cout << "Ejercicio LinkedList ---- implementador ----------------------------------------- " << endl;

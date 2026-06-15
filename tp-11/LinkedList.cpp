@@ -101,7 +101,7 @@ HEAP
 // Agrega un elemento al principio de la lista.
 void Cons(int x, LinkedList xs)
 {
-    NodoL *n = new NodoL;
+    NodoL* n = new NodoL;
     n->elem = x;
     n->siguiente = xs->primero;
     xs->primero = n;
@@ -138,7 +138,7 @@ void Tail(LinkedList xs)
 {
     if (xs->cantidad > 0)
     {
-        NodoL *n = xs->primero->siguiente;
+        NodoL* n = xs->primero->siguiente;
         delete xs->primero;
         xs->primero = n;
         xs->cantidad--;
@@ -220,15 +220,15 @@ HEAP
 // Agrega un elemento al final de la lista.
 void Snoc(int x, LinkedList xs)
 {
-    NodoL *last = xs->primero;
-    for (int i = 1; i < xs->cantidad; i++)
+    NodoL* acc = xs->primero;
+    for (int i=1; i < xs->cantidad; i++)
     {
-        last = last->siguiente;
+        acc = acc->siguiente;
     }
-    NodoL *n = new NodoL;
+    NodoL* n = new NodoL;
     n->elem = x;
     n->siguiente = NULL;
-    last->siguiente = n;
+    acc->siguiente = n;
     xs->cantidad++;
 };
 
@@ -266,7 +266,7 @@ HEAP
 ListIterator getIterator(LinkedList xs)
 {
     ListIterator li = new IteratorSt;
-    NodoL *n = xs->primero;
+    NodoL* n = xs->primero;
     li->current = n;
     return li;
 };
@@ -483,7 +483,7 @@ en O(1). */
 void AppendI(LinkedList xs, LinkedList ys)
 {
     NodoL *last = xs->primero;
-    for (int i = 1; i < xs->cantidad; i++)
+    for (int i=1; i < xs->cantidad; i++)
     {
         last = last->siguiente;
     }
