@@ -19,7 +19,7 @@ void showIterator(ListIterator xs)
 
 void showList(LinkedList xs)
 {
-    NodoL *acc = xs->primero;
+    NodoL* acc = xs->primero;
     while (acc != NULL)
     {
         cout << acc->elem;
@@ -436,7 +436,7 @@ HEAP (despues) --memory leak?
 // Libera la memoria ocupada por la lista.
 void DestroyL(LinkedList xs)
 {
-    NodoL *acc = xs->primero;
+    NodoL* acc = xs->primero;
     while (acc != NULL)
     {
         NodoL *tmp = acc->siguiente;
@@ -482,13 +482,13 @@ HEAP (despues) --memory leak?
 en O(1). */
 void AppendI(LinkedList xs, LinkedList ys)
 {
-    NodoL* last = xs->primero;
+    NodoL* acc = xs->primero;
     for (int i=1; i < xs->cantidad; i++)
     {
-        last = last->siguiente;
+        acc = acc->siguiente;
     }
-    last->siguiente = ys->primero;
-    xs->cantidad = +ys->cantidad;
+    acc->siguiente = ys->primero;
+    xs->cantidad = xs->cantidad + ys->cantidad;
     delete ys;
 };
 

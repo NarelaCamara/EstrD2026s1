@@ -372,7 +372,7 @@ int main() {
     cout << "minimo: " << minimo(l) << endl;
 
     cout << "copy: ";
-    showList(copy(l)); cout << endl;
+    showList(copy(l));
 
     LinkedList c = nil();
     Cons(50, c);
@@ -396,7 +396,7 @@ int main() {
     Cons(55, c);
 
     AppendI(c1, c2);
-    cout << "appendI: "; showList(l);
+    cout << "AppendI: "; showList(c1);
     
     cout << "Ejercicio Set ---- implementador ----------------------------------------- " << endl;
     Set s = emptyS();
