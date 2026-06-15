@@ -44,15 +44,15 @@ LinkedList nil()
 /*
 STACK
 +---------------------------------------------------------------------------+
-| nil frame                                                                |
-|   - ln : HEAP LinkedList                                                  |
+| nil frame                                                                 |
+|   - ln : HEAP LinkedList (850)                                            |
 +---------------------------------------------------------------------------+
 
 HEAP
 +-------------------------------------------------------+
-| LinkedListSt                                          |
-|  - cantidad: int = 0                                  |
-|  - primero --> NULL                                   |
+| LinkedListSt (850)                                    |
+|  - cantidad: int (851)                                |
+|  - primero: NodoL (852)                               |
 +-------------------------------------------------------+
 */
 
@@ -66,14 +66,14 @@ bool isEmpty(LinkedList xs)
 STACK
 +---------------------------------------------------------------------------+
 | isEmpty frame                                                             |
-|   - xs : HEAP LinkedList                                                  |
+|   - xs : HEAP LinkedList (850)                                            |
 +---------------------------------------------------------------------------+
 
 HEAP
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 0                                  |
-|  - primero --> NULL                                   |
+|  - cantidad: int = 0 (850)                            |
+|  - primero: NULL   (851)                              |
 +-------------------------------------------------------+
 */
 
@@ -86,15 +86,15 @@ int head(LinkedList xs)
 /*
 STACK
 +---------------------------------------------------------------------------+
-| head frame                                                             |
-|   - xs : HEAP LinkedList                                                  |
+| head frame                                                                |
+|   - xs : HEAP LinkedList (850)                                            |
 +---------------------------------------------------------------------------+
 
 HEAP
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 0                                  |
-|  - primero --> NULL                                   |
+|  - cantidad: int (850)                                |
+|  - primero: NodoL (851)                               |
 +-------------------------------------------------------+
 */
 
@@ -110,18 +110,28 @@ void Cons(int x, LinkedList xs)
 
 /*
 STACK
-+---------------------------------------------------------------------------+
-| Cons frame                                                                |
-|  - xs : HEAP LinkedList                                                   |
-|  - x: int                                                                 |
-+---------------------------------------------------------------------------+
++-------------------------------------------------------+
+| Cons frame                                            |
+|  - xs (850): HEAP LinkedList (950)                    |
+|  - x (851): int                                       |
+|  - n (852): NodoL* --> HEAP NodoL (1050)              |
++-------------------------------------------------------+
 
 HEAP
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 0                                  |
-|  - primero --> NULL                                   |
+|  - cantidad (950): int                                |
+|  - primero (951): --> Heap NodoL (1050)               |
 +-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1050)                                        |
+|  - siguiente (1051) --> HEAP NodoL (1250)             |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250)                                        |
+|  - siguiente --> HEAP NodoL (1251)                    |
++-------------------------------------------------------+
+
 */
 
 void Tail(LinkedList xs)
@@ -135,45 +145,52 @@ void Tail(LinkedList xs)
     }
 };
 /*
-STACK
-+---------------------------------------------------------------------------+
-| Tail frame                                                                |
-|   - xs : LinkedList --> HEAP { cantidad, primero --> HEAP NodoL }         |
-|   - n  : NodoL* --> HEAP NodoL                                            |
-+---------------------------------------------------------------------------+
+STACK (despues)
++------------------------------------------------------+
+| Tail frame                                           |                       |
+|   - xs (850): LinkedList --> HEAP (950)              |
+|   - n (851): --> HEAP NodoL (1250)                   |                   |
++------------------------------------------------------+
 
 HEAP (antes)
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 3                                  |
-|  - primero --> HEAP Nodo1                             |
+|  - cantidad (950): int                                |
+|  - primero (951) --> HEAP NodoL (1150)                |
 +-------------------------------------------------------+
-| Nodo1:                                                |
-|  - elem                                               |
-|  - siguiente --> HEAP Nodo2                           |
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1150): --> HEAP NodoL (1250)            |
 +-------------------------------------------------------+
-| Nodo2:                                                |
-|  - elem                                               |
-|  - siguiente --> HEAP Nodo3                           |
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
 +-------------------------------------------------------+
-| Nodo3:                                                |
-|  - elem                                               |
-|  - siguiente = NULL                                   |
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350) --> HEAP NodoL (...)              |                                  |
 +-------------------------------------------------------+
+
+STACK (despues)
++------------------------------------------------------+
+| Tail frame                                           |                       |
+|   - xs (850): LinkedList --> HEAP (950)              |
+|   - n (851): --> HEAP NodoL (1250)                   |                   |
++------------------------------------------------------+
 
 HEAP (después)
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 2                                  |
-|  - primero --> HEAP Nodo2                             |
+|  - cantidad (950): int                                |
+|  - primero (951) --> HEAP NodoL (1250)                |
 +-------------------------------------------------------+
-| Nodo2:                                                |
-|  - elem                                               |
-|  - siguiente --> HEAP Nodo3                           |
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
 +-------------------------------------------------------+
-| Nodo3:                                                |
-|  - elem                                               |
-|  - siguiente = NULL                                   |
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350) --> HEAP NodoL (...)              |                                  |
 +-------------------------------------------------------+
 
 Nota: el nodo original apuntado por xs->primero (Nodo1) es liberado con delete.
@@ -187,16 +204,16 @@ int length(LinkedList xs)
 
 /*
 STACK
-+---------------------------------------------------------------------------+
-| isEmpty frame                                                             |
-|   - xs : HEAP LinkedList                                                  |
-+---------------------------------------------------------------------------+
++------------------------------------------------------+
+| length frame                                         |
+|   - xs (850) : HEAP LinkedList (950)                 |
++------------------------------------------------------+
 
 HEAP
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 0                                  |
-|  - primero --> NULL                                   |
+|  - cantidad (950): int                                |
+|  - primero (951) --> HEAP NodoL (...)                 |
 +-------------------------------------------------------+
 */
 
@@ -217,49 +234,32 @@ void Snoc(int x, LinkedList xs)
 
 /*
 STACK
-+---------------------------------------------------------------------------+
-| Snoc frame                                                                |
-|   - xs : LinkedList --> HEAP { cantidad, primero --> HEAP NodoL }         |
-|   - x: int                                                                |
-|   - last  : NodoL* --> HEAP NodoL                                         |
-|   - n  : NodoL* --> HEAP NodoL                                            |
-+---------------------------------------------------------------------------+
++------------------------------------------------------+
+| Snoc frame                                           |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - x (851): int                                     |
+|   - last (852): NodoL* --> HEAP NodoL (1150)         |
+|   - n (853): NodoL* --> HEAP NodoL (1350)            |
++-------------------------------------------------------+
 
-HEAP (antes)
+HEAP
 +-------------------------------------------------------+
 | LinkedListSt                                          |
-|  - cantidad: int = 3                                  |
-|  - primero --> HEAP Nodo1                             |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
 +-------------------------------------------------------+
 | Nodo1:                                                |
-|  - elem                                               |
-|  - siguiente --> HEAP Nodo2                           |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
 +-------------------------------------------------------+
-| Nodo2:                                                |
-|  - elem                                               |
-|  - siguiente --> HEAP Nodo3                           |
-+-------------------------------------------------------+
-| Nodo3:                                                |
-|  - elem                                               |
-|  - siguiente = NULL                                   |
-+-------------------------------------------------------+
-
-HEAP (después)
-+-------------------------------------------------------+
-| LinkedListSt                                          |
-|  - cantidad: int = 2                                  |
-|  - primero --> HEAP Nodo2                             |
-+-------------------------------------------------------+
-| Nodo2:                                                |
-|  - elem                                               |
-|  - siguiente --> HEAP Nodo3                           |
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP Nodo3 (1350)            |
 +-------------------------------------------------------+
 | Nodo3:                                                |
-|  - elem                                               |
-|  - siguiente = NULL                                   |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
 +-------------------------------------------------------+
-
-Nota: el nodo original apuntado por xs->primero (Nodo1) es liberado con delete.
 */
 
 // Apunta el recorrido al primer elemento.
@@ -271,17 +271,80 @@ ListIterator getIterator(LinkedList xs)
     return li;
 };
 
+/*
+STACK
++------------------------------------------------------+
+| getIterator frame                                    |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - li (851): ListIterator --> HEAP (1150)           |
+|   - n (853): NodoL* --> HEAP NodoL (1250)            |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedListSt                                          |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1250)              |
++-------------------------------------------------------+
+| ListIterator:                                         |
+|  - current (1150): --> HEAP NodoL (1250)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+*/
+
 // Devuelve el elemento actual en el recorrido.
 int current(ListIterator ixs)
 {
     return ixs->current->elem;
 };
 
+/*
+STACK
++------------------------------------------------------+
+| current frame                                        |
+|   - ixs (851): ListIterator --> HEAP (1150)          |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| ListIterator:                                         |
+|  - current (1150): --> HEAP NodoL (1250)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+*/
+
+
 // Reemplaza el elemento actual por otro elemento.
 void SetCurrent(int x, ListIterator ixs)
 {
     ixs->current->elem = x;
 };
+/*
+STACK
++------------------------------------------------------+
+| SetCurrent frame                                     |
+|   - ixs (850): ListIterator --> HEAP (1050)          |
+|   - x (851): int                                     |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+*/
+
+
 
 // Pasa al siguiente elemento.
 void Next(ListIterator ixs)
@@ -289,11 +352,47 @@ void Next(ListIterator ixs)
     ixs->current = ixs->current->siguiente;
 };
 
+/*
+STACK
++------------------------------------------------------+
+| Next frame                                           |
+|   - ixs (850): ListIterator --> HEAP (1050)          |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| Nodo1:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+*/
+
 // Indica si el recorrido ha terminado.
 bool atEnd(ListIterator ixs)
 {
     return ixs->current == NULL;
 };
+
+/*
+STACK
++------------------------------------------------------+
+| Next frame                                           |
+|   - ixs (850): ListIterator --> HEAP (1050)          |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+*/
 
 // Libera la memoria ocupada por el iterador.
 /** como elimina en destroyL ya el nodo current esta eliminado, no necesario borrarlo otra vez.  */
@@ -301,6 +400,38 @@ void DisposeIterator(ListIterator ixs)
 {
     delete ixs;
 }
+
+/*
+STACK (antes)
++------------------------------------------------------+
+| Next frame                                           |
+|   - ixs (850): ListIterator --> HEAP (1050)          |
++------------------------------------------------------+
+
+HEAP (antes)
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+
+
+STACK (despues)
++------------------------------------------------------+
+| Next frame                                           |
+|   - ixs (850): ListIterator --> HEAP (1050)          |
++------------------------------------------------------+
+
+HEAP (despues) --memory leak?
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+*/
 
 // Libera la memoria ocupada por la lista.
 void DestroyL(LinkedList xs)
@@ -314,6 +445,37 @@ void DestroyL(LinkedList xs)
     }
     delete xs;
 };
+
+/*
+STACK (antes)
++------------------------------------------------------+
+| Next frame                                           |
+|   - ixs (850): LinkedList --> HEAP (1050)            |
++------------------------------------------------------+
+
+HEAP (antes)
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               | 
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+
+
+STACK (despues)
++------------------------------------------------------+
+| Next frame                                           |
+|   - ixs (850): ListIterator --> HEAP (1050)          |
++------------------------------------------------------+
+
+HEAP (despues) --memory leak?
++-------------------------------------------------------+
+|  - ... (vacia)                                        |
++-------------------------------------------------------+
+*/
 
 /**
  * Agregar la op eración de Append a la interfaz de LinkedList, e implementarla como implementador
@@ -329,3 +491,55 @@ void AppendI(LinkedList xs, LinkedList ys)
     xs->cantidad = +ys->cantidad;
     delete ys;
 };
+
+/*
+STACK (antes)
++------------------------------------------------------+
+| Next frame                                           |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - ys (851): LinkedList --> HEAP (1150)             |
++------------------------------------------------------+
+
+HEAP (antes)
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               | 
+|  - primero (1051): --> HEAP NodoL (1250)              |
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1150): int                               | 
+|  - primero (1151): --> HEAP NodoL (1350)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1351): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+
+
+
+STACK (despues)
++------------------------------------------------------+
+| Next frame                                           |
+|   - xs (850): LinkedList --> HEAP (1050)             |
++------------------------------------------------------+
+
+HEAP (despues)
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               | 
+|  - primero (1051): --> HEAP NodoL (1250)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)             |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1351): --> HEAP NodoL (...)             |
++-------------------------------------------------------+
+
+*/

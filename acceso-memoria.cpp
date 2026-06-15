@@ -83,7 +83,7 @@ STACK (f1 activa)
 |   - nombre                                          |
 |   - edad                                            |
 |                                                     |
-| p1 : PersonaStr*  ---> HEAP objeto A {nombre,edad} |
+| p1 : PersonaStr*  ---> HEAP objeto A {nombre,edad}  |
 |                                                     |
 | ps : PersonaStr[3]                                  |
 |   [0] {nombre,edad}                                 |
@@ -92,19 +92,19 @@ STACK (f1 activa)
 |                                                     |
 | ps1 : PersonaStr*[2]                                |
 |   [0] --> HEAP objeto B {nombre,edad}               |
-|   [1] = basura (sin inicializar)                   |
+|   [1] = basura (sin inicializar)                    |
 |                                                     |
-| ps2 : PersonaStr*  ---> HEAP array C de 3          |
+| ps2 : PersonaStr*  ---> HEAP array C de 3           |
 |   C[0] {nombre,edad}                                |
 |   C[1] {nombre,edad}                                |
 |   C[2] {nombre,edad}                                |
 |                                                     |
 | ps3 : PersonaStr** ---> HEAP array D de 5 punteros  |
-|   D[0] --> HEAP objeto E0 {nombre,edad}            |
-|   D[1] --> HEAP objeto E1 {nombre,edad}            |
-|   D[2] --> HEAP objeto E2 {nombre="Pepe",edad}     |
-|   D[3] --> HEAP objeto E3 {nombre,edad}            |
-|   D[4] --> HEAP objeto E4 {nombre,edad}            |
+|   D[0] --> HEAP objeto E0 {nombre,edad}             |
+|   D[1] --> HEAP objeto E1 {nombre,edad}             |
+|   D[2] --> HEAP objeto E2 {nombre="Pepe",edad}      |
+|   D[3] --> HEAP objeto E3 {nombre,edad}             |
+|   D[4] --> HEAP objeto E4 {nombre,edad}             |
 +-----------------------------------------------------+
 
 HEAP
