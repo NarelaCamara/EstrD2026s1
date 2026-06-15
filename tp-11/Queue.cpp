@@ -1,24 +1,23 @@
 #include <iostream>
 #include "Queue.h"
 
-struct NodoQ {
-int elem; // valor del nodo
-NodoQ* siguiente; // puntero al siguiente nodo
-};
-struct QueueSt {
-int cantidad; // cantidad de elementos
-NodoQ* primero; // puntero al primer nodo
-NodoQ* ultimo; // puntero al ultimo nodo
-};
-typedef QueueSt* Queue;
 //Definir la siguiente interfaz de este tip o de colas, resp etando el costo de las op eraciones:
-Queue emptyQ();
+Queue emptyQ(){
+    Queue q = new QueueSt;
+    q->cantidad = 0;
+    q->primero= NULL;
+    q->ultimo= NULL;
+};
 //Crea una cola vacía.
 //Costo: O(1).
-bool isEmptyQ(Queue q);
+bool isEmptyQ(Queue q){
+   return q->cantidad == 0;
+};
 //Indica si la cola está vacía.
 //Costo: O(1).
-int firstQ(Queue q);
+int firstQ(Queue q){
+    return 
+};
 //Devuelve el primer elemento.
 //Costo: O(1).
 void Enqueue(int x, Queue q);
