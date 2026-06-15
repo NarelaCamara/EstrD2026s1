@@ -241,7 +241,7 @@ HEAP
 /*Dada una lista genera otra con los mismos elementos, en el mismo orden.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
 LinkedList copy(LinkedList xs){
-    LinkedList c = new LinkedListSt;
+    LinkedList* c = new LinkedListSt;
     ListIterator li = getIterator(xs);
     if(!isEmpty(xs)){
         while(!atEnd(li)){
