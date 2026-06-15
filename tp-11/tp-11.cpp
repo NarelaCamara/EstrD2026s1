@@ -405,17 +405,16 @@ int main() {
     AddS(2,s);
     AddS(3,s);
     AddS(4,s);
-    cout << (belongsS(4, s) ? "true" : "false") << endl;
+    cout << "belongsS: " << (belongsS(4, s) ? "true" : "false") << endl;
     RemoveS(4,s);
     cout << "sizes: " << sizeS(s) << endl;
-    cout << "setToList"; showList(setToList(s)); cout << endl;
+    cout << "setToList: "; showList(setToList(s));
     DestroyS(s);
     cout << "DestroyS fue llamado correctamente." << endl;
 
     cout << "Ejercicio Set ---- usuario ----------------------------------------- " << endl;
 
 
-    
     cout << "Ejercicio Queues ---- implementador ----------------------------------------- " << endl;
 
 
