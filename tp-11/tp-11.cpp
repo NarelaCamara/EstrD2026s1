@@ -380,7 +380,13 @@ int main() {
     AppendI(l, c);
     cout << "appendI: "; showList(l);
     
+    cout << "Ejercicio Set ---- implementador ----------------------------------------- " << endl;
 
+    cout << "Ejercicio Set ---- usuario ----------------------------------------- " << endl;
+
+    cout << "Ejercicio Queues ---- implementador ----------------------------------------- " << endl;
+
+    cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
     /**Heaps
     Ejercicio 9
     Implementar heaps binarias según el có digo de la teórica, y probarlas con ejemplos */
