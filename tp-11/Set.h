@@ -1,3 +1,6 @@
+#ifndef TP11_SET_H
+#define TP11_SET_H
+
 #include <iostream>
 #include "LinkedList.h"
 using namespace std;
@@ -39,3 +42,5 @@ LinkedList setToList(Set s);
 
 //Lib era la memoria o cupada p or el conjunto
 void DestroyS(Set s);
+
+#endif // TP11_SET_H

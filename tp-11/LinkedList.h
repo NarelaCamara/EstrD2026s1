@@ -1,6 +1,8 @@
+#ifndef TP11_LINKEDLIST_H
+#define TP11_LINKEDLIST_H
+
 #include <iostream>
 using namespace std;
-
 
 //cantidad cuenta apartir del uno
 struct NodoL{
@@ -69,3 +71,5 @@ void DestroyL(LinkedList xs);
 La segunda lista se destruye.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
 void AppendI(LinkedList xs, LinkedList ys);
+
+#endif // TP11_LINKEDLIST_H
