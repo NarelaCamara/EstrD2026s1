@@ -241,15 +241,8 @@ HEAP
 /*Dada una lista genera otra con los mismos elementos, en el mismo orden.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
 LinkedList copy(LinkedList xs){
-    LinkedList c = new LinkedListSt;
-    ListIterator li = getIterator(xs);
-    if(!isEmpty(xs)){
-        while(!atEnd(li)){
-            Snoc(current(li), c);
-            Next(li);
-        }
-        DisposeIterator(li);
-    }
+    LinkedList c = xs;
+    c= xs;
     return c;
 };
 
@@ -332,18 +325,18 @@ HEAP
 int main() {
     cout << "LinkedList ----------------------------------------- " << endl;
     LinkedList l = nil();
-    Cons(1,l);
-    Cons(2,l);
-    Cons(3,l);
     Cons(4,l);
+    Cons(5,l);
+    Cons(6,l);
+    Cons(7,l);
     showList(l);
     cout << "Head: " << head(l) << endl;
     Tail(l);
     showList(l);
     cout << "Second: " << head(l) << endl;
     cout << "isEmpty: " << (isEmpty(l) ? "true" : "false") << endl;
-    Snoc(5,l); 
-    Snoc(6,l);
+    Snoc(3,l); 
+    Snoc(2,l);
     cout << "length: " << length(l)<< endl;
     showList(l);
 
@@ -378,14 +371,19 @@ int main() {
     cout << "apariciones: " << apariciones(2, l) << endl;
     cout << "minimo: " << minimo(l) << endl;
 
-    LinkedList c = copy(l);
     cout << "copy: ";
-    showList(c); cout << endl;
+    showList(copy(l)); cout << endl;
+
+    LinkedList c = nil();
+    Cons(50, c);
+    Cons(51, c);
+    Cons(52, c);
 
     Sucesores(c);
     Append(c, l);
-    cout << "append: "; showList(l);
-    /** 
+    cout << "append: "; showList(c);
+
+     
     cout << "Ejercicio LinkedList ---- implementador ----------------------------------------- " << endl;
     AppendI(l, c);
     cout << "appendI: "; showList(l);
@@ -413,7 +411,7 @@ int main() {
 
 
     cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
-    */
+    
     
     
     /**Heaps
