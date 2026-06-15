@@ -385,7 +385,17 @@ int main() {
 
      
     cout << "Ejercicio LinkedList ---- implementador ----------------------------------------- " << endl;
-    AppendI(l, c);
+    LinkedList c1 = nil();
+    Cons(50, c);
+    Cons(51, c);
+    Cons(52, c);
+
+    LinkedList c2 = nil();
+    Cons(53, c);
+    Cons(54, c);
+    Cons(55, c);
+
+    AppendI(c1, c2);
     cout << "appendI: "; showList(l);
     
     cout << "Ejercicio Set ---- implementador ----------------------------------------- " << endl;

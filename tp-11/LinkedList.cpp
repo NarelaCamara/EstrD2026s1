@@ -4,7 +4,7 @@ using namespace std;
 
 void showIterator(ListIterator xs)
 {
-    NodoL *acc = xs->current;
+    NodoL* acc = xs->current;
     while (acc != NULL)
     {
         cout << acc->elem;
@@ -482,7 +482,7 @@ HEAP (despues) --memory leak?
 en O(1). */
 void AppendI(LinkedList xs, LinkedList ys)
 {
-    NodoL *last = xs->primero;
+    NodoL* last = xs->primero;
     for (int i=1; i < xs->cantidad; i++)
     {
         last = last->siguiente;
