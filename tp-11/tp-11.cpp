@@ -381,12 +381,31 @@ int main() {
     cout << "appendI: "; showList(l);
     
     cout << "Ejercicio Set ---- implementador ----------------------------------------- " << endl;
+    Set s = emptyS();
+    cout << "isEmptyS "<< (isEmptyS(s)? "true" : "false") << endl;
+    AddS(1,s);
+    AddS(2,s);
+    AddS(3,s);
+    AddS(4,s);
+    cout << (belongsS(4, s) ? "true" : "false") << endl;
+    RemoveS(4,s);
+    cout << "sizes: " << sizeS(s) << endl;
+    cout << "setToList"; showList(setToList(s)); cout << endl;
+    DestroyS(s);
+    cout << "DestroyS fue llamado correctamente." << endl;
 
     cout << "Ejercicio Set ---- usuario ----------------------------------------- " << endl;
 
+
+    
     cout << "Ejercicio Queues ---- implementador ----------------------------------------- " << endl;
 
+
+
     cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
+    
+    
+    
     /**Heaps
     Ejercicio 9
     Implementar heaps binarias según el có digo de la teórica, y probarlas con ejemplos */
