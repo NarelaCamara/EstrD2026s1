@@ -489,7 +489,6 @@ void AppendI(LinkedList xs, LinkedList ys)
     }
     acc->siguiente = ys->primero;
     xs->cantidad = xs->cantidad + ys->cantidad;
-    delete ys;
 };
 
 /*
