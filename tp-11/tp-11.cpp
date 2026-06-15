@@ -17,6 +17,38 @@ int sumatoria (LinkedList xs){
     return sum;
 }
 
+/*
+STACK
++------------------------------------------------------+
+| sumatoria frame                                      |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - sum (851): int                                   |
+|   - li (852): ListIterator --> HEAP NodoL (1550)     |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1551): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP Nodo3 (1350)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
++-------------------------------------------------------+
+*/
+
 
 //Incrementa en uno to dos los elementos.
 void Sucesores (LinkedList xs){

@@ -379,7 +379,7 @@ bool atEnd(ListIterator ixs)
 /*
 STACK
 +------------------------------------------------------+
-| Next frame                                           |
+| atEnd frame                                          |
 |   - ixs (850): ListIterator --> HEAP (1050)          |
 +------------------------------------------------------+
 
@@ -404,7 +404,7 @@ void DisposeIterator(ListIterator ixs)
 /*
 STACK (antes)
 +------------------------------------------------------+
-| Next frame                                           |
+| DisposeIterator frame                                |
 |   - ixs (850): ListIterator --> HEAP (1050)          |
 +------------------------------------------------------+
 
@@ -421,7 +421,7 @@ HEAP (antes)
 
 STACK (despues)
 +------------------------------------------------------+
-| Next frame                                           |
+| DisposeIterator frame                                |
 |   - ixs (850): ListIterator --> HEAP (1050)          |
 +------------------------------------------------------+
 
@@ -449,7 +449,7 @@ void DestroyL(LinkedList xs)
 /*
 STACK (antes)
 +------------------------------------------------------+
-| Next frame                                           |
+| DestroyL frame                                       |
 |   - ixs (850): LinkedList --> HEAP (1050)            |
 +------------------------------------------------------+
 
@@ -467,7 +467,7 @@ HEAP (antes)
 
 STACK (despues)
 +------------------------------------------------------+
-| Next frame                                           |
+| DestroyL frame                                       |
 |   - ixs (850): ListIterator --> HEAP (1050)          |
 +------------------------------------------------------+
 
@@ -495,7 +495,7 @@ void AppendI(LinkedList xs, LinkedList ys)
 /*
 STACK (antes)
 +------------------------------------------------------+
-| Next frame                                           |
+| AppendI frame                                        |
 |   - xs (850): LinkedList --> HEAP (1050)             |
 |   - ys (851): LinkedList --> HEAP (1150)             |
 +------------------------------------------------------+
@@ -523,7 +523,7 @@ HEAP (antes)
 
 STACK (despues)
 +------------------------------------------------------+
-| Next frame                                           |
+| AppendI frame                                        |
 |   - xs (850): LinkedList --> HEAP (1050)             |
 +------------------------------------------------------+
 
