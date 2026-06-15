@@ -33,7 +33,7 @@ HEAP
 |  - primero (1051): --> HEAP NodoL (1150)              |
 +-------------------------------------------------------+
 | ListIterator                                          |
-|  - current (1551): --> HEAP NodoL (1150)              |
+|  - current (1550): --> HEAP NodoL (1150)              |
 +-------------------------------------------------------+
 | NodoL:                                                |
 |  - elem (1150): int                                   |
@@ -41,7 +41,7 @@ HEAP
 +-------------------------------------------------------+
 | NodoL:                                                |
 |  - elem (1250): int                                   |
-|  - siguiente (1251): --> HEAP Nodo3 (1350)            |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
 +-------------------------------------------------------+
 | NodoL:                                                |
 |  - elem (1350): int                                   |
@@ -60,6 +60,37 @@ void Sucesores (LinkedList xs){
     }
     DisposeIterator(li);
 }
+/*
+STACK
++------------------------------------------------------+
+| Sucesores frame                                      |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - li (852): ListIterator --> HEAP NodoL (1550)     |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1550): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
++-------------------------------------------------------+
+*/
+
 
 //Indica si el elemento pertenece a la lista.
 bool pertence (int x, LinkedList xs){
@@ -75,6 +106,40 @@ bool pertence (int x, LinkedList xs){
     return p;
 };
 
+/*
+STACK
++------------------------------------------------------+
+| pertence frame                                      |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - li (852): ListIterator --> HEAP (1550)           |
+|   - p (853): bool                                    |
+|   - x (854): int                                     |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1550): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
++-------------------------------------------------------+
+*/
+
+
 //Indica la cantidad de elementos iguales a x.
 int apariciones(int x, LinkedList xs){
     int p = 0;
@@ -88,6 +153,39 @@ int apariciones(int x, LinkedList xs){
     }
     return p;
 };
+
+/*
+STACK
++------------------------------------------------------+
+| apariciones frame                                    |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - li (852): ListIterator --> HEAP (1550)           |
+|   - p (853): int                                     |
+|   - x (854): int                                     |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1550): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
++-------------------------------------------------------+
+*/
 
 //Devuelve el elemento más chico de la lista.
 int minimo(LinkedList xs){
@@ -104,6 +202,39 @@ int minimo(LinkedList xs){
     }
     return min;
 };
+/*
+STACK
++------------------------------------------------------+
+| minimo frame                                         |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - li (852): ListIterator --> HEAP (1550)           |
+|   - min (853): int                                   |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1550): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
++-------------------------------------------------------+
+*/
+
+
 
 /*Dada una lista genera otra con los mismos elementos, en el mismo orden.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
@@ -120,10 +251,70 @@ LinkedList copy(LinkedList xs){
     return c;
 };
 
+/*
+STACK
++------------------------------------------------------+
+| copy frame                                           |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - c (851): LinkedList --> HEAP (2050)              |
+|   - li (852): ListIterator --> HEAP (1550)           |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (2050): int                               |
+|  - primero (2051): --> HEAP NodoL (...)               |
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (...)               |
++-------------------------------------------------------+
+| ListIterator                                          |
+|  - current (1550): --> HEAP NodoL (...)               |
++-------------------------------------------------------+
+*/
+
+
+
 /*Agrega to dos los elementos de la segunda lista al final de los de la primera.
 La segunda lista se destruye.
 Nota: notar que el costo mejoraría si Snoc fuese O(1), ¾cómo p o dría serlo?*/
 void Append(LinkedList xs, LinkedList ys){};
+
+/*
+STACK
++------------------------------------------------------+
+| Append frame                                         |
+|   - xs (850): LinkedList --> HEAP (1050)             |
+|   - ys (851): LinkedList --> HEAP (1150)             |
++------------------------------------------------------+
+
+HEAP
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| LinkedList                                            |
+|  - cantidad (1050): int                               |
+|  - primero (1051): --> HEAP NodoL (1150)              |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1150): int                                   |
+|  - siguiente (1151): --> HEAP NodoL (1250)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1250): int                                   |
+|  - siguiente (1251): --> HEAP NodoL (1350)            |
++-------------------------------------------------------+
+| NodoL:                                                |
+|  - elem (1350): int                                   |
+|  - siguiente (1350): NULL                             |
++-------------------------------------------------------+
+*/
+
+
 
 //cero es falso y uno es verdadero
 int main() {
