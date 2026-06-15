@@ -81,5 +81,5 @@ void DestroyS(Set s){
         acc = tmp;
         c--;
     }
-
+    delete s;
 };
