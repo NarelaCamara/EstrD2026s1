@@ -1,5 +1,5 @@
 
-#include "Tree.cpp"
+#include "Tree.h"
 
 #ifndef QUEUE_TREE
 #define QUEUE_TREE

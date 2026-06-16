@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-#include "Tree.cpp"
+#include "Tree.h"
 
 
 /**Definir las funciones del punto anterior utilizando BFS (recorrido iterativo a lo ancho), a excep ción

@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
-#include "LinkedList.cpp"
-#include "Set.cpp"
-#include "Queue.cpp"
-#include "Tree.cpp"
-#include "ArrayList.cpp"
-#include "QueueTree.cpp"
+#include "LinkedList.h"
+#include "Set.h"
+#include "Queue.h"
+#include "Tree.h"
+#include "ArrayList.h"
+#include "QueueTree.h"
 
 
 //Devuelve la suma de to dos los elementos
