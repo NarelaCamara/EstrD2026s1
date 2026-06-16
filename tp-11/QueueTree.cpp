@@ -1,8 +1,8 @@
-
+#include <iostream>
+#include <iomanip>
+using namespace std;
 #include "Tree.cpp"
 
-#ifndef QUEUE_TREE
-#define QUEUE_TREE
 
 /**Definir las funciones del punto anterior utilizando BFS (recorrido iterativo a lo ancho), a excep ción
 de heightT, leaves y levelN. Para esto, utilizar una QueueTree de Tree. */
@@ -47,9 +47,7 @@ void MergeQT(QueueTree q1, QueueTree q2);
 //Anexa q2 al final de q1, lib erando la memoria inservible de q2 en el pro ceso.
 //Nota: Si bien se lib era memoria de q2, no necesariamente la de sus no dos.
 //Costo: O(1).
-void DestroyQT(QueueTree q);
+void DestroyQT(QueueTree q){};
 //Lib era la memoria o cupada p or la cola.
 //Costo: O(n).
 
-
-#endif
