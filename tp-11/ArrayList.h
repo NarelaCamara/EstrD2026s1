@@ -1,4 +1,6 @@
 #include <iostream>
+#ifndef ARRAYLIST_H
+#define ARRAYLIST_H
 
 struct ArrayListSt
 {
@@ -7,7 +9,7 @@ struct ArrayListSt
     int capacidad;  // tamaño del array
 };
 // Definir la siguiente interfaz de este tip o de listas:
-typedef ArrayListSt *ArrayList;
+typedef ArrayListSt* ArrayList;
 
 // Crea una lista con 0 elementos.
 
@@ -28,3 +30,5 @@ void add(int x, ArrayList xs);
 // Agrega un elemento al final de la lista.
 void remove(ArrayList xs);
 // Borra el último elemento de la lista.
+
+#endif
