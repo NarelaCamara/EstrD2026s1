@@ -5,11 +5,7 @@ using namespace std;
 
 //definir la siguiente interfaz:
 Tree emptyT(){
-    Tree t = new NodeT;
-    t->elem = NULL;
-    t->left=NULL;
-    t->right=NULL;
-    return t;
+    return NULL;
 };
 
 Tree nodeT(int elem, Tree left, Tree right){
@@ -22,7 +18,7 @@ Tree nodeT(int elem, Tree left, Tree right){
 
 //
 bool isEmptyT(Tree t){
-    return t->elem == NULL;
+    return t == NULL;
 };
 
 //precondicion: No debe ser unn arbol vacio
