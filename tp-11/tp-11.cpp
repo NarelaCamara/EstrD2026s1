@@ -430,10 +430,10 @@ int main() {
     cout << "lengthQ: "; lengthQ(q);
 
     Queue q1 = emptyQ();
-    Enqueue(11, q);
-    Enqueue(12, q);
-    Enqueue(13, q);
-    Enqueue(14, q);
+    Enqueue(11, q1);
+    Enqueue(12, q1);
+    Enqueue(13, q1);
+    Enqueue(14, q1);
 
     MergeQ(q1,q);
     cout << "MergeQ: "; showQueue(q1);
