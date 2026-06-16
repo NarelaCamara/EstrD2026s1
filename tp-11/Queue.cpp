@@ -38,10 +38,13 @@ void Enqueue(int x, Queue q){
     n->elem= x;
     n->siguiente = NULL;
 
-    NodoQ* l = q->ultimo;
-    l ->siguiente = n;
-    
+    if(q->cantidad == 0){
+        q->primero= n;
+    }else{
+        q->ultimo->siguiente = n;
+    }
     q->ultimo = n;
+    q->cantidad++;
 };
 
 //Costo: O(1).
