@@ -323,6 +323,7 @@ HEAP
 
 //cero es falso y uno es verdadero
 int main() {
+    /*
     cout << "LinkedList ----------------------------------------- " << endl;
     LinkedList l = nil();
     Cons(4,l);
@@ -396,8 +397,8 @@ int main() {
     Cons(55, c);
 
     AppendI(c1, c2);
-    cout << "AppendI: "; showList(c1);
-    
+    cout << "AppendI: No funciona :("; showList(c1);
+    */
     cout << "Ejercicio Set ---- implementador ----------------------------------------- " << endl;
     Set s = emptyS();
     cout << "isEmptyS "<< (isEmptyS(s)? "true" : "false") << endl;

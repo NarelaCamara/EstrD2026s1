@@ -59,14 +59,11 @@ int sizeS(Set s){
 
 //Devuelve una lista con los lementos del conjunto.
 LinkedList setToList(Set s){
-    LinkedList l = new LinkedListSt;
-    l = nil();
+    LinkedList l = nil();
     NodoS* acc = s->primero;
-    int c = s->cantidad;
-    while(c > 0){
-        Cons(acc->elem, l);
+    for(int i=0;i < s->cantidad; i++){
+        Snoc(acc->elem, l);
         acc = acc->siguiente;
-        c--;
     }
     return l;
 }
