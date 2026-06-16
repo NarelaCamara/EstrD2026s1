@@ -8,6 +8,7 @@ void showQueue (Queue q) {
         cout << n->elem << "-";
         n = n->siguiente;
     }
+    cout << endl;
 }
 
 
@@ -17,7 +18,8 @@ Queue emptyQ(){
     q->cantidad = 0;
     q->primero= NULL;
     q->ultimo= NULL;
-};
+    return q;
+}
 
 //Crea una cola vacía.
 //Costo: O(1).
@@ -50,7 +52,12 @@ void Enqueue(int x, Queue q){
 //Costo: O(1).
 //Quita el primer elemento de la cola.
 void Dequeue(Queue q){
+    if (q->primero == NULL) return;
+    NodoQ* tmp = q->primero;
     q->primero = q->primero->siguiente;
+    delete tmp;
+    q->cantidad--;
+    if (q->primero == NULL) q->ultimo = NULL;
 };
 
 //Costo: O(1).
@@ -61,9 +68,16 @@ int lengthQ(Queue q){
 
 //Costo: O(1).
 void MergeQ(Queue q1, Queue q2){
-    q1->cantidad=+q2->cantidad;
-    q1->ultimo->siguiente = q2->primero;
-    q1->ultimo = q2->ultimo;
+    if (q2 == NULL || q2->cantidad == 0) return;
+    if (q1 == NULL) return;
+    if (q1->cantidad == 0) {
+        q1->primero = q2->primero;
+        q1->ultimo = q2->ultimo;
+    } else {
+        q1->ultimo->siguiente = q2->primero;
+        q1->ultimo = q2->ultimo;
+    }
+    q1->cantidad += q2->cantidad;
     delete q2;
 
 };

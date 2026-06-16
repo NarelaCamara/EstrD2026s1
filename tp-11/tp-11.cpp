@@ -427,7 +427,7 @@ int main() {
     cout << "ShowQueue: "; showQueue(q);
     Dequeue(q);
     cout << "ShowQueue: "; showQueue(q);
-    cout << "lengthQ: "; lengthQ(q);
+    cout << "lengthQ: " << lengthQ(q);
 
     Queue q1 = emptyQ();
     Enqueue(11, q1);
@@ -436,7 +436,7 @@ int main() {
     Enqueue(14, q1);
 
     MergeQ(q1,q);
-    cout << "MergeQ: "; showQueue(q1);
+    cout << endl << "MergeQ: "; showQueue(q1);
 
     DestroyQ(q);
     cout << "DestroyQ fue llamado correctamente." << endl;

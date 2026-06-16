@@ -25,6 +25,8 @@ void Enqueue(int x, Queue q);
 //Agrega un elemento al final de la cola.
 //Costo: O(1).
 void Dequeue(Queue q);
+// Muestra el contenido de la cola (para debugging)
+void showQueue(Queue q);
 //Quita el primer elemento de la cola.
 //Costo: O(1).
 int lengthQ(Queue q);
