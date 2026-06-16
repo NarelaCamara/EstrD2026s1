@@ -5,6 +5,7 @@ using namespace std;
 #include "Queue.cpp"
 #include "Tree.cpp"
 #include "ArrayList.cpp"
+#include "QueueTree.cpp"
 
 
 //Devuelve la suma de to dos los elementos
@@ -367,10 +368,10 @@ int heightT(Tree t){
 //Dado un árb ol devuelve su altura.
 
 ArrayList toList(Tree t){
-    ArrayList l = newArrayList()
-    while(!isEmptyT(t)){
+    ArrayList l = newArrayList();
+    //while(!isEmptyT(t)){
         //return 1 + ( heightT(left(t)), heightT(right(t))); 
-    }
+    //}
     return l;
 }
 //Dado un árb ol devuelve una lista con to dos sus elementos.
@@ -385,6 +386,35 @@ ArrayList levelN(int n, Tree t){
 };
 //Dados un número n y un árb ol devuelve una lista con los no dos de nivel n
 
+
+
+
+/** EJERCICIO 8 **/
+
+
+//Dado un árb ol binario de enteros devuelve la suma entre sus elementos.
+int sumarT(QueueTree t){
+};
+
+/*Dado un árb ol binario devuelve su cantidad de elementos, es decir, el tamaño del árb ol (size
+en inglés).*/
+int sizeT(QueueTree t){
+}
+
+/*Dados un elemento y un árb ol binario devuelve True si existe un elemento igual a ese en el
+árb ol. */
+bool perteneceT(int e, QueueTree t){}
+
+/*Dados un elemento e y un árb ol binario devuelve la cantidad de elementos del árb ol que son
+iguales a e.*/
+int aparicionesT(int e, QueueTree t){
+
+}
+
+//Dado un árb ol devuelve una lista con to dos sus elementos.
+ArrayList toList(QueueTree t){
+
+}
 
 //cero es falso y uno es verdadero
 int main() {
