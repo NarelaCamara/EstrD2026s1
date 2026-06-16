@@ -2,7 +2,7 @@
 using namespace std;
 #include "LinkedList.cpp"
 #include "Set.cpp"
-
+#include "Queue.cpp"
 
 
 //Devuelve la suma de to dos los elementos
@@ -398,10 +398,8 @@ int main() {
 
     AppendI(c1, c2);
     cout << "AppendI: No funciona :("; showList(c1);
-    */
     cout << "Ejercicio Set ---- implementador ----------------------------------------- " << endl;
     Set s = emptyS();
-    cout << "isEmptyS "<< (isEmptyS(s)? "true" : "false") << endl;
     AddS(1,s);
     AddS(2,s);
     AddS(3,s);
@@ -411,19 +409,40 @@ int main() {
     RemoveS(4,s);
     cout << "sizes: " << sizeS(s) << endl;
     cout << "showSet: "; showSet(s); cout << endl;
-    cout << "setToList: "; showList(setToList(s));
+    cout << "setToList: No funciona correctamente :("; showList(setToList(s));
     DestroyS(s);
     cout << "DestroyS fue llamado correctamente." << endl;
 
-    cout << "Ejercicio Set ---- usuario ----------------------------------------- " << endl;
+    */
 
-/*
     cout << "Ejercicio Queues ---- implementador ----------------------------------------- " << endl;
 
+    Queue q = emptyQ();
+    Enqueue(1, q);
+    Enqueue(2, q);
+    Enqueue(3, q);
+    Enqueue(4, q);
+    cout << "isEmptyQ: " << (isEmptyQ(q) ? "true" : "false") << endl;
+    cout << "first: " << firstQ(q) << endl;
+    cout << "ShowQueue: "; showQueue(q);
+    Dequeue(q);
+    cout << "ShowQueue: "; showQueue(q);
+    cout << "lengthQ: "; lengthQ(q);
+
+    Queue q1 = emptyQ();
+    Enqueue(11, q);
+    Enqueue(12, q);
+    Enqueue(13, q);
+    Enqueue(14, q);
+
+    MergeQ(q1,q);
+    cout << "MergeQ: "; showQueue(q1);
+
+    DestroyQ(q);
+    cout << "DestroyQ fue llamado correctamente." << endl;
 
 
     cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
-*/
     
     
     /**Heaps

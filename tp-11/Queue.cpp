@@ -1,16 +1,24 @@
 #include <iostream>
 #include "Queue.h"
 
+
+void showQueue (Queue q) {
+    NodoQ* n= q->primero;
+    for(int i =0; i < q->cantidad; i++){
+        cout << n->elem << "-";
+        n = n->siguiente;
+    }
+}
+
+
 //Definir la siguiente interfaz de este tip o de colas, resp etando el costo de las op eraciones:
 Queue emptyQ(){
     Queue q = new QueueSt;
     q->cantidad = 0;
-    NodoQ* n= new NodoQ;
-    n->elem=0;
-    n->siguiente = NULL;
-    q->primero= n;
-    q->ultimo= n;
+    q->primero= NULL;
+    q->ultimo= NULL;
 };
+
 //Crea una cola vacía.
 //Costo: O(1).
 //Indica si la cola está vacía.

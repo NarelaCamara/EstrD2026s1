@@ -7,7 +7,7 @@ using namespace std;
 
 void showSet (Set s){
     NodoS* ns = s->primero;
-    for(int i = 1; i < s->cantidad; i++){
+    for(int i = 0; i < s->cantidad; i++){
          cout <<  ns->elem << " - ";
         ns = ns->siguiente;
     }
@@ -50,15 +50,14 @@ void AddS(int x, Set s){
 //Quita un elemento dado.
 void RemoveS(int x, Set s){
     NodoS* acc = s->primero;
-    int c = s->cantidad;
-    while(c > 0){
+    for(int i=1; i < s->cantidad; i++){
         if(acc->elem == x){
             acc->elem = acc->siguiente->elem;
             acc->siguiente = acc->siguiente->siguiente;
         }else{
             acc = acc->siguiente;
         }
-        c--;
+        s->cantidad--;
     }
 };
 
@@ -81,12 +80,10 @@ LinkedList setToList(Set s){
 //Lib era la memoria o cupada p or el conjunto
 void DestroyS(Set s){
     NodoS* acc = s->primero;
-    int c = s->cantidad;
-    while(c > 0){
+    for(int i=1; i < s->cantidad; i++){
         NodoS* tmp = acc->siguiente;
         delete acc;
         acc = tmp;
-        c--;
-    }
+    };
     delete s;
 };
