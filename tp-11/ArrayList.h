@@ -1,3 +1,5 @@
+#include <iostream>
+
 struct ArrayListSt
 {
     int cantidad;   // cantidad de elementos

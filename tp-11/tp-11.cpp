@@ -358,7 +358,7 @@ int heightT(Tree t){
 //Dado un árb ol devuelve su altura.
 
 ArrayList toList(Tree t){
-    return newArrayList();
+   return newArrayList();
 }
 //Dado un árb ol devuelve una lista con to dos sus elementos.
 
