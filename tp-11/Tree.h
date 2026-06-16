@@ -41,6 +41,6 @@ ArrayList leaves(Tree t);
 //Dado un árb ol devuelve los elementos que se encuentran en sus ho jas.
  ArrayList levelN(int n, Tree t);
 //Dados un número n y un árb ol devuelve una lista con los no dos de nivel n
-void showTree(Tree t);
+void ShowTree(Tree t);
 
 #endif
