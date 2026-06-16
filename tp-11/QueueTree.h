@@ -7,15 +7,15 @@
 /**Definir las funciones del punto anterior utilizando BFS (recorrido iterativo a lo ancho), a excep ción
 de heightT, leaves y levelN. Para esto, utilizar una QueueTree de Tree. */
 
-struct NodoQ {
+struct NodoQT {
 Tree elem; // valor del nodo
-NodoQ* siguiente; // puntero al siguiente nodo
+NodoQT* siguiente; // puntero al siguiente nodo
 };
 
 struct QueueTreeSt {
 int cantidad; // cantidad de elementos
-NodoQ* primero; // puntero al primer nodo
-NodoQ* ultimo; // puntero al ultimo nodo
+NodoQT* primero; // puntero al primer nodo
+NodoQT* ultimo; // puntero al ultimo nodo
 };
 
 

@@ -543,8 +543,7 @@ int main() {
     Tree tr =  nodeT(3,t,t);
     Tree r = nodeT(1, tl, tr);
 
-    cout << "Tree: "; ShowTree(r);
-
+    cout << "Tree: "; ShowTree(r); cout << endl;
     cout << "SumarT: " << sumarT(r)<< endl;
     cout << "SizeT: " << sizeT(r) << endl;
     cout << "perteneceT: " << perteneceT(1, r) << endl;

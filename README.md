@@ -32,3 +32,24 @@ BFS (Búsqueda en Amplitud) y DFS (Búsqueda en Profundidad)
 BFS (Amplitud): Imagina que es como una ola en el agua. Desde el nodo inicial, primero miras a todos los nodos directamente conectados a él. Luego, a todos los nodos conectados a esos, y así sucesivamente. Para más detalles sobre cómo este algoritmo recorre los grafos, puedes consultar la Diferencia entre BFS y DFS - GeeksforGeeks.
 
 DFS (Profundidad): Piensa en explorar un laberinto. Caminas por un pasillo hacia adelante todo lo que puedas sin detenerte. Cuando llegas a una pared (un nodo sin explorar), das un paso atrás y tomas la siguiente bifurcación
+
+
+Tree a = Empty | NodeT a (Tree a) (Tree a)
+
+- "es un Arbol de busqueda esta balanceado"
+- "Esta balanceada" --> la diferencia en el tamaño de los subarboles y derecho es menor o igual a 1
+- Y sus subarboles tambien estan balanceados
+- La raiz es mayor que los noddos del subarbol izquierdo
+- La raiz es menor que los noddos del subarbol derecho
+
+
+ABB -> todos los nodos cumplen busqueda y balanceado.
+
+struct NodeT {
+    int elem;
+    NodeT* left;
+    NodeT* right;
+};
+typedef NodeT* Tree;
+
+sea t de tipo NodeT* la representacion de un arbol
