@@ -53,3 +53,9 @@ struct NodeT {
 typedef NodeT* Tree;
 
 sea t de tipo NodeT* la representacion de un arbol
+
+Si t no apunta a null entonces
+- Todos los nodos accesibles de left tienen elementos < t->elemen
+- Todos los nodos accesibles de right tienen elementos < t->elemen
+- la cantidad de elemenyos accesibles por un hijo o por el otro tiene una diferencia de a lo sumo 1
+- Ambos hijos son ABB/ Todos los nodos cumplen las props

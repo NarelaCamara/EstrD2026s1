@@ -1,8 +1,6 @@
 
 #include "Tree.h"
 
-#ifndef QUEUE_TREE
-#define QUEUE_TREE
 
 /**Definir las funciones del punto anterior utilizando BFS (recorrido iterativo a lo ancho), a excep ción
 de heightT, leaves y levelN. Para esto, utilizar una QueueTree de Tree. */
@@ -51,5 +49,3 @@ void DestroyQT(QueueTree q);
 //Lib era la memoria o cupada p or la cola.
 //Costo: O(n).
 
-
-#endif

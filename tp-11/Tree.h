@@ -1,6 +1,9 @@
 
 #include "ArrayList.h"
 
+#ifndef TP11_TREE_H
+#define TP11_TREE_H
+
 struct NodeT {
 int elem;
 NodeT* left;
@@ -39,3 +42,5 @@ ArrayList leaves(Tree t);
  ArrayList levelN(int n, Tree t);
 //Dados un número n y un árb ol devuelve una lista con los no dos de nivel n
 void showTree(Tree t);
+
+#endif
