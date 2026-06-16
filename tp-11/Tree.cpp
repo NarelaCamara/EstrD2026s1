@@ -5,33 +5,34 @@ using namespace std;
 
 
 //definir la siguiente interfaz:
-Tree emptyT(){};
+Tree emptyT(){
+    Tree t = new NodeT;
+    t->elem = NULL;
+    t->left=NULL;
+    t->right=NULL;
+    return t;
+};
 
-Tree nodeT(int elem, Tree left, Tree right){};
+Tree nodeT(int elem, Tree left, Tree right){
+    Tree t = new NodeT;
+    t->elem=elem;
+    t->left=left;
+    t->right=right;
+    return t;
+};
 
-bool isEmptyT(Tree t){};
+bool isEmptyT(Tree t){
+    return t->elem == NULL;
+};
 
-int rootT(Tree t){};
+int rootT(Tree t){
+    return t->elem;
+};
 
-Tree left(Tree t){};
+Tree left(Tree t){
+    return t->left;
+};
 
-Tree right(Tree t){};
-
-int sumarT(Tree t){};
-//Dado un árb ol binario de enteros devuelve la suma entre sus elementos.
- int sizeT(Tree t){};
-//Dado un árb ol binario devuelve su cantidad de elementos, es decir, el tamaño del árb ol (size
-//en inglés).
- bool perteneceT(int e, Tree t){};
-//Dados un elemento y un árb ol binario devuelve True si existe un elemento igual a ese en el árbol.
-int aparicionesT(int e, Tree t){};
-//Dados un elemento e y un árb ol binario devuelve la cantidad de elementos del árb ol que son
-//iguales a e.
-int heightT(Tree t){};
-//Dado un árb ol devuelve su altura.
-ArrayList toList(Tree t){};
-//Dado un árb ol devuelve una lista con to dos sus elementos.
-ArrayList leaves(Tree t){};
-//Dado un árb ol devuelve los elementos que se encuentran en sus ho jas.
- ArrayList levelN(int n, Tree t){};
-//Dados un número n y un árb ol devuelve una lista con los no dos de nivel n
+Tree right(Tree t){
+    return t->right;
+};

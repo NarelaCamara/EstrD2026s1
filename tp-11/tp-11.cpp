@@ -3,6 +3,7 @@ using namespace std;
 #include "LinkedList.cpp"
 #include "Set.cpp"
 #include "Queue.cpp"
+#include "Tree.cpp"
 
 
 //Devuelve la suma de to dos los elementos
@@ -321,6 +322,35 @@ HEAP
 
 
 
+int sumarT(Tree t){
+
+};
+//Dado un árb ol binario de enteros devuelve la suma entre sus elementos.
+
+int sizeT(Tree t){};
+//Dado un árb ol binario devuelve su cantidad de elementos, es decir, el tamaño del árb ol (size
+//en inglés).
+
+bool perteneceT(int e, Tree t){};
+//Dados un elemento y un árb ol binario devuelve True si existe un elemento igual a ese en el árbol.
+
+int aparicionesT(int e, Tree t){};
+//Dados un elemento e y un árb ol binario devuelve la cantidad de elementos del árb ol que son
+//iguales a e.
+
+int heightT(Tree t){};
+//Dado un árb ol devuelve su altura.
+
+ArrayList toList(Tree t){}
+//Dado un árb ol devuelve una lista con to dos sus elementos.
+
+ArrayList leaves(Tree t){};
+//Dado un árb ol devuelve los elementos que se encuentran en sus ho jas.
+
+ArrayList levelN(int n, Tree t){};
+//Dados un número n y un árb ol devuelve una lista con los no dos de nivel n
+
+
 //cero es falso y uno es verdadero
 int main() {
     /*
@@ -413,7 +443,6 @@ int main() {
     DestroyS(s);
     cout << "DestroyS fue llamado correctamente." << endl;
 
-    */
 
     cout << "Ejercicio Queues ---- implementador ----------------------------------------- " << endl;
 
@@ -441,7 +470,7 @@ int main() {
     DestroyQ(q);
     cout << "DestroyQ fue llamado correctamente." << endl;
 
-
+    */
     cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
     
     
