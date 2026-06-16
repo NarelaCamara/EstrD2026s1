@@ -322,10 +322,40 @@ HEAP
 
 
 
+//Dado un árbol binario de enteros devuelve la suma entre sus elementos.
 int sumarT(Tree t){
-
+    Tree tt = t;
+    int sum = 0;
+    
+    if(!isEmptyT(tt)){
+        int e = rootT(tt);
+        sum =+ sumarTodosLeft(tt) + sumarTodosRight(tt);
+    }
+    return sum;
 };
-//Dado un árb ol binario de enteros devuelve la suma entre sus elementos.
+
+
+int sumarTodosLeft (Tree t) {
+    int sum = 0;
+    Tree l = left(t);
+    while(!isEmptyT(l)){
+        sum =+ rootT(l);
+        l = left(l);
+    }
+    return sum;
+}
+
+
+int sumarTodosRight (Tree t) {
+    int sum = 0;
+    Tree r = right(t);
+    while(!isEmptyT(r)){
+        sum =+ rootT(r);   
+        r = right(r);
+    }
+    return sum;
+}
+
 
 int sizeT(Tree t){};
 //Dado un árb ol binario devuelve su cantidad de elementos, es decir, el tamaño del árb ol (size
