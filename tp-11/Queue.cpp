@@ -37,7 +37,10 @@ void Enqueue(int x, Queue q){
     NodoQ* n= new NodoQ;
     n->elem= x;
     n->siguiente = NULL;
-    q->ultimo->siguiente = n;
+
+    NodoQ* l = q->ultimo;
+    l ->siguiente = n;
+    
     q->ultimo = n;
 };
 
