@@ -4,6 +4,15 @@
 using namespace std;
 
 
+
+void showSet (Set s){
+    NodoS* ns = s->primero;
+    for(int i = 1; i < s->cantidad; i++){
+         cout <<  ns->elem << " - ";
+        ns = ns->siguiente;
+    }
+}
+
 //Crea un conjunto vacío.
 Set emptyS(){
     Set s = new SetSt;
@@ -35,6 +44,7 @@ void AddS(int x, Set s){
      n->elem =x;
      n->siguiente = s->primero;
      s->primero = n;
+     s->cantidad++;
 };
 
 //Quita un elemento dado.
@@ -61,8 +71,8 @@ int sizeS(Set s){
 LinkedList setToList(Set s){
     LinkedList l = nil();
     NodoS* acc = s->primero;
-    for(int i=0;i < s->cantidad; i++){
-        Snoc(acc->elem, l);
+    for(int i=1;i < s->cantidad; i++){
+        Cons(acc->elem, l);
         acc = acc->siguiente;
     }
     return l;
