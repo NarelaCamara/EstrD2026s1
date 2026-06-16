@@ -324,41 +324,54 @@ HEAP
 
 
 //Dado un árbol binario de enteros devuelve la suma entre sus elementos.
-int sumarT(Tree t){
-    Tree tt = t;
-    int sum = 0;
-    
-    
-    return sum;
+int sumarT(Tree t){    
+    while(!isEmptyT(t)){
+        return  rootT(t) + sumarT(left(t)) + sumarT(right(t)); 
+    }
+    return 0;
 };
 
 
-
-
 int sizeT(Tree t){
-        return 0;
+    while(!isEmptyT(t)){
+        return 1 + sizeT(left(t)) + sizeT(right(t)); 
+    }
+    return 0;
 };
 //Dado un árb ol binario devuelve su cantidad de elementos, es decir, el tamaño del árb ol (size
 //en inglés).
 
 bool perteneceT(int e, Tree t){
-        return 0;
+    while(!isEmptyT(t)){
+        return (rootT(t) == e) || perteneceT(e, left(t)) || perteneceT(e, right(t)); 
+    }
+    return 0;
 };
 //Dados un elemento y un árb ol binario devuelve True si existe un elemento igual a ese en el árbol.
 
 int aparicionesT(int e, Tree t){
-        return 0;
+    while(!isEmptyT(t)){
+        return  (rootT(t) == e ? 1: 0) + aparicionesT(e, left(t)) + aparicionesT(e, right(t)); 
+    }
+    return 0;
 };
 //Dados un elemento e y un árb ol binario devuelve la cantidad de elementos del árb ol que son
 //iguales a e.
 
 int heightT(Tree t){
+    while(!isEmptyT(t)){
+        return 1 + max( heightT(left(t)), heightT(right(t))); 
+    }
     return 0;
 };
 //Dado un árb ol devuelve su altura.
 
 ArrayList toList(Tree t){
-   return newArrayList();
+    ArrayList l = newArrayList()
+    while(!isEmptyT(t)){
+        //return 1 + ( heightT(left(t)), heightT(right(t))); 
+    }
+    return l;
 }
 //Dado un árb ol devuelve una lista con to dos sus elementos.
 
@@ -501,6 +514,13 @@ int main() {
     Tree r = nodeT(1, tl, tr);
 
     cout << "Tree: "; ShowTree(r);
+
+    cout << "SumarT: " << sumarT(r)<< endl;
+    cout << "SizeT: " << sizeT(r) << endl;
+    cout << "perteneceT: " << perteneceT(1, r) << endl;
+    cout << "aparicionesT: " << aparicionesT(1, r) << endl;
+    cout << "heightT: " << heightT(r) << endl;
+
     
     /**Heaps
     Ejercicio 9
