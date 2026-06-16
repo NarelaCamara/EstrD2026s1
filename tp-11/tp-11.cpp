@@ -4,6 +4,7 @@ using namespace std;
 #include "Set.cpp"
 #include "Queue.cpp"
 #include "Tree.cpp"
+#include "ArrayList.cpp"
 
 
 //Devuelve la suma de to dos los elementos
@@ -327,57 +328,48 @@ int sumarT(Tree t){
     Tree tt = t;
     int sum = 0;
     
-    if(!isEmptyT(tt)){
-        int e = rootT(tt);
-        sum =+ sumarTodosLeft(tt) + sumarTodosRight(tt);
-    }
+    
     return sum;
 };
 
 
-int sumarTodosLeft (Tree t) {
-    int sum = 0;
-    Tree l = left(t);
-    while(!isEmptyT(l)){
-        sum =+ rootT(l);
-        l = left(l);
-    }
-    return sum;
-}
 
 
-int sumarTodosRight (Tree t) {
-    int sum = 0;
-    Tree r = right(t);
-    while(!isEmptyT(r)){
-        sum =+ rootT(r);   
-        r = right(r);
-    }
-    return sum;
-}
-
-
-int sizeT(Tree t){};
+int sizeT(Tree t){
+        return 0;
+};
 //Dado un árb ol binario devuelve su cantidad de elementos, es decir, el tamaño del árb ol (size
 //en inglés).
 
-bool perteneceT(int e, Tree t){};
+bool perteneceT(int e, Tree t){
+        return 0;
+};
 //Dados un elemento y un árb ol binario devuelve True si existe un elemento igual a ese en el árbol.
 
-int aparicionesT(int e, Tree t){};
+int aparicionesT(int e, Tree t){
+        return 0;
+};
 //Dados un elemento e y un árb ol binario devuelve la cantidad de elementos del árb ol que son
 //iguales a e.
 
-int heightT(Tree t){};
+int heightT(Tree t){
+    return 0;
+};
 //Dado un árb ol devuelve su altura.
 
-ArrayList toList(Tree t){}
+ArrayList toList(Tree t){
+    return newArrayList();
+}
 //Dado un árb ol devuelve una lista con to dos sus elementos.
 
-ArrayList leaves(Tree t){};
+ArrayList leaves(Tree t){
+    return newArrayList();
+};
 //Dado un árb ol devuelve los elementos que se encuentran en sus ho jas.
 
-ArrayList levelN(int n, Tree t){};
+ArrayList levelN(int n, Tree t){
+    return newArrayList();
+};
 //Dados un número n y un árb ol devuelve una lista con los no dos de nivel n
 
 
@@ -503,6 +495,12 @@ int main() {
     */
     cout << "Ejercicio Tree ---- implementador ----------------------------------------- " << endl;
     
+    Tree t = emptyT();
+    Tree tl =  nodeT(2,t,t);
+    Tree tr =  nodeT(3,t,t);
+    Tree r = nodeT(1, tl, tr);
+
+    cout << "Tree: "; ShowTree(r);
     
     /**Heaps
     Ejercicio 9

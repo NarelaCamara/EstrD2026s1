@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ArrayList.h"
 #include "Tree.h"
 using namespace std;
 
@@ -40,3 +39,29 @@ Tree left(Tree t){
 Tree right(Tree t){
     return t->right;
 };
+
+
+void ShowTree (Tree t){
+    if (t == NULL) {
+        cout << "<>";
+        return;
+    }
+    if (isEmptyT(t)){
+        cout << "<>";
+        return;
+    }
+    cout << "(" << t->elem;
+    if (t->left != NULL) {
+        cout << " ";
+        ShowTree(t->left);
+    } else {
+        cout << " <>";
+    }
+    if (t->right != NULL) {
+        cout << " ";
+        ShowTree(t->right);
+    } else {
+        cout << " <>";
+    }
+    cout << ")";
+}
