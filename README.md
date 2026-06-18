@@ -71,3 +71,22 @@ Min-Heap: El nodo padre siempre tiene un valor menor o igual que el de sus hijos
 
 
 Una cola de prioridad es un concepto lógico (un Tipo de Dato Abstracto), mientras que un montículo (heap) es una estructura de datos física. En términos sencillos, la cola define el qué (el comportamiento), y el heap define el cómo (la forma de organizar los datos para que funcione rápido)
+
+
+Segundo parcial
+- Usuario, implementador y diseñador
+- BFS y DFS
+- AVL ...
+
+
+Haskell
+- Array, set, Queue, Priorityqueue, Heap
+- recursividad
+- arboles
+
+C++
+- memoria (estatica y dinamica)
+- Array, set, Queue, Priorityqueue, Heap 
+- punteros
+- delete / memory leak
+- 
