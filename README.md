@@ -86,7 +86,7 @@ Haskell
 
 C++
 - memoria (estatica y dinamica)
-- Array, set, Queue, Priorityqueue, Heap 
+- TADS - Array, set, Queue, Priorityqueue, Heap 
 - punteros
 - delete / memory leak
 - 
