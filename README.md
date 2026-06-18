@@ -21,8 +21,8 @@ Memoria -> Espacio que tenemos para guardar datos.
 haskell -> Maneja la memoria automáticamente, no tenemos que preocuparnos por liberar memoria.
 Manejo de memoria automatica -> Garbage Collector (GC) -> Se encarga de liberar memoria automáticamente cuando ya no se necesita.
 C++ -> Tenemos que gestionar la memoria manualmente, utilizando new y delete. Utiliza memoria estatica y dinamica.
-Memoria estatica -> Se asigna en tiempo de compilación, no cambia durante la ejecución.
-Memoria dinamica -> Se asigna en tiempo de ejecución, puede cambiar durante la ejecución.
+Memoria estatica -> Se asigna en tiempo de compilación, no cambia durante la ejecución.(se elimina cuando se termina la ejecucion)
+Memoria dinamica -> Se asigna en tiempo de ejecución, puede cambiar durante la ejecución. (no se elimina cuando se termina la ejecucion)
 
 -- TAREA IMPORTANTE HACER EL GRAFICO DE COMO SE MUEVE LA MEMORIA
 
@@ -59,3 +59,15 @@ Si t no apunta a null entonces
 - Todos los nodos accesibles de right tienen elementos < t->elemen
 - la cantidad de elemenyos accesibles por un hijo o por el otro tiene una diferencia de a lo sumo 1
 - Ambos hijos son ABB/ Todos los nodos cumplen las props
+
+c++
+(error "Error");
+exit(1);
+
+
+Max-Heap: El nodo padre siempre tiene un valor mayor o igual que el de sus hijos. El valor máximo está en la cima (la raíz).
+
+Min-Heap: El nodo padre siempre tiene un valor menor o igual que el de sus hijos. El valor mínimo está en la cima.
+
+
+Una cola de prioridad es un concepto lógico (un Tipo de Dato Abstracto), mientras que un montículo (heap) es una estructura de datos física. En términos sencillos, la cola define el qué (el comportamiento), y el heap define el cómo (la forma de organizar los datos para que funcione rápido)
