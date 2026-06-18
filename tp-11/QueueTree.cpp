@@ -4,22 +4,7 @@ using namespace std;
 #include "Tree.h"
 
 
-/**Definir las funciones del punto anterior utilizando BFS (recorrido iterativo a lo ancho), a excep ción
-de heightT, leaves y levelN. Para esto, utilizar una QueueTree de Tree. */
 
-struct NodoQ {
-Tree elem; // valor del nodo
-NodoQ* siguiente; // puntero al siguiente nodo
-};
-
-struct QueueTreeSt {
-int cantidad; // cantidad de elementos
-NodoQ* primero; // puntero al primer nodo
-NodoQ* ultimo; // puntero al ultimo nodo
-};
-
-
-typedef QueueTreeSt* QueueTree;
 
 
 //Definir la siguiente interfaz de este tip o de colas, resp etando el costo de las op eraciones:
