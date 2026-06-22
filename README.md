@@ -29,7 +29,7 @@ Memoria dinamica -> Se asigna en tiempo de ejecución, puede cambiar durante la 
 BFS (Búsqueda en Amplitud) y DFS (Búsqueda en Profundidad) 
 
 
-BFS (Amplitud): Imagina que es como una ola en el agua. Desde el nodo inicial, primero miras a todos los nodos directamente conectados a él. Luego, a todos los nodos conectados a esos, y así sucesivamente. Para más detalles sobre cómo este algoritmo recorre los grafos, puedes consultar la Diferencia entre BFS y DFS - GeeksforGeeks.
+BFS (Amplitud): Imagina que es como una ola en el agua. Desde el nodo inicial, primero miras a todos los nodos directamente conectados a él. Luego, a todos los nodos conectados a esos, y así sucesivamente. 
 
 DFS (Profundidad): Piensa en explorar un laberinto. Caminas por un pasillo hacia adelante todo lo que puedas sin detenerte. Cuando llegas a una pared (un nodo sin explorar), das un paso atrás y tomas la siguiente bifurcación
 
@@ -90,3 +90,6 @@ C++
 - punteros
 - delete / memory leak
 - 
+
+clase 7
+clase 11 
