@@ -5,7 +5,6 @@ module Map (
     lookupM,
     deleteM,
     domM,
-    mapEjemplo1,
 )
 where
 data Map k v = M (Tree k v) deriving Show
@@ -126,7 +125,4 @@ obtenerClaves:: Tree k v -> [k]
 obtenerClaves EmptyT = []
 obtenerClaves ( NodeT (c1,v1) t1 t2) = c1 : (obtenerClaves t1) ++ (obtenerClaves t2)
 
-
-
-mapEjemplo1 = (M (NodeT (2, "Valor 2") (NodeT (1, "Valor 1") EmptyT EmptyT) (NodeT (3, "Valor 3") EmptyT EmptyT)))
 
