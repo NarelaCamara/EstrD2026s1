@@ -1,4 +1,5 @@
 module Nave (
+    Nave, construir,  ingresarT, sectoresAsignados, datosDeSector, tripulantesN, agregarASector, asignarASector,
 ) where
 
 import Map
