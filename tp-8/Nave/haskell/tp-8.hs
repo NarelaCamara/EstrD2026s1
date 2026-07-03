@@ -58,4 +58,24 @@ sinSectorT (t:ts) = if sizeS (sectoresT t) > 0 then sinSectorT ts else t: sinSec
     COSTO:  
 -}
 barriles:: Nave -> [Barril]
-barriles n =  ... para mañana
+barriles n = allBarriles (setToList (sectores n)) n
+
+
+allBarriles :: [SectorId] -> Nave -> [Barril]
+allBarriles [] n = []
+allBarriles (s:ss) n = 
+    let (_, cs) = (datosDeSector s n) 
+    in allBarrilesDe cs ++ allBarriles ss n 
+
+
+allBarrilesDe:: [Componente] -> [Barril]
+allBarrilesDe [] = []
+allBarrilesDe (c:cs) = 
+    case allBarril c of 
+    Just b -> b :  allBarrilesDe cs 
+    Nothing -> allBarrilesDe css
+
+
+allBarril :: Componente -> MayBe [Barril]
+allBarril Almacen xs = Just xs
+allBarril _ = Nothing
