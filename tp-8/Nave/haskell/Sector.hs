@@ -8,9 +8,8 @@ module Sector (
     agregarT
 ) where
 
-import Map
 import Set
-import MaxHeap
+
 
 data Sector = S SectorId (Set Nombre) [Componente]  deriving Show
 
