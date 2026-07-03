@@ -2,6 +2,7 @@ import Nave
 
 
 -- USUARIO
+-- i
 {-
     Proposito: 
     PRECONDICION:   
@@ -25,5 +26,36 @@ allSectors [] n = emptyS
 allSectors (t:ts) n = unionS (sectoresT t) (allSectors ts n)  
 
 
+-- j
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  O(T) siendo la longitud de la lista
+-}
+
+sinSectoresAsignados:: Nave -> [Tripulante]
+sinSectoresAsignados n = sinSectorT (tripulantesN n)
 
 
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  O(T) 
+    - siendo T el la longitud de la lista de tripulantes
+    - O(1) siendo constante
+-}
+
+sinSectorT :: [Tripulante] -> [Tripulante]
+sinSectorT [] = []
+sinSectorT (t:ts) = if sizeS (sectoresT t) > 0 then sinSectorT ts else t: sinSectorT ts
+
+-- k
+
+{-
+    Proposito: 
+    PRECONDICION:   
+    COSTO:  
+-}
+barriles:: Nave -> [Barril]
+barriles n =  ... para mañana
