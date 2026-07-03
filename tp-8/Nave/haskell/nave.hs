@@ -7,10 +7,7 @@ import Set
 import MaxHeap
 import Tripulante
 import Sector
-
-type SectorId = String
-type Nombre = String
-type Rango = String
+import Tipos
 
 data Nave = N (Map SectorId Sector) (Map Nombre Tripulante) (MaxHeap Tripulante) deriving Show
 
@@ -29,7 +26,7 @@ data Nave = N (Map SectorId Sector) (Map Nombre Tripulante) (MaxHeap Tripulante)
     COSTO:  O(n) Lineal ->  n siendo el valor de la longitud de la lista
 -}
 construir :: [SectorId] -> Nave
-construir (x:xs) = (N crearSectores xs) (emptyM) (emptyH)
+construir xs = N (crearSectores xs) emptyM emptyH
 
 
 {-
@@ -53,8 +50,9 @@ crearSectores (x:xs) = assocM x (crearS x) (crearSectores xs)
                         por lo tanto la operación total es O(log K + log M).
 -}
 ingresarT :: Nombre -> Rango -> Nave -> Nave
-ingresarT n r (N mss mts mxts) = let tN = (crearT n r)
-    in (N mss (assocM n tN mts) (insertH t mxts))
+ingresarT n r (N mss mts mxts) =
+    let tN = crearT n r
+    in N mss (assocM n tN mts) (insertH tN mxts)
 
 
 {-
@@ -66,10 +64,10 @@ ingresarT n r (N mss mts mxts) = let tN = (crearT n r)
 -}
 
 sectoresAsignados :: Nombre -> Nave -> Set SectorId
-sectoresAsignados n (N mss mts mxts) = 
+sectoresAsignados n (N _ mts _) =
     case lookupM n mts of
-        Nothing -> Error "No existe ese tripulante"
-        Just t  -> sectoresT t
+        Nothing -> error "No existe ese tripulante"
+        Just t -> sectoresT t
 
 
 {-
@@ -81,10 +79,10 @@ sectoresAsignados n (N mss mts mxts) =
 -}
 
 datosDeSector :: SectorId -> Nave -> (Set Nombre, [Componente])
-datosDeSector s (N mss mts mxts) = 
-    case lookupM sf mss of 
+datosDeSector s (N mss _ _) =
+    case lookupM s mss of
         Just sf -> (tripulantesS sf, componenteS sf)
-        Nothing -> Error "Debe existir un sector con dicho id"
+        Nothing -> error "Debe existir un sector con dicho id"
 
 
 {-
@@ -93,7 +91,7 @@ datosDeSector s (N mss mts mxts) =
     COSTO:  O(log T) -> siendo el costo de tripulantesOrd.
 -}
 tripulantesN :: Nave -> [Tripulante]
-tripulantesN (N mss mts mxts) = tripulantesOrd mxts
+tripulantesN (N _ _ mxts) = tripulantesOrd mxts
 
 
 {-
@@ -122,10 +120,9 @@ tripulantesOrd ts = if isEmptyH ts then [] else (maxH ts) : tripulantesOrd (dele
 
 agregarASector :: [Componente] -> SectorId -> Nave -> Nave
 agregarASector css sId (N mss mts mxts) =
-    case lookupM sId mss
-    of
-        Just s  -> (N (assocM sId (addComptsASector sf) mss)  mts mxts)
-        Nothing -> (N mss mts mxts)
+    case lookupM sId mss of
+        Just s -> N (assocM sId (addComptsASector css s) mss) mts mxts
+        Nothing -> N mss mts mxts
 
 {-
     Proposito: 
@@ -135,9 +132,9 @@ agregarASector css sId (N mss mts mxts) =
             - agregarC es de costo O(1)
 -}
 
-addComptsASector::[Componente] -> Sector -> Sector
-addComptsASector [] s = s 
-addComptsASector (x:xs) s = agregarC x s : addComptsASector xs s
+addComptsASector :: [Componente] -> Sector -> Sector
+addComptsASector [] s = s
+addComptsASector (x:xs) s = addComptsASector xs (agregarC x s)
 
 
 
@@ -152,11 +149,11 @@ addComptsASector (x:xs) s = agregarC x s : addComptsASector xs s
         -insetH O(log T) siendo T la cantidad de tripulantes de la nave
 -}
 
-asignarASector:: Nombre-> SectorID -> Nave -> Nave
-asignarASector n sId (N mss mts mxts) = 
+asignarASector :: Nombre -> SectorId -> Nave -> Nave
+asignarASector n sId (N mss mts mxts) =
     case lookupM n mts of
-    Just t' -> let t = asignarS sId t' in (N (asignarEnMSS t sId mss) (asignarEnMTS t n mts) (insertH t mxts))
-    Nothing -> Error "debe existir el tripulante"
+        Just t' -> let t = asignarS sId t' in N (asignarEnMSS t sId mss) (asignarEnMTS t n mts) (insertH t mxts)
+        Nothing -> error "debe existir el tripulante"
 
 
 {-
@@ -168,11 +165,11 @@ asignarASector n sId (N mss mts mxts) =
         - agregarT O(log T) siendo T la cantidad de del tripulantes en el sector
 -}
 
-asignarEnMSS :: Tripulante -> SectorId -> Map SectorId Sector -> Map SectorId Sector 
-asignarEnMSS t sId mss = 
-    case  lookupM sId mss of
-    Just s  -> assocM sId (agregarT n s) mss
-    Nothing -> mss
+asignarEnMSS :: Tripulante -> SectorId -> Map SectorId Sector -> Map SectorId Sector
+asignarEnMSS t sId mss =
+    case lookupM sId mss of
+        Just s -> assocM sId (agregarT (nombre t) s) mss
+        Nothing -> mss
 
 
 {-
@@ -183,8 +180,8 @@ asignarEnMSS t sId mss =
         - assocM tiene un costo O(log T2) donde T2 es la cantidad de claves del map Tripulantes
 -}
 
-asignarEnMTS :: Tripulante -> Nombre -> Map Nombre Tripulante -> Map Nombre Tripulante 
-asignarEnMTS t n mts = 
-    case  lookupM n mts of
-    Just t  -> assocM n t mts
-    Nothing -> mts
+asignarEnMTS :: Tripulante -> Nombre -> Map Nombre Tripulante -> Map Nombre Tripulante
+asignarEnMTS t n mts =
+    case lookupM n mts of
+        Just _ -> assocM n t mts
+        Nothing -> mts

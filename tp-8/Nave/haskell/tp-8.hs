@@ -1,4 +1,7 @@
 import Nave
+import Tipos
+import Set
+import Tripulante
 
 
 -- USUARIO
@@ -68,14 +71,14 @@ allBarriles (s:ss) n =
     in allBarrilesDe cs ++ allBarriles ss n 
 
 
-allBarrilesDe:: [Componente] -> [Barril]
+allBarrilesDe :: [Componente] -> [Barril]
 allBarrilesDe [] = []
-allBarrilesDe (c:cs) = 
-    case allBarril c of 
-    Just b -> b :  allBarrilesDe cs 
-    Nothing -> allBarrilesDe css
+allBarrilesDe (c:cs) =
+    case allBarril c of
+        Just b -> b ++ allBarrilesDe cs
+        Nothing -> allBarrilesDe cs
 
 
-allBarril :: Componente -> MayBe [Barril]
-allBarril Almacen xs = Just xs
+allBarril :: Componente -> Maybe [Barril]
+allBarril (Almacen xs) = Just xs
 allBarril _ = Nothing

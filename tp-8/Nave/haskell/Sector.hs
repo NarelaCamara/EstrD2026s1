@@ -9,6 +9,7 @@ module Sector (
 ) where
 
 import Set
+import Tipos
 
 
 data Sector = S SectorId (Set Nombre) [Componente]  deriving Show
