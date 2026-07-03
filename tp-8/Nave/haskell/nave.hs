@@ -5,6 +5,8 @@ module Nave (
 import Map
 import Set
 import MaxHeap
+import Tripulante
+import Sector
 
 type SectorId = String
 type Nombre = String
@@ -152,7 +154,7 @@ addComptsASector (x:xs) s = agregarC x s : addComptsASector xs s
 
 asignarASector:: Nombre-> SectorID -> Nave -> Nave
 asignarASector n sId (N mss mts mxts) = 
-    case lookupM n mts
+    case lookupM n mts of
     Just t' -> let t = asignarS sId t' in (N (asignarEnMSS t sId mss) (asignarEnMTS t n mts) (insertH t mxts))
     Nothing -> Error "debe existir el tripulante"
 
@@ -168,7 +170,7 @@ asignarASector n sId (N mss mts mxts) =
 
 asignarEnMSS :: Tripulante -> SectorId -> Map SectorId Sector -> Map SectorId Sector 
 asignarEnMSS t sId mss = 
-    case  lookupM sId mss
+    case  lookupM sId mss of
     Just s  -> assocM sId (agregarT n s) mss
     Nothing -> mss
 
@@ -183,6 +185,6 @@ asignarEnMSS t sId mss =
 
 asignarEnMTS :: Tripulante -> Nombre -> Map Nombre Tripulante -> Map Nombre Tripulante 
 asignarEnMTS t n mts = 
-    case  lookupM n mts
+    case  lookupM n mts of
     Just t  -> assocM n t mts
     Nothing -> mts
