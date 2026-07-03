@@ -82,3 +82,155 @@ allBarrilesDe (c:cs) =
 allBarril :: Componente -> Maybe [Barril]
 allBarril (Almacen xs) = Just xs
 allBarril _ = Nothing
+
+
+--- INSTANCIAS
+
+showValue :: Show a => String -> a -> IO ()
+showValue texto valor = do
+  putStrLn texto
+  print valor
+
+
+----
+
+s1 ::  SectorId
+s1 = "S1"
+
+s2 ::  SectorId
+s2 = "S2"
+
+s3 ::  SectorId
+s3 = "S3" 
+
+----
+
+r1 ::  Rango
+r1 = "R1"
+
+r2 ::  Rango
+r2 = "R2"
+
+r3 ::  Rango
+r3 = "R3" 
+
+--
+
+nombre1 :: Nombre
+nombre1 = "Nombre 1"
+
+
+nombre2 :: Nombre
+nombre2 = "Nombre 2"
+
+nombre3 :: Nombre
+nombre3 = "Nombre 3"
+
+--
+
+sectorIdsEjemplo :: [SectorId] 
+sectorIdsEjemplo = [s1, s2, s3] 
+
+
+--
+
+construirEjemplo :: Nave
+construirEjemplo = construir sectorIdsEjemplo
+
+-- 
+
+ingresarTEjemplo :: Nave
+ingresarTEjemplo = ingresarT nombre1 r1 construirEjemplo
+
+--
+
+naveSectoresAsignadosEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+sectoresAsignadosEjemplo :: Set SectorId
+sectoresAsignadosEjemplo = sectoresAsignados nombre1 naveSectoresAsignados 
+
+--
+
+naveDatosDeSectorEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+datosDeSectorEjemplo :: (Set Nombre, [Componente])
+datosDeSectorEjemplo = datosDeSector s1 naveDatosDeSectorEjemplo
+
+---
+
+naveTripulanteNEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+tripulanteNEjemplo :: [Tripulante]
+tripulanteNEjemplo = tripulantesN naveTripulanteNEjemplo
+
+---
+
+naveAgregarASectorEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+componentesEjemplo :: [Componente]
+componentesEjemplo = [ LazanTorpedos, Motor 1, Almacen [Comida, Oxigeno] , Motor 2, Almacen [Torpedo, Combustible] ]
+
+agregarASectorEjemplo :: Nave
+agregarASectorEjemplo = agregarASector componentesEjemplo s1 naveAgregarASectorEjemplo
+
+---
+naveAsignarASectorEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+asignarASectorEjemplo :: Nave
+asignarASectorEjemplo = asignarASector nombre1 s1 naveAsignarASectorEjemplo
+
+---
+
+naveSectoresEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+sectoresEjemplo :: Set SectorId
+sectoresEjemplo = sectores naveSectoresEjemplo
+
+---
+
+naveSinSectoresAsignadosEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+
+sinSectoresAsignadosEjemplo :: [Tripulante]
+sinSectoresAsignadosEjemplo = sinSectoresAsignados naveSinSectoresAsignadosEjemplo
+
+---
+
+naveBarrilesEjemplo = 
+    (ingresarT nombre3 s3 
+    (ingresarT nombre2 s1 
+    (ingresarT nombre1 s1 
+    (ingresarT nombre1 s1 construirEjemplo))))
+
+barrilesEjemplo :: [Barril]
+barrilesEjemplo = barriles naveBarrilesEjemplo
+
+--
