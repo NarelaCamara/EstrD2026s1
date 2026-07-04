@@ -19,9 +19,7 @@ struct MapSt {
     NodoS* primero; // puntero al primer nodo
 };
  
-
 typedef Map *MapSt;
-
 
 
 //emptyM :: Map k v O(1) --haskell
@@ -47,8 +45,8 @@ void assocM (String k, String v, Map m){
             tmp= tmp->siguiente;
         }
         c++;
-        delete tmp;
     }
+    delete tmp;
     cout << "assocM" << showMap(m);
 }
 
@@ -61,19 +59,21 @@ String lookupM  (String k, Map m){
     while(c < m->cantidad){
 
         if(tmp->key == k){
-            return (tmp->value);
+            cout << "lookupM" << showMap(m) << tmp->value;
+            return tmp->value;
         }else{
             tmp= tmp->siguiente;
         }
         c++;
-        delete tmp;
     }   
+    delete tmp;
     return NULL;
 }
 
 
 //deleteM :: k -> Map k v -> Map k v O(log K)
 void deleteM (String k, Map m){
+    cout << "before deleteM" << showMap(m);
     int c = 0;
     NodoS* tmp = map->primero;
 
@@ -85,15 +85,25 @@ void deleteM (String k, Map m){
             tmp= tmp->siguiente;
         }
         c++;
-        delete tmp;
     }   
+    delete tmp;
+    cout << "aafter deleteM" << showMap(m);
 }
 
 
 //domM :: Map k v -> [k] O(K)
 
-int* domM (Map m){
+string domM (Map m){
+    string[m->cantidad] keysTemp;
 
+    NodoS* tmp = map->primero;
+
+    while(c < m->cantidad){
+        keysTemp= tmp->key;
+        tmp= tmp->siguiente;
+        c++;
+    } 
+    delete tmp;
 }
 
 
