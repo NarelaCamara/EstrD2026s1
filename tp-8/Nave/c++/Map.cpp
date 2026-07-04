@@ -2,8 +2,6 @@
 #include "Map.h"
 using namespace std;
 
-
-
 //emptyM :: Map k v O(1) --haskell
 //costo: constante O(1) 
 Map emptyM () {
