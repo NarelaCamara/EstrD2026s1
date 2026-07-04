@@ -27,7 +27,7 @@ bool isEmptyS(Set s);
 bool belongsS(int x, Set s);
 
 //Agrega un elemento al conjunto.
-void AddS(int x, Set s);
+void addS(int x, Set s);
 
 //Quita un elemento dado.
 void RemoveS(int x, Set s);
@@ -36,7 +36,10 @@ void RemoveS(int x, Set s);
 int sizeS(Set s);
 
 //Devuelve un arreglo con los elementos del conjunto.
-int* setToList(Set s);
+int[] setToList(Set s);
 
 //Lib era la memoria o cupada p or el conjunto
 void DestroyS(Set s);
+
+
+Set unionS (Set s1, Set s2);

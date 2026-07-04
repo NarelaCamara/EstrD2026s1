@@ -38,7 +38,7 @@ bool belongsS(int x, Set s){
 }
 
 //Agrega un elemento al conjunto.
-void AddS(int x, Set s){
+void addS(int x, Set s){
      NodoS* n = new NodoS;
      n->elem =x;
      n->siguiente = s->primero;
@@ -86,3 +86,8 @@ void DestroyS(Set s){
     };
     delete s;
 };
+
+
+Set unionS (Set s1, Set s2){
+    return s1;
+}
