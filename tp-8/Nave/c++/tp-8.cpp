@@ -9,6 +9,9 @@ int testMaxHeap();
 int main() {
     testMap();
     testMaxHeap();
-    testSet()
+    testSet();
+    testTripulante();
+    testSector();
+    testNave();
     return 0;
 }
