@@ -44,7 +44,7 @@ String lookupM(String k, Map m) {
         }
         actual = actual->siguiente;
     }
-    return "NO EXISTE";
+    return nullptr;
 }
 
 void deleteM(String k, Map m) {
