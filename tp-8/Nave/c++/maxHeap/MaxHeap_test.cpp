@@ -1,5 +1,9 @@
+#include <iostream>
+#include "MaxHeap.h"
 
-int MAxHeap_test() {
+using namespace std;
+
+int testMaxHeap() {
     MaxHeap h = emptyH();
     cout << "Is the heap empty? " << (isEmptyH(h) ? "Yes" : "No") << endl;
 
