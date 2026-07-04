@@ -35,8 +35,8 @@ void RemoveS(int x, Set s);
 //Devuelve la cantidad de elementos.
 int sizeS(Set s);
 
-//Devuelve una lista con los lementos del conjunto.
-[Any] setToList(Set s);
+//Devuelve un arreglo con los elementos del conjunto.
+int* setToList(Set s);
 
 //Lib era la memoria o cupada p or el conjunto
 void DestroyS(Set s);
