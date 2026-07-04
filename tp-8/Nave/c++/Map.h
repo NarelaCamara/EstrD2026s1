@@ -1,35 +1,33 @@
-#include <iostream>
-using namespace std;
+#pragma once
+
+#include <string>
+#include <vector>
+
+using String = std::string;
 
 /*
 INVARIANTES DE REPRESENTACION:
-    - Si el tipo int cantidad es igual a cero, tipo NodoS primero es NULL
+    - Si el tipo int cantidad es igual a cero, tipo NodoS primero es nullptr
     - Todas las key del tipo NodoS son diferentes univocas
-    - si en el NodoS el siguiente es NULL, quiere decir que es el ultimo elemento de Map.
+    - si en el NodoS el siguiente es nullptr, quiere decir que es el ultimo elemento de Map.
 */
 
 struct NodoS {
-    string key;
-    string value;
-    NodoS* siguiente; // puntero al siguiente nodo
+    String key;
+    String value;
+    NodoS* siguiente;
 };
 
 struct MapSt {
-    int cantidad; // cantidad de elementos diferentes
-    NodoS* primero; // puntero al primer nodo
+    int cantidad;
+    NodoS* primero;
 };
- 
-typedef Map *MapSt;
 
+typedef MapSt* Map;
 
-Map emptyM (); 
-
-void assocM (String k, String v, Map m);
-
+Map emptyM();
+void assocM(String k, String v, Map m);
 String lookupM(String k, Map m);
-
-void deleteM (String k, Map m); 
-
-String domM(Map m);
-
+void deleteM(String k, Map m);
+std::vector<String> domM(Map m);
 void showMap(Map m);
