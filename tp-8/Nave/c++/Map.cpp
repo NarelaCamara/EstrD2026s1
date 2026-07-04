@@ -4,10 +4,10 @@ using namespace std;
 
 Map emptyM (); 
 
-Map assocM (Any k, Any v, Map m);
+void assocM (String k, String v, Map m);
 
-Maybe lookupM(Any k, Map m);
+Maybe lookupM(String k, Map m);
 
-Map deleteM (Any k, Map m); 
+void deleteM (String k, Map m); 
 
 int* domM(Map m);
