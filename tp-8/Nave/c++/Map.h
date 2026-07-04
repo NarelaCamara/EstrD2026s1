@@ -29,5 +29,5 @@ Map emptyM();
 void assocM(String k, String v, Map m);
 String lookupM(String k, Map m);
 void deleteM(String k, Map m);
-std::vector<String> domM(Map m);
+String[] domM(Map m);
 void showMap(Map m);

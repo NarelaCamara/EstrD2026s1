@@ -44,41 +44,60 @@ String lookupM(String k, Map m) {
         }
         actual = actual->siguiente;
     }
-    return "";
+    return "NO EXISTE";
 }
 
 void deleteM(String k, Map m) {
     if (m == nullptr || m->primero == nullptr) {
+        //cout << "[deleteM] El mapa está vacío, no se elimina nada." << endl;
         return;
     }
 
+    //cout << "[deleteM] Buscando la clave '" << k << "'" << endl;
+
+    // El algoritmo recorre la lista desde el inicio y mantiene un puntero al nodo anterior.
+    // Cuando encuentra la clave buscada, une el nodo anterior con el siguiente para saltar el nodo a borrar.
+    // Si el nodo a borrar es el primero, simplemente mueve el puntero de inicio al siguiente.
     NodoS* actual = m->primero;
-    NodoS* previo = nullptr;
+    NodoS* anterior = nullptr;
+
     while (actual != nullptr) {
+        //cout << "[deleteM] Revisando nodo: " << actual->key << endl;
+
         if (actual->key == k) {
-            if (previo == nullptr) {
+            //cout << "[deleteM] Se encontró la clave '" << k << "'" << endl;
+
+            if (anterior == nullptr) {
+                //cout << "[deleteM] La clave estaba al inicio, se actualiza el primer nodo" << endl;
                 m->primero = actual->siguiente;
             } else {
-                previo->siguiente = actual->siguiente;
+                //cout << "[deleteM] Se enlaza el nodo anterior con el siguiente" << endl;
+                anterior->siguiente = actual->siguiente;
             }
+
             delete actual;
             m->cantidad--;
+            //cout << "[deleteM] Nodo eliminado. Cantidad actual: " << m->cantidad << endl;
             return;
         }
-        previo = actual;
+
+        anterior = actual;
         actual = actual->siguiente;
     }
+
+   // cout << "[deleteM] No se encontró la clave '" << k << "'" << endl;
 }
 
-std::vector<String> domM(Map m) {
-    std::vector<String> keys;
+String[] domM(Map m) {
+    String[] keys = new String[m->cantidad];
+    int i = 0;
     if (m == nullptr) {
-        return keys;
+        return [];
     }
 
     NodoS* actual = m->primero;
     while (actual != nullptr) {
-        keys.push_back(actual->key);
+        keys[i++] = actual->key;
         actual = actual->siguiente;
     }
     return keys;
