@@ -1,28 +1,28 @@
 
 #include <iostream>
 #include "Tripulante.h"
-#include "Set.h"
+#include "../set/Set.h"
 
-Tripulante creatT (Nombre n, Rango r){
-    TripulanteSt* t = new  TripulanteSt;
+Tripulante crearT(const Nombre& n, Rango r){
+    TripulanteSt* t = new TripulanteSt;
     t->sectores = emptyS();
-    t->nombre= n;
-    t->rango= r;
+    t->nombre = n;
+    t->rango = r;
     return t;
 }
 
-void asignarS (SectorId s, Tripulante t){
+void asignarS(SectorId s, Tripulante t){
     addS(s, t->sectores);
-};
+}
 
-Set sectoresT (Tripulante t){
+Set sectoresT(Tripulante t){
     return t->sectores;
-};
+}
 
-Nombre nombre (Tripulante t){
+Nombre nombre(Tripulante t){
     return t->nombre;
-};
+}
 
-Rango rango (Tripulante t){
+Rango rango(Tripulante t){
     return t->rango;
-};
+}

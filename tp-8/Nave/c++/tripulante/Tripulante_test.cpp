@@ -1,22 +1,23 @@
 
 #include <iostream>
+#include <cassert>
 #include "Tripulante.h"
-#include "Set.h"
+#include "../set/Set.h"
 
-int tripulate_test() {
+int tripulante_test() {
     Tripulante tripulante = crearT("Juan", 3);
 
     assert(nombre(tripulante) == "Juan");
     assert(rango(tripulante) == 3);
 
-    cout << "Nombre: " << nombre(tripulante) << endl;
-    cout << "rango: " << rango(tripulante) << endl; 
+    std::cout << "Nombre: " << nombre(tripulante) << std::endl;
+    std::cout << "Rango: " << rango(tripulante) << std::endl;
 
-    asignarS("Sector A", tripulante);
-    asignarS("Sector B", tripulante);
+    asignarS(1, tripulante);
+    asignarS(2, tripulante);
 
-    assert(sectoresT(tripulante).size() == 2);
-    cout << "Sectores asignados: ";
+    assert(sizeS(sectoresT(tripulante)) == 2);
+    std::cout << "Sectores asignados: ";
     showSet(sectoresT(tripulante));
     return 0;
 }

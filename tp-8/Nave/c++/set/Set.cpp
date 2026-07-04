@@ -89,5 +89,14 @@ void DestroyS(Set s){
 
 
 Set unionS (Set s1, Set s2){
-    return s1;
+    if(s1 != nullptr && s2 != nullptr){
+        NodoS* acc = s2->primero;
+        for(int i=0; i < s2->cantidad; i++){
+            if(!belongsS(acc->elem, s1)){
+                addS(acc->elem, s1);
+            }
+            acc = acc->siguiente;
+        }
+        return s1;
+    }
 }

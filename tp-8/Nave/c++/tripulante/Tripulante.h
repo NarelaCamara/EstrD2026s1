@@ -1,22 +1,36 @@
-#include <iostream>
-using namespace std;
+#pragma once
+
+#include <string>
 #include "../set/Set.h"
 
+/*
+INVARIANTE DE REPRESENTACION:
+- El conjunto de sectores no puede ser nulo.
+- El nombre no puede ser vacío.
+- El rango debe ser un valor válido, un numero mayor o igual a 0 y siendo 10 el mas alto.
+*/
+
 typedef std::string Nombre;
-typedef std::string SectorId;
+typedef int SectorId;
+typedef int Rango;
 
 struct TripulanteSt {
     Set sectores;
     Nombre nombre;
-    Rango rango
-}
+    Rango rango;
+};
 
-Tripulante creatT (Nombre n, Rango r);
+typedef TripulanteSt* Tripulante;
 
-void asignarS (SectorId s, Tripulante t);
+// Crea un tripulante con nombre y rango.
+Tripulante crearT(const Nombre& n, Rango r);
 
-Set sectoresT (Tripulante t);
+// Asigna un sector al tripulante.
+void asignarS(SectorId s, Tripulante t);
 
-Nombre nombre (Tripulante t);
+// Devuelve los sectores asignados.
+Set sectoresT(Tripulante t);
 
-Rango rango (Tripulante t);
+// Accesores.
+Nombre nombre(Tripulante t);
+Rango rango(Tripulante t);
