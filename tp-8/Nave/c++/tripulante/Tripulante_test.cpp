@@ -4,19 +4,19 @@
 #include "Set.h"
 
 int tripulate_test() {
-    Tripulante tripulante("Juan", 30, "Piloto");
-    assert(tripulante.getNombre() == "Juan");
-    assert(tripulante.getEdad() == 30);
-    assert(tripulante.getRol() == "Piloto");
+    Tripulante tripulante = crearT("Juan", 3);
 
-    cout << "Nombre: " << tripulante.getNombre() << endl;
-    cout << "Edad: " << tripulante.getEdad() << endl;
-    cout << "Rol: " << tripulante.getRol() << endl; 
+    assert(nombre(tripulante) == "Juan");
+    assert(rango(tripulante) == 3);
+
+    cout << "Nombre: " << nombre(tripulante) << endl;
+    cout << "rango: " << rango(tripulante) << endl; 
 
     asignarS("Sector A", tripulante);
     asignarS("Sector B", tripulante);
+
+    assert(sectoresT(tripulante).size() == 2);
     cout << "Sectores asignados: ";
-    showSet(sectores);
-    
+    showSet(sectoresT(tripulante));
     return 0;
 }

@@ -15,7 +15,7 @@ Tripulante creatT (Nombre n, Rango r);
 
 void asignarS (SectorId s, Tripulante t);
 
-Set SectoresT (Tripulante t);
+Set sectoresT (Tripulante t);
 
 Nombre nombre (Tripulante t);
 

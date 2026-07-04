@@ -15,7 +15,7 @@ void asignarS (SectorId s, Tripulante t){
     addS(s, t->sectores);
 };
 
-Set SectoresT (Tripulante t){
+Set sectoresT (Tripulante t){
     return t->sectores;
 };
 
