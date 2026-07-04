@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "Tripulante.h"
+#include "Set.h"
 
 Tripulante creatT (Nombre n, Rango r){
     TripulanteSt* t = new  TripulanteSt;
