@@ -2,6 +2,9 @@
 #include "map/Map.h"
 #include "maxHeap/MaxHeap.h"
 #include "set/Set.h"
+#include "tripulante/Tripulante.h"
+#include "sector/Sector.h"
+#include "nave/Nave.h"
 
 int testMap();
 int testMaxHeap();
