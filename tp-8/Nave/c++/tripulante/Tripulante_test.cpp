@@ -19,5 +19,6 @@ int tripulante_test() {
     assert(sizeS(sectoresT(tripulante)) == 2);
     std::cout << "Sectores asignados: ";
     showSet(sectoresT(tripulante));
+    std::cout << "=== Fin del ejemplo ===" << std::endl;
     return 0;
 }
