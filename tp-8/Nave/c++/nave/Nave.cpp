@@ -39,7 +39,7 @@ Set sectoresAsignados (Nombre n, Nave n){
 };
 
 Tripulante[] tripulantesN (Nave n, int cant){
-    String[cant] keys = domM(n->tripulantes);
+    string[cant] keys = domM(n->tripulantes);
     int i = 0;
     while(i < cant){
         keys[i]= lookupM(n->tripulantes[i], n->tripulantes);

@@ -13,7 +13,7 @@ Comando para compilar y ejecutar el programa a la vez:
 - cls; g++ -std=c++11 -O2 -o acceso-memoria.exe acceso-memoria.cpp; .\acceso-memoria.exe
 
 ## TP 8 Nave
-- cd .\tp-8\Nave\c++; g++ -std=c++17 tp-8.cpp map/Map.cpp map/Map_test.cpp maxHeap/MaxHeap.cpp maxHeap/MaxHeap_test.cpp -o tp-8.exe; .\tp-8.exe
+- cls; g++ -std=c++11 -O2 -o tp-8\Nave\c++\tp-8.exe tp-8\Nave\c++\tp-8.cpp; tp-8\Nave\c++\tp-8.exe
 
 # Conceptos fundamentales
 
