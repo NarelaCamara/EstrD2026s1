@@ -21,7 +21,7 @@ struct TripulanteSt {
 typedef TripulanteSt* Tripulante;
 
 // Crea un tripulante con nombre y rango.
-Tripulante crearT(const Nombre& n, Rango r);
+Tripulante crearT(Nombre n, Rango r);
 
 // Asigna un sector al tripulante.
 void asignarS(SectorId s, Tripulante t);
