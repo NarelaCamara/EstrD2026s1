@@ -3,6 +3,8 @@
 
 using namespace std;
 
+//precondicion: ninguna
+//costo: constante O(1)
 Map emptyM() {
     Map m = new MapSt;
     m->cantidad = 0;
@@ -10,7 +12,9 @@ Map emptyM() {
     return m;
 }
 
-void assocM(string k, string v, Map m) {
+//precondicion: ninguna
+//costo: O(n) donde n es la cantidad de elementos en el mapa
+void assocM(string k, Base* v, Map m) {
     if (m == nullptr) {
         return;
     }
@@ -32,6 +36,9 @@ void assocM(string k, string v, Map m) {
     m->cantidad++;
 }
 
+
+//precondicion: ninguna
+// costo: O(n) donde n es la cantidad de elementos en el mapa
 string lookupM(string k, Map m) {
     if (m == nullptr) {
         return "";
@@ -47,6 +54,8 @@ string lookupM(string k, Map m) {
     return "";
 }
 
+//precondicion: ninguna
+// costo: O(n) donde n es la cantidad de elementos en el mapa
 void deleteM(string k, Map m) {
     if (m == nullptr || m->primero == nullptr) {
         //cout << "[deleteM] El mapa está vacío, no se elimina nada." << endl;
@@ -88,6 +97,8 @@ void deleteM(string k, Map m) {
    // cout << "[deleteM] No se encontró la clave '" << k << "'" << endl;
 }
 
+// costo: O(n) donde n es la cantidad de elementos en el mapa
+// precondicion: ninguna
 vector<string> domM(Map m) {
     vector<string> keys;
     if (m == nullptr) {
@@ -103,6 +114,8 @@ vector<string> domM(Map m) {
     return keys;
 }
 
+// precondicion: ninguna
+// costo: O(n) donde n es la cantidad de elementos en el mapa
 void showMap(Map m) {
     if (m == nullptr) {
         cout << "{}";
