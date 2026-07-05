@@ -12,6 +12,7 @@ void showSet (Set s){
     }
 }
 
+// costo: constante O(1) 
 //Crea un conjunto vacío.
 Set emptyS(){
     Set s = new SetSt;
@@ -20,13 +21,15 @@ Set emptyS(){
     return s;
 }
 
+//costo: constante O(1)
 //Indica si el conjunto está vacío.
 bool isEmptyS(Set s){
     return s->cantidad == 0;
 }
 
+// costo: O(n) donde n es la cantidad de elementos en el conjunto
 //Indica si el elemento pertenece al conjunto.
-bool belongsS(int x, Set s){
+bool belongsS(string x, Set s){
     NodoS* acc = s->primero;
     for(int i = 0; i < s->cantidad; i++){
         if(acc->elem == x){
@@ -37,17 +40,27 @@ bool belongsS(int x, Set s){
     return false;
 }
 
+// costo: O(n) donde n es la cantidad de elementos en el conjunto
 //Agrega un elemento al conjunto.
-void addS(int x, Set s){
-     NodoS* n = new NodoS;
-     n->elem =x;
-     n->siguiente = s->primero;
-     s->primero = n;
-     s->cantidad++;
+void addS(string x, Set s){
+
+    NodoS* acc = s->primero;
+    while(acc != nullptr){
+        if(acc->elem == x){
+            return;
+        }
+        acc = acc->siguiente;
+    }
+    NodoS* n = new NodoS;
+    n->elem =x;
+    n->siguiente = s->primero;
+    s->primero = n;
+    s->cantidad++;
 };
 
+// costo: O(n) donde n es la cantidad de elementos en el conjunto
 //Quita un elemento dado.
-void RemoveS(int x, Set s){
+void RemoveS(string x, Set s){
     NodoS* acc = s->primero;
     for(int i=1; i < s->cantidad; i++){
         if(acc->elem == x){
@@ -60,11 +73,13 @@ void RemoveS(int x, Set s){
     }
 };
 
+//costo: constante O(1)
 //Devuelve la cantidad de elementos.
 int sizeS(Set s){
     return s->cantidad;
 };
 
+//costo: O(n) donde n es la cantidad de elementos en el conjunto
 //Devuelve una lista con los lementos del conjunto.
 int* setToList(Set s){
     int* list = new int[s->cantidad];
@@ -76,6 +91,7 @@ int* setToList(Set s){
     return list;
 }
 
+// costo: O(n) donde n es la cantidad de elementos en el conjunto
 //Libera la memoria ocupada por el conjunto
 void destroyS(Set s){
     NodoS* acc = s->primero;
@@ -88,6 +104,8 @@ void destroyS(Set s){
 };
 
 
+//costo: O(n) donde n es la cantidad de elementos en el conjunto
+//Devuelve la unión de dos conjuntos.
 Set unionS (Set s1, Set s2){
     if(s1 != nullptr && s2 != nullptr){
         NodoS* acc = s2->primero;

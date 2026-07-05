@@ -5,7 +5,7 @@
 #include <iostream>
 
 struct NodoS {
-	int elem; // valor del nodo
+	std::string elem; // valor del nodo
 	NodoS* siguiente; // puntero al siguiente nodo
 };
 
@@ -23,18 +23,18 @@ Set emptyS();
 // Indica si el conjunto está vacío.
 bool isEmptyS(Set s);
 // Indica si el elemento pertenece al conjunto.
-bool belongsS(int x, Set s);
+bool belongsS(string x, Set s);
 // Agrega un elemento al conjunto.
-void addS(int x, Set s);
+void addS(string x, Set s);
 // Quita un elemento dado.
-void RemoveS(int x, Set s);
+void RemoveS(string x, Set s);
 // Devuelve la cantidad de elementos.
 int sizeS(Set s);
 
 //Devuelve un arreglo con los elementos del conjunto.
 int* setToList(Set s);
 
-//Lib era la memoria o cupada p or el conjunto
+//Libera la memoria ocupada por el conjunto
 void destroyS(Set s);
 
 // Operaciones adicionales
