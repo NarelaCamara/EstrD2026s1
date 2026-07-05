@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 #include "../set/Set.h"
 #include "../map/Map.h"
 #include "../maxHeap/MaxHeap.h"

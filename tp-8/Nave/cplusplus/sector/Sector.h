@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 #include "../set/Set.h"
 #include "../shared.h"
 
