@@ -1,9 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include "../tripulante/Tripulante.h"
 
 struct NodoMH {
-    int elem;
+    Tripulante elem;
     NodoMH* siguiente;
 };
 
@@ -16,8 +17,8 @@ typedef MaxHeapSt* MaxHeap;
 
 MaxHeap emptyH();
 bool isEmptyH(MaxHeap mh);
-void insertH(int x, MaxHeap mh);
-int maxH(MaxHeap mh);
+void insertH(Tripulante t, MaxHeap mh);
+Tripulante maxH(MaxHeap mh);
 void deleteMaxH(MaxHeap mh);
 void showMH(MaxHeap mh);
 int testMaxHeap();

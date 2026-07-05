@@ -22,7 +22,7 @@ Nave construir (SectorId ss){
 void ingresarT(Nombre n, Rango r, Nave n){
     Tripulante t = crearT(n, r);
     assocM(n, t, n->tripulantes); 
-    insertH(t, n->tripulantes);
+    insertH(t, n->OrdRangoTripulantes);
 };
 
 Set sectoresAsignados (Nombre n, Nave n){

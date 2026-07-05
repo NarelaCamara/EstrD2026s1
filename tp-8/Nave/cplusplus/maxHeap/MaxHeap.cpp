@@ -14,21 +14,21 @@ bool isEmptyH(MaxHeap mh) {
     return mh == nullptr || mh->cantidad == 0;
 }
 
-void insertH(int x, MaxHeap mh) {
-    if (mh == nullptr) {
+void insertH(Tripulante t, MaxHeap mh) {
+    if (mh == nullptr || t == nullptr) {
         return;
     }
 
     NodoMH* nuevo = new NodoMH;
-    nuevo->elem = x;
+    nuevo->elem = t;
     nuevo->siguiente = nullptr;
 
-    if (mh->primero == nullptr || x > mh->primero->elem) {
+    if (mh->primero == nullptr || rango(t) > rango(mh->primero->elem)) {
         nuevo->siguiente = mh->primero;
         mh->primero = nuevo;
     } else {
         NodoMH* actual = mh->primero;
-        while (actual->siguiente != nullptr && actual->siguiente->elem >= x) {
+        while (actual->siguiente != nullptr && rango(actual->siguiente->elem) >= rango(t)) {
             actual = actual->siguiente;
         }
         nuevo->siguiente = actual->siguiente;
@@ -38,9 +38,9 @@ void insertH(int x, MaxHeap mh) {
     mh->cantidad++;
 }
 
-int maxH(MaxHeap mh) {
+Tripulante maxH(MaxHeap mh) {
     if (mh == nullptr || mh->primero == nullptr) {
-        return -1;
+        return nullptr;
     }
     return mh->primero->elem;
 }
@@ -60,7 +60,7 @@ void showMH(MaxHeap mh) {
     cout << "[";
     NodoMH* actual = (mh == nullptr) ? nullptr : mh->primero;
     while (actual != nullptr) {
-        cout << actual->elem;
+        cout << nombre(actual->elem) << "(" << rango(actual->elem) << ")";
         if (actual->siguiente != nullptr) {
             cout << ", ";
         }
@@ -75,16 +75,21 @@ int testMaxHeap() {
     MaxHeap h = emptyH();
     cout << "Is the heap empty? " << (isEmptyH(h) ? "Yes" : "No") << endl;
 
-    insertH(10, h);
-    insertH(20, h);
-    insertH(5, h);
-    insertH(30, h);
+    Tripulante juan = crearT("Juan", 3);
+    Tripulante ana = crearT("Ana", 8);
+    Tripulante luis = crearT("Luis", 5);
 
-    cout << "Max element: " << maxH(h) << endl;
+    insertH(juan, h);
+    insertH(ana, h);
+    insertH(luis, h);
+
+    Tripulante mayor = maxH(h);
+    cout << "Tripulante con mayor rango: " << nombre(mayor) << " (" << rango(mayor) << ")" << endl;
     showMH(h);
 
     deleteMaxH(h);
-    cout << "After deleting max, new max: " << maxH(h) << endl;
+    mayor = maxH(h);
+    cout << "After deleting max, new max: " << nombre(mayor) << " (" << rango(mayor) << ")" << endl;
     showMH(h);
 
     return 0;
