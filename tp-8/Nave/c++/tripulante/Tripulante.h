@@ -1,5 +1,3 @@
-#pragma once
-
 #include <string>
 #include "../set/Set.h"
 
@@ -34,3 +32,5 @@ Set sectoresT(Tripulante t);
 // Accesores.
 Nombre nombre(Tripulante t);
 Rango rango(Tripulante t);
+
+int testTripulante();
