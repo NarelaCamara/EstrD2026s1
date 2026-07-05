@@ -12,7 +12,9 @@ Nombre nombre (Mago m){
 };
 
 void aprender (Hechizo h, Mago m){
-    addS(h, m->hechizos);
+    Set hechizosM = hechizos(m);
+    addS(h, hechizosM);
+    m->hechizos = hechizosM;
 };
 
 Set hechizos (Mago m){
