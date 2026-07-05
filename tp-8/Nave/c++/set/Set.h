@@ -1,5 +1,4 @@
 
-#pragma once
 
 #include <iostream>
 using namespace std;
@@ -32,10 +31,12 @@ void RemoveS(int x, Set s);
 int sizeS(Set s);
 
 //Devuelve un arreglo con los elementos del conjunto.
-int[] setToList(Set s);
+int* setToList(Set s);
 
 //Lib era la memoria o cupada p or el conjunto
 void DestroyS(Set s);
 
 // Operaciones adicionales
 Set unionS (Set s1, Set s2);
+
+int testSet();
