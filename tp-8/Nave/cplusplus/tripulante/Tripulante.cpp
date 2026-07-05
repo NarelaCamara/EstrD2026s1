@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Tripulante.h"
 #include "../set/Set.h"
+#include "../shared.h"
 
 ///costo: constante O(1)
 Tripulante crearT( Nombre n, Rango r){

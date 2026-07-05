@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Sector.h"
+#include "../shared.h"
 using namespace std;
 
 
