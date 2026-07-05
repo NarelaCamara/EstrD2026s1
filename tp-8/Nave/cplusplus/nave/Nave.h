@@ -5,6 +5,7 @@ using namespace std;
 #include "../set/Set.h"
 #include "../map/Map.h"
 #include "../maxHeap/MaxHeap.h"
+#include "../shared.h"
 
 struct NaveSt {
     Map sectores;
@@ -14,30 +15,6 @@ struct NaveSt {
 
 typedef NaveSt* Nave;
 
-typedef int Barril;
-#define Comida 0
-#define Oxigeno  1
-#define Torpedo   2
-#define Combustible 3
-
-
-typedef std::string Nombre;
-typedef std::string SectorId;
-typedef std::string LanzaTorpedos;
-
-struct Motor {
-    int numero;
-};
-
-struct Almacen {
-    vector<Barril> barriles;
-};
-
-union Componente {
-    LanzaTorpedos LanzaTorpedo;
-    Motor Motor;
-    Almacen Almacen;
-};
 
 Nave construir(SectorId ss);
 

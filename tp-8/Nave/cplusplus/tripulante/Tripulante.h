@@ -2,6 +2,7 @@
 
 #include <string>
 #include "../set/Set.h"
+#include "../shared.h"
 
 /*
 INVARIANTE DE REPRESENTACION:
@@ -10,9 +11,6 @@ INVARIANTE DE REPRESENTACION:
 - El rango debe ser un valor válido, un numero mayor o igual a 0 y siendo 10 el mas alto.
 */
 
-typedef std::string Nombre;
-typedef std::string SectorId;
-typedef int Rango;
 
 struct TripulanteSt {
     Set sectores;

@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+
 struct NodoS {
 	std::string elem; // valor del nodo
 	NodoS* siguiente; // puntero al siguiente nodo
