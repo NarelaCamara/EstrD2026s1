@@ -1,10 +1,5 @@
-#pragma once
-
-#include <string>
 #include <vector>
-
-using String = std::string;
-
+#include <string>
 /*
 INVARIANTES DE REPRESENTACION:
     - Si el tipo int cantidad es igual a cero, tipo NodoS primero es nullptr
@@ -27,7 +22,8 @@ typedef MapSt* Map;
 
 Map emptyM();
 void assocM(String k, String v, Map m);
-String lookupM(String k, Map m);
+string lookupM(String k, Map m);
 void deleteM(String k, Map m);
-String[] domM(Map m);
+string[] domM(Map m);
 void showMap(Map m);
+int testMap();
