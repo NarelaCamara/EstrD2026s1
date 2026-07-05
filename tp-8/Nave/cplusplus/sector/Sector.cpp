@@ -1,13 +1,33 @@
 
 
-Sector crearS(SectorId sId);
+Sector crearS(SectorId sId){
+    Sector s = new SectorSt;
+    s->sectorId = sId;
+    s->componentes = vector<Componente>();
+    s->tripulantes = emptyS();
+    return s;
+};
 
-SectorId sectorId(Sector s);
+SectorId sectorId(Sector s){
+    return s->sectorId;
+};
 
-Componente[] componentesS (Sector s);
+Componente[] componentesS (Sector s){
+    return s->componentes;
+};
 
-Set tripulantesS (Sector s);
+Set tripulantesS (Sector s){
+    return s->tripulantes;
+};
 
-void agregarC (Componente c, Sector s);
+void agregarC (Componente c, Sector s){
+    Set componentes = s->componentes;
+    componentes = addS(c, componentes);
+    s->componentes = componentes;
+};
 
-void agregarT (Tripulant t, Sector s);
+void agregarT (Tripulant t, Sector s){
+    Set tripulantes = s->tripulantes;
+    tripulantes = addS(t, tripulantes);
+    s->tripulantes = tripulantes;
+};

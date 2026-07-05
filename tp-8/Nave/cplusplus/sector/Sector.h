@@ -5,7 +5,7 @@ using namespace std;
 struct SectorSt {
     Set tripulantes;
     SectorId sectorId;
-    Componente[] componentes
+    Componente[] componentes;
 }
 
 typedef SectorSt* Sector;
