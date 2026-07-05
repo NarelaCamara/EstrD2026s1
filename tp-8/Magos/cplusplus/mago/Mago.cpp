@@ -1,4 +1,5 @@
 #include "../set/Set.h"
+#include "Mago.h"
 
 Mago crearM (Nombre n){
     MagoSt* m = new MagoSt;

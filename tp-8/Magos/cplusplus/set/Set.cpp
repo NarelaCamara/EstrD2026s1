@@ -26,7 +26,7 @@ bool isEmptyS(Set s){
 }
 
 //Indica si el elemento pertenece al conjunto.
-bool belongsS(int x, Set s){
+bool belongsS(string x, Set s){
     NodoS* acc = s->primero;
     for(int i = 0; i < s->cantidad; i++){
         if(acc->elem == x){
@@ -38,7 +38,7 @@ bool belongsS(int x, Set s){
 }
 
 //Agrega un elemento al conjunto.
-void addS(int x, Set s){
+void addS(string x, Set s){
      NodoS* n = new NodoS;
      n->elem =x;
      n->siguiente = s->primero;
@@ -47,7 +47,7 @@ void addS(int x, Set s){
 };
 
 //Quita un elemento dado.
-void RemoveS(int x, Set s){
+void RemoveS(string x, Set s){
     NodoS* acc = s->primero;
     for(int i=1; i < s->cantidad; i++){
         if(acc->elem == x){
@@ -111,18 +111,18 @@ int testSet() {
     showSet(s);
     std::cout << std::endl;
     std::cout << "Agregando elementos al conjunto..." << std::endl;
-    addS(5, s);
-    addS(10, s);
-    addS(5, s); // Intento de agregar un elemento duplicado
-    addS(15, s);
+    addS("5", s);
+    addS("10", s);
+    addS("5", s); // Intento de agregar un elemento duplicado
+    addS("15", s);
     std::cout << "Conjunto despues de agregar elementos: ";
     showSet(s);
     std::cout << std::endl;
-    std::cout << "Pertenece 10 al conjunto? " << (belongsS(10, s) ? "Sí" : "No") << std::endl;
-    std::cout << "Pertenece 20 al conjunto? " << (belongsS(20, s) ? "Sí" : "No") << std::endl;
+    std::cout << "Pertenece 10 al conjunto? " << (belongsS("10", s) ? "Sí" : "No") << std::endl;
+    std::cout << "Pertenece 20 al conjunto? " << (belongsS("20", s) ? "Sí" : "No") << std::endl;
 
     std::cout << "Eliminando el elemento 10 del conjunto..." << std::endl;
-    RemoveS(10, s);
+    RemoveS("10", s);
     std::cout << "Conjunto despues de eliminar el elemento 10: ";
     showSet(s);
 
@@ -142,8 +142,8 @@ int testSet() {
     std::cout << std::endl;
 
     Set s2 = emptyS();
-    addS(20, s2);
-    addS(30, s2);
+    addS("20", s2);
+    addS("30", s2);
     Set unionSet = unionS(s, s2);
     std::cout << "Conjunto 2: ";
     showSet(s2);
