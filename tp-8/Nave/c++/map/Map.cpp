@@ -44,7 +44,7 @@ string lookupM(string k, Map m) {
         }
         actual = actual->siguiente;
     }
-    return nullptr;
+    return "";
 }
 
 void deleteM(string k, Map m) {
@@ -88,16 +88,16 @@ void deleteM(string k, Map m) {
    // cout << "[deleteM] No se encontró la clave '" << k << "'" << endl;
 }
 
-string[] domM(Map m) {
-    string[] keys = new string[m->cantidad];
-    int i = 0;
+vector<string> domM(Map m) {
+    vector<string> keys;
     if (m == nullptr) {
-        return [];
+        return keys;
     }
 
+    keys.reserve(m->cantidad);
     NodoS* actual = m->primero;
     while (actual != nullptr) {
-        keys[i++] = actual->key;
+        keys.push_back(actual->key);
         actual = actual->siguiente;
     }
     return keys;
@@ -154,10 +154,10 @@ int testMap() {
     std::cout << std::endl;
 
     std::cout << "8) domM(m) -> ";
-    string[] keys = domM(m);
-    for (size_t i = 0; i < m->cantidad; ++i) {
+    vector<string> keys = domM(m);
+    for (size_t i = 0; i < keys.size(); ++i) {
         std::cout << keys[i];
-        if (i + 1 < m->cantidad; ) {
+        if (i + 1 < keys.size()) {
             std::cout << ", ";
         }
     }

@@ -8,8 +8,8 @@ INVARIANTES DE REPRESENTACION:
 */
 
 struct NodoS {
-    String key;
-    String value;
+    std::string key;
+    std::string value;
     NodoS* siguiente;
 };
 
@@ -21,9 +21,9 @@ struct MapSt {
 typedef MapSt* Map;
 
 Map emptyM();
-void assocM(String k, String v, Map m);
-string lookupM(String k, Map m);
-void deleteM(String k, Map m);
-string[] domM(Map m);
+void assocM(std::string k, std::string v, Map m);
+std::string lookupM(std::string k, Map m);
+void deleteM(std::string k, Map m);
+std::vector<std::string> domM(Map m);
 void showMap(Map m);
 int testMap();
