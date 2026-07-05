@@ -1,5 +1,3 @@
-#pragma once
-
 #include <iostream>
 
 struct NodoMH {
@@ -20,4 +18,4 @@ void insertH(int x, MaxHeap mh);
 int maxH(MaxHeap mh);
 void deleteMaxH(MaxHeap mh);
 void showMH(MaxHeap mh);
-
+int testMaxHeap();
