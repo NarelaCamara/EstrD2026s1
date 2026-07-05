@@ -1,5 +1,7 @@
-#include <vector>
+#pragma once
+
 #include <string>
+#include <vector> 
 /*
 INVARIANTES DE REPRESENTACION:
     - Si el tipo int cantidad es igual a cero, tipo NodoM primero es nullptr

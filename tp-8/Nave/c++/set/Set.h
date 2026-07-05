@@ -3,7 +3,6 @@
 #pragma once
 
 #include <iostream>
-using namespace std;
 
 struct NodoS {
 	int elem; // valor del nodo
