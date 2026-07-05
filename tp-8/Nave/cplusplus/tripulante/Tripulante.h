@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+using std::string;
 #include "../set/Set.h"
 #include "../shared.h"
 

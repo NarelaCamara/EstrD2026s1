@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+using std::string;
 #include <vector>
 #include "../set/Set.h"
 #include "../map/Map.h"

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+using std::string;
 #include <vector> 
 #include "../Tripulante/Tripulante.h"
 #include "../Sector/Sector.h"
@@ -12,7 +13,7 @@ INVARIANTES DE REPRESENTACION:
 */
 using Value = std::variant<Tripulante, Sector>;
 struct NodoM {
-    std::string key;
+    string key;
     Value value;
     NodoM* siguiente;
 };
@@ -25,9 +26,9 @@ struct MapSt {
 typedef MapSt* Map;
 
 Map emptyM();
-void assocM(std::string k, std::Value v, Map m);
-std::string lookupM(std::string k, Map m);
-void deleteM(std::string k, Map m);
-std::vector<std::string> domM(Map m);
+void assocM(string k, Value v, Map m);
+string lookupM(string k, Map m);
+void deleteM(string k, Map m);
+vector<string> domM(Map m);
 void showMap(Map m);
 int testMap();

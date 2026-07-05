@@ -2,11 +2,12 @@
 
 #pragma once
 #include <string>
+using std::string;
 #include <iostream>
 
 
 struct NodoS {
-	std::string elem; // valor del nodo
+	string elem; // valor del nodo
 	NodoS* siguiente; // puntero al siguiente nodo
 };
 
