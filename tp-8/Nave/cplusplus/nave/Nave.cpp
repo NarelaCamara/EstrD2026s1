@@ -33,10 +33,16 @@ Set sectoresAsignados (Nombre n, Nave n){
     }
     return emptyS();
 };
-
-(Set, Componente[]) datosDeSector(SectorId sId, Nave n){
-    
+ 
+pair<Set, vector<Componente>> datosDeSector(SectorId sId, Nave n){
+    Sector s = lookupM(sId, n->sectores);
+    if(s != nullptr){
+        return make_pair(sectoresC(s), componentesC(s));
+    }
+    return make_pair(emptyS(), vector<Componente>());
 };
+
+
 
 Tripulante[] tripulantesN (Nave n, int cant){
     string[cant] keys = domM(n->tripulantes);
