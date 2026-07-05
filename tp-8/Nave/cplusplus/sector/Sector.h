@@ -21,3 +21,6 @@ Set tripulantesS (Sector s);
 void agregarC (Componente c, Sector s);
 
 void agregarT (Tripulant t, Sector s);
+
+
+int testSector();

@@ -14,7 +14,7 @@ Map emptyM() {
 
 //precondicion: ninguna
 //costo: O(n) donde n es la cantidad de elementos en el mapa
-void assocM(string k, Base* v, Map m) {
+void assocM(string k, Value v, Map m) {
     if (m == nullptr) {
         return;
     }

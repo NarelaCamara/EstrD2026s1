@@ -41,3 +41,8 @@ void agregarT (Tripulant t, Sector s){
     tripulantes = addS(t, tripulantes);
     s->tripulantes = tripulantes;
 };
+
+
+int testSector (){
+    return 0;
+}

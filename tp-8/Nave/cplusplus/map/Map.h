@@ -2,16 +2,18 @@
 
 #include <string>
 #include <vector> 
+#include "../Tripulante/Tripulante.h"
+#include "../Sector/Sector.h"
 /*
 INVARIANTES DE REPRESENTACION:
     - Si el tipo int cantidad es igual a cero, tipo NodoM primero es nullptr
     - Todas las key del tipo NodoM son diferentes univocas
     - si en el NodoM el siguiente es nullptr, quiere decir que es el ultimo elemento de Map.
 */
-
+using Value = std::variant<Tripulante, Sector>;
 struct NodoM {
     std::string key;
-    std::Base* value;
+    Value value;
     NodoM* siguiente;
 };
 
@@ -23,7 +25,7 @@ struct MapSt {
 typedef MapSt* Map;
 
 Map emptyM();
-void assocM(std::string k, std::Base* v, Map m);
+void assocM(std::string k, std::Value v, Map m);
 std::string lookupM(std::string k, Map m);
 void deleteM(std::string k, Map m);
 std::vector<std::string> domM(Map m);

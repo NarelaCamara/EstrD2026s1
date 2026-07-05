@@ -28,3 +28,5 @@ Vector<Tripulantes> tripulantesN (Nave n);
 void agregarASector (Componentes[] cs, SectorId sId, Nave n);
 
 void asignarASector(Nombre n, SectorId sId, Nave n);
+
+int testNave();

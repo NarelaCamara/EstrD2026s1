@@ -77,3 +77,7 @@ void asignarASector(Nombre n, SectorId sId, Nave n){
     assocM(sId, s, n->sectores);
     delete s;
 };
+
+int testNave(){
+    return 0;
+}
