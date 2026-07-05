@@ -6,8 +6,6 @@
 #include "sector/Sector.h"
 #include "nave/Nave.h"
 
-int testMap();
-int testMaxHeap();
 
 int main() {
     testMap();
