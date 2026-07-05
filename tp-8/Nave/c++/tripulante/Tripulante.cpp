@@ -28,6 +28,8 @@ Rango rango(Tripulante t){
 }
 
 int testTripulante() {
+
+    std::cout << "=== Ejemplo de uso de Tripulante ===" << std::endl;
     Tripulante tripulante = crearT("Juan", 3);
 
 
