@@ -11,7 +11,7 @@ INVARIANTE DE REPRESENTACION:
 */
 
 typedef std::string Nombre;
-typedef int SectorId;
+typedef std::string SectorId;
 typedef int Rango;
 
 struct TripulanteSt {

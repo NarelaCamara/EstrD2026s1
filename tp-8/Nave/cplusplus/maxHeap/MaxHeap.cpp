@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//costo: constante O(1)
 MaxHeap emptyH() {
     MaxHeap mh = new MaxHeapSt;
     mh->cantidad = 0;
@@ -10,10 +11,12 @@ MaxHeap emptyH() {
     return mh;
 }
 
+//costo: constante O(1)
 bool isEmptyH(MaxHeap mh) {
     return mh == nullptr || mh->cantidad == 0;
 }
 
+//costo: O(n) donde n es la cantidad de elementos en el heap
 void insertH(Tripulante t, MaxHeap mh) {
     if (mh == nullptr || t == nullptr) {
         return;
@@ -38,6 +41,7 @@ void insertH(Tripulante t, MaxHeap mh) {
     mh->cantidad++;
 }
 
+//costo: constante O(1)
 Tripulante maxH(MaxHeap mh) {
     if (mh == nullptr || mh->primero == nullptr) {
         return nullptr;
@@ -45,6 +49,7 @@ Tripulante maxH(MaxHeap mh) {
     return mh->primero->elem;
 }
 
+// costo: constante O(1)
 void deleteMaxH(MaxHeap mh) {
     if (mh == nullptr || mh->primero == nullptr) {
         return;
