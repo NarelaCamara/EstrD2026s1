@@ -3,6 +3,7 @@
 #include "Tripulante.h"
 #include "../set/Set.h"
 
+///costo: constante O(1)
 Tripulante crearT( Nombre n, Rango r){
     TripulanteSt* t = new TripulanteSt;
     t->sectores = emptyS();
@@ -11,18 +12,24 @@ Tripulante crearT( Nombre n, Rango r){
     return t;
 }
 
+//costo: O(n) donde n es la cantidad de sectores asignados al tripulante
 void asignarS(SectorId s, Tripulante t){
-    addS(s, t->sectores);
+    Set sectores = t->sectores;
+    addS(s, sectores);
+    t->sectores = sectores;
 }
 
+//costo: constante O(1)
 Set sectoresT(Tripulante t){
     return t->sectores;
 }
 
+//costo: constante O(1)
 Nombre nombre(Tripulante t){
     return t->nombre;
 }
 
+//Coasto: constante O(1)
 Rango rango(Tripulante t){
     return t->rango;
 }
