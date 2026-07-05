@@ -9,7 +9,7 @@ typedef std::string Hechizo;
 
 struct MagoSt {
    Nombre nombre;
-   Set hechizos
+   Set hechizos;
 };
 
 typedef MagoSt* Mago;
