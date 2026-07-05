@@ -104,6 +104,7 @@ Set unionS (Set s1, Set s2){
  
 
 int testSet() {
+    std::cout << "=== Ejemplo de uso de Set ===" << std::endl;
 
     Set s = emptyS();
     std::cout << "Conjunto vacio: ";

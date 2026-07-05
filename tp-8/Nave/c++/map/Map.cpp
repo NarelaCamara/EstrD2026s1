@@ -15,7 +15,7 @@ void assocM(string k, string v, Map m) {
         return;
     }
 
-    NodoS* actual = m->primero;
+    NodoM* actual = m->primero;
     while (actual != nullptr) {
         if (actual->key == k) {
             actual->value = v;
@@ -24,7 +24,7 @@ void assocM(string k, string v, Map m) {
         actual = actual->siguiente;
     }
 
-    NodoS* nuevo = new NodoS;
+    NodoM* nuevo = new NodoM;
     nuevo->key = k;
     nuevo->value = v;
     nuevo->siguiente = m->primero;
@@ -37,7 +37,7 @@ string lookupM(string k, Map m) {
         return "";
     }
 
-    NodoS* actual = m->primero;
+    NodoM* actual = m->primero;
     while (actual != nullptr) {
         if (actual->key == k) {
             return actual->value;
@@ -58,8 +58,8 @@ void deleteM(string k, Map m) {
     // El algoritmo recorre la lista desde el inicio y mantiene un puntero al nodo anterior.
     // Cuando encuentra la clave buscada, une el nodo anterior con el siguiente para saltar el nodo a borrar.
     // Si el nodo a borrar es el primero, simplemente mueve el puntero de inicio al siguiente.
-    NodoS* actual = m->primero;
-    NodoS* anterior = nullptr;
+    NodoM* actual = m->primero;
+    NodoM* anterior = nullptr;
 
     while (actual != nullptr) {
         //cout << "[deleteM] Revisando nodo: " << actual->key << endl;
@@ -95,7 +95,7 @@ vector<string> domM(Map m) {
     }
 
     keys.reserve(m->cantidad);
-    NodoS* actual = m->primero;
+    NodoM* actual = m->primero;
     while (actual != nullptr) {
         keys.push_back(actual->key);
         actual = actual->siguiente;
@@ -110,7 +110,7 @@ void showMap(Map m) {
     }
 
     cout << "{";
-    NodoS* actual = m->primero;
+    NodoM* actual = m->primero;
     while (actual != nullptr) {
         cout << actual->key << " -> " << actual->value;
         if (actual->siguiente != nullptr) {
@@ -155,9 +155,9 @@ int testMap() {
 
     std::cout << "8) domM(m) -> ";
     vector<string> keys = domM(m);
-    for (size_t i = 0; i < keys.size(); ++i) {
+    for (size_t i = 0; i < m->cantidad; ++i) {
         std::cout << keys[i];
-        if (i + 1 < keys.size()) {
+        if (i + 1 < m->cantidad) {
             std::cout << ", ";
         }
     }

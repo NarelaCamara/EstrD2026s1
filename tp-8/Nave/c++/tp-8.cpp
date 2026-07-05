@@ -1,6 +1,6 @@
 #include <iostream>
-//#include "map/Map.h"
-//#include "maxHeap/MaxHeap.h"
+#include "map/Map.h"
+#include "maxHeap/MaxHeap.h"
 #include "set/Set.h"
 //#include "tripulante/Tripulante.h"
 //#include "sector/Sector.h"
@@ -8,8 +8,8 @@
 
 
 int main() {
-  //  testMap();
-   // testMaxHeap();
+    testMap();
+    testMaxHeap();
     testSet();
   //  testTripulante();
   //  testSector();

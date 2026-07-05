@@ -70,6 +70,8 @@ void showMH(MaxHeap mh) {
 }
 
 int testMaxHeap() {
+    std::cout << "=== Ejemplo de uso de MaxHeap ===" << std::endl;
+
     MaxHeap h = emptyH();
     cout << "Is the heap empty? " << (isEmptyH(h) ? "Yes" : "No") << endl;
 

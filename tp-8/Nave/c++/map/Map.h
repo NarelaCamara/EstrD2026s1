@@ -2,20 +2,20 @@
 #include <string>
 /*
 INVARIANTES DE REPRESENTACION:
-    - Si el tipo int cantidad es igual a cero, tipo NodoS primero es nullptr
-    - Todas las key del tipo NodoS son diferentes univocas
-    - si en el NodoS el siguiente es nullptr, quiere decir que es el ultimo elemento de Map.
+    - Si el tipo int cantidad es igual a cero, tipo NodoM primero es nullptr
+    - Todas las key del tipo NodoM son diferentes univocas
+    - si en el NodoM el siguiente es nullptr, quiere decir que es el ultimo elemento de Map.
 */
 
-struct NodoS {
+struct NodoM {
     std::string key;
     std::string value;
-    NodoS* siguiente;
+    NodoM* siguiente;
 };
 
 struct MapSt {
     int cantidad;
-    NodoS* primero;
+    NodoM* primero;
 };
 
 typedef MapSt* Map;
