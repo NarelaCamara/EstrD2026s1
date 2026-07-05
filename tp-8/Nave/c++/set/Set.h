@@ -34,7 +34,7 @@ int sizeS(Set s);
 int* setToList(Set s);
 
 //Lib era la memoria o cupada p or el conjunto
-void DestroyS(Set s);
+void destroyS(Set s);
 
 // Operaciones adicionales
 Set unionS (Set s1, Set s2);

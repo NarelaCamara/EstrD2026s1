@@ -13,7 +13,7 @@ Comando para compilar y ejecutar el programa a la vez:
 - cls; g++ -std=c++11 -O2 -o acceso-memoria.exe acceso-memoria.cpp; .\acceso-memoria.exe
 
 ## TP 8 Nave
-- cls; Push-Location 'tp-8\Nave\c++'; g++ -std=c++11 -O2 -o tp-8.exe tp-8.cpp map/Map.cpp maxHeap/MaxHeap.cpp; .\tp-8.exe; Pop-Location
+- Push-Location 'D:\Estructuras\EstrD2026s1\tp-8\Nave\c++'; g++ -std=c++11 -O2 -o tp-8.exe tp-8.cpp map/Map.cpp maxHeap/MaxHeap.cpp set/Set.cpp; .\tp-8.exe; Pop-Location
 
 
 

@@ -66,18 +66,18 @@ int sizeS(Set s){
 };
 
 //Devuelve una lista con los lementos del conjunto.
-LinkedList setToList(Set s){
-    LinkedList l = nil();
+int* setToList(Set s){
+    int* list = new int[s->cantidad];
     NodoS* acc = s->primero;
-    for(int i=1;i < s->cantidad; i++){
-        Cons(acc->elem, l);
+    for(int i=0;i < s->cantidad; i++){
+        list[i] = acc->elem;
         acc = acc->siguiente;
     }
-    return l;
+    return list;
 }
 
-//Lib era la memoria o cupada p or el conjunto
-void DestroyS(Set s){
+//Libera la memoria ocupada por el conjunto
+void destroyS(Set s){
     NodoS* acc = s->primero;
     for(int i=1; i < s->cantidad; i++){
         NodoS* tmp = acc->siguiente;
@@ -106,7 +106,7 @@ Set unionS (Set s1, Set s2){
 int testSet() {
 
     Set s = emptyS();
-    std::cout << "Conjunto vacío: ";
+    std::cout << "Conjunto vacio: ";
     showSet(s);
     std::cout << std::endl;
     std::cout << "Agregando elementos al conjunto..." << std::endl;
@@ -114,7 +114,7 @@ int testSet() {
     addS(10, s);
     addS(5, s); // Intento de agregar un elemento duplicado
     addS(15, s);
-    std::cout << "Conjunto después de agregar elementos: ";
+    std::cout << "Conjunto despues de agregar elementos: ";
     showSet(s);
     std::cout << std::endl;
     std::cout << "Pertenece 10 al conjunto? " << (belongsS(10, s) ? "Sí" : "No") << std::endl;
@@ -122,34 +122,35 @@ int testSet() {
 
     std::cout << "Eliminando el elemento 10 del conjunto..." << std::endl;
     RemoveS(10, s);
-    std::cout << "Conjunto después de eliminar el elemento 10: ";
+    std::cout << "Conjunto despues de eliminar el elemento 10: ";
     showSet(s);
 
     std::cout << std::endl;
 
-    isEmptyS(s) ? std::cout << "El conjunto está vacío." : std::cout << "El conjunto no está vacío.";
+    isEmptyS(s) ? std::cout << "El conjunto está vacio." : std::cout << "El conjunto no esta vacio.";
     std::cout << std::endl;
 
     std::cout << "El conjunto tiene: "  << sizeS(s) << std::endl;
     std::cout << std::endl;
 
-    std::vector<int> list = setToList(s);
+    int* list = setToList(s);
     std::cout << "Elementos del conjunto como lista: ";
-    for (const auto& elem : list) {
-        std::cout << elem << " ";
+    for (int i = 0; i < sizeS(s); i++) {
+        std::cout << list[i] << " ";
     }
     std::cout << std::endl;
 
-    unionset s2 = emptyS();
+    Set s2 = emptyS();
     addS(20, s2);
     addS(30, s2);
     Set unionSet = unionS(s, s2);
-    std::cout << "Conjunto resultante de la unión: ";
+    std::cout << "Conjunto 2: ";
+    showSet(s2);
+    std::cout << "Conjunto resultante de la union: ";
     showSet(unionSet);
-
-    destroyS(s2);
-    showSet(unionSet);
+    destroyS(s2); 
     destroyS(unionSet);
+    std::cout << std::endl;
 
     std::cout << "=== Fin del ejemplo ===" << std::endl;
 
