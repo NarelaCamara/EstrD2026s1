@@ -5,7 +5,7 @@
 struct SectorSt {
     Set tripulantes;
     SectorId sectorId;
-    Componente[] componentes;
+    Componente* componentes;
 }
 
 typedef SectorSt* Sector;
@@ -14,7 +14,7 @@ Sector crearS(SectorId sId);
 
 SectorId sectorId(Sector s);
 
-Componente[] componentesS (Sector s);
+Componente* componentesS (Sector s);
 
 Set tripulantesS (Sector s);
 

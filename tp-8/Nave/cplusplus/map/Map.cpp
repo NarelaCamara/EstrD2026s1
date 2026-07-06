@@ -99,8 +99,8 @@ void deleteM(string k, Map m) {
 
 // costo: O(n) donde n es la cantidad de elementos en el mapa
 // precondicion: ninguna
-vector<string> domM(Map m) {
-    vector<string> keys;
+string* domM(Map m) {
+    string* keys;
     if (m == nullptr) {
         return keys;
     }
@@ -167,7 +167,7 @@ int testMap() {
     std::cout << std::endl;
 
     std::cout << "8) domM(m) -> ";
-    vector<string> keys = domM(m);
+    string keys = domM(m);
     for (size_t i = 0; i < m->cantidad; ++i) {
         std::cout << keys[i];
         if (i + 1 < m->cantidad) {

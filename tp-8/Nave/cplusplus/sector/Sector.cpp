@@ -8,7 +8,7 @@ using namespace std;
 Sector crearS(SectorId sId){
     Sector s = new SectorSt;
     s->sectorId = sId;
-    s->componentes = vector<Componente>();
+    s->componentes = nullptr;
     s->tripulantes = emptyS();
     return s;
 };
@@ -19,7 +19,7 @@ SectorId sectorId(Sector s){
 };
 
 //costo: constante O(1)
-Componente[] componentesS (Sector s){
+Componente* componentesS (Sector s){
     return s->componentes;
 };
 

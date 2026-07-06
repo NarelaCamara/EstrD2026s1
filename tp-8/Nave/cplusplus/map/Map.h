@@ -2,7 +2,6 @@
 
 #include <string>
 using std::string;
-#include <vector> 
 #include "../Tripulante/Tripulante.h"
 #include "../Sector/Sector.h"
 /*
@@ -29,6 +28,6 @@ Map emptyM();
 void assocM(string k, Value v, Map m);
 string lookupM(string k, Map m);
 void deleteM(string k, Map m);
-vector<string> domM(Map m);
+string* domM(Map m);
 void showMap(Map m);
 int testMap();
