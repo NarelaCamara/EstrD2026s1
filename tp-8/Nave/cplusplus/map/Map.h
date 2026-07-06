@@ -4,13 +4,15 @@
 using std::string;
 #include "../Tripulante/Tripulante.h"
 #include "../Sector/Sector.h"
+#include "../value/Value.h"
 /*
 INVARIANTES DE REPRESENTACION:
     - Si el tipo int cantidad es igual a cero, tipo NodoM primero es nullptr
     - Todas las key del tipo NodoM son diferentes univocas
     - si en el NodoM el siguiente es nullptr, quiere decir que es el ultimo elemento de Map.
 */
-using Value = std::variant<Tripulante, Sector>;
+
+
 struct NodoM {
     string key;
     Value value;

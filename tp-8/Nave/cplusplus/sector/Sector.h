@@ -1,3 +1,6 @@
+#ifndef SECTOR_H
+#define SECTOR_H
+
 #include <iostream>
 #include "../set/Set.h"
 #include "../shared.h"
@@ -8,7 +11,7 @@ struct SectorSt {
     Set tripulantes;
     SectorId sectorId;
     Componente* componentes;
-}
+};
 
 typedef SectorSt* Sector;
 
@@ -22,6 +25,8 @@ Set tripulantesS (Sector s);
 
 void agregarC (Componente c, Sector s);
 
-void agregarT (Tripulant t, Sector s);
+void agregarT (Tripulante t, Sector s);
 
 int testSector();
+
+#endif

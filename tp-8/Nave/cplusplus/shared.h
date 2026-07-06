@@ -6,7 +6,6 @@ using std::string;
 typedef int Rango;
 typedef std::string Nombre;
 typedef std::string SectorId;
-typedef std::string LanzaTorpedos;
 
 #define Comida 0
 #define Oxigeno  1

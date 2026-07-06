@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include "Sector.h"
 #include "../shared.h"
@@ -7,7 +9,7 @@ using namespace std;
 
 //costo: constante O(1)
 Sector crearS(SectorId sId){
-    Sector s = new SectorSt;
+    Sector s = new Sector;
     s->sectorId = sId;
     s->componentes = nullptr;
     s->tripulantes = emptyS();
