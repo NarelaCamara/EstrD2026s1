@@ -1,3 +1,7 @@
+#ifndef NAVE_H
+#define NAVE_H
+
+
 #include <iostream>
 #include <string>
 using std::string;
@@ -11,7 +15,7 @@ struct NaveSt {
     Map sectores;
     Map tripulantes;
     MaxHeap OrdRangoTripulantes;
-}
+};
 
 typedef NaveSt* Nave;
 
@@ -30,3 +34,5 @@ void agregarASector (Componentes* cs, SectorId sId, Nave n);
 void asignarASector(Nombre n, SectorId sId, Nave n);
 
 int testNave();
+
+#endif
