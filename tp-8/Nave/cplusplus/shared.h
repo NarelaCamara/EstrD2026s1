@@ -9,8 +9,6 @@ typedef std::string Nombre;
 typedef std::string SectorId;
 typedef std::string LanzaTorpedos;
 
-
-
 struct Motor {
     int numero;
 };
@@ -19,12 +17,12 @@ struct Almacen {
     Barril* barriles;
 };
 
-using Componente = std::variant<Motor, Almacen, LanzaTorpedos>;
 #define Comida 0
 #define Oxigeno  1
 #define Torpedo   2
 #define Combustible 3
 
 
+using Componente = std::variant<Motor, Almacen, LanzaTorpedos>;
 
 #endif   
