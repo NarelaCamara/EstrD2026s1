@@ -5,6 +5,7 @@ using std::string;
 #include "../map/Map.h"
 #include "../maxHeap/MaxHeap.h"
 #include "../shared.h"
+#include "../componente/componente.h"
 
 struct NaveSt {
     Map sectores;

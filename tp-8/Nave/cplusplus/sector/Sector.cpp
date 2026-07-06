@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Sector.h"
 #include "../shared.h"
+#include "../componente/componente.h"
 using namespace std;
 
 

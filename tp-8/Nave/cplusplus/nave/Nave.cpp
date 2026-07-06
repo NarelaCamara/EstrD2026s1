@@ -4,6 +4,7 @@
 #include "../set/Set.h"
 #include "../maxHeap/MaxHeap.h"
 #include "../shared.h"
+#include "../componente/componente.h"
 using namespace std;
 
 //costo: constante O(1)

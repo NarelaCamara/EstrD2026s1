@@ -23,6 +23,6 @@ struct Almacen {
 #define Combustible 3
 
 
-using Componente = std::variant<Motor, Almacen, LanzaTorpedos>;
+
 
 #endif   

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../set/Set.h"
 #include "../shared.h"
+#include "../componente/componente.h"
 
 struct SectorSt {
     Set tripulantes;
