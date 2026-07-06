@@ -2,8 +2,8 @@
 
 #include <string>
 using std::string;
-#include "../Tripulante/Tripulante.h"
-#include "../Sector/Sector.h"
+#include "../tripulante/Tripulante.h"
+#include "../sector/Sector.h"
 #include "../value/Value.h"
 /*
 INVARIANTES DE REPRESENTACION:
