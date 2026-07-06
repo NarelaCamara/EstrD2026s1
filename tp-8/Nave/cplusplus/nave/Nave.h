@@ -8,7 +8,6 @@ struct MapSt;
 struct SetSt;
 struct MaxHeapSt;
 struct Componente; 
-struct Tripulante; // Asumiendo que existe este tipo
 
 // 2. Inclusión de dependencias
 // Si esto causa error de inclusión circular, mueve estos #include al Nave.cpp
@@ -25,7 +24,6 @@ using std::pair;
 #include "../map/Map.h"     // Debe definir Map
 #include "../maxHeap/MaxHeap.h" // Debe definir MaxHeap
 #include "../componente/componente.h" // Debe definir Componente
-#include "../tripulante/Tripulante.h"
 
 // 3. Definición de la estructura
 struct NaveSt {
