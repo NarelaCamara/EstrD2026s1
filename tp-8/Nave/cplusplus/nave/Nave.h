@@ -25,6 +25,7 @@ using std::pair;
 #include "../map/Map.h"     // Debe definir Map
 #include "../maxHeap/MaxHeap.h" // Debe definir MaxHeap
 #include "../componente/componente.h" // Debe definir Componente
+#include "../tripulante/Tripulante.h"
 
 // 3. Definición de la estructura
 struct NaveSt {
@@ -54,7 +55,7 @@ pair<Set, Componente*> datosDeSector(SectorId sId, Nave nav);
 // CORRECCIÓN CRÍTICA: ¿Qué es Tripulantes*? ¿Es un Set? ¿Un array?
 // Si devuelves un puntero a un tripulante específico o una lista:
 // Opción A: Si devuelves un Set de tripulantes
-Tripulantes* tripulantesN(Nave nav); 
+Tripulante* tripulantesN(Nave nav); 
 // Opción B: Si devuelves un puntero a un array (poco recomendable en C++ moderno)
 // Tripulante* tripulantesN(Nave nav); 
 
