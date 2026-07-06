@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../set/Set.h"
 #include "../shared.h"
+#include "../tripulante/Tripulante.h"
 #include "../componente/componente.h"
 
 struct SectorSt {
@@ -22,6 +23,5 @@ Set tripulantesS (Sector s);
 void agregarC (Componente c, Sector s);
 
 void agregarT (Tripulant t, Sector s);
-
 
 int testSector();
