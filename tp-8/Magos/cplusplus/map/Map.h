@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../mago/Mago.h"
 #include <string>
 #include <vector> 
 /*
@@ -11,7 +12,7 @@ INVARIANTES DE REPRESENTACION:
 
 struct NodoM {
     std::string key;
-    std::string value;
+    std::Mago value;
     NodoM* siguiente;
 };
 
@@ -23,7 +24,7 @@ struct MapSt {
 typedef MapSt* Map;
 
 Map emptyM();
-void assocM(std::string k, std::string v, Map m);
+void assocM(std::string k, std::Mago v, Map m);
 std::string lookupM(std::string k, Map m);
 void deleteM(std::string k, Map m);
 std::vector<std::string> domM(Map m);

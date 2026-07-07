@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../mago/Mago.h"
 #include <iostream>
 
 struct NodoMH {
-    int elem;
+    Mago elem;
     NodoMH* siguiente;
 };
 
@@ -16,8 +17,8 @@ typedef MaxHeapSt* MaxHeap;
 
 MaxHeap emptyH();
 bool isEmptyH(MaxHeap mh);
-void insertH(int x, MaxHeap mh);
-int maxH(MaxHeap mh);
+void insertH(Mago x, MaxHeap mh);
+Mago maxH(MaxHeap mh);
 void deleteMaxH(MaxHeap mh);
 void showMH(MaxHeap mh);
 int testMaxHeap();

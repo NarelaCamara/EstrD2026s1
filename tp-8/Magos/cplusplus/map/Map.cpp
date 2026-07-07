@@ -10,7 +10,7 @@ Map emptyM() {
     return m;
 }
 
-void assocM(string k, string v, Map m) {
+void assocM(string k, Mago v, Map m) {
     if (m == nullptr) {
         return;
     }
@@ -32,7 +32,7 @@ void assocM(string k, string v, Map m) {
     m->cantidad++;
 }
 
-string lookupM(string k, Map m) {
+Mago lookupM(string k, Map m) {
     if (m == nullptr) {
         return "";
     }
@@ -130,26 +130,26 @@ int testMap() {
     showMap(m);
     std::cout << std::endl;
 
-    std::cout << "2) assocM('uno', '1')" << std::endl;
-    assocM("uno", "1", m);
+    std::cout << "2) assocM('uno', crearM('uno'))" << std::endl;
+    assocM("uno", crearM("uno"), m);
     showMap(m);
     std::cout << std::endl;
 
-    std::cout << "3) assocM('dos', '2')" << std::endl;
-    assocM("dos", "2", m);
+    std::cout << "3) assocM('dos', crearM('dos'))" << std::endl;
+    assocM("dos", crearM("dos"), m);
     showMap(m);
     std::cout << std::endl;
 
-     std::cout << "4) assocM('tres', '3')" << std::endl;
-    assocM("tres", "3", m);
+     std::cout << "4) assocM('tres', crearM('tres'))" << std::endl;
+    assocM("tres", crearM("tres"), m);
     showMap(m);
     std::cout << std::endl;
 
-    std::cout << "5) lookupM('uno') -> " << lookupM("uno", m) << std::endl;
-    std::cout << "6) lookupM('cuatro') -> " << lookupM("cuatro", m) << std::endl;
+    std::cout << "5) lookupM('uno') -> " << showMago(lookupM("uno", m)) << std::endl;
+    std::cout << "6) lookupM('cuatro') -> " << showMago(lookupM("cuatro", m)) << std::endl;
 
-    std::cout << "7) assocM('uno', '10') para reemplazar el valor" << std::endl;
-    assocM("uno", "10", m);
+    std::cout << "7) assocM('uno', crearM('diez')) para reemplazar el valor" << std::endl;
+    assocM("uno", crearM("diez"), m);
     showMap(m);
     std::cout << std::endl;
 

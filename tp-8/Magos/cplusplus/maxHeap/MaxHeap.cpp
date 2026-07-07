@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include "MaxHeap.h"
-
+#include "../mago/Mago.h"
 using namespace std;
 
 MaxHeap emptyH() {
@@ -14,7 +14,7 @@ bool isEmptyH(MaxHeap mh) {
     return mh == nullptr || mh->cantidad == 0;
 }
 
-void insertH(int x, MaxHeap mh) {
+void insertH(Mago x, MaxHeap mh) {
     if (mh == nullptr) {
         return;
     }
@@ -38,7 +38,7 @@ void insertH(int x, MaxHeap mh) {
     mh->cantidad++;
 }
 
-int maxH(MaxHeap mh) {
+Mago maxH(MaxHeap mh) {
     if (mh == nullptr || mh->primero == nullptr) {
         return -1;
     }
