@@ -75,10 +75,10 @@ int testMaxHeap() {
     MaxHeap h = emptyH();
     cout << "Is the heap empty? " << (isEmptyH(h) ? "Yes" : "No") << endl;
 
-    insertH(10, h);
-    insertH(20, h);
-    insertH(5, h);
-    insertH(30, h);
+    insertH(crearM("uno"), h);
+    insertH(crearM("dos"), h);
+    insertH(crearM("tres"), h);
+    insertH(crearM("cuatro"), h);
 
     cout << "Max element: " << maxH(h) << endl;
     showMH(h);
