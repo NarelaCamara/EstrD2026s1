@@ -1,0 +1,15 @@
+1.a) 
+personasOrdenadas rm = case (cantidadDePersonas rm) of 
+		       0 -> []
+		       _ -> persona : (personasOrdenadas (quitar persona rm))
+2.b) 
+nuevaRondaMate :: Int -> [Persona] -> RondaMate 
+nuevaRondaMate n ps = RM (nuevaRonda ps) emptyMS n
+
+cebar :: RondaMate -> RondaMate
+cebar (RM rp mp n) = let (persona,rondaNueva) = siguiente rp 
+		     in RM (enqueue persona rondaNueva) (addsMS persona mp) (n-1)
+
+saltear :: Int -> RondaMate -> (RondaMate, [Persona])
+saltear n (RM rp mp n) = let (persona,rondaNueva) = siguiente rp
+			 in saltear (n-1) (RM (enqueue persona rondaNueva) mp n)	

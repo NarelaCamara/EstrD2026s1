@@ -1,0 +1,90 @@
+Primer Ejercicio (Usuario): 
+
+1.
+data Reality = R (Map Nombre Participante)
+		 (Map Juego [Nombre])
+                 (PriorityQueue Participante)
+		 Int  
+comenzarConParticipantes :: [Nombre] -> Reality
+comenzarConParticipantes [] = comenzarReality 
+comenzarConParticipantes (n:ns) = ingresarParticipante n (comenzarParticipantes ns)
+O(P log P)
+
+2.
+sonTodosNovatos :: Reality -> Bool
+sonTodosNovatos r = lenght (losQueEstanAlHorno r) == cantParticipantes r
+O(P log P)
+
+3.
+losSobrevivientes :: Reality -> [Participante]
+losSobrevivientes r = if hayClaroGanador r 
+		      then unClaroGanador r : losSobrevivientes(sinUnClaroGanador r)
+		      else [] 
+O (P * J(P + log J)
+
+Segundo Ejercicio (Invariantes): 
+
+Siendo R mps mjs ps jn 
+
+*El valor P asociado a cada clave n en mps cumple que nombre p es n
+*Si J es elemento de Juego P, siendo P un valor asociado a clave en mps entonces J es clave en mjs y nombre P pertenece al valor asociado al mismo. 
+*Las listas asociadas a cada clave J en mjs no tienen repetidos --> me falto 
+*Para cada P que sea valor asociado a una clave mps, P esta en PS
+*Para cada P que esta en PS, P es valor a una clave en mps
+*En PS no hay elementos repetidos --> me falto
+*jn es la cantidad de claves en mps
+
+Tercer Ejercicio (Implementador):
+
+1.
+ingresarParticipante :: Nombre -> Reality -> Relity
+ingresarParticipante n (R mps mjs ps jn) = case lookupM n mps of 
+					   Nothing -> let participante = crearP n 
+						      in R (assocM n p mps) 
+						            mjs
+							   (insertPQ p ps)
+							    n
+					   Just _ -> error "El participante ya existe en el Reality" 
+2.
+losQueEstanAlHorno :: Reality -> [Paticipante]
+losQueEstanAlHorno (R mps _ _ _) = losQueNoTienenJuegos (keys mps) mps
+
+losQueNoTienenJuegos :: [Nombre] -> Map Nombre Participante -> [Participante]
+losQueNoTienenJuegos [] mps = []
+losQueNoTienenJuegos (n:ns) mps = case lookupM n mps of 
+				  Nothing -> error "no puede pasar"
+				  Just p -> if cantJuegos p == 0
+					    then p : losQueNoTienenJuegos ns mps
+					    else losQueNoTienenJuegos ns mps
+3.
+unClaroGanador :: Reality -> Bool
+unClaroGanador (R _ _ ps _) = hayPrimeroConMasDe5 ps 
+
+hayPrimeroConMasDe5 :: PriorityQueue Participante -> Bool
+hayPrimeroConMasDe5 ps = not(isEmptyPQ ps) && cantJuegos (maxPQ ps) >= 5
+
+Me falto usar isEmptyPQ porque es necesario para usar maxPQ 
+4.
+unClaroGanador :: Reality -> Participante
+unClaroGanador (R _ _ ps _) = if hayPrimeroConMasDe5 ps 
+			      then maxPQ ps 
+			      else error "no hay un claro ganador" 
+
+hay que usar la subtarea no la función 
+5.
+sinElClaroGanador :: Reality -> Reality 
+sinElClaroGanador (R mps mjs ps jn) = if hayPrimeroConMasDe 5 ps 
+				      then let p = maxPQ ps 
+				           in R (deleteM (nombre p) mps)
+					         quitarParticipanteDe (juego p) (nombre p) mjs) 
+					        (deleteMaxPQ p ps)
+					        jn 
+				      else error "No hay un claro ganador" 
+
+quitarParticipanteDe :: [Juego] -> Nombres -> Map Juego [Nombre] -> Map Juego [Nombre]
+quitarParticipanteDe [] _ mjs = mjs
+quitarParticipanteDe (j:js) n mjs = case lookupM j mjs of
+				    Just ns -> assocM J (borrar n ns) (quitarParticipanteDe js n mjs)
+				    Nothing -> error "No puede pasar" 
+
+quitarParticipanteDe 

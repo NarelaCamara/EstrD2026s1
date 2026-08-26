@@ -1,0 +1,121 @@
+{-
+data Investigacion = ConsI (Map Nombre Persona) MapP 
+			   (Map Evidencia [Nombre]) MapE
+			   (PriorityQueue Persona) PQ
+			   Int Ne
+
+a)
+Definir Invariantes de Representación: 
+
+Sea ConsI mapp mape pqp int
+INV. REP.: 
+            * Por cada clave nombre en el mapp existe un valor asociado en el mape.
+	    * Por cada nombre en el valor asociado de mape existe una clave en el mapp.  	
+            * Por cada clave nombre en el mapp, la Persona asociada debe tener el mismo nombre. 
+            * En la PQ no hay dos personas con el mismo nombre.
+            * La cantidad de evidencia int es la misma cantidad de claves en el mape. 
+            * Cada persona del mapp debe estar tambien en la pqp.
+
+IMPLEMENTADOR
+
+b) 
+comenzarInvestigacion :: Investigacion 
+comenzarInvestigacion = ConsI emptyM emptyM emptyQ 0 
+
+Le eficiencia es de costo O(1) ya que las operaciones de empty son de costo constante. 
+
+c) 
+cantEvidenciaIngresada :: Investigacion -> Int 
+cantEvidenciaIngresada (ConsI mp me pq n) = n 
+
+La eficiencia es de costo O(1) ya que la operacion es simplemente mostrar el entero que representa la cantidad de evidencia.
+
+d) 
+evidenciaIngresada :: Investigacion -> [Evidencia]
+evidenciaIngresada (ConsI mp me pq n) = domM me 
+
+La eficiencia es O(n) ya que domM tiene un costo de O(k) siendo k el total de evidencia del MapE 
+
+e) 
+nombresIngresados :: Investigacion -> [Nombre]
+nombresIngresados (ConsI mp me pq n) = domM mp 
+
+La eficiencia es O(n) ya que domM tiene un costo O(k) siendo k el total de nombres del MapP 
+
+f) 
+casoCerrado :: Investigacion -> Bool 
+casoCerrado (ConsI _ _ pq _) = let p = MaxPQ pq in
+                               cantEvidencia p >= 5 
+
+La eficiencia es O(1) ya que MaxPQ y cantEvidencia tienen un costo constante. 
+
+g) 
+esSospechoso :: Nombre -> Investigacion -> Bool 
+esSospechoso nom (ConsI mp _ _ _) = case (lookUpM nom mp) of 
+                                    Nothing -> False
+                                    Just p -> cantEvidencia p >= 1 
+
+La eficiencia es O(log N) ya que el costo de lookUpM es logaritmico siendo N la cantidad total de personas en el mp. 
+
+h) 
+mi solución es: 
+
+posiblesInocentes :: Investigacion -> [Persona]
+posiblesInocentes (ConsI mp _ _ _) = let ps = domM mp in 
+                                     posiblesInocentes' ps mp 
+
+posiblesInocentes' :: [Nombre] -> Map Nombre Persona -> [Persona]
+posiblesInocentes'   []   _  = []
+posiblesInocentes' (n:ns) mp = let p' = fromJust(lookUpM n mp) in 
+                               if cantEvidencia p' <= 0
+                               then p' : posiblesInocentes' ns mp
+                               else posiblesInocentes' ns mp  
+
+La eficiencia es O(N log N) ya que domM tiene un costo de O(N) siendo N todas las claves nombre del mp, como asi tambien dentro de la subtarea posiblesInocentes'
+la operacion de recorrer la lista tiene un costo de O(N) y por cada elemento se realiza la operacion lookUpM de costo de O(log N). 
+
+i) 
+ingresarPersonas :: [Nombre] -> Investigacion -> Investigacion
+ingresarPersonas   []            inv        = inv
+ingresarPersonas (n:ns) (ConsI mp me pq n') = let p = crearP n 
+					      in ingresarPersonas ns (ConsI (assocM n p mp) me (insertPQ p pq) n')
+
+La eficiencia es O(N log N) ya que por cada Nombre de la lista se hace la operacion lookUpM de costo O(log N) siendo N la cantidad de nombres del mp.
+
+j)
+ingresarEvidencia :: Evidencia -> Nombre -> Investigacion -> Investigacion 
+ingresarEvidencia e nom (ConsI mp me pq n) = let persona = fromJust(lookupM n mp)
+						 nombres = fromJust(lookupM e me)
+						 newPersona = agregarEvidencia e persona 
+						 newPQ = actualizarPQ newPersona pq
+						 newNombres = nombres : (nombre newPersona)
+					     in ConsI (assocM (nombre newPersona) newPersona mp) (assocM e newNombres me) newPQ (n+1)
+
+actualizarPQ :: Persona -> PriorityQueue Persona -> PriorityQueue
+actualizarPQ p pq = let maxP = maxPQ pq 
+		    in if (nombre p) == (nombre maxP)
+		       then insertPQ p (deleteMaxPQ pq)
+		       else insertPQ maxP (modificarPQ p(deleteMaxPQ pq))
+
+La eficiencia es O(N log N) ya que por cada persona de la pq se ejecuta la funcion deleteMaxPQ 
+
+USUARIO
+
+k)
+comenzarConPersonas :: [Nombre] -> Investigacion
+comenzarConPersonas ns = let inv = comenzarInvestigacion in
+                         ingresarPersonas ns inv 
+
+La eficiencia es O(N log N) ya que se ingresa cada persona de la lista a la Investigacion
+
+l) 
+todosInocentes :: Investigacion -> Bool
+todosInocentes inv = cantEvidenciaIngresada inv == 0
+
+m) 
+terminaCerrado :: [(Evidencia,Nombre)] -> Investigacion -> Bool
+terminaCerrado [] inv = casoCerrado inv
+terminaCerrado ((e,n):ens) inv = terminaCerrado ens (ingresarEvidencia e n inv)
+
+-}
+

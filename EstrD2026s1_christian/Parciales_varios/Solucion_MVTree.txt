@@ -1,0 +1,64 @@
+type Categoria = String
+type CaminoJ = [Categoria]
+type Producto = String
+
+data MVTree = MVT (Heap (int,Producto)) --vendidos (Map Categoria MVTree) --subcategorías
+
+INV. REP.: 
+	*En la heap no pueden existir dos tuplas con la misma segunda componente.
+	*Los productos de la heap, deben estar presentes en los nodos ancestros con una cantidad igual o mayor a la del nodo actual.
+
+Siendo usuario del TAD:
+
+O(J^2 + J * (J log SC + P log P))
+esMasVendido :: Producto -> CaminoJ -> Int -> MVTree -> Bool
+esMasVendido p cs n t = esMasVendido' p (inits cs) n t
+
+O(N * (J log SC + P log P) + P) = N * (J log SC + P log P) 
+esMasVendido' :: Producto -> [CaminoJ] -> Int -> MVTree -> Bool
+esMasVendido' p [] n t = False
+esMasVendido' p (cs:css) n t = elem p (esMasVendidoEn n cs t) || esMasVendido' p css n t
+
+O(J * log SC)
+registrarCategoria :: CaminoJ -> MVTree -> MVTree
+registrarCategoria [] t = t 
+registrarCategoria (c:cs) (MVT h m) = case lookupM c m of 
+				      Nothing -> MVT h (assocM c (registrarCategoria cs (MVT emptyH emptyM)) m)
+				      Just t -> MVT h (assocM c (registrarCategoria cs t) m)
+
+O(J * log SC)
+subCategoriasDe :: CaminoJ -> MVTree -> [Categoria]
+subCategoriasDe [] (MVT h m) = domM m
+subCategoriasDe (c:cs) (MVT h m) = case lookupM c m of 
+				   Nothing -> error "Jerarquia invalida" 
+				   Just t -> subCategoriasDe cs t
+
+O(J (log SC + P log P))
+registrarVenta :: Producto -> CaminoJ -> MVTree -> MVTree
+registrarVenta p [] (MVT h m) = MVT (registrarVentaH p h) m
+registrarVenta p (c:cs) (MVT h m) = case lookupM c m of 
+				    Nothing -> error "jerarquia invalida" 
+				    Just t -> MVT (registrarVentaH p h) (assocM c (registrarVenta p cs t) m)
+
+registrarVentaH :: Producto -> Heap (Int, Producto) -> Heap (Int, Producto) 
+registrarVentaH p h = if isEmptyH h 
+		      then insertH (1,p) h 
+		      else let (i,p') = findMaxH h in 
+			if p == p'
+			then insertH (i+1,p) (deleteMaxH h)
+			else insertH (i,p') (registrarVentaH p (deleteMaxH h))
+
+masVendidosEn :: Int -> CaminoJ -> MVTree -> [Producto]
+masVendidosEn i [] (MVT h m) = if i < 0 
+			       then [] 
+			       else takeH i h
+masVendidosEn i (c:cs) (MVT h m) = case lookupM c m of 
+				   Nothing -> error "jerarquia invalida"
+				   Just t -> masVendidosEn i cs t
+
+takeH :: Int -> Heap (Int, Producto) -> [Producto]
+takeH 0 h = []
+takeH n h = if isEmptyH h 
+	    then []
+            else (snd (findMaxH h)) : takeH (n-1) (deleteMaxH h)
+ 

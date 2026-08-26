@@ -1,0 +1,69 @@
+data EmGame = AG (Map Persona [Esmeralda])
+	         (Map Esmeralda (Maybe Personaje))
+		 (MaxHeap Personaje)
+
+Si soy usuario de una TAD EmGame y tengo el tipo:
+
+data Comando = IniciarJuego (Set Personaje) (Set Esmeralda)
+	      |ObtenerEsmeralda Personaje Esmeralda
+	      |CompetirPor Personaje Personaje Esmeralda
+	      |UsarEsmeralda Personaje Esmeralda 
+y necesito implementar como ususario:
+partida :: [Comando] -> Personaje
+siendo siempre el primer elemento de la lista el Comando InciarJuego
+
+partida cs = elMasPOderosoDe(PartidaRec (reverse cs)) 
+
+PartidaRec :: [Comando] -> EmGame 
+PartidaRec 
+
+ganarE :: EmGame -> Personaje -> Personaje -> Esmeralda -> EmGame
+ganarE (AG mpe memp h) p1 p2 e = let esm = lookupM e memp
+				     pl1 = lookupM p1 mpe 
+				     pl2 = lookupM p2 mpe 
+				 in if isJust pl1 && isJust pl2
+				 then case esm of 
+				      Nothing -> error "la esm no esta en el juego" 
+				      Just p  -> case mp of
+						 Nothing -> error "la esmeralda no es de pl1 ni pl2"
+						 Just p -> Just p -> if p == pl1 || p == pl2
+								     then if poder pl1 > poder pl2 
+								          then AG (moverEsm mpe e pl1 pl2) () h
+									  else AG (moverEsm mpe e pl2 pl1) () h
+							             else error "la esm no es de ningún jugador"
+				 else error "Algun personaje no esta en el juego" 
+
+
+Errores en Invariantes: 
+*En m1 no hay claves repetidas 
+*Toda clave en m1 esta en h y viceversa 
+
+Errores de código: 
+case lookupM … of 
+Nothing -> …
+Just x -> case (Maybe x) of
+		Tipos no son lo mismo que los constructores 
+
+Maybe(Maybe Personaje)
+
+---------
+
+1) sp se = if isEmpty ….
+	   then error "__" 
+	   else AG(armarMap (set2List sp) emptyM)
+
+Costos: 
+Aclarar que es P en log P<
+ 
+
+sum [1,2]
+
+sum [] = 0
+
+1 + sum [2]
+
+1 + 2 + sum []
+
+aplicar C (aplicar C' (elMasPoderoso game))
+
+1 + 2 + 0 

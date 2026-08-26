@@ -1,0 +1,124 @@
+{-
+cada Foto se identifica mediante un CUIF
+TAD's auxiliares: CUIF para representar el codigo de fotos, Vehiculo para representar vehiculos 
+data Foto = MkF CUIF (Set Vehiculo)
+
+interfaz RV 
+se utilizan los numeros 
+F: la cantidad total de fotos del Registro Vehicular 
+V: la cantidad de vehiculos diferentes que aparecen en el Registro  
+vf: la cantidad maxima de vehiculos en alguna foto 
+
+USUARIO
+1)
+a) 
+esInnecesaria :: RV -> CUIF -> Bool
+esInnecesaria rv cuif = isEmptyS (quienesAparecen rv cuif) 
+
+La eficiencia es O(lof F) ya que es el costo de la función quienesAparecen 
+
+b) 
+juntos :: Vehiculo -> Vehiculo -> RV -> Set CUIF 
+juntos v1 v2 rv = if aparecenJuntos rv v1 v2 
+		  then enQueFotosAparecen rv (todasLasFotos rv) v1 v2
+		  else emptyS
+                  
+enQueFotosAparecen :: RV -> [CUIF] -> Vehiculo -> Vehiculo -> set CUIF
+enQueFotosAparecen _ [] _ _ = emptyS
+enQueFotosAparecen rv (c:cs) v1 v2 = let vehiculos = quienesAparecen rv c 
+                                     if belgonsS v1 vehiculos && belgonsS v2 vehiculos
+                                     then addS c (enQueFotosAparecen rv cs v1 v2)
+                                     else enQueFotosAparecen rv cs v1 v2
+
+La eficiencia es O(F*(log F + log vf)) ya que F es la cantidad de fotos del registro y por cada foto se hace la tarea quienesAparecen que tiene un costo log F 
+y se aplica la funcion belgonsS que tiene un costo de O(log vf)
+     
+2)
+a)
+data RV = MkRV (Map CUIF Foto) --fotos del registro MapCF
+               (Map Vehiculo (Set Vehiculo)) --Vehiculos que aparecen juntos en alguna foto MapV
+
+INV. REP: 
+        * Por cada clave c en mcf su valor asociado Vehiculo debe tener como CUIF dicha clave c.
+	* Si un vehiculo aparece en alguna foto de mcf, debe ser clave en mvvs.
+	* Si un vehiculo v1 aparece con otro v2, entonces v2 también aparece con v1. 
+	* Ninguna clave c en mcf aparece dentro de su valor asociado Set Vehiculo. 
+-}
+b)
+----
+nuevoRV :: RV
+nuevoRV = MkRV emptyM emptyM
+----
+agregarFoto :: RV -> Foto -> RV
+agregarFoto (MkRV mf mv) (MkF c vehs) =
+  case lookupM c mf of
+    Just _  -> MkRV mf mv  -- ya existe la foto, no se modifica
+    Nothing ->
+      let nuevoMF = assocM c (MkF c vehs) mf
+          listaVehs = set2list vehs
+          nuevoMV = actualizarCoapariciones listaVehs mv
+      in MkRV nuevoMF nuevoMV
+
+
+-- Actualiza el mapa de coapariciones, recursivamente
+actualizarCoapariciones :: [Vehiculo] -> Map Vehiculo (Set Vehiculo) -> Map Vehiculo (Set Vehiculo)
+actualizarCoapariciones [] mv = mv
+actualizarCoapariciones (v:vs) mv =
+  let mv'  = agregarPares v vs mv
+  in actualizarCoapariciones vs mv'
+
+-- Agrega simétricamente los pares (v, v2) para cada v2 en la lista dada
+agregarPares :: Vehiculo -> [Vehiculo] -> Map Vehiculo (Set Vehiculo) -> Map Vehiculo (Set Vehiculo)
+agregarPares _ [] mv = mv
+agregarPares v (v2:resto) mv =
+  let mv'  = agregarPar v v2 mv
+  in agregarPares v resto mv'
+
+-- Agrega relación simétrica v1-v2
+agregarPar :: Vehiculo -> Vehiculo -> Map Vehiculo (Set Vehiculo) -> Map Vehiculo (Set Vehiculo)
+agregarPar v1 v2 mv =
+  let set1 = case lookupM v1 mv of
+               Nothing -> addS v2 emptyS
+               Just s  -> addS v2 s
+      mv1  = assocM v1 set1 mv
+      set2 = case lookupM v2 mv1 of
+               Nothing -> addS v1 emptyS
+               Just s  -> addS v1 s
+  in assocM v2 set2 mv1
+
+Para una foto con vf vehículos:
+
+actualizarCoapariciones recorre la lista → O(vf)
+
+Cada llamada a agregarPares recorre los demás vehículos → O(vf)
+
+En cada par se hacen operaciones sobre Map y Set → O(log vf)
+
+Total: O(vf² * log vf), tal como exige el enunciado.
+
+----
+todasLasFotos :: RV -> [CUIF]
+todasLasFotos (MkRV mcf _) = keysM mcf
+----
+quienesAparecen :: RV -> CUIF -> Set Vehiculo
+quienesAparecen c (MkRV mcf _) = case (lookupM c mcf) of
+				 Nothing -> error "El CUIF no corresponde a una foto de RV" 
+				 Just (MkF c sv) -> sv
+----
+aparecenJuntos :: RV -> Vehiculo -> Vehiculo -> Bool
+aparecenJuntos (MkRV _ mvs) v1 v2 = if v1 /= v2 
+				    then case lookupM v1 mv of
+    					      Nothing   -> False
+                                              Just setV -> belongsS v2 setV
+			            else error "Los vehículos tienen que ser diferentes" 
+----
+Parte 3) 
+
+data RV = MkRV (Map CUIF Foto)              -- Fotos del registro
+               (Map Vehiculo (Set Vehiculo))-- Coapariciones
+               (Heap (Int, CUIF))           -- Heap ordenada por cantidad de vehículos (máximo arriba)
+
+masCargada :: RV -> Maybe CUIF
+masCargada (MkRV _ _ heap) = if isEmptyH heap 
+			     then Nothing
+                             else Just (snd (findMaxH heap))

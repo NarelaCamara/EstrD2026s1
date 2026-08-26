@@ -1,0 +1,9 @@
+Un diccionario que tiene 2 claves pero que permite obtener todos los valores asociados a 1 sola de dichas claves por consulta. Asi, se pueden pedir todos los valores asociados a un caso … de la primera clave o todos los valores asociados a un caso particular de la segunda clave, pero no … al mismo tiempo. Se podría pensar como una matriz en la que queremos acceder a todos los … una fila o de una columna de manera eficiente. 
+
+… puede modelar con un TAD DoubleMap k v, cuya interfaz es la que se enuncia a continuación. … los valores K1 para la cantidad de claves que aparecen como primera clave, K2 para la cantidad … que aparecen como segunda clave y K12 para la cantidad máxima de primeras claves asociadas a … clave. 
+
+
+Un diccionario que tiene 2 claves pero que permite obtener todos los valores asociados a 1 sola de dichas claves por consulta. Así, se pueden pedir todos los valores asociados a un caso particular de la primera clave o todos los valores asociados a un caso particular de la segunda clave, pero no ambos al mismo tiempo. Se podría pensar como una matriz en la que queremos acceder a todos los elementos de una fila o de una columna de manera eficiente.
+
+Esto puede modelar con un TAD DoubleMap k v, cuya interfaz es la que se enuncia a continuación. Sean los valores K1 para la cantidad de claves que aparecen como primera clave, K2 para la cantidad de claves que aparecen como segunda clave y K12 para la cantidad máxima de primeras claves asociadas a una segunda clave.
+

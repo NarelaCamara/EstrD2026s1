@@ -1,0 +1,34 @@
+TAD Busqueda:  data Busqueda = B (Map String (Map String Int)) - - nombre producto x atributos [Filtro] - - filtros aplicados a la búsqueda
+
+1. 
+siguientesN :: Búsqueda -> Int -> [(String,Int)]
+siguientesN _ 0 = []
+siguientesN búsqueda n = case siguiente búsqueda of 
+			 (Just producto, nuevaBusqueda) -> producto : siguientesN nuevaBusqueda (n-1)
+			 (Nothing,_) -> []
+
+3. 
+registrar :: String -> Int -> Map String Int -> Búsqueda -> Búsqueda 
+registrar prod pre atributos (B mpa fs) = case (lookupM prod mpa) of 
+					  Nothing -> agregarProducto prod pre atributos mpa fs
+					  Just p -> B mpa fs
+
+agregarProducto :: String -> Int -> Map String Int -> Map String (Map String Int) -> [Filtro] -> Busqueda  
+agregarProducto prod pre atributos mpa fs = let atributosNew = assocM "precio" pre atributos 
+					    if aplicarFiltros fs atributos 
+					    then B (assocM prod atributosNew mpa) fs
+					    else B mpa fs
+
+aplicanFiltros :: [Filtro] -> Map String Int -> Bool
+aplicanFiltros [] = True
+aplicanFiltros (f:fs) mpa = aplica f mpa && aplicanFiltros fs mpa 
+
+filtrar :: Filtro -> Búsqueda -> Búsqueda 
+filtrar filtro (B mpa fs) = B (aplicarFiltro filtro (keysM mpa) mpa) (filtro:fs)
+
+aplicarFiltro :: Filtro -> [Producto] -> Map String (Map String Int) -> Map String (Map String Int)
+aplicarFiltro f [] mpa = emptyM
+aplicarFiltro f (p:ps) mpa = let atributos = fromJust(lookupM p mpa)
+			     in if aplica f atributos 
+			        then assocM p atributos (aplicarFiltro f ps mpa)
+			        else aplicarFiltro f ps mpa	

@@ -1,0 +1,94 @@
+type Coord = (Int, Int)
+type Cell = (Int, Int, Int, Int)
+data ChangeType =  NoChange
+		 | ChangeCell Coord
+   	  	 | HeadChange
+data GBBoard = GBB Coord (History Coord) (Map Coord (History Cell)) (History ChangeType)
+
+ponerEn :: Color -> Cell -> Cell
+nroBolitasEn :: Color -> Cell -> Int
+puedeMoverA :: Coord -> Dir -> Coord -> Bool
+moverA :: Coord -> Dir -> Coord -> Coord
+
+mover :: Dir -> GBBoard -> GBBoard
+mover d (GBB size head cells changes) = let pos = current head
+				        in GBB size (register (moverA size d pos) head)
+					       cells (register HeadChange changes)
+
+ponerBolitaRojaEnCadaCeldaDelTablero :: GBBoard -> GBBoard
+ponerBolitaRojaEnCadaCeldaDelTablero gb = ponerBolitasRojasYaInicializado(irAlBordeSur(irAlBordeOeste gb))
+
+ponerBolitasRojasYaInicializado :: GBBoard -> GBBoard
+ponerBolitasRojasYaInicializado gb = if (haySiguienteCeldaEnRecorridoAl_Y_ Este Norte gb)
+				     then ponerBolitasRojasYaInicializado (irASiguienteCeldaEnRecorridoAl_Y_ Este Norte (PonerRojo gb))
+				     else Poner Rojo gb 
+
+haySiguienteCeldaEnRecorridoAl_Y_ :: Dir -> Dir -> GBBoard -> Bool
+haySiguienteCeldaEnRecorridoAl_Y_ d1 d2 gb = puedoMover d1 gb || puedoMover d2 gb
+
+irASiguienteCeldaEnRecorridoAl_Y_ :: Dir -> Dir -> GBBoard -> GBBoard
+irASiguienteCeldaEnRecorridoAl_Y_ d1 d2 gb = if puedoMover d1 gb
+					     then mover d1 gb
+					     else irAlBorde (opuesto d1) (mover d2 gb)
+
+el costo es O(N*M) siendo N la cantidad de celdas del tablero y M el ancho del tablero
+
+Opuesto :: Dir -> Dir 
+Opuesto Norte = Sur
+Opuesto Este = Oeste
+Opuesto Sur = Norte 
+Opuesto _ = Este 
+
+IrAlBorde :: Dir -> GBBoard -> GBBoard
+IrAlBorde d gb = if PuedoMover d gb
+		 then IrAlBorde d (Mover d gb)
+		 else gb
+
+INV. REP.: Sea (GBB di hca mh hg) un GBBoard 
+	*Por cada HeadChange en la historia de hg debe haber un cambio registrado en la historia de hca
+	*Por cada registro de cambio en la historia de hca debe haber un HeadChange registrado en la historia hg
+	*Por cada ChangeCell en la historia de hg debe haber un cambio registrado en la historia del hca (Siendo hca = fromJust (lookupM c), siendo a su vez c una coordenada de un ChangeCell de hg) correspondiente a la coordenada del ChangeCell.
+	*Por cada valor de DC (siendo DC = domM mh) debe haber un ChangeCell en hg con el valor dado
+	*Por cada cambio registrado en la historia de un hca, debe haber un cambio registrado en la historia de hg de Change Cell Coord, donde Coord es la clave asociada a hcr en mh
+	*Ni el alto ni el ancho de ningún valor de dc puede superar ni el alto ni el ancho de Di 
+
+EmptyGBB :: Int -> Int -> GBBoard 
+EmptyGBB al an = GBB (al,an) (newH (0,0)) emptyM (newH NoChange)
+
+Poner :: Coord -> GBBoard -> GBBoard
+Poner c (GBB co hc mh hg) = let Coord = Current hc
+			    in GBB co hc (assocM Coord (cambioHistoriaCelda c Coord mh))
+					 (Registrar (ChangeCru Coord) hg)
+O(log N)
+
+cambioHistoriaCelda :: Coord -> Coord -> Map k v -> History A
+cambioHistoriaCelda Coord c co m = let nhc = lookupM co m 
+				   in if(EsNothing mhc)
+				      then newH (PonerEn c (0000))
+				      else Registrar (PonerEn c (Current (fromJust mhc)))
+						     (fromJust mhc)
+EsNothing :: Mayor A -> Bool
+EsNothing Nothing = True
+EsNothing _ = False 
+
+NroBolitas :: Coord -> GBBoard -> Int 
+NroBolitas c (GBB _ hc m _) = let mhc = lookupM (current hc) m
+			      in if (EsNothing mhc) 
+				 then 0
+				 else NroBolitas c (current (fromJust mhc))
+
+PuedeMover :: Dir -> GBBoard -> Bool
+PuedeMover d (GBB c hc _ _) = PuedeMoverA c d (Current hc)
+
+Undo :: GBBoard -> GBBoard
+Undo (GBB di hc mh hg) = let change = current hg
+		         in if (EsHeadChange change)
+			    then (GBB di (undo hc) mh (undo hg))
+			    else (GBB di hc (UndoMpp change mh) (undo hg))
+UndoMpp :: ChangeType -> Map k v -> Map k v
+UndoMpp (ChangeCrii c) m = let h = fromJust(lookupM c m)
+			   in AssocM c (undo h) m
+
+EsHeadChange :: ChangeType -> Bool
+EsHeadChange HeadChange = True
+EsHeadChange _ = False 

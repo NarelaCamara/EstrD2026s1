@@ -1,0 +1,52 @@
+
+
+data MVTree = MVT (Heap(Int,Producto)) --productos vendidos
+		  (Map Categoria MVTree) --Subcategorías 
+
+Donde en la heap se guardan los productos y la cantidad de veces que se vendió dicho producto.
+En el Map se guarda la Categoría que viene después de el nodo raíz, es decir, en primer lugar hay un nodo raíz que no tiene nombre, el cual guarda una heap con todos los productos y la cantidad de veces q se vendieron de toda la jerarquía. El camino de dicha jerarquía viene dado por un tipo data CaminoJ = [Categoria], es decir, CaminoJ es una lista de Categorías que define un camino jerárquico, cabe aclarar que Categoria=String y Producto=String, por lo que pueden ser comparados por igualdad. Por ejemplo, tengo el árbol con nodo raíz vacío, luego un hijo podría ser Computación, el hijo de este Accesorios y el hijo de este Mouse, por lo que el CaminoJ resultante seria ["Computacion","Accesorios","Mouse"], camino incorrecto seria si por ejemplo Computación además de tener el hijo Accesorios tendría otro hijo de nombre Placas Madres, el cual tiene un hijo AsRock, por lo que un camino incorrecto seria ["Computacion","Accesorios","Placas Madres"] ya que Placas Madres no es hijo de Accesorios. 
+
+La interfaz del TAD MVTree es: 
+1- registrarCategoria :: CaminoJ -> MVTree -> MVTree
+   Propósito: Dado un CaminoJ y un MVTree, agrega las categorías que no esten en MVTree.
+2- subCategoriasDe :: CaminoJ -> MVTree -> [Categoria]
+   Propósito: Dado un CaminoJ y un MVTree devuelve todas las subcategorías de la ultima de la lista CaminoJ. En caso de que el CaminoJ sea incorrecto lanzar el error correspondiente. 
+3- registrarVenta :: Producto -> CaminoJ -> MVTree -> MVTree
+   Propósito: Dado un Producto, un CaminoJ y un MVTree ingresa la venta de dicho producto en las heap de cada categoría del CaminoJ dado, en caso de que el CaminoJ sea incorrecto lanzar el error correspondiente. 
+4- masVendidosEn :: Int -> CaminoJ -> MVTree -> [Producto]
+   Propósito: Dado un número n, un CaminoJ y un MVTree devuelve los n Productos mas vendidos de la ultima categoría de la lista CaminoJ, en caso de que el CaminoJ sea incorrecto lanzar el error correspondiente. 
+
+Realizar como Usuario del TAD MVTree:
+
+esMasVendido :: Producto -> CaminoJ -> Int -> MVTree -> Boolean
+Propósito: Dado un Producto, un CaminoJ, un Int y un MVTree revisar si el Producto esta dentro de los n Productos mas vendidos de MVTree. Tener en cuenta utilizar la función masVendidosEn de la interfaz. También tener en cuenta que puede servir la función inits, la cual realiza lo siguiente: inits [1,2,3,4] = [[],[1],[1,2],[1,2,3],[1,2,3,4]]. 
+
+esMasVendido :: Producto -> CaminoJ -> Int -> MVTree -> Boolean
+esMasVendido p c n mvt = estaEntreLosMasVendidos p (reverse(inits c)) n mvt 
+
+estaEntreLosMasVendidos :: Producto -> [CaminoJ] -> Int -> MVTree -> Boolean
+estaEntreLosMasVendidos p [] n mvt = False 
+estaEntreLosMasVendidos p (c:cs) n mvt = p `elem` masVendidoEn n c mvt || estaEntreLosMasVendidos p s n mvt
+
+Siendo J la cantidad de elementos en CaminoJ, SC la cantidad de elementos en el Map Categoria MTVTree, y P la cantidad de Productos en la Heap:
+Puede ser que el costo sea O(J(J log SC + P log P)) ya que por cada elemento de la lista de listas de CaminoJ se realiza la subtarea masVendidosEn, la cual tiene un costo O(J log SC + P log P).
+
+emptyMVTree :: MVTree
+emptyMVTree = MVT emptyH emptyM
+
+subCategoriasDe :: CaminoJ -> MVTree -> [Categoria]
+subCategoriasDe [] (MVT hv mcs) = mapToList (keysM mcs) subc
+subCategoriasDe [c] (MVT hv mcs) = case lookUpM c mcs of 
+				      Nothing -> error "Camino Jerarquico incorrecto"
+				      Just subc -> mapToList (keysM subc) subc
+subCategoriasDe (c:cs) (MVT hv mcs) = case lookUpM c mcs of 
+				      Nothing -> error "Camino Jerarquico incorrecto"
+				      Just subc -> subCategoriasDe cs (MVT hv subc)
+
+mapToList :: Eq k => Map k v -> [(k, v)]
+--Propósito: convierte un map en una lista de pares clave valor.
+mapToList m = unir (keys m) m
+
+unir :: Eq k => [k] -> Map k v -> [(k, v)]
+unir [] _     = []
+unir (k:ks) m = (k,fromJust(lookupM k m)) : unir ks m
