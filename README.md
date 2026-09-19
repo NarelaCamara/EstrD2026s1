@@ -238,3 +238,60 @@ inOrder x (y:ys) =
 **Explicación**:
 - `inOrder` inserta un elemento en la lista manteniendo orden
 - `assocCons` busca en el map y actualiza o crea una nueva asociación
+
+
+### Ejemplo mas claro de la IA sobre como mostrar la eficiencia
+
+    -- PROPÓSITO: Invierte un mapa agrupando en una lista las claves que compartían el mismo valor.
+-- 
+-- EJEMPLO:
+--   m = { "a" -> 1, "b" -> 1, "c" -> 1, "d" -> 2, "e" -> 2, "f" -> 3 }
+--   invertir m => { 1 -> ["c","b","a"], 2 -> ["e","d"], 3 -> ["f"] }
+--
+-- VARIABLES DE TAMAÑO:
+--   * K = Cantidad de claves en el mapa original (ej: 6 letras: "a", "b", "c", "d", "e", "f")
+--   * V = Cantidad de valores distintos en el original (ej: 3 números: 1, 2, 3)
+--
+-- COSTO TOTAL:
+--   keysM m              -> O(K)           Extrae las K claves en una lista.
+--   invertirL (keysM m)  -> O(K * (K + log V))  Procesa las K claves una a una.
+--   ------------------------------------------------------------
+--   Costo final: O(K + K * (K + log V)) => O(K * (K + log V))
+--   (Se descarta el primer '+ K' porque el producto K * (...) es el que domina).
+
+invertir :: (Ord k, Ord v) => Map k v -> Map v [k]
+invertir m = invertirL (keysM m) m
+
+
+-- COSTO DE invertirL:
+-- Recorremos la lista de tamaño N (donde N = K, porque viene de keysM m).
+-- Para cada una de las N claves hacemos tres cosas:
+--
+--   1) lookupM x m:
+--      Busca la clave en el mapa original (de tamaño K).
+--      -> Costo: O(log K)
+--
+--   2) Buscar e insertar la clave en el mapa nuevo:
+--      El mapa nuevo tiene como claves los valores originales (a lo sumo V claves).
+--      Por eso el costo de búsqueda/inserción aquí depende de V, no de K.
+--      -> Costo: O(log V)
+--
+--   3) Agregar el elemento a la lista asociada:
+--      En el peor caso (si todos los elementos tenían el mismo valor),
+--      la lista acumulada puede llegar a contener hasta K elementos.
+--      Manipular esa lista cuesta proporcional a su longitud.
+--      -> Costo: O(K)
+--
+-- SUMA POR CADA ELEMENTO:
+--   O(log K + log V + K)
+--   Como K es lineal y log K es logarítmico, K domina y absorbe a log K.
+--   Queda: O(K + log V) por cada llamada.
+--
+-- COSTO TOTAL DE LA RECURSIÓN:
+--   O(N * (K + log V)) => O(K * (K + log V))  [reemplazando N por K]
+
+invertirL :: (Ord k, Ord v) => [k] -> Map k v -> Map v [k]
+invertirL [] _ = emptyM
+invertirL (x:xs) m = case lookupM x m of 
+  Nothing -> invertirL xs m
+  Just y  -> assocCons y x (invertirL xs m)
