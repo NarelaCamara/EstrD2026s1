@@ -11,16 +11,30 @@ Comando para compilar y ejecutar el programa a la vez:
 - cls; g++ -std=c++11 -O2 -o tp-10\tp-10.exe tp-10\tp-10.cpp; tp-10\tp-10.exe
 - cls; g++ -std=c++11 -O2 -o tp-11\tp-11.exe tp-11\tp-11.cpp; tp-11\tp-11.exe
 - cls; g++ -std=c++11 -O2 -o acceso-memoria.exe acceso-memoria.cpp; .\acceso-memoria.exe
-
-## TP 8 Nave
 - cls; g++ -std=c++11 -O2 -o tp-8\Nave\cplusplus\tp-8.exe tp-8\Nave\cplusplus\tp-8.cpp; tp-8\Nave\cplusplus\tp-8.exe
-
-
-
-## TP 8 Magos
 - cls; g++ -std=c++11 -O2 -o tp-8\Magos\cplusplus\tp-8.exe tp-8\Magos\cplusplus\tp-8.cpp; tp-8\Magos\cplusplus\tp-8.exe
 
 # Conceptos fundamentales
+
+## Formas de implementar TADs 
+
+### BST 
+Es un Set con formato de arbol de busqueda, los elementos del brazo izquierdo son 
+menores que la raiz y la derecha son mayores, asi sucesivamente en cada nodo. Para 
+buscar un elemento especifico se compara en primera insancia con la raiz y ahi se decide 
+para que lado ir, para insertar es lo mismo. Si se borra la raiz se debe balancear el arbol 
+subiendo el maximo de la izquierda o el minimo de la derecha. 
+### AVL
+Para mantener una balance en un BST se necesita la invariante AVL la que representa 
+que las diferencias de alturas entre el brazo izquierdo y el brazo derecho no pueden ser 
+mayor a 1. Esto se controla al insertar o borrar un valor.  
+### Heap 
+Es una PQ con formato de arbol HEAP, donde la raiz es el minimo elemento y por 
+consecuente los siguiente nodos respetan esa particularidad, los de maximo valor son los 
+ultimos valores, un arbol lleno es que todos los niveles estan completos, a excepcion del 
+ultimo que puede estar completo de izquierda a derecha pero no debe contener agujeros, 
+tiene un unico lugar donde borar y donde insertar. Al insertar se debe comparar con los 
+valores cercanos para ver a donde tiene que rotar. 
 
 ## Gestión de Memoria
 
@@ -242,6 +256,7 @@ inOrder x (y:ys) =
 
 ### Ejemplo mas claro de la IA sobre como mostrar la eficiencia
 
+```haskell
     -- PROPÓSITO: Invierte un mapa agrupando en una lista las claves que compartían el mismo valor.
 -- 
 -- EJEMPLO:
@@ -295,3 +310,5 @@ invertirL [] _ = emptyM
 invertirL (x:xs) m = case lookupM x m of 
   Nothing -> invertirL xs m
   Just y  -> assocCons y x (invertirL xs m)
+
+```
