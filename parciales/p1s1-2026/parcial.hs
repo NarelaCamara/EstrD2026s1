@@ -189,3 +189,17 @@ ancestrosDe_En_' n (Hijos3 p g1 g2 g3) = if (existeEnGen n g1) || (existeEnGen n
 
 
 ancestrosDe_En_Ejemplo = ancestrosDe_En_ "Lucius Malfoy" fliaMalfoy
+
+
+
+elegirEntre :: Maybe a -> Maybe a -> Maybe a
+elegirEntre (Just x) m = Just x
+elegirEntre Nothing m = m
+
+elegirSi :: Bool -> Maybe a -> Maybe a -> Maybe a
+elegirSi True  m1 m2 = m1
+elegirSi False m1 m2 = m2
+
+agregar_A_ :: a -> Maybe [a] -> Maybe [a]
+agregar_A_ y Nothing = Nothing
+agregar_A_ y (Just xs) = Just (y : xs)
