@@ -1,5 +1,8 @@
 {-- --}
 
+
+
+
 brutus     = P "Brutus Malfoy II" (EnMatrimonioCon "Cierce Vyndon")
 pollux     = P "Pollux Black" (EnMatrimonioCon "Irma Crabbe")
 abraxas    = P "Abraxas Malfoy" (EnMatrimonioCon "(no identificada)")
@@ -79,9 +82,20 @@ type Nombre = String
 data EstadoCivil = SinPareja | EnMatrimonioCon Nombre | EnMatrimonioConPeroHijosCon Nombre Nombre deriving Show
 data Persona = P Nombre EstadoCivil deriving Show
 data GenTree =   Hijos0 Persona | Hijos1 Persona GenTree | Hijos2 Persona GenTree GenTree | Hijos3 Persona GenTree GenTree GenTree deriving Show
---data Maybe a = Nothing | Just a deriving Show
+data Maybe a = Nothing | Just a deriving Show
 
 
+elegirEntre :: Maybe a -> Maybe a -> Maybe a
+elegirEntre (Just x) m = Just x
+elegirEntre Nothing m = m
+
+elegirSi :: Bool -> Maybe a -> Maybe a -> Maybe a
+elegirSi True  m1 m2 = m1
+elegirSi False m1 m2 = m2
+
+agregar_A_ :: a -> Maybe [a] -> Maybe [a]
+agregar_A_ y Nothing = Nothing
+agregar_A_ y (Just xs) = Just (y : xs)
 
 nombre:: Persona -> Nombre
 nombre (P n _) = n
@@ -162,11 +176,10 @@ existeEnGen n (Hijos2 p g1 g2) = esPersona n p || existeEnGen n g1 || existeEnGe
 existeEnGen n (Hijos3 p g1 g2 g3) = esPersona n p || existeEnGen n g1 || existeEnGen n g2 || existeEnGen n g3
 
 
-
-
 ancestrosDe_En_ :: Nombre -> GenTree -> [Persona] 
-ancestrosDe_En_ n g = if existeEnGen n g then ancestrosDe_En_' n g  else error "No pertenece a la familia"
-
+ancestrosDe_En_ n g = case existeEnGen n g1 of 
+   False -> error "No pertenece a la familia"
+   True -> ancestrosDe_En_' n g 
 
 ancestrosDe_En_' :: Nombre -> GenTree -> [Persona] 
 ancestrosDe_En_' n (Hijos0 p) = []
